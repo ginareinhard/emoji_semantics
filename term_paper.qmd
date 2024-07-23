@@ -19,3 +19,12 @@ csl: "apa_7th.csl"
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
+
+
+```{r load-libraries, message=FALSE}
+
+#load libraries
+library(tidyverse)
+
+```
+

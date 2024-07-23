@@ -21,7 +21,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r include=FALSE}
 
-#load checkdown library
 library(checkdown)
 
 ```
@@ -30,8 +29,13 @@ library(checkdown)
 
 ```{r load-libraries, message=FALSE}
 
-#load libraries
 library(tidyverse)
+
+```
+
+```{r import-data, message=FALSE}
+
+raw_data <- read_csv(file = "data/raw_data.csv")
 
 ```
 

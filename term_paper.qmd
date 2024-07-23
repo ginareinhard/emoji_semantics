@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Term paper"
 subtitle: ""
 author: "Rose Hörsting & Gina Reinhard"
 date: "2024-09-15"
@@ -26,6 +26,7 @@ library(checkdown)
 
 ```
 
+#### **Chapter overview** {.unnumbered}
 
 ```{r load-libraries, message=FALSE}
 
@@ -48,4 +49,3 @@ right = "Test right!",
 wrong = "Test incorrect.")
 
 ```
-

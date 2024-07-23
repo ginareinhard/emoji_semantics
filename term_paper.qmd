@@ -13,10 +13,16 @@ link-citations: true
 csl: "apa_7th.csl"
 ---
 
-
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r include=FALSE}
+
+#load checkdown library
+library(checkdown)
 
 ```
 
@@ -25,6 +31,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #load libraries
 library(tidyverse)
+
+```
+
+::: callout-tip
+#### Quiz time! {.unnumbered}
+
+1\) Test question?
+
+```{r echo=FALSE, results="asis"}
+
+check_question("D", options = c("A", "B", "C", "D", "E"), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer", q_id = 4,
+right = "Test right!",
+wrong = "Test incorrect.")
 
 ```
 

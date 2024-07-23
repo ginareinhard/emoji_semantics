@@ -39,6 +39,22 @@ raw_data <- read_csv(file = "data/raw_data.csv")
 
 ```
 
+```{r, results=FALSE}
+
+table(raw_data$gender)
+table(raw_data$emoji_understanding)
+table(raw_data$emoji_use)
+
+```
+
+```{r}
+
+data <- raw_data |> 
+  filter(age <= 35)
+
+```
+
+
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
@@ -53,3 +69,6 @@ right = "Test right!",
 wrong = "Test incorrect.")
 
 ```
+:::
+
+## Conclusion

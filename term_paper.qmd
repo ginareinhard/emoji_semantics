@@ -1,0 +1,14 @@
+---
+title: ""
+subtitle: ""
+author: "Rose Hörsting & Gina Reinhard"
+date: "2024-09-15"
+engine: knitr
+execute:
+  echo: true
+bibliography: references.bib
+format: 
+  html:
+    toc: true
+    embed-resources: true
+---

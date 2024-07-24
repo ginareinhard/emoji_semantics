@@ -47,7 +47,7 @@ table(raw_data$emoji_use)
 
 ```
 
-```{r}
+```{r clean-data}
 
 data <- raw_data |> 
   filter(age <= 35)

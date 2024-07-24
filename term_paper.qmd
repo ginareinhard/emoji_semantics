@@ -76,13 +76,19 @@ emoji_use_count <- data |>
 
 table(emoji_use_count$emoji_use)
 
+emoji_use_count_gender <- data |> 
+  group_by(submission_id, gender) |> 
+  count(emoji_use)
+
+table(emoji_use_count_gender$emoji_use, emoji_use_count_gender$gender)
+
 ```
 
 ## Data wrangling / visualisation
 
 ### Walkthrough bar plot
 
-Plot emoji use frequencies as barplot with ggplot:
+Plot emoji use frequencies as barplot with ggplot (absolute frequencies instead of percentages):
 
 ```{r}
 
@@ -109,6 +115,53 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 
 ```
 
+Add title and labels:
+
+```{r}
+ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+  geom_bar() +
+  labs(title = "Emoji use with absolute frequencies", x = "Emoji use", y = "Total count")
+```
+
+Bring in gender to see the difference between female and male participants in emoji use:
+
+```{r}
+
+ggplot(emoji_use_count_gender, mapping = aes(x = emoji_use, fill = gender)) + 
+  geom_bar() +
+  labs(title = "Emoji use by gender with absolute frequencies", x = "Emoji use by gender", y = "Total count")
+  
+```
+
+That looks a little chaotic... Right, we have to order the levels again.
+
+```{r}
+emoji_use_count_gender <- emoji_use_count_gender |> 
+  mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
+
+emoji_use_count_gender |> 
+  ggplot(mapping = aes(x = emoji_use, fill = gender)) + 
+  geom_bar() +
+  labs(title = "Emoji use by gender with absolute frequencies", x = "Emoji use by gender", y = "Total count")
+```
+
+Already much better! If we do not want the bars to be stacked on top of each other, we can change that by adding the argument position = "dodge" to the geom_bar function.
+
+```{r}
+
+emoji_use_count_gender |> 
+  ggplot(mapping = aes(x = emoji_use, fill = gender)) + 
+  geom_bar(position = "dodge") +
+  labs(title = "Emoji use by gender with absolute frequencies", x = "Emoji use by gender", y = "Total count")
+
+#emoji_use_count_gender |> 
+#  ggplot(mapping = aes(x = emoji_use, fill = gender)) + 
+#  geom_bar(width = 0.8, position = "dodge")
+
+```
+
+It´s weird that the bars differ in width/ the width seems to be measured overall regardless of whether there are three bars or only one.
+include divers genders?
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

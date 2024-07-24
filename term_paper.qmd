@@ -87,8 +87,7 @@ Plot emoji use frequencies as barplot with ggplot:
 ```{r}
 
 ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
-  geom_bar() +
-  theme_bw()
+  geom_bar()
 
 ```
 
@@ -106,8 +105,7 @@ Plot with ordered levels:
 ```{r}
 
 ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
-  geom_bar() +
-  theme_bw()
+  geom_bar()
 
 ```
 

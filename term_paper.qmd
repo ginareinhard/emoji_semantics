@@ -33,11 +33,15 @@ library(tidyverse)
 
 ```
 
+## Introducing the study
+
 ```{r import-data, message=FALSE}
 
 raw_data <- read_csv(file = "data/raw_data.csv")
 
 ```
+
+## Descriptive statistics
 
 ```{r, results=FALSE}
 
@@ -54,6 +58,9 @@ data <- raw_data |>
 
 ```
 
+## Data wrangling / visualisation
+
+### Walkthrough bar plot
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

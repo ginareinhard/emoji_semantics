@@ -43,6 +43,13 @@ raw_data <- read_csv(file = "data/raw_data.csv")
 
 ## Descriptive statistics
 
+```{r clean-data}
+
+data <- raw_data |> 
+  filter(age <= 35)
+
+```
+
 ```{r, results=FALSE}
 
 table(raw_data$gender)
@@ -51,16 +58,59 @@ table(raw_data$emoji_use)
 
 ```
 
-```{r clean-data}
+```{r gender-count, results=FALSE}
 
-data <- raw_data |> 
-  filter(age <= 35)
+gender_count <- data |> 
+  group_by(submission_id) |> 
+  count(gender)
+
+table(gender_count$gender)
+
+```
+
+```{r emojiuse-count, results=FALSE}
+
+emoji_use_count <- data |> 
+  group_by(submission_id) |> 
+  count(emoji_use)
+
+table(emoji_use_count$emoji_use)
 
 ```
 
 ## Data wrangling / visualisation
 
 ### Walkthrough bar plot
+
+Plot emoji use frequencies as barplot with ggplot:
+
+```{r}
+
+ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+  geom_bar() +
+  theme_bw()
+
+```
+
+Reorder levels of factor "emoji_use":
+
+```{r plot-emojiuse}
+
+emoji_use_count <- emoji_use_count |> 
+  mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
+
+```
+
+Plot with ordered levels:
+
+```{r}
+
+ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+  geom_bar() +
+  theme_bw()
+
+```
+
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

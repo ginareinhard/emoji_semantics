@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 
-setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+setwd(here::here())
 
 ```
 
@@ -35,6 +35,7 @@ library(checkdown)
 
 ```{r load-libraries, message=FALSE}
 
+library(here)
 library(tidyverse)
 
 ```

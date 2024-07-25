@@ -19,6 +19,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
+```{r}
+
+setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+
+```
+
+
 ```{r include=FALSE}
 
 library(checkdown)

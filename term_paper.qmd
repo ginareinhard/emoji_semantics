@@ -8,6 +8,8 @@ bibliography: references.bib
 format: 
   html:
     toc: true
+    toc-depth: 3
+    number-sections: true
     embed-resources: true
 link-citations: true
 csl: "apa_7th.csl"
@@ -40,8 +42,12 @@ library(tidyverse)
 
 @fricke2024semantic
 
+::: {.callout-note title="How did the experiment work?"}
+...
+
 They used the face emoji annotation system developed by @fugate2021implications.
 
+:::
 
 ```{r import-data, message=FALSE}
 
@@ -118,7 +124,7 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 ```
 
 
-::: callout-tip
+::: {.callout-tip}
 #### Quiz time! {.unnumbered}
 
 1\) Test question?
@@ -133,6 +139,10 @@ wrong = "Test incorrect.")
 
 ```
 :::
+
+## Inserting emojis in R
+
+😁
 
 ## Conclusion
 

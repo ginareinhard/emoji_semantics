@@ -158,6 +158,16 @@ emoji_use_count_gender |>
 It´s weird that the bars differ in width/ the width seems to be measured overall regardless of whether there are three bars or only one.
 include divers genders?
 
+```{r}
+
+emoji_use_count_gender |> 
+  ggplot(mapping = aes(x = emoji_use, fill = gender)) + 
+  geom_bar(position = position_dodge(preserve = "single")) +
+  labs(title = "Emoji use by gender with absolute frequencies", x = "Emoji use by gender", y = "Total count")
+
+```
+
+
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 

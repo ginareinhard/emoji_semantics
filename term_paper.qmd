@@ -27,6 +27,8 @@ library(checkdown)
 
 #### **Chapter overview** {.unnumbered}
 
+In this chapter, we...
+
 ```{r load-libraries, message=FALSE}
 
 library(tidyverse)
@@ -34,6 +36,11 @@ library(tidyverse)
 ```
 
 ## Introducing the study
+
+@fricke2024semantic
+
+They used the face emoji annotation system developed by @fugate2021implications.
+
 
 ```{r import-data, message=FALSE}
 
@@ -127,3 +134,5 @@ wrong = "Test incorrect.")
 :::
 
 ## Conclusion
+
+## References

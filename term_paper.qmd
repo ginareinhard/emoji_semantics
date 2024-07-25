@@ -31,6 +31,7 @@ In this chapter, we...
 
 ```{r load-libraries, message=FALSE}
 
+library(here)
 library(tidyverse)
 
 ```
@@ -44,7 +45,7 @@ They used the face emoji annotation system developed by @fugate2021implications.
 
 ```{r import-data, message=FALSE}
 
-raw_data <- read_csv(file = "data/raw_data.csv")
+raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
 

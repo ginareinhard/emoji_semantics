@@ -25,7 +25,6 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 ```
 
-
 ```{r include=FALSE}
 
 library(checkdown)
@@ -99,7 +98,7 @@ Plot emoji use frequencies as barplot with ggplot (absolute frequencies instead 
 
 ```{r}
 
-ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+ggplot(emoji_use_count_gender, mapping = aes(x = emoji_use)) + 
   geom_bar()
 
 ```
@@ -108,7 +107,7 @@ Reorder levels of factor "emoji_use":
 
 ```{r plot-emojiuse}
 
-emoji_use_count <- emoji_use_count |> 
+emoji_use_count_gender <- emoji_use_count_gender |> 
   mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
 
 ```
@@ -117,7 +116,7 @@ Plot with ordered levels:
 
 ```{r}
 
-ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+ggplot(emoji_use_count_gender, mapping = aes(x = emoji_use)) + 
   geom_bar()
 
 ```
@@ -125,7 +124,7 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 Add title and labels:
 
 ```{r}
-ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
+ggplot(emoji_use_count_gender, mapping = aes(x = emoji_use)) + 
   geom_bar() +
   labs(title = "Emoji use with absolute frequencies", x = "Emoji use", y = "Total count")
 ```
@@ -140,19 +139,7 @@ ggplot(emoji_use_count_gender, mapping = aes(x = emoji_use, fill = gender)) +
   
 ```
 
-That looks a little chaotic... Right, we have to order the levels again.
-
-```{r}
-emoji_use_count_gender <- emoji_use_count_gender |> 
-  mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
-
-emoji_use_count_gender |> 
-  ggplot(mapping = aes(x = emoji_use, fill = gender)) + 
-  geom_bar() +
-  labs(title = "Emoji use by gender with absolute frequencies", x = "Emoji use by gender", y = "Total count")
-```
-
-Already much better! If we do not want the bars to be stacked on top of each other, we can change that by adding the argument position = "dodge" to the geom_bar function.
+If we do not want the bars to be stacked on top of each other, we can change that by adding the argument position = "dodge" to the geom_bar function.
 
 ```{r}
 

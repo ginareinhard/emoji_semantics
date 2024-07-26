@@ -130,6 +130,54 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 
 ```
 
+```{r emoji understanding}
+
+emoji_understanding_percentage <- data |> 
+  group_by(emoji_understanding) |> 
+  summarise(count = n())%>% 
+  mutate(percentage = count/sum(count))
+
+emoji_understanding_percentage |>
+  ggplot(aes(x = emoji_understanding, y = percentage, fill  =  emoji_understanding)) + 
+  geom_bar(stat = "identity") +
+labs(x = "self-reported emoji understanding")
+
+# The following is copied from Fricke et al.´s analysis script
+# # Emoji understanding
+# 
+# young$emoji_understanding <- as.factor(young$emoji_understanding)
+# levels(young$emoji_understanding)
+# 
+# young$emoji_understanding <- recode(young$emoji_understanding, "mittelmäßig" = "moderate", 
+#                                "eher gut" = "rather good",
+#                                "gut" = "good",
+#                                "sehr gut" = "very good")
+# 
+# percentages <- young %>%
+#   group_by(emoji_understanding) %>% 
+#   summarise(count=n())%>% 
+#   mutate(percentage=count/sum(count))
+# 
+# percentages <- within(percentages,
+#                       emoji_understanding <- factor(emoji_understanding,
+#                                                levels= c("moderate", "rather good", "good", "very good")))
+# 
+# percentages_plot <- percentages %>%
+#   ggplot(aes(x=emoji_understanding, y=percentage, fill=as.factor(emoji_understanding))) +
+#   geom_bar(stat="identity", width=0.5)+
+#   labs(x = "Understanding of emojis") +
+#   ylab("")+
+#   theme( axis.title=element_text(size="18", vjust=-0.6), 
+#          axis.title.x = element_text(margin = unit(c(0.5, 2, 0, 0), "cm")),
+#          axis.title.y = element_text(margin = unit(c(2, 0.5, 0, 0), "cm")), 
+#          axis.text=element_text(size="13"),
+#          legend.text=element_text(size="18")) +
+#   scale_fill_manual(values = c("#D1DF9F","#BBCE70", "#A4BE40", "#8DAE10") ) +
+#   theme(legend.position="none")
+# 
+# percentages_plot
+
+```
 
 ::: {.callout-tip}
 #### Quiz time! {.unnumbered}

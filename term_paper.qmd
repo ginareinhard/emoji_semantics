@@ -46,6 +46,13 @@ library(tidyverse)
 ...
 
 They used the face emoji annotation system developed by @fugate2021implications.
+Goal: Test the predictions of the pictorial approach. 
+
+Pictorial approach @maier2023emojis vs. lexicalist approach @grosz2023semantics.
+
+Question: Do AU differences lead to differences in meaning between the two emojis of a pair?
+Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4)
+Method: three [AU+] and three [AU] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5)
 
 :::
 

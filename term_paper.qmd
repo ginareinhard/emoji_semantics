@@ -179,6 +179,43 @@ labs(x = "self-reported emoji understanding")
 
 ```
 
+Bring in gender:
+
+```{r}
+
+emoji_understanding_gender <- data |>
+  group_by(gender) |> 
+  count(gender, emoji_understanding) |> 
+  mutate(absolute = n/24, #24 rows per participant/submission_id (calculate more elegantly?)
+         total = sum(absolute), 
+         percentage = (absolute/total) * 100) |> 
+  mutate(emoji_understanding = factor(emoji_understanding, levels = c("mittelmäßig", "eher gut", "gut", "sehr gut")))
+
+```
+
+Plot absolute frequencies: 
+
+```{r}
+
+ggplot(emoji_understanding_gender, aes(x = emoji_understanding, y = absolute, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Emoji Understanding by Gender",
+       x = "self-reported emoji understanding")
+
+```
+
+Plot relative frequencies: 
+
+```{r}
+
+ggplot(emoji_understanding_gender, aes(x = emoji_understanding, y = percentage, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Emoji Understanding by Gender",
+       x = "self-reported emoji understanding")
+
+```
+
+
 ::: {.callout-tip}
 #### Quiz time! {.unnumbered}
 

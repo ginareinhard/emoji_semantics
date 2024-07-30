@@ -62,7 +62,7 @@ raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
 
-## Descriptive statistics
+## Data wrangling
 
 ```{r clean-data}
 
@@ -100,7 +100,15 @@ table(emoji_use_count$emoji_use)
 ```
 
                                    str_detect(name, "filler") ~ "filler",
-## Data wrangling / visualisation
+                                   .default = NULL))
+
+table(data$AU_difference)
+ 
+```
+
+## Data analysis/visualisation 
+
+### Descriptive statistics
 
 ### Walkthrough bar plot
 

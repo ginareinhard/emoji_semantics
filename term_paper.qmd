@@ -99,6 +99,7 @@ table(emoji_use_count$emoji_use)
 
 ```
 
+                                   str_detect(name, "filler") ~ "filler",
 ## Data wrangling / visualisation
 
 ### Walkthrough bar plot

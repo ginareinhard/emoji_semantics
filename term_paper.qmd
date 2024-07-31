@@ -184,7 +184,7 @@ Bring in gender:
 ```{r}
 
 emoji_understanding_gender <- data |>
-  group_by(gender) |> 
+  group_by(gender) |>
   count(gender, emoji_understanding) |> 
   mutate(absolute = n/24, #24 rows per participant/submission_id (calculate more elegantly?)
          total = sum(absolute), 
@@ -215,6 +215,18 @@ ggplot(emoji_understanding_gender, aes(x = emoji_understanding, y = percentage, 
 
 ```
 
+```{r boxplot use x age}
+age_data <- data |> 
+  group_by(submission_id) |> 
+  count(emoji_use, age) |> 
+  mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
+
+age_data |> 
+  ggplot(aes (x = emoji_use, y = age, fill = emoji_use)) + 
+  geom_boxplot() +
+  geom_jitter(color="black", size=0.8, alpha=0.9)+
+  theme (legend.position="none")
+```
 
 ::: {.callout-tip}
 #### Quiz time! {.unnumbered}

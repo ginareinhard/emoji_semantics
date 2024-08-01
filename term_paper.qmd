@@ -56,7 +56,7 @@ Question: Do AU differences lead to differences in meaning between the two emoji
 
 ```{r import-data, message=FALSE}
 
-raw_data <- read.csv(file = here("data", "raw_data.csv"))
+raw_data <- read.csv("/Users/ginareinhard/Documents/GitHub/term_paper/data/raw_data.csv")
 
 ```
 
@@ -74,6 +74,7 @@ data <- raw_data |>
 table(raw_data$gender)
 table(raw_data$emoji_understanding)
 table(raw_data$emoji_use)
+table(raw_data$name)
 
 ```
 
@@ -97,6 +98,16 @@ table(emoji_use_count$emoji_use)
 
 ```
 
+```{r}
+
+data <- data |> 
+  mutate(alex_anna = case_when(
+    str_detect(question, "Alex") ~ "Alex",
+    str_detect(question, "Anna") ~ "Anna",
+    .default = NULL))
+
+```
+
 Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
 
 ```{r}
@@ -108,7 +119,110 @@ data <- data |>
                                    .default = NULL))
 
 table(data$AU_difference)
- 
+
+test_AU <- data |>
+  filter(str_detect(name, "AU")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+table(test_AU$name)
+
+```
+
+```{r}
+
+#####emoji pairs with AU difference:
+
+test_AU02 <- data |>
+  filter(str_detect(name, "AU-02")) |> 
+  select(name, option1, option2, alex_anna, trial_name, QUD)
+
+test_AU07 <- data |>
+  filter(str_detect(name, "AU-07")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_AU22 <- data |>
+  filter(str_detect(name, "AU-22")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_AU23 <- data |>
+  filter(str_detect(name, "AU-23")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_AU40 <- data |>
+  filter(str_detect(name, "AU-40")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_AU41 <- data |>
+  filter(str_detect(name, "AU-41")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+table(test_AU02$option1)
+table(test_AU02$option2)
+table(test_AU07$option1)
+table(test_AU07$option2)
+table(test_AU22$option1)
+table(test_AU22$option2)
+table(test_AU23$option1)
+table(test_AU23$option2)
+table(test_AU40$option1)
+table(test_AU40$option2)
+table(test_AU41$option1)
+table(test_AU41$option2)
+
+#####emoji pairs without AU difference:
+
+test_N04 <- data |>
+  filter(str_detect(name, "N-04")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_N06 <- data |>
+  filter(str_detect(name, "N-06")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_N12 <- data |>
+  filter(str_detect(name, "N-12")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_N13 <- data |>
+  filter(str_detect(name, "N-13")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_N36 <- data |>
+  filter(str_detect(name, "N-36")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+test_N37 <- data |>
+  filter(str_detect(name, "N-37")) |> 
+  select(name, option1, option2, question, trial_name, QUD)
+
+table(test_N04$option1)
+table(test_N04$option2)
+table(test_N06$option1)
+table(test_N06$option2)
+table(test_N12$option1)
+table(test_N12$option2)
+table(test_N13$option1)
+table(test_N13$option2)
+table(test_N36$option1)
+table(test_N36$option2)
+table(test_N37$option1)
+table(test_N37$option2)
+
+```
+
+Context:
+
+```{r}
+
+test_happiness <- data |>
+  filter(str_detect(question, "freut sich"))
+
+test_laughter <- data |>
+  filter(str_detect(question, "lacht"))
+  
+table(test_happiness$name)
+table(test_laughter$name)
+
 ```
 
 ## Data analysis/visualisation

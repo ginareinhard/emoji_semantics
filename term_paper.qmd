@@ -126,7 +126,7 @@ data <- data |>
                              str_detect(question, "macht sich Sorgen") ~ "concern",
                              str_detect(question, "ist überrascht") ~ "surprise",
                              str_detect(question, "ist etwas genervt") ~ "mild irritation",
-                             str_detect(question, "ärgert sich") ~ "is annoyed",
+                             str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
                              str_detect(question, "ist überglücklich") ~ "(intense) happiness",
                              str_detect(question, "ist enttäuscht") ~ "mild disappointment",

@@ -139,7 +139,19 @@ table(data$context)
 
 ```
 
-Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using the information from the original analysis script? (meaning of N-36 and N-37)
+Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using/citing the information from the original analysis script? (meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")
+
+```{r}
+
+data <- data |> 
+  mutate(context = case_when(
+                             str_detect(name, "N-36") ~ "mild disappointment",
+                             str_detect(name, "N-37") ~ "moderate disappointment",
+                                   .default = context))
+
+table(data$context)
+
+```
 
 ## Data analysis/visualisation
 

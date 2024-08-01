@@ -40,8 +40,7 @@ library(tidyverse)
 
 ## Introducing the study
 
-@fricke2024semantic
-> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <httpsdoi:10.1017/langcog.2024.12>.
+@fricke2024semantic \> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
 
 ::: {.callout-note title="How did the experiment work?"}
 ...
@@ -50,12 +49,9 @@ They used the face emoji annotation system developed by @fugate2021implications,
 
 Pictorial approach @maier2023emojis vs. lexicalist approach @grosz2023semantics.
 
-Goal: Test the predictions of the pictorial approach, i.e.: There should be a clear preference for the context-matching emoji for emoji pairs with an [AU+] difference. For emojis without an AU difference [AU-], context-matching emojis should be chosen less often (p.7)
+Goal: Test the predictions of the pictorial approach, i.e.: There should be a clear preference for the context-matching emoji for emoji pairs with an \[AU+\] difference. For emojis without an AU difference \[AU-\], context-matching emojis should be chosen less often (p.7)
 
-Question: Do AU differences lead to differences in meaning between the two emojis of a pair?
-Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4)
-Method: three [AU+] and three [AU] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5)
-Task: participants must choose between emojis of a pair (Forced chocie task), help "Alex/Anna" help using the emoji that best matches the text (6)
+Question: Do AU differences lead to differences in meaning between the two emojis of a pair? Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4) Method: three \[AU+\] and three \[AU\] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5) Task: participants must choose between emojis of a pair (Forced chocie task), help "Alex/Anna" help using the emoji that best matches the text (6)
 :::
 
 ```{r import-data, message=FALSE}
@@ -101,19 +97,21 @@ table(emoji_use_count$emoji_use)
 
 ```
 
-                                   
+Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
+
 ```{r}
-# str_detect(name, "filler") ~ "filler",
-#                                    .default = NULL))
-# 
-# table(data$AU_difference)
 
-#this was outside of a code chunk, I´m not sure where to put it
+data <- data |>
+  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "yes",
+                                   str_detect(name, "N") ~ "no",
+                                   str_detect(name, "filler") ~ "filler",
+                                   .default = NULL))
 
+table(data$AU_difference)
+ 
 ```
 
-
-## Data analysis/visualisation 
+## Data analysis/visualisation
 
 ### Descriptive statistics
 
@@ -146,8 +144,7 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 
 ```
 
-
-::: {.callout-tip}
+::: callout-tip
 #### Quiz time! {.unnumbered}
 
 1\) Test question?

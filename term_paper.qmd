@@ -101,6 +101,8 @@ Create a column with the experimental conditions (AU+, AU-, and filler/control i
 
 ```{r}
 
+#delete this code chunk?
+
 data <- data |>
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "yes",
                                    str_detect(name, "N") ~ "no",
@@ -108,8 +110,34 @@ data <- data |>
                                    .default = NULL))
 
 table(data$AU_difference)
- 
+
 ```
+
+Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
+
+```{r}
+
+data <- data |> 
+  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
+                             str_detect(question, "lacht") ~ "(cheeky) laughter",
+
+                             str_detect(question, "macht sich Sorgen") ~ "concern",
+                             str_detect(question, "ist überrascht") ~ "surprise",
+                             str_detect(question, "ist etwas genervt") ~ "mild irritation",
+                             str_detect(question, "ärgert sich") ~ "is annoyed",
+                             str_detect(question, "amüsiert sich") ~ "amusement",
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
+                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
+                             #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now
+                             str_detect(question, "ist verlegen") ~ "bashfulness",
+                                   .default = NULL))
+
+table(data$context)
+
+```
+
+Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using the information from the original analysis script? (meaning of N-36 and N-37)
 
 ## Data analysis/visualisation
 

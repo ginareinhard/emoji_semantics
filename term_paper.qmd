@@ -153,6 +153,21 @@ table(data$context)
 
 ```
 
+Define matches:
+
+```{r}
+
+data <- data |> 
+  mutate(match = case_when(context == "happiness" & (option1 == "grinning_face_with_big_eyes" | option1 == "grinning_face_with_big_eyes") ~ "yes",
+                           context == "(cheeky) laughter" & (option1 == "grinning_squinting_face" | option1 == "grinning_squinting_face") ~ "yes",
+                           context == "concern" & (option1 == "hushed_face" | option1 == "hushed_face") ~ "yes",
+                           context == "surprise" & (option1 == "astonished_face" | option1 == "astonished_face") ~ "yes",
+                           .default = "no"
+  ))
+
+###to be continued
+```
+
 ## Data analysis/visualisation
 
 ### Descriptive statistics

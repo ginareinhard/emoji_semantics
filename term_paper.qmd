@@ -157,7 +157,7 @@ Define matches:
 
 ```{r}
 
-data <- data |> 
+data <- data |>
   mutate(
   match = case_when(
     context == "happiness" & (option1 == "grinning_face_with_big_eyes" | option2 == "grinning_face_with_big_eyes") ~ "yes",
@@ -173,14 +173,39 @@ data <- data |>
     context == "happiness2" & (option1 == "smiling_face_with_smiling_eyes" | option2 == "smiling_face_with_smiling_eyes") ~ "yes",
     context == "bashfulness" & (option1 == "smiling_face" | option2 == "smiling_face") ~ "yes",
     .default = "no"))
+#checks if the emojis that are fitting the context are used, do we need that?
+
+data <- data |> 
+  mutate(
+  match2 = case_when( #called it match2 for now, potentially the only match column needed?
+    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
+    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
+    context == "concern" & response == "hushed_face" ~ "yes",
+    context == "surprise" & response == "astonished_face" ~ "yes",
+    context == "mild irritation" & response == "neutral_face" ~ "yes",
+    context == "annoyance" & response == "expressionless_face" ~ "yes",
+    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "yes",
+    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "yes",
+    context == "mild disappointment" & response == "slightly_frowning_face" ~ "yes",
+    context == "moderate disappointment" & response == "frowning_face" ~ "yes",
+    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
+    context == "bashfulness" & response == "smiling_face" ~ "yes",
+    .default = "no"))
 
 ```
 
 ```{r plot match x emoji use}
-data_use_count <-cbind(data, n = emoji_use_count$n)
+data_match_use <- data |> 
+  group_by(emoji_use, match2) |> 
+  count(match2)
 
-data_use_count |> 
-  ggplot(aes(x = emoji_use, y = n, fill = match)) + 
+percentages_match_use <- data_match_use %>%
+  group_by(emoji_use, match2) %>% 
+  summarise(count=n())%>% 
+  mutate(percentage=count/sum(count))
+
+data_match_use |> 
+  ggplot(aes(x = emoji_use, y = n, fill = match2)) + 
   geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
   scale_fill_brewer(palette="Set1")+
   labs(title = "",
@@ -188,7 +213,7 @@ data_use_count |>
        y = "Ratio")+
   coord_flip()
 
-#technically ok but not what I wnat. Match rates need to be calculated first. I´ll work on it tomorrow
+#something is wrong with that plot, I can´t work out what yet
 
 ```
 

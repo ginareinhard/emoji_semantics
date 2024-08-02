@@ -195,8 +195,15 @@ data <- data |>
 
 ```
 
-```{r match count}
-match_count <- data |> 
+```{r match2 count}
+data_no_filler <- data |> #remove filler rows
+  filter(match2 != "filler")
+
+data_no_filler |> #simple barplot showing that matches occurred more often than no matches
+  ggplot(aes(x = match2)) +
+  geom_bar()
+
+match_count <- data_no_filler |> 
   group_by(match2) |> 
   count() |> 
   filter(match2 != "filler")
@@ -206,21 +213,22 @@ match_count <- data |>
 # 1 no       583
 # 2 yes     1325
 
-data_no_filler <- data |> #remove fillr rows
-  filter(match2 != "filler")
-
-ggplot(data_no_filler, mapping = aes(x = match2)) +
-  geom_bar()
-
 ```
 
 
 ```{r plot match x emoji use}
 #trying to see whether there is a correlation of emoji use and matching accuracy
-match_use_count <- data |> 
-  group_by(emoji_use, match2) |> 
+match_use_count <- data_no_filler |> 
+  group_by(match2, emoji_use) |> 
   count() |> 
   filter(match2 != "filler")
+
+match_use_count |> 
+  group_by(emoji_use) |> 
+  ggplot(aes(x = emoji_use, y = n, fill = match2)) +
+  geom_bar(stat = "identity", position = "dodge") + #better with position = "dodge" or default position = "stack"?
+  labs(x = "Use frequency", y = "count")
+#there seem to be considerable differences between values
 
 match_use_count |> 
   ggplot(aes(x = emoji_use, y = n, fill = match2)) + 
@@ -231,7 +239,7 @@ match_use_count |>
        y = "Ratio")+
   coord_flip()
 
-#the plot does not really look meaningful, i.e. there is not a real difference.
+#the plot does not really look meaningful, i.e. there is not a real difference when scaled up to 100%
 
 ```
 

@@ -190,30 +190,48 @@ data <- data |>
     context == "moderate disappointment" & response == "frowning_face" ~ "yes",
     context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
     context == "bashfulness" & response == "smiling_face" ~ "yes",
+    AU_difference == "filler" ~ "filler",
     .default = "no"))
 
 ```
 
+```{r match count}
+match_count <- data |> 
+  group_by(match2) |> 
+  count() |> 
+  filter(match2 != "filler")
+
+#   match2     n
+#   <chr>  <int>
+# 1 no       583
+# 2 yes     1325
+
+data_no_filler <- data |> #remove fillr rows
+  filter(match2 != "filler")
+
+ggplot(data_no_filler, mapping = aes(x = match2)) +
+  geom_bar()
+
+```
+
+
 ```{r plot match x emoji use}
-data_match_use <- data |> 
+#trying to see whether there is a correlation of emoji use and matching accuracy
+match_use_count <- data |> 
   group_by(emoji_use, match2) |> 
-  count(match2)
+  count() |> 
+  filter(match2 != "filler")
 
-percentages_match_use <- data_match_use %>%
-  group_by(emoji_use, match2) %>% 
-  summarise(count=n())%>% 
-  mutate(percentage=count/sum(count))
-
-data_match_use |> 
+match_use_count |> 
   ggplot(aes(x = emoji_use, y = n, fill = match2)) + 
   geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
   scale_fill_brewer(palette="Set1")+
-  labs(title = "",
+  labs(title = "Do participants that use emojis less frequently have a lower matching accuracy?",
        x = "Use frequency",
        y = "Ratio")+
   coord_flip()
 
-#something is wrong with that plot, I can´t work out what yet
+#the plot does not really look meaningful, i.e. there is not a real difference.
 
 ```
 

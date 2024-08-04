@@ -115,6 +115,19 @@ table(data$AU_difference)
 
 ```
 
+Filter out filler emojis:
+
+```{r}
+
+data <- data |>
+  filter(AU_difference != "filler")
+
+# alternative (if code chunk above is deleted): 
+#data <- data |> 
+#  filter(!str_detect(name, "filler"))
+
+```
+
 Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
 
 ```{r}
@@ -172,23 +185,19 @@ data <- data |>
     context == "moderate disappointment" & response == "frowning_face" ~ "yes",
     context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
     context == "bashfulness" & response == "smiling_face" ~ "yes",
-    AU_difference == "filler" ~ "filler",
     .default = "no"))
 
 ```
 
 ```{r match count}
-data_no_filler <- data |> #remove filler rows
-  filter(match != "filler")
 
-data_no_filler |> #simple barplot showing that matches occurred more often than no matches
+data |> #simple barplot showing that matches occurred more often than no matches
   ggplot(aes(x = match)) +
   geom_bar()
 
-match_count <- data_no_filler |> 
+match_count <- data |> 
   group_by(match) |> 
-  count() |> 
-  filter(match != "filler")
+  count()
 
 #   match     n
 #   <chr>  <int>
@@ -199,10 +208,9 @@ match_count <- data_no_filler |>
 
 ```{r plot match x emoji use}
 #trying to see whether there is a correlation of emoji use and matching accuracy
-match_use_count <- data_no_filler |> 
+match_use_count <- data |> 
   group_by(match, emoji_use) |> 
-  count() |> 
-  filter(match != "filler")
+  count()
 
 match_use_count |> 
   group_by(emoji_use) |> 

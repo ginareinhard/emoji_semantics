@@ -157,27 +157,9 @@ Define matches:
 
 ```{r}
 
-data <- data |>
-  mutate(
-  match = case_when(
-    context == "happiness" & (option1 == "grinning_face_with_big_eyes" | option2 == "grinning_face_with_big_eyes") ~ "yes",
-    context == "(cheeky) laughter" & (option1 == "grinning_squinting_face" | option2 == "grinning_squinting_face") ~ "yes",
-    context == "concern" & (option1 == "hushed_face" | option2 == "hushed_face") ~ "yes",
-    context == "surprise" & (option1 == "astonished_face" | option2 == "astonished_face") ~ "yes",
-    context == "mild irritation" & (option1 == "neutral_face" | option2 == "neutral_face") ~ "yes",
-    context == "annoyance" & (option1 == "expressionless_face" | option2 == "expressionless_face") ~ "yes",
-    context == "amusement" & (option1 == "grinning_face_with_smiling_eyes" | option2 == "grinning_face_with_smiling_eyes") ~ "yes",
-    context == "(intense) happiness" & (option1 == "beaming_face_with_smiling_eyes" | option2 == "beaming_face_with_smiling_eyes") ~ "yes",
-    context == "mild disappointment" & (option1 == "slightly_frowning_face" | option2 == "slightly_frowning_face") ~ "yes",
-    context == "moderate disappointment" & (option1 == "frowning_face" | option2 == "frowning_face") ~ "yes",
-    context == "happiness2" & (option1 == "smiling_face_with_smiling_eyes" | option2 == "smiling_face_with_smiling_eyes") ~ "yes",
-    context == "bashfulness" & (option1 == "smiling_face" | option2 == "smiling_face") ~ "yes",
-    .default = "no"))
-#checks if the emojis that are fitting the context are used, do we need that?
-
 data <- data |> 
   mutate(
-  match2 = case_when( #called it match2 for now, potentially the only match column needed?
+  match = case_when( #called it match for now, potentially the only match column needed?
     context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
     context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
     context == "concern" & response == "hushed_face" ~ "yes",
@@ -195,43 +177,42 @@ data <- data |>
 
 ```
 
-```{r match2 count}
+```{r match count}
 data_no_filler <- data |> #remove filler rows
-  filter(match2 != "filler")
+  filter(match != "filler")
 
 data_no_filler |> #simple barplot showing that matches occurred more often than no matches
-  ggplot(aes(x = match2)) +
+  ggplot(aes(x = match)) +
   geom_bar()
 
 match_count <- data_no_filler |> 
-  group_by(match2) |> 
+  group_by(match) |> 
   count() |> 
-  filter(match2 != "filler")
+  filter(match != "filler")
 
-#   match2     n
+#   match     n
 #   <chr>  <int>
 # 1 no       583
 # 2 yes     1325
 
 ```
 
-
 ```{r plot match x emoji use}
 #trying to see whether there is a correlation of emoji use and matching accuracy
 match_use_count <- data_no_filler |> 
-  group_by(match2, emoji_use) |> 
+  group_by(match, emoji_use) |> 
   count() |> 
-  filter(match2 != "filler")
+  filter(match != "filler")
 
 match_use_count |> 
   group_by(emoji_use) |> 
-  ggplot(aes(x = emoji_use, y = n, fill = match2)) +
+  ggplot(aes(x = emoji_use, y = n, fill = match)) +
   geom_bar(stat = "identity", position = "dodge") + #better with position = "dodge" or default position = "stack"?
   labs(x = "Use frequency", y = "count")
 #there seem to be considerable differences between values
 
 match_use_count |> 
-  ggplot(aes(x = emoji_use, y = n, fill = match2)) + 
+  ggplot(aes(x = emoji_use, y = n, fill = match)) + 
   geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
   scale_fill_brewer(palette="Set1")+
   labs(title = "Do participants that use emojis less frequently have a lower matching accuracy?",
@@ -242,7 +223,6 @@ match_use_count |>
 #the plot does not really look meaningful, i.e. there is not a real difference when scaled up to 100%
 
 ```
-
 
 ## Data analysis/visualisation
 

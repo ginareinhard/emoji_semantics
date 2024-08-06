@@ -280,7 +280,7 @@ plot_AU_plus <- perc_AU_diff |>
 filter(AU_difference == "yes") |> 
 mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance"))) |> 
 ggplot(aes(x = context, y = percentage, fill = match)) +
-geom_bar(stat = "identity") +
+geom_bar(stat = "identity", position = "fill") +
 theme_minimal()
 
 #plot AU- pairs: context pairs AU- mild disappointment - moderate disappointment, amusement - overhappy (intense happiness), happiness(2) - bashfulness
@@ -288,7 +288,7 @@ plot_AU_minus <- perc_AU_diff |>
 filter(AU_difference == "no") |> 
 mutate(context = factor(context, levels = c("mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
 ggplot(aes(x = context, y = percentage, fill = match)) +
-geom_bar(stat = "identity") +
+geom_bar(stat = "identity", position = "fill") +
 theme_minimal()
 
 #install.packages("ggpubr")
@@ -297,6 +297,78 @@ ggarrange(plot_AU_plus, plot_AU_minus,
                     labels = c("AU+ condition", "AU- condition"),
                     common.legend = TRUE, legend = "right",
                     ncol = 1, nrow = 2)
+
+#problem: I cannot figure out how to group the context pairs together so that it is clear what should be compared, solution: similar to Fricke et al.: make a plot for each pair and put it all together? I.e. 3 plots for AU+ and 3 plots for AU-
+#AU+ condition:
+#concern - surprise
+plot_concern_surprise <- perc_AU_diff |> 
+filter(context == "concern" | context == "surprise") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs (x= "", y = "")+
+theme_minimal()
+
+#happiness - (cheeky) laughter
+plot_happiness_cheeky <- perc_AU_diff |> 
+filter(context == "happiness" | context == "(cheeky) laughter") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs(x = "", y = "")+
+theme_minimal()
+
+#mild irritation - annoyance
+plot_mild_irr_annoyance <- perc_AU_diff |> 
+filter(context == "mild irritation" | context == "annoyance") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs(x = "", y = "")+
+theme_minimal()
+
+#AU- condition:
+#mild disappointment - moderate disappointment
+plot_mild_disapp_mod_dissap <- perc_AU_diff |> 
+filter(context == "mild disappointment" | context == "moderate disappointment") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs(x = "", y = "")+
+theme_minimal()
+
+#amusement - (intense) happiness
+plot_amusement_int_happiness <- perc_AU_diff |> 
+filter(context == "amusement" | context == "(intense) happiness") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs(x = "", y = "") +
+theme_minimal()
+
+#happiness2 - bashfulness
+plot_happiness2_bashfulness <- perc_AU_diff |> 
+filter(context == "happiness2" | context == "bashfulness") |> 
+ggplot(aes(x = context, y = percentage, fill = match)) +
+geom_bar(stat = "identity", position = "fill") +
+labs(x = "", y = "") + 
+theme_minimal()
+
+AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
+labels = "AU+ condition",
+legend = "none",
+nrow = 1, ncol = 3)
+
+AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
+labels = "AU- condition",
+common.legend = TRUE, legend = "top", 
+nrow = 1, ncol = 3)
+
+AU_combined <- ggarrange(AU_plus, AU_minus,
+common.legend = TRUE, 
+nrow = 2)
+
+AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
+top = text_grob("AU differences for individual contexts"),
+left = text_grob("percentages", rot = 90),
+bottom = text_grob("context"))
+
+AU_combined
 ```
 
 ::: callout-tip

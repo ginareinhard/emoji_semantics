@@ -189,6 +189,12 @@ data <- data |>
 
 ```
 
+## Data analysis/visualisation
+
+### Descriptive statistics
+
+### Walkthrough bar plot
+
 ```{r match count}
 
 data |> #simple barplot showing that matches occurred more often than no matches
@@ -264,12 +270,6 @@ plot_AU_combined <- (plot_AU_plus / plot_AU_minus)
 plot_AU_combined
 
 ```
-
-## Data analysis/visualisation
-
-### Descriptive statistics
-
-### Walkthrough bar plot
 
 Plot emoji use frequencies as barplot with ggplot:
 

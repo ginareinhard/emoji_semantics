@@ -267,7 +267,7 @@ match_use_count |>
 
 ```{r AU difference , matching rates, context}
 perc_AU_diff <- data |> 
-group_by(AU_difference, match, AU_difference) |> 
+group_by(AU_difference, match, context) |> 
 summarise(count = n()) |> 
 mutate(percentage = count/sum(count))
 
@@ -281,7 +281,8 @@ filter(AU_difference == "yes") |>
 mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance"))) |> 
 ggplot(aes(x = context, y = percentage, fill = match)) +
 geom_bar(stat = "identity") +
-labs(title = "AU+ condition")
+labs(title = "AU+ condition")+
+theme_minimal()
 
 #plot AU- pairs: context pairs AU- mild disappointment - moderate disappointment, amusement - overhappy (intense happiness), happiness(2) - bashfulness
 plot_AU_minus <- perc_AU_diff |> 
@@ -289,11 +290,14 @@ filter(AU_difference == "no") |>
 mutate(context = factor(context, levels = c("mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
 ggplot(aes(x = context, y = percentage, fill = match)) +
 geom_bar(stat = "identity") +
-labs(title = "AU- condition")
+labs(title = "AU- condition") +
+theme_minimal()
 
-library(patchwork) #just for now, Notlösung :D
-
-plot_AU_combined <- (plot_AU_plus / plot_AU_minus)
+# install.packages("ggpubr")
+library(ggpubr)
+plot_AU_combined <- ggarrange(plot_AU_plus, plot_AU_minus,
+                    labels = c("AU+ condition", "AU- condition"),
+                    ncol = 2, nrow = 2)
 plot_AU_combined
 
 ```

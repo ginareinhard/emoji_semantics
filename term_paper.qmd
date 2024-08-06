@@ -297,92 +297,106 @@ match_use_count |>
 
 ```{r AU difference , matching rates, context}
 perc_AU_diff <- data |> 
-group_by(AU_difference, match, context) |> 
-summarise(count = n()) |> 
-mutate(percentage = count/sum(count))
+filter(AU_difference != "filler") |> 
+count(context, match) %>%
+mutate(percent_col = round(n/sum(n)*100, 2)) %>%
+group_by(context) %>%
+mutate(percent = round(n/sum(n)*100, 2)) #not sure what I´m doing here but it works to calculate the correct percentages within context groups, copy and pasted (and slightly adjusted) from: https://stackoverflow.com/questions/61308768/ggplot2-add-labels-to-percentage-plot-not-position-fill-but-just-fill
 
-perc_AU_diff |> 
-ggplot(aes(x = context, y = percentage, fill = match)) + 
-geom_bar(stat = "identity")
-
-#plot AU+ pairs: context pairs AU+ concern - surprise; general happiness - hearty (cheeky) laughter; mild_irritation - annoyance;
-plot_AU_plus <- perc_AU_diff |> 
-filter(AU_difference == "yes") |> 
-mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance"))) |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
-geom_bar(stat = "identity", position = "fill") +
-theme_minimal()
-
-#plot AU- pairs: context pairs AU- mild disappointment - moderate disappointment, amusement - overhappy (intense happiness), happiness(2) - bashfulness
-plot_AU_minus <- perc_AU_diff |> 
-filter(AU_difference == "no") |> 
-mutate(context = factor(context, levels = c("mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
-geom_bar(stat = "identity", position = "fill") +
-theme_minimal()
-
-#package "ggpubr" needed:
-ggarrange(plot_AU_plus, plot_AU_minus,
-                    labels = c("AU+ condition", "AU- condition"),
-                    common.legend = TRUE, legend = "right",
-                    ncol = 1, nrow = 2)
+### ignore ###
+# #plot AU+ pairs: context pairs AU+ concern - surprise; general happiness - hearty (cheeky) laughter; mild_irritation - annoyance;
+# plot_AU_plus <- perc_AU_diff |> 
+# filter(AU_difference == "yes") |> 
+# mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance"))) |> 
+# ggplot(aes(x = context, y = percentage, fill = match)) +
+# geom_bar(stat = "identity", position = "fill") +
+# theme_minimal()
+# 
+# #plot AU- pairs: context pairs AU- mild disappointment - moderate disappointment, amusement - overhappy (intense happiness), happiness(2) - bashfulness
+# plot_AU_minus <- perc_AU_diff |> 
+# filter(AU_difference == "no") |> 
+# mutate(context = factor(context, levels = c("mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
+# ggplot(aes(x = context, y = percentage, fill = match)) +
+# geom_bar(stat = "identity", position = "fill") +
+# theme_minimal()
+# 
+# #package "ggpubr" needed:
+# ggarrange(plot_AU_plus, plot_AU_minus,
+#                     labels = c("AU+ condition", "AU- condition"),
+#                     common.legend = TRUE, legend = "right",
+#                     ncol = 1, nrow = 2)
 
 #problem: I cannot figure out how to group the context pairs together so that it is clear what should be compared, solution: similar to Fricke et al.: make a plot for each pair and put it all together? I.e. 3 plots for AU+ and 3 plots for AU-
+
 #AU+ condition:
 #concern - surprise
 plot_concern_surprise <- perc_AU_diff |> 
 filter(context == "concern" | context == "surprise") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs (x= "", y = "")+
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs (x= "", y = "", title = "😯 😲") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
 #happiness - (cheeky) laughter
 plot_happiness_cheeky <- perc_AU_diff |> 
-filter(context == "happiness" | context == "(cheeky) laughter") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs(x = "", y = "")+
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😃 😆")+
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
 #mild irritation - annoyance
 plot_mild_irr_annoyance <- perc_AU_diff |> 
 filter(context == "mild irritation" | context == "annoyance") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs(x = "", y = "")+
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😐 😑") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
 #AU- condition:
 #mild disappointment - moderate disappointment
 plot_mild_disapp_mod_dissap <- perc_AU_diff |> 
 filter(context == "mild disappointment" | context == "moderate disappointment") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs(x = "", y = "")+
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "🙁️ ☹️")+
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
 #amusement - (intense) happiness
 plot_amusement_int_happiness <- perc_AU_diff |> 
-filter(context == "amusement" | context == "(intense) happiness") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+filter(context == "amusement" | context == "(intense) happiness") |> #intense happiness = overhappy
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs(x = "", y = "") +
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😄 😁") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
 #happiness2 - bashfulness
 plot_happiness2_bashfulness <- perc_AU_diff |> 
 filter(context == "happiness2" | context == "bashfulness") |> 
-ggplot(aes(x = context, y = percentage, fill = match)) +
+ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
-labs(x = "", y = "") + 
-theme_minimal()
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😊 ☺️") + 
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
 
+#arrange all AU+ conditions together in one plot
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
 labels = "AU+ condition",
 legend = "none",
 nrow = 1, ncol = 3)
 
+#arrange all AU-conditions together in one plot
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
 labels = "AU- condition",
 common.legend = TRUE, legend = "top", 
@@ -398,6 +412,13 @@ left = text_grob("percentages", rot = 90),
 bottom = text_grob("context"))
 
 AU_combined
+### proposals what to change when editing###
+# geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
+#make context names consistent with the paper, so that happiness => general_happiness, (intense) happiness => overhappy, happiness2 => happiness, cheeky_laughter = hearty laughter
+#optional: better title
+#optional, if necessary: order of emojis, order of bars
+#optional: colours
+#optional: legend "match/ no match" instead of "match: no/ yes"  --> maybe more easily readable?
 ```
 
 ::: callout-tip

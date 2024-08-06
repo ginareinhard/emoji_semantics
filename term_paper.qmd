@@ -339,6 +339,8 @@ labs (x= "", y = "", title = "😯 😲") +
 theme_minimal() +
 theme(plot.title = element_text(hjust = 0.5))
 
+plot_concern_surprise
+
 #happiness - (cheeky) laughter
 plot_happiness_cheeky <- perc_AU_diff |> 
 filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness
@@ -412,8 +414,9 @@ left = text_grob("percentages", rot = 90),
 bottom = text_grob("context"))
 
 AU_combined
-### proposals what to change when editing###
-# geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
+### potentially change when editing###
+#either change scale to 100% (instead of 1) or delete *100 in the beginning for 0-1 scale (making it consistent)
+#geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
 #make context names consistent with the paper, so that happiness => general_happiness, (intense) happiness => overhappy, happiness2 => happiness, cheeky_laughter = hearty laughter
 #optional: better title
 #optional, if necessary: order of emojis, order of bars

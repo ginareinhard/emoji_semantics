@@ -119,8 +119,8 @@ Filter out filler emojis:
 
 ```{r}
 
-data <- data |>
-  filter(AU_difference != "filler")
+#data <- data |>
+#  filter(AU_difference != "filler")
 
 # alternative (if code chunk above is deleted): 
 #data <- data |> 
@@ -198,7 +198,7 @@ data <- data |>
 Plot emoji use frequencies as barplot with ggplot:
 
 ```{r}
-
+#delete this code chunk?
 ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
   geom_bar()
 
@@ -207,7 +207,7 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 Reorder levels of factor "emoji_use":
 
 ```{r plot-emojiuse}
-
+#delete this code chunk?
 emoji_use_count <- emoji_use_count |> 
   mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
 
@@ -216,9 +216,37 @@ emoji_use_count <- emoji_use_count |>
 Plot with ordered levels:
 
 ```{r}
-
+#delete this code chunk?
 ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
   geom_bar()
+
+```
+
+Plot self-reported emoji understanding by gender (male and female), relative frequencies:
+
+```{r}
+#move code chunk to data wrangling part
+gender_understanding_count <- data |> 
+  filter(gender != "divers") |>
+  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
+    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
+    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |> 
+  group_by(gender) |> 
+  count(gender, emoji_understanding) |> 
+  mutate(absolute = n/24, #24 rows per participant/submission_id (calculate more elegantly?)
+         total = sum(absolute), 
+         percentage = (absolute/total) * 100)
+
+```
+
+```{r}
+
+ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Self-reported Emoji Understanding by Gender",
+       x = "Emoji understanding",
+       y = "Percent") +
+  scale_fill_brewer(palette = "Set1")
 
 ```
 

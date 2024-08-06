@@ -339,8 +339,6 @@ labs (x= "", y = "", title = "😯 😲") +
 theme_minimal() +
 theme(plot.title = element_text(hjust = 0.5))
 
-plot_concern_surprise
-
 #happiness - (cheeky) laughter
 plot_happiness_cheeky <- perc_AU_diff |> 
 filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness

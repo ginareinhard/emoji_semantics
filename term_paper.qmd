@@ -35,6 +35,8 @@ In this chapter, we...
 
 library(here)
 library(tidyverse)
+#install.packages("ggpubr")
+library(ggpubr)
 
 ```
 
@@ -319,8 +321,7 @@ ggplot(aes(x = context, y = percentage, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 theme_minimal()
 
-#install.packages("ggpubr")
-library(ggpubr)
+#package "ggpubr" needed:
 ggarrange(plot_AU_plus, plot_AU_minus,
                     labels = c("AU+ condition", "AU- condition"),
                     common.legend = TRUE, legend = "right",

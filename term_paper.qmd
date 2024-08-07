@@ -37,7 +37,8 @@ library(here)
 library(tidyverse)
 #install.packages("ggpubr")
 library(ggpubr)
-
+#install.packages("scales")
+#library(scales)
 ```
 
 ## Introducing the study
@@ -135,18 +136,18 @@ Define contexts using a combination of str_detect, case_when and mutate (and che
 ```{r}
 
 data <- data |> 
-  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
-                             str_detect(question, "lacht") ~ "(cheeky) laughter",
+  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
+                             str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
 
                              str_detect(question, "macht sich Sorgen") ~ "concern",
                              str_detect(question, "ist überrascht") ~ "surprise",
                              str_detect(question, "ist etwas genervt") ~ "mild irritation",
                              str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
-                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness", #overhappy
                              str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
-                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now, Fricke et al.: happiness
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
 
@@ -382,7 +383,7 @@ theme(plot.title = element_text(hjust = 0.5))
 
 #happiness2 - bashfulness
 plot_happiness2_bashfulness <- perc_AU_diff |> 
-filter(context == "happiness2" | context == "bashfulness") |> 
+filter(context == "happiness2" | context == "bashfulness") |>
 ggplot(aes(x = context, y = percent_col, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -412,13 +413,124 @@ left = text_grob("percentages", rot = 90),
 bottom = text_grob("context"))
 
 AU_combined
+
 ### potentially change when editing###
 #either change scale to 100% (instead of 1) or delete *100 in the beginning for 0-1 scale (making it consistent)
-#geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
+#change scale to 100
+#install.packages(scales)
+#library(scales) 
+#add scale_y_continuous(label = percent)
+
+#optional: geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
+
 #make context names consistent with the paper, so that happiness => general_happiness, (intense) happiness => overhappy, happiness2 => happiness, cheeky_laughter = hearty laughter
+
+perc_AU_diff_2 <- perc_AU_diff |> 
+mutate(context = case_when(
+  context == "(cheeky) laughter" ~ "hearty laughter",
+  context == "happiness" ~ "general happiness",
+  context == "(intense) happiness" ~ "overhappy",
+  context == "happiness2" ~ "happiness",
+  .default = context))
+
+#fix order of bars so that they match the order of emojis (default order: alphabetically)
+#mild irritation <-> annoyance
+#happiness <-> bashfulness
+#easier: change order of emojis
+
+#AU+ condition:
+#concern - surprise
+plot_concern_surprise_2 <- perc_AU_diff_2 |> 
+filter(context == "concern" | context == "surprise") |> 
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs (x= "", y = "", title = "😯 😲") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#happiness - (cheeky) laughter
+plot_happiness_cheeky_2 <- perc_AU_diff_2 |> 
+filter(context == "general happiness" | context == "hearty laughter") |> #happiness = general happiness
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😃 😆")+
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#mild irritation - annoyance
+plot_mild_irr_annoyance_2 <- perc_AU_diff_2 |> 
+filter(context == "mild irritation" | context == "annoyance") |> 
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😑 😐") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#AU- condition:
+#mild disappointment - moderate disappointment
+plot_mild_disapp_mod_dissap_2 <- perc_AU_diff_2 |> 
+filter(context == "mild disappointment" | context == "moderate disappointment") |> 
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "🙁️ ☹️")+
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#amusement - (intense) happiness
+plot_amusement_int_happiness_2 <- perc_AU_diff_2 |> 
+filter(context == "amusement" | context == "overhappy") |> #intense happiness = overhappy
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "😄 😁") +
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#happiness2 - bashfulness
+plot_happiness2_bashfulness_2 <- perc_AU_diff_2 |> 
+filter(context == "happiness" | context == "bashfulness") |>
+ggplot(aes(x = context, y = percent_col, fill = match)) +
+geom_col(position = "fill") +
+scale_y_continuous(labels = percent) +
+geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
+labs(x = "", y = "", title = "☺️ 😊️") + 
+theme_minimal() +
+theme(plot.title = element_text(hjust = 0.5))
+
+#arrange all AU+ conditions together in one plot
+AU_plus_2 <- ggarrange(plot_concern_surprise_2, plot_happiness_cheeky_2, plot_mild_irr_annoyance_2,
+labels = "AU+ condition",
+legend = "none",
+nrow = 1, ncol = 3)
+
+#arrange all AU-conditions together in one plot
+AU_minus_2 <- ggarrange(plot_mild_disapp_mod_dissap_2, plot_amusement_int_happiness_2, plot_happiness2_bashfulness_2,
+labels = "AU- condition",
+common.legend = TRUE, legend = "top", 
+nrow = 1, ncol = 3)
+
+AU_combined_2 <- ggarrange(AU_plus_2, AU_minus_2,
+common.legend = TRUE, 
+nrow = 2)
+
+AU_combined_2 <- annotate_figure(AU_combined_2, #also a function of the "ggpubr" package
+top = text_grob("AU differences for individual contexts"),
+left = text_grob("percentages", rot = 90),
+bottom = text_grob("context"))
+
+AU_combined_2
+
 #optional: better title
-#optional, if necessary: order of emojis, order of bars
-#optional: colours
+#optional: colours (colour blind friendly)
 #optional: legend "match/ no match" instead of "match: no/ yes"  --> maybe more easily readable?
 ```
 

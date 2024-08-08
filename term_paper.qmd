@@ -233,6 +233,10 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 
 ```
 
+![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
+
+![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
+
 Plot self-reported emoji understanding by gender (male and female), relative frequencies, adjust color manually to colors of @fricke2024semantic:
 
 ```{r}

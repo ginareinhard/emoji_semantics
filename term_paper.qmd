@@ -206,33 +206,6 @@ data <- data |>
 
 ### Walkthrough bar plot
 
-Plot emoji use frequencies as barplot with ggplot:
-
-```{r}
-#delete this code chunk?
-ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
-  geom_bar()
-
-```
-
-Reorder levels of factor "emoji_use":
-
-```{r plot-emojiuse}
-#delete this code chunk?
-emoji_use_count <- emoji_use_count |> 
-  mutate(emoji_use = factor(emoji_use, levels = c("nie", "selten", "gelegentlich", "oft", "in fast jeder Nachricht")))
-
-```
-
-Plot with ordered levels:
-
-```{r}
-#delete this code chunk?
-ggplot(emoji_use_count, mapping = aes(x = emoji_use)) + 
-  geom_bar()
-
-```
-
 ![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
 
 ![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}

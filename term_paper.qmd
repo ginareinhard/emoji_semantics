@@ -71,13 +71,13 @@ Question: Do AU differences lead to differences in meaning between the two emoji
 
 ![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
 
+## Data wrangling
+
 ```{r import-data, message=FALSE}
 
 raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
-
-## Data wrangling
 
 ```{r clean-data}
 

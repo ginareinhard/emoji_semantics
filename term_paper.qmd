@@ -67,6 +67,10 @@ Question: Do AU differences lead to differences in meaning between the two emoji
 
 ![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
 
+![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
+
+![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
+
 ```{r import-data, message=FALSE}
 
 raw_data <- read.csv(file = here("data", "raw_data.csv"))
@@ -205,10 +209,6 @@ data <- data |>
 ### Descriptive statistics
 
 ### Walkthrough bar plot
-
-![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
-
-![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
 
 Plot self-reported emoji understanding by gender (male and female), relative frequencies, adjust color manually to colors of @fricke2024semantic:
 

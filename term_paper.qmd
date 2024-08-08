@@ -14,10 +14,16 @@ format:
 link-citations: true
 csl: "apa_7th.csl"
 ---
+```{r ragg, include=FALSE}
+
+##install.packages('ragg')
+library(ragg)
+
+```
 
 ```{r setup, include=FALSE}
 
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(dev = "ragg_png")
 
 ```
 
@@ -38,7 +44,8 @@ library(tidyverse)
 #install.packages("ggpubr")
 library(ggpubr)
 #install.packages("scales")
-#library(scales)
+library(scales)
+
 ```
 
 ## Introducing the study

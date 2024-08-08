@@ -14,9 +14,10 @@ format:
 link-citations: true
 csl: "apa_7th.csl"
 ---
+
 ```{r ragg, include=FALSE}
 
-##install.packages('ragg')
+#install.packages("ragg")
 library(ragg)
 
 ```
@@ -232,7 +233,7 @@ ggplot(emoji_use_count, mapping = aes(x = emoji_use)) +
 
 ```
 
-Plot self-reported emoji understanding by gender (male and female), relative frequencies:
+Plot self-reported emoji understanding by gender (male and female), relative frequencies, adjust color manually to colors of @fricke2024semantic:
 
 ```{r}
 #move code chunk to data wrangling part
@@ -256,7 +257,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
   labs(title = "Self-reported Emoji Understanding by Gender",
        x = "Emoji understanding",
        y = "Percent") +
-  scale_fill_brewer(palette = "Set1")
+  scale_fill_manual(values=c("#003560", "#B61E3E"))
 
 ```
 

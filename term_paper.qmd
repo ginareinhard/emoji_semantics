@@ -73,11 +73,15 @@ Question: Do AU differences lead to differences in meaning between the two emoji
 
 ## Data wrangling
 
+Import the data using "here":
+
 ```{r import-data, message=FALSE}
 
 raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
+
+Filter out participants who exceed the maximum age of 35 years specified by @fricke2024semantic (p. 8):
 
 ```{r clean-data}
 
@@ -90,7 +94,6 @@ data <- raw_data |>
 
 table(raw_data$gender)
 table(raw_data$emoji_understanding)
-table(raw_data$emoji_use)
 
 ```
 
@@ -104,13 +107,28 @@ table(gender_count$gender)
 
 ```
 
-```{r emojiuse-count, results=FALSE}
+-\> 109 specified male, 47 female, 3 non-binary. @fricke2024semantic excluded participants with non-binary gender, as there were only 3.
 
-emoji_use_count <- data |> 
-  group_by(submission_id) |> 
-  count(emoji_use)
+```{r}
 
-table(emoji_use_count$emoji_use)
+data <- data |> 
+  filter(gender != "divers")
+
+```
+
+Add a column with self-reported emoji understanding by gender (men/women), relative frequencies:
+
+```{r}
+
+gender_understanding_count <- data |> 
+  distinct(submission_id, .keep_all = TRUE) |> #keep only the first occurrence of each unique submission_id
+  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
+    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
+    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |>
+  group_by(gender) |> 
+  count(gender, emoji_understanding) |> 
+  mutate(total = sum(n), 
+         percentage = (n/total) * 100)
 
 ```
 
@@ -134,11 +152,11 @@ Filter out filler emojis:
 
 ```{r}
 
-#data <- data |>
-#  filter(AU_difference != "filler")
+data_without_fillers <- data |>
+  filter(AU_difference != "filler")
 
 # alternative (if code chunk above is deleted): 
-#data <- data |> 
+#data_without_fillers <- data |> 
 #  filter(!str_detect(name, "filler"))
 
 ```
@@ -147,7 +165,7 @@ Define contexts using a combination of str_detect, case_when and mutate (and che
 
 ```{r}
 
-data <- data |> 
+data_without_fillers <- data_without_fillers |> 
   mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
                              str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
 
@@ -163,7 +181,7 @@ data <- data |>
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
 
-table(data$context)
+table(data_without_fillers$context)
 
 ```
 
@@ -171,13 +189,13 @@ Problem: emoji pair "slightly frowning face" and "frowning face" with the same q
 
 ```{r}
 
-data <- data |> 
+data_without_fillers <- data_without_fillers |> 
   mutate(context = case_when(
                              str_detect(name, "N-36") ~ "mild disappointment",
                              str_detect(name, "N-37") ~ "moderate disappointment",
                                    .default = context))
 
-table(data$context)
+table(data_without_fillers$context)
 
 ```
 
@@ -185,7 +203,7 @@ Define matches:
 
 ```{r}
 
-data <- data |> 
+data_without_fillers <- data_without_fillers |> 
   mutate(
   match = case_when( #called it match for now, potentially the only match column needed?
     context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
@@ -213,21 +231,6 @@ data <- data |>
 Plot self-reported emoji understanding by gender (male and female), relative frequencies, adjust color manually to colors of @fricke2024semantic:
 
 ```{r}
-#move code chunk to data wrangling part
-gender_understanding_count <- data |> 
-  filter(gender != "divers") |>
-  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
-    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
-    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |> 
-  group_by(gender) |> 
-  count(gender, emoji_understanding) |> 
-  mutate(absolute = n/24, #24 rows per participant/submission_id (calculate more elegantly?)
-         total = sum(absolute), 
-         percentage = (absolute/total) * 100)
-
-```
-
-```{r}
 
 ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, fill = gender)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -240,11 +243,11 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 
 ```{r match count}
 
-data |> #simple barplot showing that matches occurred more often than no matches
+data_without_fillers |> #simple barplot showing that matches occurred more often than no matches
   ggplot(aes(x = match)) +
   geom_bar()
 
-match_count <- data |> 
+match_count <- data_without_fillers |> 
   group_by(match) |> 
   count()
 
@@ -256,8 +259,9 @@ match_count <- data |>
 ```
 
 ```{r plot match x emoji use}
+
 #trying to see whether there is a correlation of emoji use and matching accuracy
-match_use_count <- data |> 
+match_use_count <- data_without_fillers |> 
   group_by(match, emoji_use) |> 
   count()
 
@@ -283,8 +287,7 @@ match_use_count |>
 
 ```{r AU difference , matching rates, context}
 
-#perc_AU_diff <- data |> 
-#filter(AU_difference != "filler") |> 
+#perc_AU_diff <- data_without_fillers |> 
 #count(context, match) |> #counts matches and non-matches (match((yes/no)) for each context
 #mutate(percent_col = round(n/sum(n)*100, 2)) |> #creates a new column with the percentages for each of these counts (in relation to the sum of all matches/non-matches, rounded to 2 digits)
 #group_by(context)  |> 
@@ -292,8 +295,7 @@ match_use_count |>
 #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
 
 ######suggestion (only use column "percent"):
-perc_AU_diff <- data |> 
-  filter(AU_difference != "filler") |> 
+perc_AU_diff <- data_without_fillers |> 
   group_by(context) |> 
   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
   mutate(percent = round(n/sum(n)*100, 2)) #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)

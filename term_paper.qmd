@@ -282,12 +282,21 @@ match_use_count |>
 ```
 
 ```{r AU difference , matching rates, context}
+
+#perc_AU_diff <- data |> 
+#filter(AU_difference != "filler") |> 
+#count(context, match) |> #counts matches and non-matches (match((yes/no)) for each context
+#mutate(percent_col = round(n/sum(n)*100, 2)) |> #creates a new column with the percentages for each of these counts (in relation to the sum of all matches/non-matches, rounded to 2 digits)
+#group_by(context)  |> 
+#mutate(percent = round(n/sum(n)*100, 2)) #not sure what I´m doing here but it works to calculate the correct percentages within context groups, copy and pasted (and slightly adjusted) from: https://stackoverflow.com/questions/61308768/ggplot2-add-labels-to-percentage-plot-not-position-fill-but-just-fill
+#creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
+
+######suggestion (only use column "percent"):
 perc_AU_diff <- data |> 
-filter(AU_difference != "filler") |> 
-count(context, match) %>%
-mutate(percent_col = round(n/sum(n)*100, 2)) %>%
-group_by(context) %>%
-mutate(percent = round(n/sum(n)*100, 2)) #not sure what I´m doing here but it works to calculate the correct percentages within context groups, copy and pasted (and slightly adjusted) from: https://stackoverflow.com/questions/61308768/ggplot2-add-labels-to-percentage-plot-not-position-fill-but-just-fill
+  filter(AU_difference != "filler") |> 
+  group_by(context) |> 
+  count(match) |> #counts matches and non-matches (match((yes/no)) for each context
+  mutate(percent = round(n/sum(n)*100, 2)) #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
 
 ### ignore ###
 # #plot AU+ pairs: context pairs AU+ concern - surprise; general happiness - hearty (cheeky) laughter; mild_irritation - annoyance;
@@ -318,7 +327,7 @@ mutate(percent = round(n/sum(n)*100, 2)) #not sure what I´m doing here but it w
 #concern - surprise
 plot_concern_surprise <- perc_AU_diff |> 
 filter(context == "concern" | context == "surprise") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs (x= "", y = "", title = "😯 😲") +
@@ -328,7 +337,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #happiness - (cheeky) laughter
 plot_happiness_cheeky <- perc_AU_diff |> 
 filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs(x = "", y = "", title = "😃 😆")+
@@ -338,7 +347,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #mild irritation - annoyance
 plot_mild_irr_annoyance <- perc_AU_diff |> 
 filter(context == "mild irritation" | context == "annoyance") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs(x = "", y = "", title = "😐 😑") +
@@ -349,7 +358,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #mild disappointment - moderate disappointment
 plot_mild_disapp_mod_dissap <- perc_AU_diff |> 
 filter(context == "mild disappointment" | context == "moderate disappointment") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs(x = "", y = "", title = "🙁️ ☹️")+
@@ -359,7 +368,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #amusement - (intense) happiness
 plot_amusement_int_happiness <- perc_AU_diff |> 
 filter(context == "amusement" | context == "(intense) happiness") |> #intense happiness = overhappy
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs(x = "", y = "", title = "😄 😁") +
@@ -369,7 +378,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #happiness2 - bashfulness
 plot_happiness2_bashfulness <- perc_AU_diff |> 
 filter(context == "happiness2" | context == "bashfulness") |>
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity", position = "fill") +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
 labs(x = "", y = "", title = "😊 ☺️") + 
@@ -427,7 +436,7 @@ mutate(context = case_when(
 #concern - surprise
 plot_concern_surprise_2 <- perc_AU_diff_2 |> 
 filter(context == "concern" | context == "surprise") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -438,7 +447,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #happiness - (cheeky) laughter
 plot_happiness_cheeky_2 <- perc_AU_diff_2 |> 
 filter(context == "general happiness" | context == "hearty laughter") |> #happiness = general happiness
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -449,7 +458,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #mild irritation - annoyance
 plot_mild_irr_annoyance_2 <- perc_AU_diff_2 |> 
 filter(context == "mild irritation" | context == "annoyance") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -461,7 +470,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #mild disappointment - moderate disappointment
 plot_mild_disapp_mod_dissap_2 <- perc_AU_diff_2 |> 
 filter(context == "mild disappointment" | context == "moderate disappointment") |> 
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -472,7 +481,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #amusement - (intense) happiness
 plot_amusement_int_happiness_2 <- perc_AU_diff_2 |> 
 filter(context == "amusement" | context == "overhappy") |> #intense happiness = overhappy
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +
@@ -483,7 +492,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #happiness2 - bashfulness
 plot_happiness2_bashfulness_2 <- perc_AU_diff_2 |> 
 filter(context == "happiness" | context == "bashfulness") |>
-ggplot(aes(x = context, y = percent_col, fill = match)) +
+ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col(position = "fill") +
 scale_y_continuous(labels = percent) +
 geom_text(aes(label = percent), position = position_fill(vjust = 0.5)) +

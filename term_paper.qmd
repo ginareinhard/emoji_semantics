@@ -389,23 +389,31 @@ theme(plot.title = element_text(hjust = 0.5))
 
 #arrange all AU+ conditions together in one plot
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
-labels = "AU+ condition",
+#labels = "AU+ condition",
 legend = "none",
 nrow = 1, ncol = 3)
 
+AU_plus <- annotate_figure(AU_plus,
+left = text_grob("[AU+] condition"))
+
 #arrange all AU-conditions together in one plot
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
-labels = "AU- condition",
+#labels = "AU- condition",
 common.legend = TRUE, legend = "top", 
 nrow = 1, ncol = 3)
+
+AU_minus <- annotate_figure(AU_minus,
+left = text_grob("[AU-] condition"))
+
+AU_minus
 
 AU_combined <- ggarrange(AU_plus, AU_minus,
 common.legend = TRUE, 
 nrow = 2)
 
 AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
-top = text_grob("AU differences for individual contexts"),
-left = text_grob("percentages", rot = 90),
+#top = text_grob("AU differences for individual contexts"),
+#left = text_grob("percent", rot = 90),
 bottom = text_grob("context"))
 
 AU_combined
@@ -504,23 +512,26 @@ theme(plot.title = element_text(hjust = 0.5))
 
 #arrange all AU+ conditions together in one plot
 AU_plus_2 <- ggarrange(plot_concern_surprise_2, plot_happiness_cheeky_2, plot_mild_irr_annoyance_2,
-labels = "AU+ condition",
 legend = "none",
 nrow = 1, ncol = 3)
 
+AU_plus_2 <- annotate_figure(AU_plus_2,
+top = text_grob("[AU+] condition"))
+
 #arrange all AU-conditions together in one plot
 AU_minus_2 <- ggarrange(plot_mild_disapp_mod_dissap_2, plot_amusement_int_happiness_2, plot_happiness2_bashfulness_2,
-labels = "AU- condition",
 common.legend = TRUE, legend = "top", 
 nrow = 1, ncol = 3)
+
+AU_minus_2 <- annotate_figure(AU_minus_2,
+top = text_grob("[AU-] condition"))
 
 AU_combined_2 <- ggarrange(AU_plus_2, AU_minus_2,
 common.legend = TRUE, 
 nrow = 2)
 
 AU_combined_2 <- annotate_figure(AU_combined_2, #also a function of the "ggpubr" package
-top = text_grob("AU differences for individual contexts"),
-left = text_grob("percentages", rot = 90),
+left = text_grob("percent", rot = 90),
 bottom = text_grob("context"))
 
 AU_combined_2

@@ -398,7 +398,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #arrange all AU+ conditions together in one plot
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
 #labels = "AU+ condition",
-legend = "none",
+common.legend = TRUE, legend = "bottom",
 nrow = 1, ncol = 3)
 
 AU_plus <- annotate_figure(AU_plus,
@@ -407,7 +407,7 @@ left = text_grob("[AU+] condition", rot = 90))
 #arrange all AU-conditions together in one plot
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
 #labels = "AU- condition",
-common.legend = TRUE, legend = "top", 
+legend = "none",
 nrow = 1, ncol = 3)
 
 AU_minus <- annotate_figure(AU_minus,

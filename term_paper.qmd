@@ -353,7 +353,7 @@ plot_mild_irr_annoyance <- perc_AU_diff |>
 filter(context == "mild irritation" | context == "annoyance") |> 
 ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("mild irritation", "annoyance")) +
+scale_x_discrete(limits = c("mild irritation", "annoyance"), guide = guide_axis(n.dodge = 2)) +
 geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
 labs(x = "", y = "", title = "😐 😑") +
 theme_minimal() +
@@ -371,8 +371,6 @@ labs(x = "", y = "", title = "🙁️ ☹️")+
 theme_minimal() +
 theme(plot.title = element_text(hjust = 0.5))
 
-plot_mild_disapp_mod_dissap
-
 #amusement - (intense) happiness
 plot_amusement_int_happiness <- perc_AU_diff |> 
 filter(context == "amusement" | context == "(intense) happiness") |> #intense happiness = overhappy
@@ -389,7 +387,7 @@ plot_happiness2_bashfulness <- perc_AU_diff |>
 filter(context == "happiness2" | context == "bashfulness") |>
 ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("happiness2", "bashfulness")) +
+scale_x_discrete(limits = c("happiness2", "bashfulness"), guide = guide_axis(n.dodge = 2)) +
 geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
 labs(x = "", y = "", title = "😊 ☺️") + 
 theme_minimal() +
@@ -398,7 +396,7 @@ theme(plot.title = element_text(hjust = 0.5))
 #arrange all AU+ conditions together in one plot
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
 #labels = "AU+ condition",
-common.legend = TRUE, legend = "bottom",
+common.legend = TRUE, legend = "right",
 nrow = 1, ncol = 3)
 
 AU_plus <- annotate_figure(AU_plus,
@@ -407,14 +405,13 @@ left = text_grob("[AU+] condition", rot = 90))
 #arrange all AU-conditions together in one plot
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
 #labels = "AU- condition",
-legend = "none",
+common.legend = TRUE, legend = "right",
 nrow = 1, ncol = 3)
 
 AU_minus <- annotate_figure(AU_minus,
 left = text_grob("[AU-] condition", rot = 90))
 
 AU_combined <- ggarrange(AU_plus, AU_minus,
-common.legend = TRUE, 
 nrow = 2)
 
 AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package

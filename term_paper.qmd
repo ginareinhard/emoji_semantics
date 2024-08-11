@@ -287,14 +287,6 @@ match_use_count |>
 
 ```{r AU difference , matching rates, context}
 
-#perc_AU_diff <- data_without_fillers |> 
-#count(context, match) |> #counts matches and non-matches (match((yes/no)) for each context
-#mutate(percent_col = round(n/sum(n)*100, 2)) |> #creates a new column with the percentages for each of these counts (in relation to the sum of all matches/non-matches, rounded to 2 digits)
-#group_by(context)  |> 
-#mutate(percent = round(n/sum(n)*100, 2)) #not sure what I´m doing here but it works to calculate the correct percentages within context groups, copy and pasted (and slightly adjusted) from: https://stackoverflow.com/questions/61308768/ggplot2-add-labels-to-percentage-plot-not-position-fill-but-just-fill
-#creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
-
-######suggestion (only use column "percent"):
 perc_AU_diff <- data_without_fillers |> 
   group_by(context) |> 
   count(match) |> #counts matches and non-matches (match((yes/no)) for each context

@@ -536,6 +536,61 @@ AU_combined_2
 #optional: legend "match/ no match" instead of "match: no/ yes"  --> maybe more easily readable?
 ```
 
+Shorten the code using a function:
+
+```{r}
+
+#define function to plot matches for emoji pairs with contexts
+plot_AU_matches <- function(contexts, emojis) {
+  perc_AU_diff |> 
+    filter(context %in% contexts) |> 
+    ggplot(aes(x = context, y = percent, fill = match)) +
+    geom_bar(stat = "identity") +
+    scale_x_discrete(limits = contexts, guide = guide_axis(n.dodge = 2)) +
+    geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+    labs (x= "", y = "", title = emojis) +
+    theme_minimal() +
+    theme(plot.title = element_text(hjust = 0.5))
+}
+
+#apply function to all contexts and emojis (create plots)
+plot_concern_surprise <- plot_AU_matches(c("concern", "surprise"), "😯 😲")
+plot_happiness_cheeky <- plot_AU_matches(c("happiness", "(cheeky) laughter"), "😃 😆")
+plot_mild_irr_annoyance <- plot_AU_matches(c("mild irritation", "annoyance"), "😐 😑")
+plot_mild_disapp_mod_dissap <- plot_AU_matches(c("mild disappointment", "moderate disappointment"), "🙁️ ☹️")
+plot_amusement_int_happiness <- plot_AU_matches(c("amusement", "(intense) happiness"), "😄 😁")
+plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "😊 ☺️")
+
+#arrange all AU+ conditions together in one plot
+AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
+#labels = "AU+ condition",
+common.legend = TRUE, legend = "right",
+nrow = 1, ncol = 3)
+
+AU_plus <- annotate_figure(AU_plus,
+left = text_grob("[AU+] condition", rot = 90))
+
+#arrange all AU-conditions together in one plot
+AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
+#labels = "AU- condition",
+common.legend = TRUE, legend = "right",
+nrow = 1, ncol = 3)
+
+AU_minus <- annotate_figure(AU_minus,
+left = text_grob("[AU-] condition", rot = 90))
+
+AU_combined <- ggarrange(AU_plus, AU_minus,
+nrow = 2)
+
+AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
+#top = text_grob("AU differences for individual contexts"),
+#left = text_grob("percent", rot = 90),
+bottom = text_grob("context"))
+
+AU_combined
+
+```
+
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 

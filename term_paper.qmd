@@ -492,6 +492,8 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
+![Individual context differences for AU conditions](images/AU_plot.png)
+
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 

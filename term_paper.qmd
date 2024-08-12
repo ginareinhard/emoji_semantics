@@ -292,6 +292,12 @@ perc_AU_diff <- data_without_fillers |>
   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
   mutate(percent = round(n/sum(n)*100, 2)) #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
 
+```
+
+Delete?
+
+```{r}
+
 ### ignore ###
 # #plot AU+ pairs: context pairs AU+ concern - surprise; general happiness - hearty (cheeky) laughter; mild_irritation - annoyance;
 # plot_AU_plus <- perc_AU_diff |> 
@@ -317,8 +323,12 @@ perc_AU_diff <- data_without_fillers |>
 
 #problem: I cannot figure out how to group the context pairs together so that it is clear what should be compared, solution: similar to Fricke et al.: make a plot for each pair and put it all together? I.e. 3 plots for AU+ and 3 plots for AU-
 
-#AU+ condition:
-#concern - surprise
+```
+
+Creating a stacked bar plot for the first (AU+) condition, emoji pair 😯 😲, contexts concern and surprise.
+
+```{r}
+
 plot_concern_surprise <- perc_AU_diff |> 
 filter(context == "concern" | context == "surprise") |> 
 ggplot(aes(x = context, y = percent, fill = match)) +
@@ -329,91 +339,103 @@ labs (x= "", y = "", title = "😯 😲") +
 theme_minimal() +
 theme(plot.title = element_text(hjust = 0.5))
 
-#happiness - (cheeky) laughter
-plot_happiness_cheeky <- perc_AU_diff |> 
-filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("happiness", "(cheeky) laughter")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs(x = "", y = "", title = "😃 😆")+
-theme_minimal() +
-theme(plot.title = element_text(hjust = 0.5))
+plot_concern_surprise
 
-#mild irritation - annoyance
-plot_mild_irr_annoyance <- perc_AU_diff |> 
-filter(context == "mild irritation" | context == "annoyance") |> 
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("mild irritation", "annoyance")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs(x = "", y = "", title = "😐 😑") +
-theme_minimal() +
-theme(plot.title = element_text(hjust = 0.5))
+```
 
-#AU- condition:
-#mild disappointment - moderate disappointment
-plot_mild_disapp_mod_dissap <- perc_AU_diff |> 
-filter(context == "mild disappointment" | context == "moderate disappointment") |> 
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("mild disappointment", "moderate disappointment")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs(x = "", y = "", title = "🙁️ ☹️")+
-theme_minimal() +
-theme(plot.title = element_text(hjust = 0.5))
+Delete?
 
-#amusement - (intense) happiness
-plot_amusement_int_happiness <- perc_AU_diff |> 
-filter(context == "amusement" | context == "(intense) happiness") |> #intense happiness = overhappy
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("amusement", "(intense) happiness")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs(x = "", y = "", title = "😄 😁") +
-theme_minimal() +
-theme(plot.title = element_text(hjust = 0.5))
+```{r}
 
-#happiness2 - bashfulness
-plot_happiness2_bashfulness <- perc_AU_diff |> 
-filter(context == "happiness2" | context == "bashfulness") |>
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("happiness2", "bashfulness")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs(x = "", y = "", title = "😊 ☺️") + 
-theme_minimal() +
-theme(plot.title = element_text(hjust = 0.5))
+# #happiness - (cheeky) laughter
+# plot_happiness_cheeky <- perc_AU_diff |> 
+# filter(context == "happiness" | context == "(cheeky) laughter") |> #happiness = general happiness
+# ggplot(aes(x = context, y = percent, fill = match)) +
+# geom_bar(stat = "identity") +
+# scale_x_discrete(limits = c("happiness", "(cheeky) laughter")) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+# labs(x = "", y = "", title = "😃 😆")+
+# theme_minimal() +
+# theme(plot.title = element_text(hjust = 0.5))
+# 
+# #mild irritation - annoyance
+# plot_mild_irr_annoyance <- perc_AU_diff |> 
+# filter(context == "mild irritation" | context == "annoyance") |> 
+# ggplot(aes(x = context, y = percent, fill = match)) +
+# geom_bar(stat = "identity") +
+# scale_x_discrete(limits = c("mild irritation", "annoyance")) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+# labs(x = "", y = "", title = "😐 😑") +
+# theme_minimal() +
+# theme(plot.title = element_text(hjust = 0.5))
+# 
+# #AU- condition:
+# #mild disappointment - moderate disappointment
+# plot_mild_disapp_mod_dissap <- perc_AU_diff |> 
+# filter(context == "mild disappointment" | context == "moderate disappointment") |> 
+# ggplot(aes(x = context, y = percent, fill = match)) +
+# geom_bar(stat = "identity") +
+# scale_x_discrete(limits = c("mild disappointment", "moderate disappointment")) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+# labs(x = "", y = "", title = "🙁️ ☹️")+
+# theme_minimal() +
+# theme(plot.title = element_text(hjust = 0.5))
+# 
+# #amusement - (intense) happiness
+# plot_amusement_int_happiness <- perc_AU_diff |> 
+# filter(context == "amusement" | context == "(intense) happiness") |> #intense happiness = overhappy
+# ggplot(aes(x = context, y = percent, fill = match)) +
+# geom_bar(stat = "identity") +
+# scale_x_discrete(limits = c("amusement", "(intense) happiness")) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+# labs(x = "", y = "", title = "😄 😁") +
+# theme_minimal() +
+# theme(plot.title = element_text(hjust = 0.5))
+# 
+# #happiness2 - bashfulness
+# plot_happiness2_bashfulness <- perc_AU_diff |> 
+# filter(context == "happiness2" | context == "bashfulness") |>
+# ggplot(aes(x = context, y = percent, fill = match)) +
+# geom_bar(stat = "identity") +
+# scale_x_discrete(limits = c("happiness2", "bashfulness")) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+# labs(x = "", y = "", title = "😊 ☺️") + 
+# theme_minimal() +
+# theme(plot.title = element_text(hjust = 0.5))
+# 
+# #arrange all AU+ conditions together in one plot
+# AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
+# #labels = "AU+ condition",
+# common.legend = TRUE, legend = "right",
+# nrow = 1, ncol = 3)
+# 
+# AU_plus <- annotate_figure(AU_plus,
+# left = text_grob("[AU+] condition", rot = 90))
+# 
+# #arrange all AU-conditions together in one plot
+# AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
+# #labels = "AU- condition",
+# common.legend = TRUE, legend = "right",
+# nrow = 1, ncol = 3)
+# 
+# AU_minus <- annotate_figure(AU_minus,
+# left = text_grob("[AU-] condition", rot = 90))
+# 
+# AU_combined <- ggarrange(AU_plus, AU_minus,
+# nrow = 2)
+# 
+# AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
+# #top = text_grob("AU differences for individual contexts"),
+# #left = text_grob("percent", rot = 90),
+# bottom = text_grob("context"))
+# 
+# AU_combined
 
-#arrange all AU+ conditions together in one plot
-AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
-#labels = "AU+ condition",
-common.legend = TRUE, legend = "right",
-nrow = 1, ncol = 3)
+```
 
-AU_plus <- annotate_figure(AU_plus,
-left = text_grob("[AU+] condition", rot = 90))
+Delete?
 
-#arrange all AU-conditions together in one plot
-AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
-#labels = "AU- condition",
-common.legend = TRUE, legend = "right",
-nrow = 1, ncol = 3)
-
-AU_minus <- annotate_figure(AU_minus,
-left = text_grob("[AU-] condition", rot = 90))
-
-AU_combined <- ggarrange(AU_plus, AU_minus,
-nrow = 2)
-
-AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
-#top = text_grob("AU differences for individual contexts"),
-#left = text_grob("percent", rot = 90),
-bottom = text_grob("context"))
-
-AU_combined
-
-ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
+```{r}
 
 ### potentially change when editing###
 #either change scale to 100% (instead of 1) or delete *100 in the beginning for 0-1 scale (making it consistent)
@@ -536,13 +558,13 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 #optional: better title
 #optional: colours (colour blind friendly)
 #optional: legend "match/ no match" instead of "match: no/ yes"  --> maybe more easily readable?
+
 ```
 
-Shorten the code using a function:
+Since we have to do this with all emoji pairs, we define a function.
 
 ```{r}
 
-#define function to plot matches for emoji pairs with contexts
 plot_AU_matches <- function(contexts, emojis) {
   perc_AU_diff |> 
     filter(context %in% contexts) |> 
@@ -555,7 +577,12 @@ plot_AU_matches <- function(contexts, emojis) {
     theme(axis.text.x = element_text(size = 4.5), plot.title = element_text(hjust = 0.5))
 }
 
-#apply function to all contexts and emojis (create plots)
+```
+
+We apply this function to all emoji pairs and contexts.
+
+```{r}
+
 plot_concern_surprise <- plot_AU_matches(c("concern", "surprise"), "😯 😲")
 plot_happiness_cheeky <- plot_AU_matches(c("happiness", "(cheeky) laughter"), "😃 😆")
 plot_mild_irr_annoyance <- plot_AU_matches(c("mild irritation", "annoyance"), "😐 😑")
@@ -563,7 +590,12 @@ plot_mild_disapp_mod_dissap <- plot_AU_matches(c("mild disappointment", "moderat
 plot_amusement_int_happiness <- plot_AU_matches(c("amusement", "(intense) happiness"), "😄 😁")
 plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "😊 ☺️")
 
-#arrange all AU+ conditions together in one plot
+```
+
+Arranging all AU+ conditions together in one plot, arranging all AU- conditions together in one plot.
+
+```{r}
+
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
 #labels = "AU+ condition",
 common.legend = TRUE, legend = "right",
@@ -572,7 +604,6 @@ nrow = 1, ncol = 3)
 AU_plus <- annotate_figure(AU_plus,
 left = text_grob("[AU+] condition", rot = 90))
 
-#arrange all AU-conditions together in one plot
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
 #labels = "AU- condition",
 common.legend = TRUE, legend = "right",
@@ -580,6 +611,12 @@ nrow = 1, ncol = 3)
 
 AU_minus <- annotate_figure(AU_minus,
 left = text_grob("[AU-] condition", rot = 90))
+
+```
+
+Combining all AU+ and AU- plots.
+
+```{r}
 
 AU_combined <- ggarrange(AU_plus, AU_minus,
 nrow = 2)
@@ -590,6 +627,13 @@ AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" pac
 bottom = text_grob("context"))
 
 AU_combined
+
+```
+
+```{r}
+
+ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
+
 ```
 
 ::: callout-tip

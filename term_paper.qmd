@@ -71,6 +71,19 @@ Question: Do AU differences lead to differences in meaning between the two emoji
 
 ![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
 
+## Inserting emojis in R
+
+(move this chapter/subchapter?)
+
+Insert emojis via emoji keyboard (Shortcut fn+e on Mac), also available in R Studio (Edit -\> Emojis & Symbols). This is the easiest way. Alternatively, there are emoji libraries, e.g. "emo(ji)" (<https://github.com/hadley/emo>).
+
+As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. Only necessary for Mac?
+
+For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
+
+-   save the plots with ggsave() and insert them
+-   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
+
 ## Data wrangling
 
 Import the data using "here":
@@ -651,10 +664,6 @@ wrong = "Test incorrect.")
 
 ```
 :::
-
-## Inserting emojis in R
-
-😁
 
 ## Conclusion
 

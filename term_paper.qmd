@@ -62,7 +62,7 @@ Pictorial approach @maier2023emojis vs. lexicalist approach @grosz2023semantics.
 
 Goal: Test the predictions of the pictorial approach, i.e.: There should be a clear preference for the context-matching emoji for emoji pairs with an \[AU+\] difference. For emojis without an AU difference \[AU-\], context-matching emojis should be chosen less often (p.7)
 
-Question: Do AU differences lead to differences in meaning between the two emojis of a pair? Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4) Method: three \[AU+\] and three \[AU\] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5) Task: participants must choose between emojis of a pair (Forced chocie task), help "Alex/Anna" help using the emoji that best matches the text (6)
+Question: Do AU differences lead to differences in meaning between the two emojis of a pair? Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4) Method: three \[AU+\] and three \[AU\] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5) Task: participants must choose between emojis of a pair (Forced choce task), help "Alex/Anna" help using the emoji that best matches the text (6)
 :::
 
 ![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
@@ -126,6 +126,8 @@ table(gender_count$gender)
 
 data <- data |> 
   filter(gender != "divers")
+
+### Question for Elen 1/6: Originally, we planned to include divers gender (unlike Fricke et al.) but because only three participants had divers gender, it skewed our visualisation: when using relative frequencies, the bars for divers genders become huge. On the other hand using absolute frequencies, the plot is not meaningful because significantly more males than females participated. Do you know a way to solve this without excluding divers genders?
 
 ```
 
@@ -209,6 +211,8 @@ data_without_fillers <- data_without_fillers |>
                                    .default = context))
 
 table(data_without_fillers$context)
+
+### Question for Elen 2/6: Is it in this case acceptable to cite the analysis script of Fricke et al.? We do not see another possibility since the contexts for "mild disappointment" and "moderate disappointment" are exactly identical except für the coded names of the emojis. The coding of the emojis (data$name) is not transparent to us: It corresponds somewhat, but not completely, to the AU coding.
 
 ```
 
@@ -431,7 +435,9 @@ plot_AU_matches <- function(contexts, emojis) {
     theme(plot.title = element_text(hjust = 0.5))
 }
 
-#optional: geom_col is the same as geom_bar(stat = "identity"), maybe more elegant? Or more complicated for textbook readers?
+### Question for Elen 3/6: Would it be better to use geom_col instead of geom_bar(stat = "identity"), since the two are seemingly identical? Or is unnecessarily more complicated for the textbook readers?
+
+### Question for Elen 4/6: Is it too advanced to define a function to create the plot? Instead, we could write out the code as above under "Delete" but a lot of it would be redundant.
 
 ```
 
@@ -489,6 +495,10 @@ AU_combined
 ```{r}
 
 ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
+
+### Question for Elen 5/6: The plot came out looking quite similar to the one of Fricke et al (p. 11). We were wondering whether that similarity is okay? 
+
+### Question for Elen 6/6: The easiest way to display the plot is by saving it using ggsave and inserting it as an image. Otherwise the long context labels on the x axis would always overlap. This solution felt not ideal to us because changing the code then does not immediately transfer to the plot in the html output. Another solution would be to make the font of the labels very small so that they do not overlap. However, since that messes with the proportions within the plot, we both prefer the ggsave Version. So we would like to know whether using ggsave is acceptable in this case.
 
 ```
 

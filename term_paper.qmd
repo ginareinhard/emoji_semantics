@@ -122,12 +122,14 @@ table(gender_count$gender)
 
 -\> 109 specified male, 47 female, 3 non-binary. @fricke2024semantic excluded participants with non-binary gender, as there were only 3.
 
+##### Question for Elen 1/6
+
+Originally, we planned to include divers gender (unlike Fricke et al.) but because only three participants had divers gender, it skewed our visualisation: when using relative frequencies, the bars for divers genders become huge. On the other hand using absolute frequencies, the plot is not meaningful because significantly more males than females participated. Do you know a way to solve this without excluding divers genders?
+
 ```{r}
 
 data <- data |> 
   filter(gender != "divers")
-
-### Question for Elen 1/6: Originally, we planned to include divers gender (unlike Fricke et al.) but because only three participants had divers gender, it skewed our visualisation: when using relative frequencies, the bars for divers genders become huge. On the other hand using absolute frequencies, the plot is not meaningful because significantly more males than females participated. Do you know a way to solve this without excluding divers genders?
 
 ```
 
@@ -212,9 +214,11 @@ data_without_fillers <- data_without_fillers |>
 
 table(data_without_fillers$context)
 
-### Question for Elen 2/6: Is it in this case acceptable to cite the analysis script of Fricke et al.? We do not see another possibility since the contexts for "mild disappointment" and "moderate disappointment" are exactly identical except für the coded names of the emojis. The coding of the emojis (data$name) is not transparent to us: It corresponds somewhat, but not completely, to the AU coding.
-
 ```
+
+##### Question for Elen 2/6
+
+Is it in this case acceptable to cite the analysis script of Fricke et al.? We do not see another possibility since the contexts for "mild disappointment" and "moderate disappointment" are exactly identical except für the coded names of the emojis. The coding of the emojis (data\$name) is not transparent to us: It corresponds somewhat, but not completely, to the AU coding.
 
 Define matches:
 
@@ -435,11 +439,15 @@ plot_AU_matches <- function(contexts, emojis) {
     theme(plot.title = element_text(hjust = 0.5))
 }
 
-### Question for Elen 3/6: Would it be better to use geom_col instead of geom_bar(stat = "identity"), since the two are seemingly identical? Or is unnecessarily more complicated for the textbook readers?
-
-### Question for Elen 4/6: Is it too advanced to define a function to create the plot? Instead, we could write out the code as above under "Delete" but a lot of it would be redundant.
-
 ```
+
+##### Question for Elen 3/6
+
+Would it be better to use geom_col instead of geom_bar(stat = "identity"), since the two are seemingly identical? Or is unnecessarily more complicated for the textbook readers?
+
+##### Question for Elen 4/6
+
+Is it too advanced to define a function to create the plot? Instead, we could write out the code as above under "Delete" but a lot of it would be redundant.
 
 We apply this function to all emoji pairs and contexts.
 
@@ -496,11 +504,15 @@ AU_combined
 
 ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
 
-### Question for Elen 5/6: The plot came out looking quite similar to the one of Fricke et al (p. 11). We were wondering whether that similarity is okay? 
-
-### Question for Elen 6/6: The easiest way to display the plot is by saving it using ggsave and inserting it as an image. Otherwise the long context labels on the x axis would always overlap. This solution felt not ideal to us because changing the code then does not immediately transfer to the plot in the html output. Another solution would be to make the font of the labels very small so that they do not overlap. However, since that messes with the proportions within the plot, we both prefer the ggsave Version. So we would like to know whether using ggsave is acceptable in this case.
-
 ```
+
+##### Question for Elen 5/6
+
+The plot came out looking quite similar to the one of Fricke et al (p. 11). We were wondering whether that similarity is okay?
+
+##### Question for Elen 6/6
+
+The easiest way to display the plot is by saving it using ggsave and inserting it as an image. Otherwise the long context labels on the x axis would always overlap. This solution felt not ideal to us because changing the code then does not immediately transfer to the plot in the html output. Another solution would be to make the font of the labels very small so that they do not overlap. However, since that messes with the proportions within the plot, we both prefer the ggsave Version. So we would like to know whether using ggsave is acceptable in this case.
 
 ![Individual context differences for AU conditions](images/AU_plot.png)
 

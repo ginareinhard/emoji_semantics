@@ -433,13 +433,18 @@ AU_minus_patch <-
 AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
   ggtitle("[AU-] condition")
 
+AU_combined_patch2 <- AU_plus_patch | AU_minus_patch
+AU_combined_patch2
+
 ```
 
 Combining AU+ and AU- plots
 ```{r}
-AU_combined_patch <- AU_plus_patch | AU_minus_patch
+AU_combined_patch <- 
+  plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance | plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness
  
 AU_combined_patch 
+#how can I add the AU condition titles?
 
 ```
 

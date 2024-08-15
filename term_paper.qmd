@@ -373,18 +373,18 @@ Arranging all AU+ conditions together in one plot, arranging all AU- conditions 
 AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
 #labels = "AU+ condition",
 common.legend = TRUE, legend = "right",
-nrow = 1, ncol = 3)
+nrow = 3, ncol = 1)
 
 AU_plus <- annotate_figure(AU_plus,
-left = text_grob("[AU+] condition", rot = 90))
+top = text_grob("[AU+] condition"))
 
 AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
 #labels = "AU- condition",
 common.legend = TRUE, legend = "right",
-nrow = 1, ncol = 3)
+nrow = 3, ncol = 1)
 
 AU_minus <- annotate_figure(AU_minus,
-left = text_grob("[AU-] condition", rot = 90))
+top = text_grob("[AU-] condition"))
 
 ```
 
@@ -393,12 +393,12 @@ Combining the AU+ and AU- plots.
 ```{r}
 
 AU_combined <- ggarrange(AU_plus, AU_minus,
-nrow = 2)
+ncol = 2)
 
-AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
-#top = text_grob("AU differences for individual contexts"),
-#left = text_grob("percent", rot = 90),
-bottom = text_grob("context"))
+# AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
+# #top = text_grob("AU differences for individual contexts"),
+# #left = text_grob("percent", rot = 90),
+# bottom = text_grob("context"))
 
 AU_combined
 
@@ -409,8 +409,6 @@ AU_combined
 ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
 
 ```
-
-![Individual context differences for AU conditions](images/AU_plot.png)
 
 ### Patchwork
 Alternative using the patchwork chapter, layout: two columns (one for each AU condtion), three rows

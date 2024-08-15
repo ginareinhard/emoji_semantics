@@ -11,6 +11,8 @@ format:
     toc-depth: 3
     number-sections: true
     embed-resources: true
+    fig-width: 10
+    fig-height: 8
 link-citations: true
 csl: "apa_7th.csl"
 ---
@@ -304,6 +306,7 @@ match_use_count |>
 
 ```
 
+## AU plot
 ```{r AU difference , matching rates, context}
 
 perc_AU_diff <- data_without_fillers |> 
@@ -362,6 +365,7 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 
 ```
 
+### ggarrange
 Arranging all AU+ conditions together in one plot, arranging all AU- conditions together in one plot.
 
 ```{r}
@@ -384,7 +388,7 @@ left = text_grob("[AU-] condition", rot = 90))
 
 ```
 
-Combining all AU+ and AU- plots.
+Combining the AU+ and AU- plots.
 
 ```{r}
 
@@ -406,7 +410,12 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
+![Individual context differences for AU conditions](images/AU_plot.png)
+
+### Patchwork
 Alternative using the patchwork chapter, layout: two columns (one for each AU condtion), three rows
+
+#### Version 1
 
 ```{r}
 #install.packages(patchwork)
@@ -419,7 +428,8 @@ Arranging all AU+ conditions together in one plot, arranging all AU- conditons i
 #AU+ conditions
 AU_plus_patch <- 
   plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance +
-  plot_layout(guide = "collect")
+  plot_layout(guides = "collect")
+  #theme(legend.position = "none")
 
 #need to use wrap_elements to add a title nested plots (otherwise the title is lost in the final nested plot)
 AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +
@@ -428,32 +438,36 @@ AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +
 #AU- condition:
 AU_minus_patch <- 
   plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness +
-  plot_layout(guide = "collect")
+  plot_layout(guides = "collect")
 
 AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
   ggtitle("[AU-] condition")
 
-AU_combined_patch2 <- AU_plus_patch | AU_minus_patch
-AU_combined_patch2
-
 ```
 
-Combining AU+ and AU- plots
+Combining AU+ and AU- plots:
 ```{r}
-AU_combined_patch <- 
-  plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance | plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness
- 
-AU_combined_patch 
-#how can I add the AU condition titles?
-
+AU_combined_patch1 <- AU_plus_patch | AU_minus_patch
+AU_combined_patch1
+#problem: cannot collect the two legends of the nested plots, and if I strip away the legend of AU_plus_patch, the plots do not have the same widths because of the legend.
 ```
 
+#### Version 2
+Alternative: create a plot without nesting before, so with all six plots. Problem: no other possibility to create "AU titles" other than adding the labels as separate objects.
 
-##### Question for Elen 6/6
+```{r}
+col_label1 <- wrap_elements(panel = text_grob("AU+ condition"))
+col_label2 <- wrap_elements(panel = text_grob("AU- condition"))
 
-The easiest way to display the plot is by saving it using ggsave and inserting it as an image. Otherwise the long context labels on the x axis would always overlap. This solution felt not ideal to us because changing the code then does not immediately transfer to the plot in the html output. Another solution would be to make the font of the labels very small so that they do not overlap. However, since that messes with the proportions within the plot, we both prefer the ggsave Version. So we would like to know whether using ggsave is acceptable in this case.
+AU_combined_patch2 <- 
+  ((col_label1 / plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance) | (col_label2 / plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness)) +
+  plot_layout(heights = c(.1,2,2,2,.2,2,2,2), guides = "collect") &
+  theme(legend.position = "bottom")
+ 
+AU_combined_patch2
+#problem: a lot of white space around the condition labels
 
-![Individual context differences for AU conditions](images/AU_plot.png)
+```
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

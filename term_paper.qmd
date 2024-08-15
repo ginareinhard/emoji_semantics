@@ -345,7 +345,7 @@ plot_AU_matches <- function(contexts, emojis) {
     geom_col() +
     scale_x_discrete(limits = contexts) +
     geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-    labs (x= "", y = "", title = emojis) +
+    labs (x= "context", y = "percent", title = emojis) +
     theme_minimal() +
     theme(plot.title = element_text(hjust = 0.5))
 }

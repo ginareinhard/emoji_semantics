@@ -346,7 +346,7 @@ plot_AU_matches <- function(contexts, emojis) {
     scale_x_discrete(limits = contexts) +
     geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
     labs (x= "context", y = "percent", title = emojis) +
-    theme_minimal() +
+    theme_bw() +
     theme(plot.title = element_text(hjust = 0.5))
 }
 
@@ -427,7 +427,6 @@ Arranging all AU+ conditions together in one plot, arranging all AU- conditons i
 AU_plus_patch <- 
   plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance +
   plot_layout(guides = "collect")
-  #theme(legend.position = "none")
 
 #need to use wrap_elements to add a title nested plots (otherwise the title is lost in the final nested plot)
 AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +

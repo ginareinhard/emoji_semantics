@@ -207,11 +207,23 @@ data_without_fillers <- data_without_fillers |>
 
 ### Explore the relationship between gender and emoji understanding
 
-To get an overview of how the values of the gender variable are distributed, we look at the data using the ´table()´ function.
+Let's first get a general overview of the gender distribution in the data. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘male’, ‘female’, and ‘diverse’ in the data, we would end up with 24 times the values of the frequencies.
 
-```{r, results=TRUE}
+To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` column. We then pipe `count(gender)` to this to count the genders by `submission_id`. (refer to <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.5.2 Piped Functions**).
 
-table(raw_data$gender)
+```{r}
+
+gender_count <- data |> 
+  group_by(submission_id) |> 
+  count(gender)
+
+```
+
+The result is stored in a new data frame called 'gender_count'. Now we can look at the distribution using the table() function.
+
+```{r}
+
+table(gender_count$gender)
 
 ```
 
@@ -219,24 +231,14 @@ The gender distribution in the data is very uneven: 109 men, 47 women and 3 non-
 
 ```{r}
 
-table(raw_data$emoji_understanding)
-
-```
-
-```{r gender-count, results=FALSE}
-
-gender_count <- data |> 
-  group_by(submission_id) |> 
-  count(gender)
-
-table(gender_count$gender)
+data <- data |> 
+  filter(gender != "divers")
 
 ```
 
 ```{r}
 
-data <- data |> 
-  filter(gender != "divers")
+table(raw_data$emoji_understanding)
 
 ```
 
@@ -268,6 +270,8 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
   scale_fill_manual(values=c("#003560", "#B61E3E"))
 
 ```
+
+### Emoji use
 
 ```{r match count}
 

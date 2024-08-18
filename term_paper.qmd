@@ -26,7 +26,7 @@ library(ragg)
 
 ```{r setup, include=FALSE}
 
-knitr::opts_chunk$set(dev = "ragg_png")
+knitr::opts_chunk$set(dev = "ragg_png", warning = FALSE, message = FALSE)
 
 ```
 
@@ -213,7 +213,6 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
        x = "Emoji understanding",
        y = "Percent") #+
   #scale_fill_manual(values=c("#003560", "#B61E3E"))
-
 ```
 
 ### Emoji use
@@ -260,6 +259,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 
 ## AU plot
 
+### Data preparation
 Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
 
 ```{r}
@@ -408,59 +408,11 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 
 ```
 
-### ggarrange
-
-Arranging all AU+ conditions together in one plot, arranging all AU- conditions together in one plot.
-
-```{r}
-
-AU_plus <- ggarrange(plot_concern_surprise, plot_happiness_cheeky, plot_mild_irr_annoyance,
-#labels = "AU+ condition",
-common.legend = TRUE, legend = "right",
-nrow = 3, ncol = 1)
-
-AU_plus <- annotate_figure(AU_plus,
-top = text_grob("[AU+] condition"))
-
-AU_minus <- ggarrange(plot_mild_disapp_mod_dissap, plot_amusement_int_happiness, plot_happiness2_bashfulness,
-#labels = "AU- condition",
-common.legend = TRUE, legend = "right",
-nrow = 3, ncol = 1)
-
-AU_minus <- annotate_figure(AU_minus,
-top = text_grob("[AU-] condition"))
-
-```
-
-Combining the AU+ and AU- plots.
-
-```{r}
-
-AU_combined <- ggarrange(AU_plus, AU_minus,
-ncol = 2)
-
-# AU_combined <- annotate_figure(AU_combined, #also a function of the "ggpubr" package
-# #top = text_grob("AU differences for individual contexts"),
-# #left = text_grob("percent", rot = 90),
-# bottom = text_grob("context"))
-
-AU_combined
-
-```
-
-```{r}
-
-ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
-
-```
-
 ### Patchwork
 
 By applying our function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
 ![Patchwork artwork by Allison Horst](images/patchwork.png)
-
-#### Version 1
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -517,6 +469,12 @@ AU_combined_patch1 <- AU_plus_patch | AU_minus_patch
 AU_combined_patch1
 ```
 
+```{r image AU plot, include=FALSE}
+
+ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
+
+```
+
 This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is not ideal but it is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later. There are a couple of other options that will produce other outcomes, however, none is going to be perfect.
 
 The options are to (1) delete the legends from both blocks, (2) keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one), or (3) keep the legends of all six plots. We have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product.
@@ -524,7 +482,7 @@ The options are to (1) delete the legends from both blocks, (2) keep the legend 
 As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
 
 ::: callout-tip
-#### Quiz time! {.unnumbered}
+Quiz time! {.unnumbered}
 
 [**Q1.**]{style="color:green;"} Looking at the final patchwork, which "sub-plot" shows the most significant finding?
 
@@ -543,24 +501,6 @@ wrong = "Not quite, try again.")
 
 [**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
 :::
-
-#### Version 2
-
-Alternative: create a plot without nesting before, so with all six plots. Problem: no other possibility to create "AU titles" other than adding the labels as separate objects.
-
-```{r}
-col_label1 <- wrap_elements(panel = text_grob("AU+ condition"))
-col_label2 <- wrap_elements(panel = text_grob("AU- condition"))
-
-AU_combined_patch2 <- 
-  ((col_label1 / plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance) | (col_label2 / plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness)) +
-  plot_layout(heights = c(.1,2,2,2,.2,2,2,2), guides = "collect") &
-  theme(legend.position = "bottom")
- 
-AU_combined_patch2
-#problem: a lot of white space around the condition labels
-
-```
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

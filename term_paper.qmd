@@ -271,10 +271,6 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 
 ```{r match count}
 
-data_without_fillers |> #simple barplot showing that matches occurred more often than no matches
-  ggplot(aes(x = match)) +
-  geom_bar()
-
 match_count <- data_without_fillers |> 
   group_by(match) |> 
   count()

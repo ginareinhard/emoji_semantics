@@ -109,96 +109,6 @@ data <- raw_data |>
 
 ```
 
-Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
-
-```{r}
-
-#delete this code chunk?
-
-data <- data |>
-  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "yes",
-                                   str_detect(name, "N") ~ "no",
-                                   str_detect(name, "filler") ~ "filler",
-                                   .default = NULL))
-
-table(data$AU_difference)
-
-```
-
-Filter out filler emojis:
-
-```{r}
-
-data_without_fillers <- data |>
-  filter(AU_difference != "filler")
-
-# alternative (if code chunk above is deleted): 
-#data_without_fillers <- data |> 
-#  filter(!str_detect(name, "filler"))
-
-```
-
-Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
-
-```{r}
-
-data_without_fillers <- data_without_fillers |> 
-  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
-                             str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
-
-                             str_detect(question, "macht sich Sorgen") ~ "concern",
-                             str_detect(question, "ist überrascht") ~ "surprise",
-                             str_detect(question, "ist etwas genervt") ~ "mild irritation",
-                             str_detect(question, "ärgert sich") ~ "annoyance",
-                             str_detect(question, "amüsiert sich") ~ "amusement",
-                             str_detect(question, "ist überglücklich") ~ "(intense) happiness", #overhappy
-                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
-                             #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
-                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now, Fricke et al.: happiness
-                             str_detect(question, "ist verlegen") ~ "bashfulness",
-                                   .default = NULL))
-
-table(data_without_fillers$context)
-
-```
-
-Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using/citing the information from the original analysis script? (meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")
-
-```{r}
-
-data_without_fillers <- data_without_fillers |> 
-  mutate(context = case_when(
-                             str_detect(name, "N-36") ~ "mild disappointment",
-                             str_detect(name, "N-37") ~ "moderate disappointment",
-                                   .default = context))
-
-table(data_without_fillers$context)
-
-```
-
-Define matches:
-
-```{r}
-
-data_without_fillers <- data_without_fillers |> 
-  mutate(
-  match = case_when( #called it match for now, potentially the only match column needed?
-    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
-    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
-    context == "concern" & response == "hushed_face" ~ "yes",
-    context == "surprise" & response == "astonished_face" ~ "yes",
-    context == "mild irritation" & response == "neutral_face" ~ "yes",
-    context == "annoyance" & response == "expressionless_face" ~ "yes",
-    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "yes",
-    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "yes",
-    context == "mild disappointment" & response == "slightly_frowning_face" ~ "yes",
-    context == "moderate disappointment" & response == "frowning_face" ~ "yes",
-    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
-    context == "bashfulness" & response == "smiling_face" ~ "yes",
-    .default = "no"))
-
-```
-
 ## Data analysis/visualisation
 
 ### Descriptive statistics
@@ -247,6 +157,8 @@ table(gender_count$gender)
 
 The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study.
 
+The uneven gender distribution (/this) is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants. (move this part?)
+
 Next, we want to find out how well the different gender groups report to understand emojis. To do this, we create a new data frame ‘gender_emoji_count’ and again only keep the unique submission_id. We group the data by gender and count the frequencies for the different gender groups within the emoji_understanding variable:
 
 ```{r}
@@ -284,8 +196,6 @@ print(gender_understanding_count)
 
 ### Walkthrough bar plot
 
-The uneven gender distribution is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants.
-
 ```{r}
 
 gender_understanding_count <- gender_understanding_count |> 
@@ -310,9 +220,9 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 
 ```{r match count}
 
-match_count <- data_without_fillers |> 
-  group_by(match) |> 
-  count()
+# match_count <- data |> 
+#   group_by(match) |> 
+#   count()
 
 #   match     n
 #   <chr>  <int>
@@ -323,26 +233,26 @@ match_count <- data_without_fillers |>
 
 ```{r plot match x emoji use}
 
-#trying to see whether there is a correlation of emoji use and matching accuracy
-match_use_count <- data_without_fillers |> 
-  group_by(match, emoji_use) |> 
-  count()
-
-match_use_count |> 
-  group_by(emoji_use) |> 
-  ggplot(aes(x = emoji_use, y = n, fill = match)) +
-  geom_bar(stat = "identity", position = "dodge") + #better with position = "dodge" or default position = "stack"?
-  labs(x = "Use frequency", y = "count")
-#there seem to be considerable differences between values
-
-match_use_count |> 
-  ggplot(aes(x = emoji_use, y = n, fill = match)) + 
-  geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
-  scale_fill_brewer(palette="Set1")+
-  labs(title = "Do participants that use emojis less frequently have a lower matching accuracy?",
-       x = "Use frequency",
-       y = "Ratio")+
-  coord_flip()
+# #trying to see whether there is a correlation of emoji use and matching accuracy
+# match_use_count <- data |> 
+#   group_by(match, emoji_use) |> 
+#   count()
+# 
+# match_use_count |> 
+#   group_by(emoji_use) |> 
+#   ggplot(aes(x = emoji_use, y = n, fill = match)) +
+#   geom_bar(stat = "identity", position = "dodge") + #better with position = "dodge" or default position = "stack"?
+#   labs(x = "Use frequency", y = "count")
+# #there seem to be considerable differences between values
+# 
+# match_use_count |> 
+#   ggplot(aes(x = emoji_use, y = n, fill = match)) + 
+#   geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
+#   scale_fill_brewer(palette="Set1")+
+#   labs(title = "Do participants that use emojis less frequently have a lower matching accuracy?",
+#        x = "Use frequency",
+#        y = "Ratio")+
+#   coord_flip()
 
 #the plot does not really look meaningful, i.e. there is not a real difference when scaled up to 100%
 
@@ -350,9 +260,99 @@ match_use_count |>
 
 ## AU plot
 
+Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
+
+```{r}
+
+#delete this code chunk?
+
+data <- data |>
+  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "yes",
+                                   str_detect(name, "N") ~ "no",
+                                   str_detect(name, "filler") ~ "filler",
+                                   .default = NULL))
+
+table(data$AU_difference)
+
+```
+
+Filter out filler emojis:
+
+```{r}
+
+data <- data |>
+  filter(AU_difference != "filler")
+
+# alternative (if code chunk above is deleted): 
+#data <- data |> 
+#  filter(!str_detect(name, "filler"))
+
+```
+
+Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
+
+```{r}
+
+data <- data |> 
+  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
+                             str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
+
+                             str_detect(question, "macht sich Sorgen") ~ "concern",
+                             str_detect(question, "ist überrascht") ~ "surprise",
+                             str_detect(question, "ist etwas genervt") ~ "mild irritation",
+                             str_detect(question, "ärgert sich") ~ "annoyance",
+                             str_detect(question, "amüsiert sich") ~ "amusement",
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness", #overhappy
+                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
+                             #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now, Fricke et al.: happiness
+                             str_detect(question, "ist verlegen") ~ "bashfulness",
+                                   .default = NULL))
+
+table(data$context)
+
+```
+
+Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using/citing the information from the original analysis script? (meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")
+
+```{r}
+
+data <- data |> 
+  mutate(context = case_when(
+                             str_detect(name, "N-36") ~ "mild disappointment",
+                             str_detect(name, "N-37") ~ "moderate disappointment",
+                                   .default = context))
+
+table(data$context)
+
+```
+
+Define matches:
+
+```{r}
+
+data <- data |> 
+  mutate(
+  match = case_when( #called it match for now, potentially the only match column needed?
+    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
+    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
+    context == "concern" & response == "hushed_face" ~ "yes",
+    context == "surprise" & response == "astonished_face" ~ "yes",
+    context == "mild irritation" & response == "neutral_face" ~ "yes",
+    context == "annoyance" & response == "expressionless_face" ~ "yes",
+    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "yes",
+    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "yes",
+    context == "mild disappointment" & response == "slightly_frowning_face" ~ "yes",
+    context == "moderate disappointment" & response == "frowning_face" ~ "yes",
+    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
+    context == "bashfulness" & response == "smiling_face" ~ "yes",
+    .default = "no"))
+
+```
+
 ```{r AU difference , matching rates, context}
 
-perc_AU_diff <- data_without_fillers |> 
+perc_AU_diff <- data |> 
   group_by(context) |> 
   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
   mutate(percent = round(n/sum(n)*100, 2)) #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)

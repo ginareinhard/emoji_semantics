@@ -203,13 +203,20 @@ data_without_fillers <- data_without_fillers |>
 
 ### Descriptive statistics
 
-### Walkthrough bar plot
+## Explore the relationship between gender and emoji understanding
 
-### Explore the relationship between gender and emoji understanding
+```{r}
 
-Let's first get a general overview of the gender distribution in the data. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘male’, ‘female’, and ‘diverse’ in the data, we would end up with 24 times the values of the frequencies.
+data <- data |> 
+  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
+    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
+    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good")))
 
-To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` column. We then pipe `count(gender)` to this to count the genders by `submission_id`. (refer to <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.5.2 Piped Functions**).
+```
+
+Let's first get a general overview of the gender distribution in the data. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
+
+To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`. (refer to <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.5.2 Piped Functions**).
 
 ```{r}
 
@@ -219,7 +226,7 @@ gender_count <- data |>
 
 ```
 
-The result is stored in a new data frame called 'gender_count'. Now we can look at the distribution using the table() function.
+The result is stored in a new data frame called 'gender_count'. Now we can look at the distribution using the `table()` function:
 
 ```{r}
 
@@ -227,34 +234,62 @@ table(gender_count$gender)
 
 ```
 
-The gender distribution in the data is very uneven: 109 men, 47 women and 3 non-binary people participated in the study. In order not to skew the visualisations, @fricke2024semantic excluded the three participants with non-binary gender.
+Alternatively, we can use the `distinct()` function to keep only unique occurrences (exactly: the first unique occurrence) of each submission_id. The argument `.keep_all` is set to `TRUE`, which means that all other variables in the data frame are kept and not deleted:
 
 ```{r}
 
-data <- data |> 
-  filter(gender != "divers")
+gender_count <- data |> 
+  distinct(submission_id, .keep_all = TRUE)
+
+table(gender_count$gender)
 
 ```
 
+The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study.
+
+Next, we want to find out how well the different gender groups report to understand emojis. To do this, we create a new data frame ‘gender_emoji_count’ and again only keep the unique submission_id. We group the data by gender and count the frequencies for the different gender groups within the emoji_understanding variable:
+
 ```{r}
 
-table(raw_data$emoji_understanding)
+gender_understanding_count <- data |>
+  distinct(submission_id, .keep_all = TRUE) |> 
+  group_by(gender) |> 
+  count(gender, emoji_understanding)
 
 ```
 
-Add a column with self-reported emoji understanding by gender (men/women), relative frequencies:
+Add relative frequencies:
 
 ```{r}
 
-gender_understanding_count <- data |> 
-  distinct(submission_id, .keep_all = TRUE) |> #keep only the first occurrence of each unique submission_id
-  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
-    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
-    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |>
+gender_understanding_count <- data |>
+  distinct(submission_id, .keep_all = TRUE) |> 
   group_by(gender) |> 
   count(gender, emoji_understanding) |> 
   mutate(total = sum(n), 
          percentage = (n/total) * 100)
+
+```
+
+Print the results:
+
+```{r}
+
+gender_understanding_count <- gender_understanding_count |> 
+  select(gender, emoji_understanding, n, percentage)
+
+print(gender_understanding_count)
+
+```
+
+### Walkthrough bar plot
+
+The uneven gender distribution is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants.
+
+```{r}
+
+gender_understanding_count <- gender_understanding_count |> 
+  filter(gender != "divers")
 
 ```
 
@@ -266,8 +301,8 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Self-reported Emoji Understanding by Gender",
        x = "Emoji understanding",
-       y = "Percent") +
-  scale_fill_manual(values=c("#003560", "#B61E3E"))
+       y = "Percent") #+
+  #scale_fill_manual(values=c("#003560", "#B61E3E"))
 
 ```
 

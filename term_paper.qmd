@@ -109,52 +109,6 @@ data <- raw_data |>
 
 ```
 
-```{r, results=FALSE}
-
-table(raw_data$gender)
-table(raw_data$emoji_understanding)
-
-```
-
-```{r gender-count, results=FALSE}
-
-gender_count <- data |> 
-  group_by(submission_id) |> 
-  count(gender)
-
-table(gender_count$gender)
-
-```
-
--\> 109 specified male, 47 female, 3 non-binary. @fricke2024semantic excluded participants with non-binary gender, as there were only 3.
-
-##### Question for Elen 1/6
-
-Originally, we planned to include divers gender (unlike Fricke et al.) but because only three participants had divers gender, it skewed our visualisation: when using relative frequencies, the bars for divers genders become huge. On the other hand using absolute frequencies, the plot is not meaningful because significantly more males than females participated. Do you know a way to solve this without excluding divers genders?
-
-```{r}
-
-data <- data |> 
-  filter(gender != "divers")
-
-```
-
-Add a column with self-reported emoji understanding by gender (men/women), relative frequencies:
-
-```{r}
-
-gender_understanding_count <- data |> 
-  distinct(submission_id, .keep_all = TRUE) |> #keep only the first occurrence of each unique submission_id
-  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
-    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
-    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |>
-  group_by(gender) |> 
-  count(gender, emoji_understanding) |> 
-  mutate(total = sum(n), 
-         percentage = (n/total) * 100)
-
-```
-
 Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
 
 ```{r}
@@ -250,6 +204,57 @@ data_without_fillers <- data_without_fillers |>
 ### Descriptive statistics
 
 ### Walkthrough bar plot
+
+### Explore the relationship between gender and emoji understanding
+
+To get an overview of how the values of the gender variable are distributed, we look at the data using the ´table()´ function.
+
+```{r, results=TRUE}
+
+table(raw_data$gender)
+
+```
+
+The gender distribution in the data is very uneven: 109 men, 47 women and 3 non-binary people participated in the study. In order not to skew the visualisations, @fricke2024semantic excluded the three participants with non-binary gender.
+
+```{r}
+
+table(raw_data$emoji_understanding)
+
+```
+
+```{r gender-count, results=FALSE}
+
+gender_count <- data |> 
+  group_by(submission_id) |> 
+  count(gender)
+
+table(gender_count$gender)
+
+```
+
+```{r}
+
+data <- data |> 
+  filter(gender != "divers")
+
+```
+
+Add a column with self-reported emoji understanding by gender (men/women), relative frequencies:
+
+```{r}
+
+gender_understanding_count <- data |> 
+  distinct(submission_id, .keep_all = TRUE) |> #keep only the first occurrence of each unique submission_id
+  mutate(gender = recode(gender, "männlich" = "men", "weiblich" = "women")) |>
+    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
+    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good"))) |>
+  group_by(gender) |> 
+  count(gender, emoji_understanding) |> 
+  mutate(total = sum(n), 
+         percentage = (n/total) * 100)
+
+```
 
 Plot self-reported emoji understanding by gender (male and female), relative frequencies, adjust color manually to colors of @fricke2024semantic:
 
@@ -460,8 +465,9 @@ This graph contains information about the matching rates of all emoji pairs for 
 As you can see, building plots and assembling them can be quite fiddly and it is easy to get lost in details. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. Maybe you will need to accept some trade-offs. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process can make up for the trouble.
 
 ::: callout-tip
-#### Quiz time! {.unnumbered} 
-1) Looking the final patchwork, which "sub-plot" shows the most significant finding?
+#### Quiz time! {.unnumbered}
+
+1)  Looking the final patchwork, which "sub-plot" shows the most significant finding?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -472,9 +478,7 @@ right = "Test right!",
 wrong = "Test incorrect.")
 ```
 
-
-2) What does that mean/ how can we interpret that finding, also regarding the results of the other plots?
-
+2)  What does that mean/ how can we interpret that finding, also regarding the results of the other plots?
 :::
 
 #### Version 2

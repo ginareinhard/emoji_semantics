@@ -295,6 +295,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 ## AU plot
 
 ### Data preparation
+
 Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
 
 ```{r}
@@ -302,8 +303,8 @@ Create a column with the experimental conditions (AU+, AU-, and filler/control i
 #delete this code chunk?
 
 data <- data |>
-  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "yes",
-                                   str_detect(name, "N") ~ "no",
+  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
+                                   str_detect(name, "N") ~ "AU-",
                                    str_detect(name, "filler") ~ "filler",
                                    .default = NULL))
 
@@ -394,6 +395,26 @@ perc_AU_diff <- data |>
 
 ```
 
+Demonstrating why we cannot simply build the plot using facet_wrap (potentially unnecessary, I was just trying stuff out)
+
+```{r}
+perc_AU_diff2 <- perc_AU_diff <- data |> 
+  group_by(context, AU_difference) |> 
+  count(match) |> #counts matches and non-matches (match((yes/no)) for each context
+  mutate(percent = round(n/sum(n)*100, 2))
+  
+plot_AU_facet <- perc_AU_diff2 |> 
+mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance", "mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
+ggplot(aes(x = percent, y = context, fill = match)) +
+geom_bar(stat = "identity") +
+facet_wrap(~AU_difference) +
+geom_text(aes(label = percent), position = position_stack(vjust = 0.5))
+
+plot_AU_facet
+```
+
+problem: The pairs are indiscernible, difficult to add emojis at the appropiate positions
+
 Creating a stacked bar plot for the first (AU+) condition, emoji pair 😯 😲, contexts concern and surprise.
 
 ```{r}
@@ -404,8 +425,8 @@ ggplot(aes(x = context, y = percent, fill = match)) +
 geom_bar(stat = "identity") +
 scale_x_discrete(limits = c("concern", "surprise")) +
 geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs (x= "", y = "", title = "😯 😲") +
-theme_minimal() +
+labs (x= "context", y = "percent", title = "😯 😲") +
+theme_bw() +
 theme(plot.title = element_text(hjust = 0.5))
 
 plot_concern_surprise
@@ -452,14 +473,15 @@ By applying our function `plot_AU_matches` to all emoji pairs and contexts, we h
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
 First, let us plan the layout of our final graph with some placeholder names:
-```
+
+```         
 p1 <- x / y / z
 
 p2 <- a / b / c
 
 p_combined <- p1 | p2
-
 ```
+
 In each of the patchworks `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the \[AU+\] condition and the \[AU-\] condition. We will then put these patchworks next to each other for comparison (`p_combined`). The final graph will have two columns and three rows.
 
 Now, we simply need to fill in the names of the plots and choose some meaningful names:
@@ -529,10 +551,6 @@ button_label = "Check answer", q_id = 5,
 right = "That´s right! There is a notable difference between the matching rates.",
 wrong = "Not quite, try again.")
 ```
-
-
-
-
 
 [**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
 :::

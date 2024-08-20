@@ -57,22 +57,19 @@ library(patchwork)
 
 ## Introducing the study
 
-> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
-
 1.  About emojis and why they are worth looking into:
 
--   face emojis as "stylized representations of human facial expressions"
--   face emojis are used in text messages by most people everyday as a means to communicate emotions (and various other purposes) by standing in for facial expressions
--   they elicit “neural responses that are similar to those caused by human faces”
+Everyday, millions of people use emojis in their text messages as a means to communicate emotions. Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. As @fricke2024semantic review, several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still much to be discovered. In this chapter, we will look into this study by @fricke2024semantic :
+
+> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
 
 ::: {.callout-note title="How does the experiment work?"}
-
 2.  Introducing FACS, explaining AUs and what AU+/AU- means
 
 -   Facial Action Coding System (FACS) by \@ekman1978facial -\> facial expressions are decomposed into minimal Action Units (AUs)
 -   Action Units are characteristics/ features of the emoji, such as *eyebrows arched, eyes wide* -\> emoji consists of several AUs (as shown in image emoji pairs), emoji as a puzzle with the AUs as its pieces; these units are coded as numbers
 -   @fricke2024semantic use two different types of pairs of visually smilar emojis (refer to emoji_pairs.png)
-    -   \[AU+\]: visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43)
+    -   \[AU+\]: visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43)
     -   \[AU-\]: visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding)
 
 They used the face emoji annotation system developed by @fugate2021implications, Facial Action Coding System (FACS) by @ekman1978facial. FACS decomposes facial expressions into minimal Action Units (AUs) which makes the annotation of face emojis possible.
@@ -117,9 +114,8 @@ They used the face emoji annotation system developed by @fugate2021implications,
 
 -   160 (one excluded --\> 159) participants (109 male, 47 female, 3 non-binary genders)
 
-```{=html}
 <!-- -->
-```
+
 -   German native spakers living in Germany, 18-35 years, predominently using WhatsApp on an Android phone (6 IOS, 3 "other")
 
 -   Filler mistakes: exclusions with ≥ three mistakes → none

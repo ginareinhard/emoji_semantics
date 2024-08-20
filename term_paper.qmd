@@ -57,18 +57,92 @@ library(patchwork)
 
 ## Introducing the study
 
-@fricke2024semantic \> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
+> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
 
-::: {.callout-note title="How did the experiment work?"}
-...
+1.  About emojis and why they are worth looking into:
+
+-   face emojis as "stylized representations of human facial expressions"
+-   face emojis are used in text messages by most people everyday as a means to communicate emotions (and various other purposes) by standing in for facial expressions
+-   they elicit “neural responses that are similar to those caused by human faces”
+
+::: {.callout-note title="How does the experiment work?"}
+
+2.  Introducing FACS, explaining AUs and what AU+/AU- means
+
+-   Facial Action Coding System (FACS) by \@ekman1978facial -\> facial expressions are decomposed into minimal Action Units (AUs)
+-   Action Units are characteristics/ features of the emoji, such as *eyebrows arched, eyes wide* -\> emoji consists of several AUs (as shown in image emoji pairs), emoji as a puzzle with the AUs as its pieces; these units are coded as numbers
+-   @fricke2024semantic use two different types of pairs of visually smilar emojis (refer to emoji_pairs.png)
+    -   \[AU+\]: visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43)
+    -   \[AU-\]: visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding)
 
 They used the face emoji annotation system developed by @fugate2021implications, Facial Action Coding System (FACS) by @ekman1978facial. FACS decomposes facial expressions into minimal Action Units (AUs) which makes the annotation of face emojis possible.
 
-Pictorial approach @maier2023emojis vs. lexicalist approach @grosz2023semantics.
+3.  Briefly summarizing the pictorial @maier2023emojis and the lexicalist approach @grosz2023semantics, and their predictions for the experiment (table?)
 
-Goal: Test the predictions of the pictorial approach, i.e.: There should be a clear preference for the context-matching emoji for emoji pairs with an \[AU+\] difference. For emojis without an AU difference \[AU-\], context-matching emojis should be chosen less often (p.7)
+-   pictorial:
 
-Question: Do AU differences lead to differences in meaning between the two emojis of a pair? Hypothesis: "Small visual differences that do not correspond to AU differences ((no clear real-life counterparts)) should be semantically less relevant than visual differences that do correspond to AU differences" (4) Method: three \[AU+\] and three \[AU\] emoji pairs, rendered in WhatsApp Android version; each emoji to occur on one pair; no emojis with symbolic components (5) Task: participants must choose between emojis of a pair (Forced choce task), help "Alex/Anna" help using the emoji that best matches the text (6)
+    -   emoji as a depiction of the writer´s face in the moment of typing (Maier 2023)
+
+    -   correspondence to human facial features as the crucial factor, if that is given
+
+    -   semantic relevance of small visual differences between two emojis
+
+    -   prediction: "Small visual differences that do not correspond to AU differences should be semantically less relevant than visual differences that do correspond to AU differences" (4)
+
+-   lexicalist:
+
+    -   emoji meanings are processed similar to/as the words that describe them (conventionalized language)
+
+    -   “partially conventionalized meaning” of small visual differences (minimal units) regardless of whether they correspond to human faces (3)
+
+    -   prediction: both types of difference (visual with AU and visual without AU) can create a difference in meaning between the two emojis of a pair → the context-matching emoji should always be chosen more often than the non-matching one
+
+-   Prediction of @fricke2024semantic: Since Fricke et al. are assuming the pictorial approach, they predict that participants will choose the context-matching emoji more often in the AU+ condition than in the AU- condition (-\> higher matching rates). For the AU- pairs, the choice pattern is predicted to be more random
+
+4.  Design
+
+-   Two contexts for each emoji pair (each fitted to correspond to a prominent usage or meaning of one emoji but not the other, prominent usage according to Emojipedia.org and results of norming study), three \[AU+\] and three \[AU-\] emoji pairs
+
+    → 12 contexts, 4 lexicalizations per context = 48 testing items in total, distributed over 4 experimental lists; also 12 filler/control items in each list
+
+-   1 factor: AU difference with 2 levels: AU+/ AU; Within participants; between items
+
+-   Dependent variable: measured rate (per condition) with which a context-matching emoji was chosen
+
+-   Two versions of the experiment: protagonist and friend male/ protagonist and friend female
+
+-   forced choice task: particpants were presented different contexts and were asked to help "Alex/Anna" choosing the emoji that best matches the text (6) (test_items.png)
+
+5.  Participants
+
+-   160 (one excluded --\> 159) participants (109 male, 47 female, 3 non-binary genders)
+
+```{=html}
+<!-- -->
+```
+-   German native spakers living in Germany, 18-35 years, predominently using WhatsApp on an Android phone (6 IOS, 3 "other")
+
+-   Filler mistakes: exclusions with ≥ three mistakes → none
+
+-   attributes:
+
+    -   frequent WhatsApp & Emoji use
+
+    -   Attitude towards emojis overall positive
+
+    -   good understanding of emojis
+
+→ participants are familiar with emojis, have a positive attitude towards them and use them frequently (9)
+
+6.  Procedure
+
+-   Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B) → 6 emoji pairs, 12 contexts
+
+-   Set of stimuli divided into two blocks, one context of a pair occured in first block and the other in the second block
+
+-   Each block: 6 test items, 5 filler items, pseudo-randomized order; order of blocks varied between lists; in 24 of 48 stimuli the matching emoji was presented on the left side; in other 24 on the right side, order of matching/non-matching emojis varied between lists for test items
+
+-   Post-test questions on demographics and emoji use frequency, attitude, understanding, WhatsApp use, smartphone operating system
 :::
 
 ![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}

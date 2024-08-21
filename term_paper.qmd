@@ -143,10 +143,6 @@ They used the face emoji annotation system developed by @fugate2021implications,
 
 ![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
 
-![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
-
-![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
-
 ## Inserting emojis in R
 
 (move this chapter/subchapter?)
@@ -183,25 +179,41 @@ data <- raw_data |>
 
 ### Descriptive statistics
 
-## Explore the relationship between gender and emoji understanding
+## Exploring the relationship between gender and emoji understanding
 
-### Translate factor levels from German to English
+Among other information, @fricke2024semantic asked the participants about their gender, the frequency of emoji use on WhatsApp, their attitude towards emojis, as well as their level of emoji understanding.
 
-As you will see, the gender groups and the degrees of emoji understanding in the data set are in German. Let's translate them into English before we start our analysis and create our visualisation.
+They visualised the distributions of emoji use and emoji attitude by gender in the form of barplots:
 
-The relevant variables are called 'gender' and 'emoji_understanding'. We first need to convert them as factors so that we can look at the levels:
+![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
+
+![Image from @fricke2024semantic](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="500"}
+
+(interpret the plots briefly?)
+
+They did not analyse/visualise the relationship between gender and emoji understanding. In this subsection, we will create the barplot for the relationship between gender and emoji understanding step by step.
+
+(mention steps)
+
+### Gender frequencies / distribution of gender groups
+
+Let's get a general overview of the gender distribution in the data. For this, we look at the variable ‘gender’ in the data set.
+
+As you will see, the names of the different gender groups are in German. Let's translate them into English before we start our analysis.
+
+We first have to convert 'gender' as factor so that we can look at its levels:
 
 ```{r}
 
 data$gender <- as.factor(data$gender)
-data$emoji_understanding <- as.factor(data$emoji_understanding)
 
 ```
+
+Now, we can look at what the levels of 'gender' are:
 
 ```{r}
 
 levels(data$gender)
-levels(data$emoji_understanding)
 
 ```
 
@@ -217,17 +229,15 @@ data <- data |>
 
 ```
 
+Check the new labels:
+
 ```{r}
 
-data <- data |> 
-    mutate(emoji_understanding = recode(emoji_understanding, "mittelmäßig" = "moderate", "eher gut" = "rather good", "gut" = "good", "sehr gut" = "very good")) |>
-    mutate(emoji_understanding = factor(emoji_understanding, levels = c("moderate", "rather good", "good", "very good")))
+levels(data$gender)
 
 ```
 
-### Gender frequencies / distribution of gender groups
-
-Let's first get a general overview of the gender distribution in the data. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
+Next, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
 
 To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
 
@@ -260,11 +270,52 @@ table(gender_count$gender)
 
 The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study.
 
+The uneven gender distribution is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants. (move this part?)
+
 ### Gender vs. emoji understanding
 
-The uneven gender distribution is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants.
+Next, we want to find out how well the different gender groups report to understand emojis.
 
-Next, we want to find out how well the different gender groups report to understand emojis. To do this, we create a new data frame ‘gender_emoji_count’ and again only keep the unique submission_id. We group the data by gender and count the frequencies for the different gender groups within the emoji_understanding variable:
+Now the levels of emoji understanding:
+
+```{r}
+data$emoji_understanding <- as.factor(data$emoji_understanding)
+levels(data$emoji_understanding)
+
+```
+
+Translate them:
+
+```{r}
+
+data <- data |> 
+    mutate(emoji_understanding = recode(emoji_understanding,
+                                        "mittelmäßig" = "moderate",
+                                        "eher gut" = "rather good",
+                                        "gut" = "good",
+                                        "sehr gut" = "very good"))
+
+```
+
+Reorder them:
+
+```{r}
+
+data <- data |> 
+    mutate(emoji_understanding = recode(emoji_understanding,
+                                        "mittelmäßig" = "moderate",
+                                        "eher gut" = "rather good",
+                                        "gut" = "good",
+                                        "sehr gut" = "very good")) |>
+    mutate(emoji_understanding = factor(emoji_understanding,
+                                        levels = c("moderate",
+                                                   "rather good",
+                                                   "good",
+                                                   "very good")))
+
+```
+
+To do this, we create a new data frame ‘gender_emoji_count’ and again only keep the unique submission_id. We group the data by gender and count the frequencies for the different gender groups within the emoji_understanding variable:
 
 ```{r}
 

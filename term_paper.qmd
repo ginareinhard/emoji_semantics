@@ -676,22 +676,6 @@ For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
 -   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
 :::
 
-::: callout-tip
-#### Quiz time! {.unnumbered}
-
-1\) Test question?
-
-```{r echo=FALSE, results="asis"}
-
-check_question("D", options = c("A", "B", "C", "D", "E"), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer", q_id = 4,
-right = "Test right!",
-wrong = "Test incorrect.")
-
-```
-:::
-
 ## Conclusion
 
 ## References

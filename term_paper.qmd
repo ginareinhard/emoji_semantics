@@ -143,19 +143,6 @@ They used the face emoji annotation system developed by @fugate2021implications,
 
 ![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
 
-## Inserting emojis in R
-
-(move this chapter/subchapter?)
-
-Insert emojis via emoji keyboard (Shortcut fn+e on Mac), also available in R Studio (Edit -\> Emojis & Symbols). This is the easiest way. Alternatively, there are emoji libraries, e.g. "emo(ji)" (<https://github.com/hadley/emo>).
-
-As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. Only necessary for Mac?
-
-For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
-
--   save the plots with ggsave() and insert them
--   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
-
 ## Data wrangling
 
 Import the data using "here":
@@ -674,6 +661,19 @@ wrong = "Not quite, try again.")
 ```
 
 [**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
+:::
+
+::: {.callout-note title="Inserting emojis in R"}
+(move this chapter/subchapter?)
+
+Insert emojis via emoji keyboard (Shortcut fn+e on Mac), also available in R Studio (Edit -\> Emojis & Symbols). This is the easiest way. Alternatively, there are emoji libraries, e.g. "emo(ji)" (<https://github.com/hadley/emo>).
+
+As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. Only necessary for Mac?
+
+For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
+
+-   save the plots with ggsave() and insert them
+-   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
 :::
 
 ::: callout-tip

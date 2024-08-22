@@ -11,8 +11,6 @@ format:
     toc-depth: 3
     number-sections: true
     embed-resources: true
-    fig-width: 10
-    fig-height: 8
 link-citations: true
 csl: "apa_7th.csl"
 ---
@@ -61,12 +59,11 @@ Everyday, millions of people use emojis in their text messages as a means to com
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
-Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in [image emoji pairs], each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously. 
+Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in \[image emoji pairs\], each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously.
 
-@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the [AU+] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the [AU-] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
+@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the \[AU-\] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
 
 ::: {.callout-note title="How does the experiment work?"}
-
 3.  Briefly summarizing the pictorial @maier2023emojis and the lexicalist approach @grosz2023semantics, and their predictions for the experiment (table? is it even relevant?)
 
 -   pictorial:
@@ -87,7 +84,7 @@ Before we dive into their study, we need to introduce the Facial Action Coding S
 
     -   prediction: both types of difference (visual with AU and visual without AU) can create a difference in meaning between the two emojis of a pair → the context-matching emoji should always be chosen more often than the non-matching one
 
-Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the [AU+] condition than in the [AU-] condition (-\> higher matching rates). For the [AU-] pairs, choice patterns are predicted to be more randomly distributed.
+Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition (-\> higher matching rates). For the \[AU-\] pairs, choice patterns are predicted to be more randomly distributed.
 
 4.  Design
 
@@ -161,9 +158,7 @@ data <- raw_data |>
 
 ## Exploring the relationship between gender and emoji understanding
 
-Among other information, @fricke2024semantic asked the participants about their gender, the frequency of emoji use on WhatsApp, their attitude towards emojis, as well as their level of emoji understanding.
-
-They visualised the distributions of emoji use and emoji attitude by gender in the form of barplots:
+Among other information, @fricke2024semantic asked the participants about their gender, how often they use emojis on WhatsApp, what their attitude towards emojis is, and how well they think they understand emojis. They visualised the distribution of emoji use and emoji attitude for male and female gender in the form of bar plots:
 
 ![Image from @fricke2024semantic](images/emoji_use.png){#fig-emojiuse fig-align="center" width="500"}
 
@@ -171,17 +166,17 @@ They visualised the distributions of emoji use and emoji attitude by gender in t
 
 (interpret the plots briefly?)
 
-They did not analyse/visualise the relationship between gender and emoji understanding. In this subsection, we will create the barplot for the relationship between gender and emoji understanding step by step.
+What they have not visualised is the distribution of emoji understanding by gender. In this subsection, we will create the bar plot for emoji understanding by gender step by step.
 
 (mention steps)
 
 ### Gender frequencies / distribution of gender groups
 
-Let's get a general overview of the gender distribution in the data. For this, we look at the variable ‘gender’ in the data set.
+Let's get a general overview: How many men, women, and non-binary people participated in the study?
 
-As you will see, the names of the different gender groups are in German. Let's translate them into English before we start our analysis.
+The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. Before we start analysing, we should translate them into English.
 
-We first have to convert 'gender' as factor so that we can look at its levels:
+To figure out what the the labels of the different genders are, we use the `levels()` function. This function applies to factors, so we first need to convert `gender` as a factor:
 
 ```{r}
 
@@ -189,7 +184,7 @@ data$gender <- as.factor(data$gender)
 
 ```
 
-Now, we can look at what the levels of 'gender' are:
+Now, we can look at what the levels of our factor `gender` are:
 
 ```{r}
 
@@ -209,7 +204,7 @@ data <- data |>
 
 ```
 
-Check the new labels:
+We check the new labels:
 
 ```{r}
 
@@ -217,7 +212,7 @@ levels(data$gender)
 
 ```
 
-Next, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
+Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
 
 To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
 
@@ -327,6 +322,32 @@ gender_understanding_count <- gender_understanding_count |>
   select(gender, emoji_understanding, n, percentage)
 
 print(gender_understanding_count)
+
+```
+
+Formatting the table nicely using the knitr library:
+
+```{r}
+
+#install.packages("knitr")
+library(knitr)
+knitr::kable(gender_understanding_count, caption = "X")
+
+```
+
+```{r}
+
+#install.packages("formattable")
+library(formattable)
+formattable(gender_understanding_count)
+
+```
+
+```{r}
+
+#install.packages("gt")
+library(gt)
+gt(gender_understanding_count)
 
 ```
 

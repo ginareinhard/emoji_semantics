@@ -57,24 +57,17 @@ library(patchwork)
 
 ## Introducing the study
 
-1.  About emojis and why they are worth looking into:
+Everyday, millions of people use emojis in their text messages as a means to communicate their emotions (among other things). Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. As @fricke2024semantic review, several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still much to be discovered. In this chapter, we will look into this study by @fricke2024semantic :
 
-Everyday, millions of people use emojis in their text messages as a means to communicate emotions. Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. As @fricke2024semantic review, several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still much to be discovered. In this chapter, we will look into this study by @fricke2024semantic :
+> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
-> Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. \<httpsdoi:10.1017/langcog.2024.12\>.
+Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in [image emoji pairs], each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously. 
+
+@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the [AU+] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the [AU-] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
 
 ::: {.callout-note title="How does the experiment work?"}
-2.  Introducing FACS, explaining AUs and what AU+/AU- means
 
--   Facial Action Coding System (FACS) by \@ekman1978facial -\> facial expressions are decomposed into minimal Action Units (AUs)
--   Action Units are characteristics/ features of the emoji, such as *eyebrows arched, eyes wide* -\> emoji consists of several AUs (as shown in image emoji pairs), emoji as a puzzle with the AUs as its pieces; these units are coded as numbers
--   @fricke2024semantic use two different types of pairs of visually smilar emojis (refer to emoji_pairs.png)
-    -   \[AU+\]: visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43)
-    -   \[AU-\]: visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding)
-
-They used the face emoji annotation system developed by @fugate2021implications, Facial Action Coding System (FACS) by @ekman1978facial. FACS decomposes facial expressions into minimal Action Units (AUs) which makes the annotation of face emojis possible.
-
-3.  Briefly summarizing the pictorial @maier2023emojis and the lexicalist approach @grosz2023semantics, and their predictions for the experiment (table?)
+3.  Briefly summarizing the pictorial @maier2023emojis and the lexicalist approach @grosz2023semantics, and their predictions for the experiment (table? is it even relevant?)
 
 -   pictorial:
 
@@ -94,7 +87,7 @@ They used the face emoji annotation system developed by @fugate2021implications,
 
     -   prediction: both types of difference (visual with AU and visual without AU) can create a difference in meaning between the two emojis of a pair → the context-matching emoji should always be chosen more often than the non-matching one
 
--   Prediction of @fricke2024semantic: Since Fricke et al. are assuming the pictorial approach, they predict that participants will choose the context-matching emoji more often in the AU+ condition than in the AU- condition (-\> higher matching rates). For the AU- pairs, the choice pattern is predicted to be more random
+Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the [AU+] condition than in the [AU-] condition (-\> higher matching rates). For the [AU-] pairs, choice patterns are predicted to be more randomly distributed.
 
 4.  Design
 
@@ -647,7 +640,7 @@ The options are to (1) delete the legends from both blocks, (2) keep the legend 
 As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
 
 ::: callout-tip
-Quiz time! {.unnumbered}
+#### Quiz time! {.unnumbered}
 
 [**Q1.**]{style="color:green;"} Looking at the final patchwork, which "sub-plot" shows the most significant finding?
 

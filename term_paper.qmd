@@ -9,6 +9,8 @@ format:
   html:
     toc: true
     toc-depth: 3
+    fig-width: 10
+    fig-height: 8
     number-sections: true
     embed-resources: true
 link-citations: true

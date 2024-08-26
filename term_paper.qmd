@@ -61,63 +61,27 @@ Everyday, millions of people use emojis in their text messages as a means to com
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
-Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in \[image emoji pairs\], each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously.
+Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously.
 
 @fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the \[AU-\] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
 
-@fricke2024semantic differentiate two approaches to emoji semantics:
-The pictorial approach of @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. The correpondence of features of emojis and human faces is central for this approach. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. It predicts that whether visual (AU) differences correspond to facial characteristics or not does not matter: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one.
+@fricke2024semantic differentiate two approaches to emoji semantics: The pictorial approach of @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. The correpondence of features of emojis and human faces is central for this approach. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. It predicts that whether visual (AU) differences correspond to facial characteristics or not does not matter: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one.
 
-Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the choice pattern is predicted to be more randomly distributed.
+Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the choice pattern is predicted to be more random.
 
-::: {.callout-note title="How does the experiment work?"}
+![Emoji pairs and their contexts, @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
 
-4.  Design
+::: {.callout-note title="How did the experiment work?"}
+### Design {.unnumbered}
 
--   Two contexts for each emoji pair (each fitted to correspond to a prominent usage or meaning of one emoji but not the other, prominent usage according to Emojipedia.org and results of norming study), three \[AU+\] and three \[AU-\] emoji pairs
+Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example \textit{happiness} and \textit{(cheeky) laughter}), where each context corresponded to a prominent usage or meaning of one emoji but not the other. Four one-sentence-stories (lexicalisations) were created for each context, which yielded 48 testing items. These testing items were divided up into into four lists. Each list also contained 12 filler items, so that each participant saw 24 items.
 
-    → 12 contexts, 4 lexicalizations per context = 48 testing items in total, distributed over 4 experimental lists; also 12 filler/control items in each list
+### Procedure {.unnumbered}
 
--   1 factor: AU difference with 2 levels: AU+/ AU; Within participants; between items
+As you can see in @fig-testitems, the participant were presented the contexts and were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and smartphone operating system.
 
--   Dependent variable: measured rate (per condition) with which a context-matching emoji was chosen
-
--   Two versions of the experiment: protagonist and friend male/ protagonist and friend female
-
--   forced choice task: particpants were presented different contexts and were asked to help "Alex/Anna" choosing the emoji that best matches the text (6) (test_items.png)
-
-5.  Participants
-
--   160 (one excluded --\> 159) participants (109 male, 47 female, 3 non-binary genders)
-
-<!-- -->
-
--   German native spakers living in Germany, 18-35 years, predominently using WhatsApp on an Android phone (6 IOS, 3 "other")
-
--   Filler mistakes: exclusions with ≥ three mistakes → none
-
--   attributes:
-
-    -   frequent WhatsApp & Emoji use
-
-    -   Attitude towards emojis overall positive
-
-    -   good understanding of emojis
-
-→ participants are familiar with emojis, have a positive attitude towards them and use them frequently (9)
-
-6.  Procedure
-
--   Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B) → 6 emoji pairs, 12 contexts
-
--   Set of stimuli divided into two blocks, one context of a pair occured in first block and the other in the second block
-
--   Each block: 6 test items, 5 filler items, pseudo-randomized order; order of blocks varied between lists; in 24 of 48 stimuli the matching emoji was presented on the left side; in other 24 on the right side, order of matching/non-matching emojis varied between lists for test items
-
--   Post-test questions on demographics and emoji use frequency, attitude, understanding, WhatsApp use, smartphone operating system
+![Example of a test item in @fricke2024semantic ´s experiment](images/test_items.png){#fig-testitems fig-align="center"}
 :::
-
-![Image from @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
 
 ## Data wrangling
 

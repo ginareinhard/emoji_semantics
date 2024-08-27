@@ -57,19 +57,21 @@ library(patchwork)
 
 ## Introducing the study
 
-Everyday, millions of people use emojis in their text messages as a means to communicate their emotions (among other things). Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. As @fricke2024semantic review, several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into this study by @fricke2024semantic :
+<!-- Kapitel überarbeitet -->
+
+Everyday, millions of people use emojis in their text messages as a means to communicate their emotions. Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. Several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into this study by @fricke2024semantic:
+
+<!-- Ich finde die Einleitung für eine Hausarbeit sehr gut, mein erster Eindruck war nur ggf. für unseren Zweck zu weit ausgeholt? -->
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
-Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously.
+@fricke2024semantic compare <!-- Studie im past tense beschreiben? --> two different approaches to emoji semantics: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. Following the pictorial approach, @fricke2024semantic predict that small visual differences between emojis that do not correspond to human facial features are less semantically relevant than differences corresponding to human facial features.
 
-@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the \[AU-\] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
-
-@fricke2024semantic differentiate two approaches to emoji semantics: The pictorial approach of @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. The correpondence of features of emojis and human faces is central for this approach. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. It predicts that whether visual (AU) differences correspond to facial characteristics or not does not matter: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one.
-
-Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the choice pattern is predicted to be more random.
+They compare visually similar emojis using a face emoji annotation system developed by @fugate2021implications. This annotation system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assign numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
 
 ![Emoji pairs and their contexts, @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
+
+@fricke2024semantic distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs. In the \[AU-\] condition, the visual difference does not correspond to an AU difference. <!-- Beispiele gelöscht -->
 
 ::: {.callout-note title="How did the experiment work?"}
 ### Design {.unnumbered}
@@ -78,9 +80,13 @@ Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-em
 
 ### Procedure {.unnumbered}
 
-As you can see in @fig-testitems, the participant were presented the contexts and were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and smartphone operating system.
+As you can see in @fig-testitems, the participant were presented the contexts and were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and smartphone operating system.
 
 ![Example of a test item in @fricke2024semantic ´s experiment](images/test_items.png){#fig-testitems fig-align="center"}
+
+@fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the pattern is predicted to be more random. <!-- erstmal hierhin verschoben, weil von den Kontexten vorher noch nicht die Rede war -->
+
+The lexicalist approach predicts that it does not matter whether visual (AU) differences correspond to facial characteristics or not: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one. <!-- erstmal hierhin verschoben, weil von den Kontexten vor der blauen Box noch nicht die Rede war -->
 :::
 
 ## Data wrangling

@@ -63,24 +63,26 @@ Everyday, millions of people use emojis in their text messages as a means to com
 
 Before we dive into their study, we need to introduce the Facial Action Coding System (FACS) which was invented by @ekman1978facial. Based on this system, @fugate2021implications developed a face emoji annotation system: They assigned numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs. This system makes it possible to describe emojis systematically and unambiguously.
 
-@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the \[AU-\] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding).
+@fricke2024semantic compare visually similar emojis, but they distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs, e.g. *grinning face with big eyes* 😃 and *grinning squinting face* 😆 (AU difference: eyes closed, nr. 43). In the \[AU-\] condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes*😁 (identical AU coding). The central research question of @fricke2024semantic is: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
-@fricke2024semantic differentiate two approaches to emoji semantics: The pictorial approach of @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. The correpondence of features of emojis and human faces is central for this approach. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. It predicts that whether visual (AU) differences correspond to facial characteristics or not does not matter: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one.
+They present two approaches to emoji semantics: The pictorial approach of @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. The correpondence of features of emojis and human faces is central for this approach. In contrast, the lexicalist approach emphasises the meanings of emojis as described by words. It predicts that whether visual (AU) differences correspond to facial characteristics or not does not matter: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one.
 
 Following the pictorial approach, @fricke2024semantic predict that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the choice pattern is predicted to be more random.
 
-![Emoji pairs and their contexts, @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center"}
+![Emoji pairs and their contexts, @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
 ::: {.callout-note title="How did the experiment work?"}
 ### Design {.unnumbered}
 
-Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example \textit{happiness} and \textit{(cheeky) laughter}), where each context corresponded to a prominent usage or meaning of one emoji but not the other. Four one-sentence-stories (lexicalisations) were created for each context, which yielded 48 testing items. These testing items were divided up into into four lists. Each list also contained 12 filler items, so that each participant saw 24 items.
+Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example \textit{happiness} and \textit{(cheeky) laughter}), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based both on <https://emojipedia.org> and on a previous norming study by the authors.
+
+Four one-sentence-stories (lexicalisations) were created for each context, which yielded 48 testing items. These testing items were divided up into into four lists. Each list also contained 12 filler items, so that each participant saw 24 items.
 
 ### Procedure {.unnumbered}
 
-As you can see in @fig-testitems, the participant were presented the contexts and were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and smartphone operating system.
+As you can see in @fig-testitems, the participant were presented with situations that illustrated the contexts and were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and their smartphone operating system.
 
-![Example of a test item in @fricke2024semantic ´s experiment](images/test_items.png){#fig-testitems fig-align="center"}
+![Example of a test item in @fricke2024semantic ´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 :::
 
 ## Data wrangling
@@ -366,25 +368,46 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 
 ## AU plot
 
-### Data preparation
+We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
-Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
+Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context. 
+
+Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column (yet). We will tackle this by ourselves in the following section.
+
+### Data preparation
+First, we need a column that includes the experimental conditions of each trial. That is, was the visual difference between the presented emoji an AU-difference (AU+) or not (AU-)? Or was a pair of filler emojis presented?
+
+We add a column `AU_difference` that will include all the necessary information by using a combination of `mutate` (which adds the column), `case_when` and `str_detect`.
+
+The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is "AU".
 
 ```{r}
 
 #delete this code chunk?
 
 data <- data |>
+  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+", 
+                                   .default = NULL))
+
+```
+
+With the code `str_detect(name, "AU") ~ "AU+"`, we say: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
+
+```{r}
+data <- data |> 
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
                                    str_detect(name, "N") ~ "AU-",
                                    str_detect(name, "filler") ~ "filler",
                                    .default = NULL))
-
-table(data$AU_difference)
-
 ```
 
-Filter out filler emojis:
+A table checks that everything worked:
+
+```{r}
+table(data$AU_difference)
+```
+
+This looks promising. Since we are only interested in the experimental items, we now filter out filler trials:
 
 ```{r}
 
@@ -397,23 +420,23 @@ data <- data |>
 
 ```
 
-Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
+Now, we will create another column called `context` to which we will add the brief context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by *ist enttäucht* "is disappointed". We will deal with this in a second, but we will exclude these contexts for now.
 
 ```{r}
 
 data <- data |> 
-  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
-                             str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
+  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
+                             str_detect(question, "lacht") ~ "(cheeky) laughter",
 
                              str_detect(question, "macht sich Sorgen") ~ "concern",
                              str_detect(question, "ist überrascht") ~ "surprise",
                              str_detect(question, "ist etwas genervt") ~ "mild irritation",
                              str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
-                             str_detect(question, "ist überglücklich") ~ "(intense) happiness", #overhappy
-                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
+                             #str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
-                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now, Fricke et al.: happiness
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" 
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
 
@@ -421,7 +444,12 @@ table(data$context)
 
 ```
 
-Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using/citing the information from the original analysis script? (meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")
+Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for a context-characteristic strings, and add the context descriptions in case of a match.
+We check the output with `table()`.
+
+(A problem becomes apparent when checking the output: All contexts have 159 occurences, except for "mild disappointment" which appears to exist 318 times. Something must have gone wrong.)
+
+Now for the problematic "mild disappointment"/"moderate disappointment" with their matching emojis "slightly frowning face"/"frowning face": Their data appears to be identical except for their coding in the column "name". The emoji "mild disappointment/slightly frowing face" is named "N-36-L1" and "moderate disappointment/frowning face" is coded as "N-37-L1". Using this, we define these contexts as well. (citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment").
 
 ```{r}
 
@@ -435,28 +463,32 @@ table(data$context)
 
 ```
 
-Define matches:
+Finally, we add the critical column that includes whether the chosen emojis and contexts match: If the response-emoji and the context agree, the column will have the value "match". Otherwise, the value will be "no match".
 
 ```{r}
 
 data <- data |> 
   mutate(
-  match = case_when( #called it match for now, potentially the only match column needed?
-    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
-    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
-    context == "concern" & response == "hushed_face" ~ "yes",
-    context == "surprise" & response == "astonished_face" ~ "yes",
-    context == "mild irritation" & response == "neutral_face" ~ "yes",
-    context == "annoyance" & response == "expressionless_face" ~ "yes",
-    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "yes",
-    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "yes",
-    context == "mild disappointment" & response == "slightly_frowning_face" ~ "yes",
-    context == "moderate disappointment" & response == "frowning_face" ~ "yes",
-    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
-    context == "bashfulness" & response == "smiling_face" ~ "yes",
-    .default = "no"))
+  match = case_when(
+    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "match",
+    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "match",
+    context == "concern" & response == "hushed_face" ~ "match",
+    context == "surprise" & response == "astonished_face" ~ "match",
+    context == "mild irritation" & response == "neutral_face" ~ "match",
+    context == "annoyance" & response == "expressionless_face" ~ "match",
+    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "match",
+    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "match",
+    context == "mild disappointment" & response == "slightly_frowning_face" ~ "match",
+    context == "moderate disappointment" & response == "frowning_face" ~ "match",
+    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "match",
+    context == "bashfulness" & response == "smiling_face" ~ "match",
+    .default = "no match"))
 
 ```
+
+### Plot building 
+
+In a new dataframe, we store all and only the columns needed to build our plot.
 
 ```{r AU difference , matching rates, context}
 
@@ -540,7 +572,7 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 
 By applying our function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
-![Patchwork artwork by Allison Horst](images/patchwork.png)
+![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){width="600"}
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -624,7 +656,17 @@ right = "That´s right! There is a notable difference between the matching rates
 wrong = "Not quite, try again.")
 ```
 
+
+
 [**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
+```{r echo=FALSE, results="asis"}
+check_question("😐 was chosen significantly less in its matching context than all the other emojis.", options = c("😐 was chosen significantly less in its matching context than all the other emojis.", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer", q_id = 1,
+right = "That´s right!",
+wrong = "Not quite, try again.")
+```
+
 :::
 
 ::: {.callout-note title="Inserting emojis in R"}
@@ -641,5 +683,6 @@ For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
 :::
 
 ## Conclusion
+
 
 ## References

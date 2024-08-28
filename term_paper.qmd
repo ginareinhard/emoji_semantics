@@ -7,6 +7,7 @@ engine: knitr
 bibliography: references.bib
 format: 
   html:
+    df-print: default
     toc: true
     toc-depth: 3
     fig-width: 10

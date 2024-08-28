@@ -74,7 +74,7 @@ They compare visually similar emojis using a face emoji annotation system develo
 
 Their central research question is: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
-@fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach grosz2023semantics emphasises the meanings of emojis as described by words.
+@fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words.
 
 Following the pictorial approach, @fricke2024semantic predict that small visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+)
 
@@ -370,26 +370,46 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding, y = percentage, 
 ```
 
 ## AU plot
+We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
+
+Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context. 
+
+Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column (yet). We will tackle this by ourselves in the following section.
 
 ### Data preparation
+First, we need a column that includes the experimental conditions of each trial. That is, was the visual difference between the presented emoji an AU-difference (AU+) or not (AU-)? Or was a pair of filler emojis presented?
 
-Create a column with the experimental conditions (AU+, AU-, and filler/control items) using a combination of str_detect, case_when and mutate:
+We add a column `AU_difference` that will include all the necessary information by using a combination of `mutate` (which adds the column), `case_when` and `str_detect`.
+
+The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is "AU".
 
 ```{r}
 
 #delete this code chunk?
 
 data <- data |>
+  mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+", 
+                                   .default = NULL))
+
+```
+
+With the code `str_detect(name, "AU") ~ "AU+"`, we say: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
+
+```{r}
+data <- data |> 
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
                                    str_detect(name, "N") ~ "AU-",
                                    str_detect(name, "filler") ~ "filler",
                                    .default = NULL))
-
-table(data$AU_difference)
-
 ```
 
-Filter out filler emojis:
+A table checks that everything worked:
+
+```{r}
+table(data$AU_difference)
+```
+
+This looks promising. Since we are only interested in the experimental items, we now filter out filler trials:
 
 ```{r}
 
@@ -402,31 +422,39 @@ data <- data |>
 
 ```
 
-Define contexts using a combination of str_detect, case_when and mutate (and check output with table()):
+Now, we will create another column called `context` to which we will add the brief context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by *ist enttäucht* "is disappointed". We will deal with this in a second, but we will exclude these contexts for now.
 
 ```{r}
 
 data <- data |> 
-  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness", #Fricke et al.: general happiness
-                             str_detect(question, "lacht") ~ "(cheeky) laughter", #hearty laughter 
+  mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
+                             str_detect(question, "lacht") ~ "(cheeky) laughter",
 
                              str_detect(question, "macht sich Sorgen") ~ "concern",
                              str_detect(question, "ist überrascht") ~ "surprise",
                              str_detect(question, "ist etwas genervt") ~ "mild irritation",
                              str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
-                             str_detect(question, "ist überglücklich") ~ "(intense) happiness", #overhappy
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
                              str_detect(question, "ist enttäuscht") ~ "mild disappointment",
+                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
+                             #str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
-                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now, Fricke et al.: happiness
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
+
 
 table(data$context)
 
 ```
 
-Problem: emoji pair "slightly frowning face" and "frowning face" with the same question/context "ist enttäuscht". This is only resolvable using/citing the information from the original analysis script? (meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")
+Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for a context-characteristic strings, and add the context descriptions in case of a match.
+We check the output with `table()`.
+
+(A problem becomes apparent when checking the output: All contexts have 159 occurences, except for "mild disappointment" which appears to exist 318 times. Something must have gone wrong.)
+
+Now for the problematic "mild disappointment" / "moderate disappointment" with their matching emojis 🙁 / ☹️ : Their data appears to be identical except for their coding in the column "name". The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as ` N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
 
 ```{r}
 
@@ -440,82 +468,104 @@ table(data$context)
 
 ```
 
-Define matches:
+Finally, we add the critical column that includes whether the chosen emojis and contexts match: If the response-emoji and the context agree, the column will have the value "match". Otherwise, the value will be "no match".
 
 ```{r}
 
 data <- data |> 
   mutate(
-  match = case_when( #called it match for now, potentially the only match column needed?
-    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "yes",
-    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "yes",
-    context == "concern" & response == "hushed_face" ~ "yes",
-    context == "surprise" & response == "astonished_face" ~ "yes",
-    context == "mild irritation" & response == "neutral_face" ~ "yes",
-    context == "annoyance" & response == "expressionless_face" ~ "yes",
-    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "yes",
-    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "yes",
-    context == "mild disappointment" & response == "slightly_frowning_face" ~ "yes",
-    context == "moderate disappointment" & response == "frowning_face" ~ "yes",
-    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "yes",
-    context == "bashfulness" & response == "smiling_face" ~ "yes",
-    .default = "no"))
+  match = case_when(
+    context == "happiness" & response == "grinning_face_with_big_eyes" ~ "match",
+    context == "(cheeky) laughter" & response == "grinning_squinting_face" ~ "match",
+    context == "concern" & response == "hushed_face" ~ "match",
+    context == "surprise" & response == "astonished_face" ~ "match",
+    context == "mild irritation" & response == "neutral_face" ~ "match",
+    context == "annoyance" & response == "expressionless_face" ~ "match",
+    context == "amusement" & response == "grinning_face_with_smiling_eyes" ~ "match",
+    context == "(intense) happiness" & response == "beaming_face_with_smiling_eyes" ~ "match",
+    context == "mild disappointment" & response == "slightly_frowning_face" ~ "match",
+    context == "moderate disappointment" & response == "frowning_face" ~ "match",
+    context == "happiness2" & response == "smiling_face_with_smiling_eyes" ~ "match",
+    context == "bashfulness" & response == "smiling_face" ~ "match",
+    .default = "no match"))
 
 ```
 
+### Plot building 
+
+In a new dataframe `AU_plot`, we store all and only the columns needed to build our plot:
+
 ```{r AU difference , matching rates, context}
 
-perc_AU_diff <- data |> 
+data_AU <- data |> 
   group_by(context) |> 
   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
   mutate(percent = round(n/sum(n)*100, 2)) #creates a new column with the percentages for each of the above counts (in relation to the sum of all matches/non-matches within each context, rounded to 2 digits)
 
 ```
 
-Demonstrating why we cannot simply build the plot using facet_wrap (potentially unnecessary, I was just trying stuff out)
+The data is grouped by contexts, matches and non-matches are counted for each context and stored in a column `n`, a column `percent` is added which stores the percentage of matches and non-matches for each context pair.
+
+<!-- Demonstrating why we cannot simply build the plot using facet_wrap (potentially unnecessary, I was just trying stuff out)
 
 ```{r}
-perc_AU_diff2 <- perc_AU_diff <- data |> 
-  group_by(context, AU_difference) |> 
-  count(match) |> #counts matches and non-matches (match((yes/no)) for each context
-  mutate(percent = round(n/sum(n)*100, 2))
-  
-plot_AU_facet <- perc_AU_diff2 |> 
-mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance", "mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
-ggplot(aes(x = percent, y = context, fill = match)) +
-geom_bar(stat = "identity") +
-facet_wrap(~AU_difference) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5))
-
-plot_AU_facet
+# perc_AU_diff2 <- perc_AU_diff <- data |> 
+#   group_by(context, AU_difference) |> 
+#   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
+#   mutate(percent = round(n/sum(n)*100, 2))
+#   
+# plot_AU_facet <- perc_AU_diff2 |> 
+# mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance", "mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
+# ggplot(aes(x = percent, y = context, fill = match)) +
+# geom_bar(stat = "identity") +
+# facet_wrap(~AU_difference) +
+# geom_text(aes(label = percent), position = position_stack(vjust = 0.5))
+# 
+# plot_AU_facet
 ```
 
-problem: The pairs are indiscernible, difficult to add emojis at the appropiate positions
+problem: The pairs are indiscernible, difficult to add emojis at the appropiate positions -->
 
-Creating a stacked bar plot for the first (AU+) condition, emoji pair 😯 😲, contexts concern and surprise.
+Let´s plot the first emoji pair [\AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
 
 ```{r}
+plot_concern_surprise <- data_AU |> 
+filter(context == "concern" | context == "surprise") |> #1.
+ggplot(aes(x = context, y = percent, fill = match)) + #2.
+geom_col() + #3.
+scale_x_discrete(limits = c("concern", "surprise")) + #4.
+geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) + #5.
+labs (x= "context", y = "percent", title = "😯 😲") + #6.
+theme_bw() + #7.
+theme(plot.title = element_text(hjust = 0.5)) #8
+```
 
-plot_concern_surprise <- perc_AU_diff |> 
-filter(context == "concern" | context == "surprise") |> 
-ggplot(aes(x = context, y = percent, fill = match)) +
-geom_bar(stat = "identity") +
-scale_x_discrete(limits = c("concern", "surprise")) +
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-labs (x= "context", y = "percent", title = "😯 😲") +
-theme_bw() +
-theme(plot.title = element_text(hjust = 0.5))
+The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps: 
 
+1. Filter out the contexts, so that only rows with either the context "concern" or (`|`) "surprise" are taken into account.
+2. Create a ggplot with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
+3. Display the plot as a bar chart. By default, `geom_bar` counts how many times matches/ no matches occurred. However,
+as our data already includes the counts for each group (column `n`), we use `geom_col` to use the data as is.
+4. Order contexts so they match the emojis
+5. Add text to the plot (percent values) and place it inside the bars
+6. Add labels: context on the x axis, percent on the y axis, emojis as title
+7. Add an appropiate and pratical theme (theme_bw)
+8. Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, move the title to the center of the plot.
+
+Let´s take a look at our plot.
+
+```{r}
 plot_concern_surprise
-
 ```
 
-Since we have to do this with all emoji pairs, we define a function.
+We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
+
+On our case, the process of defining a function is straightforward: We simply repeat the code we just wrote, but with the general argument names ("emojis" and "contexts").
 
 ```{r}
 
 plot_AU_matches <- function(contexts, emojis) {
-  perc_AU_diff |> 
+  data_AU |> 
     filter(context %in% contexts) |> 
     ggplot(aes(x = context, y = percent, fill = match)) +
     geom_col() +
@@ -528,7 +578,7 @@ plot_AU_matches <- function(contexts, emojis) {
 
 ```
 
-We apply this function to all emoji pairs and contexts.
+We apply this function to all emoji pairs and contexts by filling in the argument names:
 
 ```{r}
 
@@ -541,11 +591,24 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 
 ```
 
+::: {.callout-note title="Inserting emojis in R"}
+(move this chapter/subchapter?)
+
+Insert emojis via emoji keyboard (Shortcut fn+e on Mac), also available in R Studio (Edit -\> Emojis & Symbols). This is the easiest way. Alternatively, there are emoji libraries, e.g. "emo(ji)" (<https://github.com/hadley/emo>).
+
+As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. Only necessary for Mac?
+
+For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
+
+-   save the plots with ggsave() and insert them
+-   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
+:::
+
 ### Patchwork
 
-By applying our function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
+By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
-![Patchwork artwork by Allison Horst](images/patchwork.png)
+![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){width="600"}
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -598,9 +661,9 @@ AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
 Finally, we put both elements together to get our final graph.
 
 ```{r}
-AU_combined_patch1 <- AU_plus_patch | AU_minus_patch
+AU_combined_patch <- AU_plus_patch | AU_minus_patch
 
-AU_combined_patch1
+AU_combined_patch
 ```
 
 ```{r image AU plot, include=FALSE}
@@ -627,23 +690,24 @@ random_answer_order = TRUE,
 button_label = "Check answer", q_id = 5,
 right = "That´s right! There is a notable difference between the matching rates.",
 wrong = "Not quite, try again.")
+
 ```
 
+
+
+
 [**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
+
+```{r echo=FALSE, results="asis"}
+check_question("😐 was chosen significantly less in its matching context than all the other emojis.", options = c("😐 was chosen significantly less in its matching context than all the other emojis.", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer", q_id = 1,
+right = "That´s right!",
+wrong = "Not quite, try again.")
+```
+
 :::
 
-::: {.callout-note title="Inserting emojis in R"}
-(move this chapter/subchapter?)
-
-Insert emojis via emoji keyboard (Shortcut fn+e on Mac), also available in R Studio (Edit -\> Emojis & Symbols). This is the easiest way. Alternatively, there are emoji libraries, e.g. "emo(ji)" (<https://github.com/hadley/emo>).
-
-As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. Only necessary for Mac?
-
-For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
-
--   save the plots with ggsave() and insert them
--   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
-:::
 
 ## Conclusion
 

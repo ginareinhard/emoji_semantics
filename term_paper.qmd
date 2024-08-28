@@ -51,9 +51,25 @@ library(tidyverse)
 library(ggpubr)
 #install.packages("scales")
 library(scales)
-#install.packages(patchwork)
+#install.packages("patchwork")
 library(patchwork)
 
+```
+
+```{r colour palettes, include=FALSE}
+# colourblind-friendly
+# https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/#r-base-color-palettes
+
+cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# another option with an additional package:
+#install.packages("RColorBrewer")
+library(RColorBrewer)
+display.brewer.all(colorblindFriendly = TRUE)
+# second list of colours is best suited for nominal/categorical data: "Set2", "Paired", "Dark2"
+
+# however, a palette may be too much as we only need two colours at the same time, but which ones? two for men/women and two different ones for match/no match?
 ```
 
 ## Introducing the study
@@ -89,7 +105,7 @@ Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-em
 
 ### Procedure {.unnumbered}
 
-As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable). After the experiment, the participants were asked questions regarding their emoji use frequency, attitude towards emojis, understanding of emojis, WhatsApp use and their smartphone operating system.
+As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable).
 
 ![Example of a test item in @fricke2024semantic´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
@@ -347,48 +363,6 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-### Emoji use
-
-```{r match count}
-
-# match_count <- data |> 
-#   group_by(match) |> 
-#   count()
-
-#   match     n
-#   <chr>  <int>
-# 1 no       583
-# 2 yes     1325
-
-```
-
-```{r plot match x emoji use}
-
-# #trying to see whether there is a correlation of emoji use and matching accuracy
-# match_use_count <- data |> 
-#   group_by(match, emoji_use) |> 
-#   count()
-# 
-# match_use_count |> 
-#   group_by(emoji_use) |> 
-#   ggplot(aes(x = emoji_use, y = n, fill = match)) +
-#   geom_bar(stat = "identity", position = "dodge") + #better with position = "dodge" or default position = "stack"?
-#   labs(x = "Use frequency", y = "count")
-# #there seem to be considerable differences between values
-# 
-# match_use_count |> 
-#   ggplot(aes(x = emoji_use, y = n, fill = match)) + 
-#   geom_bar(stat = "identity", show.legend = TRUE, position = "fill") +
-#   scale_fill_brewer(palette="Set1")+
-#   labs(title = "Do participants that use emojis less frequently have a lower matching accuracy?",
-#        x = "Use frequency",
-#        y = "Ratio")+
-#   coord_flip()
-
-#the plot does not really look meaningful, i.e. there is not a real difference when scaled up to 100%
-
-```
-
 ## AU plot
 
 We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
@@ -527,28 +501,6 @@ data_AU <- data |>
 
 The data is grouped by contexts, matches and non-matches are counted for each context and stored in a column `n`, a column `percent` is added which stores the percentage of matches and non-matches for each context pair.
 
-````{=html}
-<!-- Demonstrating why we cannot simply build the plot using facet_wrap (potentially unnecessary, I was just trying stuff out)
-
-```{r}
-# perc_AU_diff2 <- perc_AU_diff <- data |> 
-#   group_by(context, AU_difference) |> 
-#   count(match) |> #counts matches and non-matches (match((yes/no)) for each context
-#   mutate(percent = round(n/sum(n)*100, 2))
-#   
-# plot_AU_facet <- perc_AU_diff2 |> 
-# mutate(context = factor(context, levels = c("concern", "surprise", "happiness", "(cheeky) laughter", "mild irritation", "annoyance", "mild disappointment", "moderate disappointment", "amusement", "(intense) happiness", "happiness2", "bashfulness"))) |> 
-# ggplot(aes(x = percent, y = context, fill = match)) +
-# geom_bar(stat = "identity") +
-# facet_wrap(~AU_difference) +
-# geom_text(aes(label = percent), position = position_stack(vjust = 0.5))
-# 
-# plot_AU_facet
-```
-
-problem: The pairs are indiscernible, difficult to add emojis at the appropiate positions -->
-````
-
 Let´s plot the first emoji pair \[\AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
 
 ```{r}
@@ -557,10 +509,11 @@ filter(context == "concern" | context == "surprise") |> #1.
 ggplot(aes(x = context, y = percent, fill = match)) + #2.
 geom_col() + #3.
 scale_x_discrete(limits = c("concern", "surprise")) + #4.
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) + #5.
-labs (x= "context", y = "percent", title = "😯 😲") + #6.
-theme_bw() + #7.
-theme(plot.title = element_text(hjust = 0.5)) #8
+scale_fill_manual(values = c("#ffa600","#bc5090")) + #5.
+geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) + #6.
+labs (x= "context", y = "percent", title = "😯 😲") + #7.
+theme_bw() + #8.
+theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank()) #9.
 ```
 
 The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps:
@@ -568,11 +521,12 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 1.  Filter out the contexts, so that only rows with either the context "concern" or (`|`) "surprise" are taken into account.
 2.  Create a ggplot with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
 3.  Display the plot as a bar chart. By default, `geom_bar` counts how many times matches/ no matches occurred. However, as our data already includes the counts for each group (column `n`), we use `geom_col` to use the data as is.
-4.  Order contexts so they match the emojis
-5.  Add text to the plot (percent values) and place it inside the bars
-6.  Add labels: context on the x axis, percent on the y axis, emojis as title
-7.  Add an appropiate and pratical theme (theme_bw)
-8.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, move the title to the center of the plot.
+4.  The "context" values, which are displayed on the x.axis, are discrete. With this command, we set and order the contexts.
+5.  Adjust colours.
+6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
+7.  Add labels: "context" on the x-axis, "percent" on the y-axis, emojis as the title
+8.  Add a theme.
+9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend since the match/no match values are self-explanatory.
 
 Let´s take a look at our plot.
 
@@ -582,7 +536,7 @@ plot_concern_surprise
 
 We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
 
-On our case, the process of defining a function is straightforward: We simply repeat the code we just wrote, but with the general argument names ("emojis" and "contexts").
+In our case, the process of defining a function is straightforward: We state that the function should have take "contexts" as its first argument and "emojis" as its second argument. We then simply repeat the code we just wrote, only replacing the specific contexts and emojis with the general argument names.
 
 ```{r}
 
@@ -592,10 +546,11 @@ plot_AU_matches <- function(contexts, emojis) {
     ggplot(aes(x = context, y = percent, fill = match)) +
     geom_col() +
     scale_x_discrete(limits = contexts) +
+    scale_fill_brewer(palette = "Set2") +
     geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
     labs (x= "context", y = "percent", title = emojis) +
     theme_bw() +
-    theme(plot.title = element_text(hjust = 0.5))
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 }
 
 ```

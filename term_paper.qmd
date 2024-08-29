@@ -94,18 +94,18 @@ Their central research question is: **Do AU-differences lead to differences in m
 
 @fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words.
 
-Following the pictorial approach, @fricke2024semantic predict that small visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+)
+Following the pictorial approach, @fricke2024semantic predict that small visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+).
 
 <!-- Beispiele gelöscht -->
 
 ::: {.callout-note title="How did the experiment work?"}
 ### Design {.unnumbered}
 
-Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based both on <https://emojipedia.org> and on a previous norming study by the authors. Four one-sentence-stories (lexicalisations) were created for each context, which yielded 48 testing items. <!-- These testing items were divided up into into four lists. Each list also contained 12 filler items, so that each participant saw 24 items.-->
+Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors. As testing items, four one-sentence-stories were created for each of the contexts (= 48 items). These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
 
 ### Procedure {.unnumbered}
 
-As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice (in one context favoring member A and in another context favoring member B). The rate with which the context-matching emoji was chosen was measured (Dependent variable).
+As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
 
 ![Example of a test item in @fricke2024semantic´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 

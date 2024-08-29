@@ -272,7 +272,7 @@ gender_understanding_count <- data |>
 
 If we check our data frame ‘gender_understanding_count’ with `View()`, it looks like this:
 
-![Figure X: The gender_understanding_count object as visualised using the `View()` function in RStudio](images/gender_understanding_count.png){fig-align="center" width="400"}
+![The gender_understanding_count object as visualised using the View() function in RStudio](images/gender_understanding_count.png){#fig-gender_understanding_count fig-align="center" width="400"}
 
 Since the sizes of the gender groups are very unequal, we add a column with the relative frequencies to make the numbers comparable. We calculate the relative frequencies using the formula `percentage = (n/total) * 100`, where we define `total` as `sum(n)` (in other words: the sum of all absolute numbers within each gender group):
 
@@ -559,7 +559,7 @@ For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
 
 By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
-![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){width="600"}
+![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 

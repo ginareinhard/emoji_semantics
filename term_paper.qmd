@@ -32,7 +32,7 @@ knitr::opts_chunk$set(dev = "ragg_png", warning = FALSE, message = FALSE)
 
 ```
 
-```{r include=FALSE}
+```{r checkdown, include=FALSE}
 
 library(checkdown)
 
@@ -40,7 +40,9 @@ library(checkdown)
 
 #### **Chapter overview** {#sec-chapter-overview .unnumbered}
 
-In this chapter, we...
+This chapter will walk you through:
+
+-   
 
 ## Session set up {#sec-session-set-up}
 
@@ -57,7 +59,8 @@ library(patchwork)
 
 ```
 
-```{r colour palettes, include=FALSE}
+```{r colour-palettes, include=FALSE}
+
 # colourblind-friendly
 # https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/#r-base-color-palettes
 
@@ -71,6 +74,7 @@ display.brewer.all(colorblindFriendly = TRUE)
 # second list of colours is best suited for nominal/categorical data: "Set2", "Paired", "Dark2"
 
 # however, a palette may be too much as we only need two colours at the same time, but which ones? two for men/women and two different ones for match/no match?
+
 ```
 
 ## Introducing the study {#sec-introducing-the-study}
@@ -127,7 +131,7 @@ raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 As specified by @fricke2024semantic (p. 8), we filter out participants who exceed the maximum age of 35 years. (refer to <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.5.2 Piped Functions**).
 
-```{r clean-data}
+```{r filter-age}
 
 data <- raw_data |> 
   filter(age <= 35)
@@ -156,7 +160,7 @@ Let's first get a general overview: How many men, women, and non-binary people p
 
 The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. Before we start analysing, we should translate them into English. To figure out what the the labels of the different genders are, we use the `levels()` function. This function applies to factors, so we first need to convert `gender` with `as.factor`:
 
-```{r}
+```{r convert-gender}
 
 data$gender <- as.factor(data$gender)
 
@@ -164,7 +168,7 @@ data$gender <- as.factor(data$gender)
 
 Now, we can look at what the levels of our factor `gender` are:
 
-```{r}
+```{r gender-levels}
 
 levels(data$gender)
 
@@ -172,7 +176,7 @@ levels(data$gender)
 
 Using a combination of `mutate()` and `recode()`, we translate ‘männlich’ to ‘men, 'weiblich' to 'women', and 'divers' to 'non-binary':
 
-```{r}
+```{r recode-gender}
 
 data <- data |> 
   mutate(gender = recode(gender, 
@@ -188,7 +192,7 @@ Now that the genders have English names, we want to determine how many men, wome
 
 To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
 
-```{r}
+```{r gender-freq}
 
 gender_count <- data |> 
   group_by(submission_id) |> 
@@ -198,7 +202,7 @@ gender_count <- data |>
 
 The result is stored in a new data frame called 'gender_count'. Now we can look at the distribution using the `table()` function:
 
-```{r}
+```{r gender-table}
 
 table(gender_count$gender)
 
@@ -206,7 +210,7 @@ table(gender_count$gender)
 
 Alternatively, we can use the `distinct()` function to keep only unique occurrences (exactly: the first unique occurrence) of each submission_id. The argument `.keep_all` is set to `TRUE`, which means that all other variables in the data frame are kept and not deleted:
 
-```{r}
+```{r gender-distinct}
 
 gender_count <- data |> 
   distinct(submission_id, .keep_all = TRUE)
@@ -221,7 +225,7 @@ The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary peop
 
 Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender. Just like with `gender`, we have to do some data wrangling first. Again, we convert the variable `emoji_understanding` as a factor to get its levels:
 
-```{r}
+```{r convert-understanding}
 
 data$emoji_understanding <- as.factor(data$emoji_understanding)
 
@@ -231,7 +235,7 @@ levels(data$emoji_understanding)
 
 We translate 'mittelmäßig' to 'moderate', 'eher gut' to 'rather good', 'gut' to 'good', and 'sehr gut' to 'very good':
 
-```{r}
+```{r recode-understanding}
 
 data <- data |> 
     mutate(emoji_understanding = recode(emoji_understanding,
@@ -246,7 +250,7 @@ levels(data$emoji_understanding)
 
 The levels are still in the wrong order. We need to rearrange them in an ascending order from 'moderate' to 'very good'. To do this, we define a vector `c("moderate", "rather good", "good", "very good")`. Using the `factor()` function, we encode this vector as a factor:
 
-```{r}
+```{r reorder-understanding}
 
 data <- data |> 
     mutate(emoji_understanding = factor(emoji_understanding,
@@ -261,7 +265,7 @@ levels(data$emoji_understanding)
 
 The levels now look correct, so we can count the frequencies for the different gender groups within `emoji_understanding`. We create a new data frame ‘gender_understanding_count’ and again keep only each participant's unique `submission_id` as above. We group the data by gender and count the frequencies for the different genders within the `emoji_understanding` factor:
 
-```{r}
+```{r gender-understanding-freq}
 
 gender_understanding_count <- data |>
   distinct(submission_id, .keep_all = TRUE) |> 
@@ -276,7 +280,7 @@ If we check our data frame ‘gender_understanding_count’ with `View()`, it lo
 
 Since the sizes of the gender groups are very unequal, we add a column with the relative frequencies to make the numbers comparable. We calculate the relative frequencies using the formula `percentage = (n/total) * 100`, where we define `total` as `sum(n)` (in other words: the sum of all absolute numbers within each gender group):
 
-```{r}
+```{r gender-understanding-percent}
 
 gender_understanding_count <- data |>
   distinct(submission_id, .keep_all = TRUE) |> 
@@ -289,7 +293,7 @@ gender_understanding_count <- data |>
 
 Finally, we print our frequency table:
 
-```{r}
+```{r print-gender-understanding}
 
 #gender_understanding_count <- gender_understanding_count |> 
 #  select(gender, emoji_understanding, n, percentage)
@@ -304,7 +308,7 @@ print(gender_understanding_count)
 
 As mentioned above, we filter out the very small group of non-binary participants for our visualisation:
 
-```{r}
+```{r filter-gender}
 
 gender_understanding_count <- gender_understanding_count |> 
   filter(gender != "non-binary")
@@ -313,7 +317,7 @@ gender_understanding_count <- gender_understanding_count |>
 
 We use `ggplot()` to create a bar chart in which emoji understanding is arranged in ascending order on the x-axis and the relative frequencies on the y-axis. The bars are coloured according to gender:
 
-```{r}
+```{r gender-understanding-plot}
 
 ggplot(gender_understanding_count, aes(x = emoji_understanding, 
                                        y = percentage, 
@@ -324,7 +328,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 To make our plot more meaningful, we add a title and labels. We also change the colours manually to make it look nicer:
 
-```{r}
+```{r gender-understanding-labs}
 
 ggplot(gender_understanding_count, aes(x = emoji_understanding, 
                                        y = percentage, 
@@ -366,17 +370,21 @@ data <- data |>
 With the code `str_detect(name, "AU") ~ "AU+"`, we say: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
 
 ```{r}
+
 data <- data |> 
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
                                    str_detect(name, "N") ~ "AU-",
                                    str_detect(name, "filler") ~ "filler",
                                    .default = NULL))
+
 ```
 
 A table checks that everything worked:
 
 ```{r}
+
 table(data$AU_difference)
+
 ```
 
 This looks promising. Since we are only interested in the experimental items, we now filter out filler trials:
@@ -478,6 +486,7 @@ The data is grouped by contexts, matches and non-matches are counted for each co
 Let´s plot the first emoji pair \[\AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
 
 ```{r}
+
 plot_concern_surprise <- data_AU |> 
 filter(context == "concern" | context == "surprise") |> #1.
 ggplot(aes(x = context, y = percent, fill = match)) + #2.
@@ -488,6 +497,7 @@ geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) + #6.
 labs (x= "context", y = "percent", title = "😯 😲") + #7.
 theme_bw() + #8.
 theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank()) #9.
+
 ```
 
 The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps:
@@ -505,10 +515,18 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 Let´s take a look at our plot.
 
 ```{r}
+
 plot_concern_surprise
+
 ```
 
 We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
+
+::: {.callout-note title="What are functions and how to define them?"}
+So far, we have only used functions, but not defined any functions ourselves...
+
+<!-- eingefügt, da Elen grundlegende Definition von Funktionen wollte -->
+:::
 
 In our case, the process of defining a function is straightforward: We state that the function should have take "contexts" as its first argument and "emojis" as its second argument. We then simply repeat the code we just wrote, only replacing the specific contexts and emojis with the general argument names.
 
@@ -578,6 +596,7 @@ In each of the patchworks `p1` and `p2`, three plots are stacked on top of each 
 Now, we simply need to fill in the names of the plots and choose some meaningful names:
 
 ```{r}
+
 #[AU+] condition:
 AU_plus_patch <- 
   plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance
@@ -585,11 +604,13 @@ AU_plus_patch <-
 #[AU-] condition:
 AU_minus_patch <- 
   plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness
+
 ```
 
 The `plot_layout` function takes the argument `guides`. By setting this argument to `"collect"`, identical legends of all plots within the patchwork are merged.
 
 ```{r}
+
 #AU+ condition:
 AU_plus_patch <- AU_plus_patch +
   plot_layout(guides = "collect")
@@ -597,24 +618,29 @@ AU_plus_patch <- AU_plus_patch +
 #AU- condition:
 AU_minus_patch <- AU_minus_patch +
   plot_layout(guides = "collect")
+
 ```
 
 Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one graph, we need to add titles to them to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
 
 ```{r}
+
 AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +
   ggtitle("[AU+] condition")
 
 AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
   ggtitle("[AU-] condition")
+
 ```
 
 Finally, we put both elements together to get our final graph.
 
 ```{r}
+
 AU_combined_patch <- AU_plus_patch | AU_minus_patch
 
 AU_combined_patch
+
 ```
 
 ```{r image AU plot, include=FALSE}

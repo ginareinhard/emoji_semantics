@@ -16,6 +16,7 @@ format:
     embed-resources: true
 link-citations: true
 csl: "apa_7th.csl"
+number-sections: true
 ---
 
 ```{r ragg, include=FALSE}
@@ -37,11 +38,11 @@ library(checkdown)
 
 ```
 
-#### **Chapter overview** {.unnumbered}
+#### **Chapter overview** {#sec-chapter-overview .unnumbered}
 
 In this chapter, we...
 
-## Session set up
+## Session set up {#sec-session-set-up}
 
 ```{r load-libraries, message=FALSE}
 
@@ -72,7 +73,7 @@ display.brewer.all(colorblindFriendly = TRUE)
 # however, a palette may be too much as we only need two colours at the same time, but which ones? two for men/women and two different ones for match/no match?
 ```
 
-## Introducing the study
+## Introducing the study {#sec-introducing-the-study}
 
 <!-- Kapitel überarbeitet -->
 
@@ -99,11 +100,11 @@ Following the pictorial approach, @fricke2024semantic predict that small visual 
 <!-- Beispiele gelöscht -->
 
 ::: {.callout-note title="How did the experiment work?"}
-### Design {.unnumbered}
+### Design {#sec-design .unnumbered}
 
 Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors. As testing items, four one-sentence-stories were created for each of the contexts (= 48 items). These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
 
-### Procedure {.unnumbered}
+### Procedure {#sec-procedure .unnumbered}
 
 As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
 
@@ -114,7 +115,7 @@ The lexicalist approach predicts that it does not matter whether visual (AU) dif
 In contrast, @fricke2024semantic expect that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the pattern is predicted to be more random. <!-- erstmal hierhin verschoben, weil von den Kontexten vorher noch nicht die Rede war -->
 :::
 
-## Importing the data
+## Importing the data {#sec-importing-the-data}
 
 Import the data using "here":
 
@@ -133,7 +134,7 @@ data <- raw_data |>
 
 ```
 
-## Exploring the relationship between gender and emoji understanding
+## Exploring the relationship between gender and emoji understanding {#sec-gender-understanding}
 
 @fricke2024semantic also asked participants about their gender, their attitude towards emojis, how often they use emojis on WhatsApp and how well they think they understand emojis. They visualised the distribution of male and female gender for emoji use and emoji attitude:
 
@@ -149,7 +150,7 @@ Women seem to use emojis more often and have a more positive attitude towards em
 
 <!-- descriptive statistics? -->
 
-### Gender frequency analysis
+### Gender frequency analysis {#sec-gender-freq}
 
 Let's first get a general overview: How many men, women, and non-binary people participated in the study?
 
@@ -183,7 +184,7 @@ levels(data$gender)
 
 ```
 
-Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, as the data frame contains 24 rows for each subject. So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
+Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, as the data frame contains 24 rows for each subject (see @sec-introducing-the-study). So if we were to simply count the occurrences of ‘men’, ‘women’, and ‘non-binary’ in the data, we would end up with 24 times the values of the frequencies.
 
 To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
 
@@ -216,7 +217,7 @@ table(gender_count$gender)
 
 The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. This is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants for our visualisation.
 
-### How well do the different genders understand emojis?
+### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 
 Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender. Just like with `gender`, we have to do some data wrangling first. Again, we convert the variable `emoji_understanding` as a factor to get its levels:
 
@@ -299,7 +300,7 @@ print(gender_understanding_count)
 
 <!-- interpret frequencies? -->
 
-### Data visualisation
+### Data visualisation {#sec-gender-understanding-vis}
 
 As mentioned above, we filter out the very small group of non-binary participants for our visualisation:
 
@@ -336,7 +337,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-## AU plot
+## AU plot {#sec-au-plot}
 
 We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
@@ -344,7 +345,7 @@ Step by step, we will build an informative plot which will include all the infor
 
 Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column (yet). We will tackle this by ourselves in the following section.
 
-### Data preparation
+### Data preparation {#sec-au-data-preparation}
 
 First, we need a column that includes the experimental conditions of each trial. That is, was the visual difference between the presented emoji an AU-difference (AU+) or not (AU-)? Or was a pair of filler emojis presented?
 
@@ -459,7 +460,7 @@ data <- data |>
 
 ```
 
-### Plot building
+### Plot building {#sec-au-plot-building}
 
 In a new dataframe `AU_plot`, we store all and only the columns needed to build our plot:
 
@@ -554,7 +555,7 @@ For rendering the output from qmd (or Markdown?) to HTML (or pdf?) we can:
 -   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
 :::
 
-### Patchwork
+### Patchwork {#sec-au-patchwork}
 
 By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package (@pedersen2024patchwork) to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
@@ -654,6 +655,6 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-## Conclusion
+## Conclusion {#sec-conclusion}
 
-## References
+## References {#sec-references .unnumbered}

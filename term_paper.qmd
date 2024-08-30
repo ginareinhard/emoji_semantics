@@ -18,13 +18,11 @@ link-citations: true
 csl: "apa_7th.csl"
 number-sections: true
 ---
-
-```{css}
-#| echo: false
+<style>
 p {
-  text-align: justify
+  text-align: justify;
 }
-```
+</style>
 
 ```{r ragg, include=FALSE}
 

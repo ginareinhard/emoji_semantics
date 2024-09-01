@@ -579,7 +579,7 @@ So far, we have only used functions, but not defined any functions ourselves...
 <!-- eingefügt, da Elen grundlegende Definition von Funktionen wollte -->
 :::
 
-In our case, the process of defining a function is straightforward: We state that the function should have take "contexts" as its first argument and "emojis" as its second argument. We then simply repeat the code we just wrote, only replacing the specific contexts and emojis with the general argument names.
+In our case, the process of defining a function is straightforward: We state that the function should have take `contexts` as its first argument and `emojis` as its second argument. We then simply repeat the code we just wrote, only replacing the specific contexts and emojis with the general argument names.
 
 ```{r}
 
@@ -711,11 +711,14 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
-This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is not ideal but it is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
+This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
 
-There are a couple of other options that will produce other outcomes, however, none is going to be perfect. They are to delete the legends from both blocks, keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one), or keep the legends of all six plots.
+There are a couple of other options that will produce different outcomes, however, none is going to be perfect: We could delete the legends from both blocks or keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one). We could also keep the legends of all six plots.
 
-We have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product. <!-- possible task? -->
+<!-- insert (small) pictures of plots with other options -->
+<!-- possible task? -->
+
+Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

@@ -18,12 +18,14 @@ link-citations: true
 csl: "apa_7th.csl"
 number-sections: true
 ---
+
+```{=html}
 <style>
 p {
   text-align: justify;
 }
 </style>
-
+```
 ```{r ragg, include=FALSE}
 
 #install.packages("ragg")
@@ -45,14 +47,13 @@ library(checkdown)
 
 #### **Chapter overview** {#sec-chapter-overview .unnumbered}
 
-This chapter will walk you through:
-<!-- Vorschläge -->
+This chapter will walk you through: <!-- Vorschläge -->
 
-- how to overview/explore the data of a study 
-- access the specific data you are interested in
-- frequency analysis
-- visualisations
-- building a complex plot and interpreting it
+-   how to overview/explore the data of a study
+-   access the specific data you are interested in
+-   frequency analysis
+-   visualisations
+-   building a complex plot and interpreting it
 
 We will work with data of the study by @fricke2024semantic.
 
@@ -111,8 +112,10 @@ They compare visually similar emojis using a face emoji annotation system develo
 
 Their central research question is: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
+```{=html}
 <!-- @fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words.
 Following the pictorial approach, -->
+```
 @fricke2024semantic predict in line with the pictorial approach by @maier2023emojis that visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+).
 
 <!-- Beispiele gelöscht -->
@@ -397,15 +400,13 @@ We will now turn to exploring the central research question of @fricke2024semant
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
-Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column (yet). We will tackle this by ourselves in the following section.
+Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column. We will tackle this by ourselves in this section.
 
 ### Preparing the data {#sec-au-data-preparation}
 
-First, we need a column that includes the experimental conditions of each trial. That is, was the visual difference between the presented emoji an AU-difference (AU+) or not (AU-)? Or was a pair of filler emojis presented?
+First, we need a column that includes the experimental conditions of each trial. The experimental conditions include whether the visual difference between the presented emojis correponded to an AU-difference (AU+) or not (AU-), or whether a filler was presented.
 
 We add a column `AU_difference` that will include all the necessary information by using a combination of `mutate` (which adds the column), `case_when` and `str_detect`.
-
-The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is "AU".
 
 ```{r}
 
@@ -417,7 +418,9 @@ data <- data |>
 
 ```
 
-With the code `str_detect(name, "AU") ~ "AU+"`, we say: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
+The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is "AU".
+
+The above code command means: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
 
 ```{r}
 
@@ -450,7 +453,7 @@ data <- data |>
 
 ```
 
-Now, we will create another column called `context` to which we will add the brief context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by *ist enttäucht* "is disappointed". We will deal with this in a second, but we will exclude these contexts for now.
+We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by *ist enttäucht* "is disappointed". We will deal with this in a second, but we will exclude these contexts for now.
 
 ```{r}
 
@@ -463,8 +466,6 @@ data <- data |>
                              str_detect(question, "ist etwas genervt") ~ "mild irritation",
                              str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
-                             str_detect(question, "ist überglücklich") ~ "(intense) happiness",
-                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              str_detect(question, "ist überglücklich") ~ "(intense) happiness",
                              #str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
@@ -481,7 +482,7 @@ Again, we combine `mutate`, `case_when` and `str_detect`: In the column `questio
 
 (A problem becomes apparent when checking the output: All contexts have 159 occurences, except for "mild disappointment" which appears to exist 318 times. Something must have gone wrong.)
 
-Now for the problematic "mild disappointment" / "moderate disappointment" with their matching emojis 🙁 / ☹️ : Their data appears to be identical except for their coding in the column "name". The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
+Now for the problematic "mild disappointment" / "moderate disappointment" with their matching emojis 🙁 / ☹️ : Their data appears to be identical except for their coding in the column `name`. The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
 
 ```{r}
 
@@ -531,9 +532,9 @@ data_AU <- data |>
 
 ```
 
-The data is grouped by contexts, matches and non-matches are counted for each context and stored in a column `n`, a column `percent` is added which stores the percentage of matches and non-matches for each context pair.
+The data is grouped by contexts. Matches and non-matches are counted for each context and stored in a column `n`. We add a column `percent` which stores the percentage of matches and non-matches for each context-pair.
 
-Let´s plot the first emoji pair \[\AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
+Let´s plot the first emoji pair of the \[AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
 
 ```{r}
 
@@ -552,15 +553,15 @@ theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank()) #9.
 
 The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps:
 
-1.  Filter out the contexts, so that only rows with either the context "concern" or (`|`) "surprise" are taken into account.
+1.  Filter out the contexts, such that only rows of the contexts "concern" or (`|`) "surprise" are taken into account.
 2.  Create a ggplot with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
-3.  Display the plot as a barplot. By default, `geom_bar` counts how many times matches/ no matches occurred. However, as our data already includes the counts for each group (column `n`), we use `geom_col` to use the data as is.
-4.  The "context" values, which are displayed on the x.axis, are discrete. With this command, we set and order the contexts.
+3.  Display the plot as a barplot. By default, `geom_bar` counts how many times matches/ no matches occurred. However, as we have already calculated the values of metric we want to use (column `percent`), we use `geom_col` to use the data as is.
+4.  The "context" values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
 5.  Adjust colours (manually or with the package `RColorBrewer`)
 6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
-7.  Add labels: "context" on the x-axis, "percent" on the y-axis, emojis as the title
+7.  Add labels: "context" on the x-axis, "percent" on the y-axis, and the corresponding emojis as the title.
 8.  Add a theme.
-9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend since the match/no match values are self-explanatory.
+9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend since the "match/no match" values are self-explanatory.
 
 Let´s take a look at our plot.
 
@@ -632,7 +633,6 @@ For rendering the output from .qmd (or Markdown?) to HTML (or pdf?) you can eith
 or
 
 -   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
-
 :::
 
 ### Assembling with patchwork {#sec-au-patchwork}
@@ -711,9 +711,9 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
-This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is not ideal but it is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later. 
+This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is not ideal but it is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
 
-There are a couple of other options that will produce other outcomes, however, none is going to be perfect. They are to delete the legends from both blocks, keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one), or keep the legends of all six plots. 
+There are a couple of other options that will produce other outcomes, however, none is going to be perfect. They are to delete the legends from both blocks, keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one), or keep the legends of all six plots.
 
 We have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product. <!-- possible task? -->
 
@@ -746,7 +746,8 @@ wrong = "Not quite, try again.")
 As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
 
 ### Interpreting the plot
-"For almost all contexts, the matching emoji is generally preferred with matching rates above chance level. In the case of the pair neutral face and expressionless face (   and   ), however, the latter emoji was preferred both in the ‘annoyance’ and in the ‘mild irritation’ context." [@fricke2024semantic].
+
+"For almost all contexts, the matching emoji is generally preferred with matching rates above chance level. In the case of the pair neutral face and expressionless face ( and ), however, the latter emoji was preferred both in the ‘annoyance’ and in the ‘mild irritation’ context." [@fricke2024semantic].
 
 Do AU-differences lead to differences in meaning between the two emojis of a pair?
 
@@ -754,7 +755,7 @@ Do AU-differences lead to differences in meaning between the two emojis of a pai
 
 exception is the pair mild disappointment - moderate disappointment
 
-"Our experiment indicates that the small visual difference between the two emojis of a pair does, in fact, create a difference in meaning. This is equally the case for [AU +] differences that map to different facial actions in human faces and for [AU-] differences that represent the same facial actions in a human face."
+"Our experiment indicates that the small visual difference between the two emojis of a pair does, in fact, create a difference in meaning. This is equally the case for \[AU +\] differences that map to different facial actions in human faces and for \[AU-\] differences that represent the same facial actions in a human face."
 
 main finding: "context-matching emojis are chosen significantly above chance level in all conditions."
 

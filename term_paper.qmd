@@ -615,7 +615,7 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 
 There are various routes to displaying emojis in R.
 
-The easiest way is to use the emoji keyboard (on Mac with the Shortcut fn+e). The emoji keyboard is also available in RStudio (Edit -\> Emojis & Symbols). Alternatively, there are emoji libraries, for example "emo(ji)" (<https://github.com/hadley/emo>).
+The easiest way is to use the emoji keyboard (on Mac with the Shortcut fn+e). The emoji keyboard is also available in RStudio (Edit -\> Emojis & Symbols). Alternatively, there are emoji libraries, for example "emo(ji)" developed by @wickham2024emoji.
 
 As we want to display emojis within plots using ggplot: We have to use AGG/Cairo? as Backend in R Studio (Tools -\> Global Options -\> Graphics -\> Backend -\> AGG) \[explain AGG/Cairo\]. (Only necessary for Mac?)
 

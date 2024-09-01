@@ -157,7 +157,6 @@ data <- raw_data |>
 @fricke2024semantic also asked participants about their gender, their attitude towards emojis, how often they use emojis on WhatsApp and how well they think they understand emojis. They visualised the distribution of male and female gender for emoji use and emoji attitude as barplots:
 
 ::: {#fig-barplots layout-ncol="2"}
-
 ![Barplot "Emoji use by gender"](images/emoji_use.png){#fig-emojiuse fig-align="center" width="550"}
 
 ![Barplot "Attitude towards emojis by gender"](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
@@ -238,7 +237,37 @@ table(gender_count$gender)
 
 ```
 
-The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. This is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants for our visualisation.
+The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. This is likely to skew our visualisation.
+
+::: callout-tip
+#### Quiz time! {.unnumbered}
+
+[**Q1.**]{style="color:green;"} What problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
+
+```{r echo=FALSE, results="asis"}
+
+check_question("", options = c("It will appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups will look smaller than they actually are.", "The differences in emoji understanding within gender groups will look bigger than they actually are.", "The bars for the non-binary group will appear huge.", "There will be no problems if we use ggplot."), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer", q_id = 5,
+right = "That´s right! Unequal group sizes can exaggerate differences in understanding by showing larger totals for bigger groups.",
+wrong = "Not quite, try again.")
+
+```
+
+[**Q2.**]{style="color:green;"} How could you address these issues?
+
+```{r echo=FALSE, results="asis"}
+
+check_question("", options = c("", "", "", "", "", ""), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer", q_id = 5,
+right = "That´s right! There is a notable difference between the matching rates.",
+wrong = "Not quite, try again.")
+
+```
+:::
+
+This is likely to skew our visualisation. To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants for our visualisation.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 
@@ -685,7 +714,7 @@ We have opted to create one legend for each condition, but feel free to try the 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q1.**]{style="color:green;"} Looking at the final patchwork, which "sub-plot" shows the most significant finding?
+[**Q3.**]{style="color:green;"} Looking at the final patchwork, which "sub-plot" shows the most significant finding?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -697,8 +726,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-
-[**Q2.**]{style="color:green;"} Which interpretation of this finding is most accurate?
+[**Q4.**]{style="color:green;"} Which interpretation of this finding is most accurate?
 
 ```{r echo=FALSE, results="asis"}
 check_question("😐 was chosen significantly less for its matching context than all the other emojis.", options = c("😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts happiness2 and bashfulness.","Noch was drittes"), type = "radio", 

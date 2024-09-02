@@ -26,13 +26,6 @@ p {
 }
 </style>
 ```
-```{r ragg, include=FALSE}
-
-#install.packages("ragg")
-library(ragg)
-
-```
-
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(dev = "ragg_png", warning = FALSE, message = FALSE)
@@ -69,6 +62,8 @@ library(ggpubr)
 library(scales)
 #install.packages("patchwork")
 library(patchwork)
+#install.packages("ragg")
+library(ragg)
 
 ```
 
@@ -249,7 +244,7 @@ The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary peop
 
 ```{r echo=FALSE, results="asis"}
 
-check_question("", options = c("It will appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups will look smaller than they actually are.", "The differences in emoji understanding within gender groups will look bigger than they actually are.", "The bars for the non-binary group will appear huge.", "There will be no problems if we use ggplot."), type = "radio", 
+check_question("", options = c("It may appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look smaller than they actually are.", "The differences in emoji understanding within gender groups may look bigger than they actually are.", "The bars for the non-binary group may appear huge.", "There will be no problems if we use ggplot."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer", q_id = 5,
 right = "That´s right! Unequal group sizes can exaggerate differences in understanding by showing larger totals for bigger groups.",
@@ -612,27 +607,25 @@ plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "
 ```
 
 ::: {.callout-note title="Inserting emojis in R"}
-There are various ways to insert emojis in R. The easiest is to use the emoji keyboard. To open it on MacOS, use the keyboard shortcut `Crtl + Cmd + Space` or `fn + e` and on Windows `Windows logo key + . (period)`. The emoji keyboard is also available in RStudio, if you go to the "Edit" drop-down menu and click on "Emojis & Symbols’. Alternatively, there are emoji libraries for R, for example "emo(ji)" developed by @wickham2024emoji.
+There are various ways to insert emojis in R. The easiest is to use the emoji keyboard (see @fig-emoji-keyboard). To open it on MacOS, use the keyboard shortcut `Crtl + Cmd + Space` or `fn + e` and on Windows `Windows logo key + . (period)`. The emoji keyboard is also available in RStudio, if you go to the "Edit" drop-down menu and click on "Emojis & Symbols". Alternatively, there are emoji libraries for R, for example "emo(ji)" developed by @wickham2024emoji.
 
-As we want to display emojis within plots, we need to pay even more attention to graphics. Emojis as part of plots created by ggplot, for example, cannot be displayed just like that. Additional problems can occur when rendering a Quarto or R Markdown document to HTML.
+As we want to display emojis within plots, we need to pay even more attention to graphics. Emojis as part of plots created by ggplot cannot be displayed just like that. Additional problems can occur when rendering a Quarto or R Markdown document to HTML.
 
-If displaying emojis as part of plots in RStudio does not work for you, you will need to use AGG or Cairo as a backend in RStudio. To do this, head to the "Tools" drop-down menu and click on "Global Options". Then go to the "Graphics" tab and select the "AGG" or "Cairo" option (see @fig-agg). \[explain AGG/Cairo\]
+If displaying emojis as part of plots in RStudio does not work for you, you will need to use AGG or Cairo as a backend in RStudio. To do this, head to the "Tools" drop-down menu and click on "Global Options". Then go to the "Graphics" tab and select the "AGG" or "Cairo" option (see @fig-agg). AGG stands for Anti-Grain Geometry \[explain AGG/Cairo\]
 
-::: {#fig-test layout-ncol="2"}
+Tools for inserting and displaying emojis in RStudio
+
+::: {#fig-emoji-tools layout-ncol="2"}
 ![The emoji keyboard](images/emoji_keyboard.png){#fig-emoji-keyboard fig-align="center" width="270"}
 
 ![Recommended graphics backend in RStudio](images/AGG.png){#fig-agg fig-align="center" width="300"}
 
-XXXX
+Tools for inserting and displaying emojis in RStudio
 :::
 
-For rendering the output from .qmd (or Markdown?) to HTML (or pdf?) you can either:
+To correctly render the output from a Quarto document to HTML, you can use the "ragg" library developed by @pedersen2024ragg. This library provides graphic devices based on AGG and includes advanced text rendering, with support for emojis.
 
--   save the plots with ggsave() and insert them
-
-or
-
--   use the ragg library (<https://ragg.r-lib.org>) ("ragg can be used as the graphic back-end to the RStudio device (for RStudio \>= 1.4) by choosing *AGG* as the backend in the graphics pane in general options (see screenshot)")
+"Use ragg with knitr: knitr supports png output from ragg by setting `dev = "ragg_png"` in the chunk settings or globally with `knitr::opts_chunk$set(dev = "ragg_png")`." (<https://ragg.r-lib.org/index.html>)
 :::
 
 ### Assembling with patchwork {#sec-au-patchwork}
@@ -716,6 +709,7 @@ This graph contains information on the matching rates of all emoji pairs with th
 There are a couple of other options that will produce different outcomes, however, none is going to be perfect: We could delete the legends from both blocks or keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one). We could also keep the legends of all six plots.
 
 <!-- insert (small) pictures of plots with other options -->
+
 <!-- possible task? -->
 
 Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product.
@@ -744,22 +738,21 @@ button_label = "Check answer", q_id = 1,
 right = "That´s right!",
 wrong = "Not quite, try again.")
 ```
-
 :::
 
 As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
 
 ### Interpreting the plot
+
 By looking and interpreting the above plot, we can now finally answer the research question: Do AU-differences lead to differences in meaning between the two emojis of a pair?
 
-The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. In the plot, the matching emoji was "generally preferred with matching rates above chance level" in the AU+ and the AU- condition (exception: mild irritation). However, we also see that minor visual differences between emojis do affect the understanding and choice of emojis in different contexts. 
+The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. In the plot, the matching emoji was "generally preferred with matching rates above chance level" in the AU+ and the AU- condition (exception: mild irritation). However, we also see that minor visual differences between emojis do affect the understanding and choice of emojis in different contexts.
 
 main finding: "context-matching emojis are chosen significantly above chance level in all conditions."
 
 "For almost all contexts, the matching emoji is generally preferred with matching rates above chance level. In the case of the pair neutral face and expressionless face ( and ), however, the latter emoji was preferred both in the ‘annoyance’ and in the ‘mild irritation’ context." [@fricke2024semantic].
 
-"each emoji is preferred over a visually similar emoji in a context that represents a prominent aspect of its meaning, as determined on the basis of the emoji’s Emojipedia.org entry and a norming experiment. Thus, subtle differences in emojis that otherwise look alike lead to differences in meaning."
-exception is the pair mild disappointment - moderate disappointment
+"each emoji is preferred over a visually similar emoji in a context that represents a prominent aspect of its meaning, as determined on the basis of the emoji’s Emojipedia.org entry and a norming experiment. Thus, subtle differences in emojis that otherwise look alike lead to differences in meaning." exception is the pair mild disappointment - moderate disappointment
 
 "Our experiment indicates that the small visual difference between the two emojis of a pair does, in fact, create a difference in meaning. This is equally the case for \[AU +\] differences that map to different facial actions in human faces and for \[AU-\] differences that represent the same facial actions in a human face."
 

@@ -240,27 +240,15 @@ The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary peop
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q1.**]{style="color:green;"} What problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
+1\) What problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
 
 ```{r echo=FALSE, results="asis"}
 
-check_question("", options = c("It may appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look smaller than they actually are.", "The differences in emoji understanding within gender groups may look bigger than they actually are.", "The bars for the non-binary group may appear huge.", "There will be no problems if we use ggplot."), type = "radio", 
+check_question("It may appear as if men have a greater emoji understanding simply because of their group size.", options = c("It may appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look smaller than they actually are.", "The differences in emoji understanding within gender groups may look bigger than they actually are.", "The bars for the non-binary group may appear huge.", "There will be no problems if we use ggplot."), type = "radio", 
 random_answer_order = TRUE,
-button_label = "Check answer", q_id = 5,
-right = "That´s right! Unequal group sizes can exaggerate differences in understanding by showing larger totals for bigger groups.",
-wrong = "Not quite, try again.")
-
-```
-
-[**Q2.**]{style="color:green;"} How could you address these issues?
-
-```{r echo=FALSE, results="asis"}
-
-check_question("", options = c("", "", "", "", "", ""), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer", q_id = 5,
-right = "That´s right! There is a notable difference between the matching rates.",
-wrong = "Not quite, try again.")
+button_label = "Check answer",
+right = "That´s right! Unequal group sizes can exaggerate differences in understanding by showing larger totals for bigger groups. <br><br>Can you think of ways to ensure that these factors are controlled for? / How could you address these issues?",
+wrong = "Not quite. There are more reasons.")
 
 ```
 :::
@@ -717,24 +705,24 @@ Here, we have opted to create one legend for each condition, but feel free to tr
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q3.**]{style="color:green;"} Looking at the final patchwork, which "sub-plot" shows the most significant finding?
+2\) Looking at the final patchwork, which "sub-plot" shows the most significant finding?
 
 ```{r echo=FALSE, results="asis"}
 
 check_question("lower left", options = c("upper left", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
 random_answer_order = TRUE,
-button_label = "Check answer", q_id = 5,
+button_label = "Check answer",
 right = "That´s right! There is a notable difference between the matching rates.",
 wrong = "Not quite, try again.")
 
 ```
-
-[**Q4.**]{style="color:green;"} Which interpretation of this finding is most accurate?
+<br><br>
+3\) Which interpretation of this finding is most accurate?
 
 ```{r echo=FALSE, results="asis"}
 check_question("😐 was chosen significantly less for its matching context than all the other emojis.", options = c("😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts happiness2 and bashfulness.","Noch was drittes"), type = "radio", 
 random_answer_order = TRUE,
-button_label = "Check answer", q_id = 1,
+button_label = "Check answer",
 right = "That´s right!",
 wrong = "Not quite, try again.")
 ```

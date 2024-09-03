@@ -378,7 +378,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. There are also more women than men in the *moderate* category. The bars for both genders are highest in the *good* to *very good* range.
 
-## Comparing matching rates between AU-conditions (or across emoji pairs) {#sec-au-plot}
+## Comparing matching rates between AU-conditions {#sec-au-plot}
 
 We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
@@ -437,7 +437,7 @@ data <- data |>
 
 ```
 
-We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by *ist enttäucht* "is disappointed". We will deal with this in a second, but we will exclude these contexts for now.
+We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by "ist enttäuscht" *is disappointed*. We will deal with this in a second, but we will exclude these contexts for now.
 
 ```{r}
 
@@ -579,6 +579,18 @@ plot_AU_matches <- function(contexts, emojis) {
     theme_bw() +
     theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 }
+plot_AU_matches2 <- function(contexts, emojis) {
+  data_AU |> 
+    filter(context %in% contexts) |> 
+    ggplot(aes(x = context, y = percent, fill = match)) +
+    geom_col() +
+    scale_x_discrete(limits = contexts) +
+    scale_fill_brewer(palette = "Set2") +
+    geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+    labs (x= "context", y = "percent", title = emojis) +
+    theme_bw() +
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
+}
 
 ```
 
@@ -592,7 +604,6 @@ plot_mild_irr_annoyance <- plot_AU_matches(c("mild irritation", "annoyance"), "�
 plot_mild_disapp_mod_dissap <- plot_AU_matches(c("mild disappointment", "moderate disappointment"), "🙁️ ☹️")
 plot_amusement_int_happiness <- plot_AU_matches(c("amusement", "(intense) happiness"), "😄 😁")
 plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "😊 ☺️")
-
 ```
 
 ::: {.callout-note title="Inserting emojis in R"}
@@ -642,11 +653,11 @@ Now, we simply need to fill in the names of the plots and choose some meaningful
 ```{r}
 
 #[AU+] condition:
-AU_plus_patch <- 
+AU_plus_patch <-
   plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance
 
 #[AU-] condition:
-AU_minus_patch <- 
+AU_minus_patch <-
   plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness
 
 ```
@@ -695,13 +706,18 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 This graph contains information on the matching rates of all emoji pairs with their contexts. However, you will probably notice that the graph contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
 
-There are a couple of other options that will produce different outcomes, however, none is going to be perfect: We could delete the legends from both blocks or keep the legend of one block and delete the other (this makes the bars take up the space of the legend, i.e. the bars in one block become wider than in the other one). We could also keep the legends of all six plots.
+There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
-<!-- insert (small) pictures of plots with other options -->
+::: {#fig-AU-plot-options layout-ncol="2"}
 
-<!-- possible task? -->
+![The plot with all six legends kept.](images/AU-plot_legend_option1.png){#fig-alllegends fig-align="center" width="550"}
 
-Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself and see how it affects the final product.
+![The plot with only one legend kept.](images/AU-plot_legend_option2.png){#fig-onelegend fig-align="center" width="550"}
+
+Alternative options to deal with the legend.
+:::
+
+Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself. Which look do you prefer?
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

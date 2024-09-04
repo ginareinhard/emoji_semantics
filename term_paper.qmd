@@ -114,23 +114,43 @@ Following the pictorial approach, -->
 ```
 @fricke2024semantic predict in line with the pictorial approach by @maier2023emojis that visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+).
 
-<!-- Beispiele gelöscht -->
+### The experiment {#sec-design}
 
 ::: {.callout-note title="How did the experiment work?"}
-### Design {#sec-design}
+Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors. 
 
-Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors. As testing items, four single-sentence-narratives were created for each of the contexts (= 48 items). These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
+Four single-sentence-narratives were created for each of the contexts. See @fig-testitems, and its following translation [taken from @fricke2024semantic, p.6], for an example:
 
-### Procedure {#sec-procedure}
+> 1.  Alex writes to his best friend Stefan: 
+>
+>     *I just learned that my cousin´s dog has her own advent 
+>     calender.*
+>     
+>      Alex is amused.
+>     Which of the emojis matches the message better?
+>     😄😁
+>
+>
+> 2.  Alex writes to his best friend Stefan:
+>
+>     *I just learned that I won 500 Euro in the     
+>     lottery.*
+>
+>     Alex is overjoyed.
+>     Which of the emojis matches the messsage better?
+>     😄😁
 
-As you can see in @fig-testitems, situations that illustrated the contexts were presented to participants, and participants were asked to help a male ("Alex") or female ("Anna") friend choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
+These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
+
+The context illustrating situations were presented to participants, and participants were asked to help choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
+
+:::
 
 ![Example of a test item in @fricke2024semantic´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
 The lexicalist approach predicts that it does not matter whether visual (AU) differences correspond to facial characteristics or not: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one. <!-- erstmal hierhin verschoben, weil von den Kontexten vor der blauen Box noch nicht die Rede war -->
 
 In contrast, @fricke2024semantic expect that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the pattern is predicted to be more random. <!-- erstmal hierhin verschoben, weil von den Kontexten vorher noch nicht die Rede war -->
-:::
 
 ## Importing the data {#sec-importing-the-data}
 

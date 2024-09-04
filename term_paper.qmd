@@ -578,7 +578,12 @@ plot_concern_surprise
 We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
 
 ::: {.callout-note title="What are functions and how to define them?"}
-So far, we have only used functions, but not defined any functions ourselves...
+So far, we have only used built-in R functions, but have not defined any functions ourselves. Functions are reusable blocks of code that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, it makes sense to define a function for highly specific queries that are applied multiple times.
+
+Functions in R are defined using the keyword `function`. After this keyword, we write a list of **parameters** in parantheses. **Parameters** act as placeholders for the function's actual arguments. 
+We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon. 
+
+We also need to think of a name for our function under which we will be able to call it. The function is assigned to the name by `<-`.
 
 <!-- eingefügt, da Elen grundlegende Definition von Funktionen wollte -->
 :::
@@ -599,19 +604,6 @@ plot_AU_matches <- function(contexts, emojis) {
     theme_bw() +
     theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 }
-plot_AU_matches2 <- function(contexts, emojis) {
-  data_AU |> 
-    filter(context %in% contexts) |> 
-    ggplot(aes(x = context, y = percent, fill = match)) +
-    geom_col() +
-    scale_x_discrete(limits = contexts) +
-    scale_fill_brewer(palette = "Set2") +
-    geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
-    labs (x= "context", y = "percent", title = emojis) +
-    theme_bw() +
-    theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
-}
-
 ```
 
 We apply this function to all emoji pairs and contexts by filling in the argument names:

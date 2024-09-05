@@ -269,7 +269,7 @@ check_hint("Four of these problems are likely to occur.", hint_title = "🐭 Cli
 <br>
 :::
 
-To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants for our visualisation.
+To solve these problems, we will use the same strategies as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable. For our visualisation, we will have to exclude the very small group of three non-binary participants.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 

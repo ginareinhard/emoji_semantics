@@ -51,6 +51,7 @@ This chapter will walk you through: <!-- Vorschläge -->
 We will work with data of the study by @fricke2024semantic. @fricke2024semantic have made their data and their analysis code available to the public. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
 
 ## Session set up {#sec-session-set-up}
+
 To run the code of this chapter, you will need to install and load the following packages:
 
 ```{r load-libraries, message=FALSE}
@@ -116,33 +117,26 @@ Following the pictorial approach, -->
 ### The experiment {#sec-design}
 
 ::: {.callout-note title="How did the experiment work?"}
-Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors. 
+Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors.
 
 Four single-sentence-narratives were created for each of the contexts. See @fig-testitems, and its following translation [taken from @fricke2024semantic, p.6], for an example:
 
-> 1.  Alex writes to his best friend Stefan: 
+> 1.  Alex writes to his best friend Stefan:
 >
->     *I just learned that my cousin´s dog has his own advent 
->     calender.*
->     
->      Alex is amused.
->     Which of the emojis matches the message better?
->     😄😁
+>     *I just learned that my cousin´s dog has his own advent calender.*
 >
+>     Alex is amused. Which of the emojis matches the message better? 😄😁
 >
 > 2.  Alex writes to his best friend Stefan:
 >
->     *I just learned that I won 500 Euro in the     
+>     *I just learned that I won 500 Euro in the\
 >     lottery.*
 >
->     Alex is overjoyed.
->     Which of the emojis matches the messsage better?
->     😄😁
+>     Alex is overjoyed. Which of the emojis matches the messsage better? 😄😁
 
 These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
 
 The context illustrating situations were presented to participants, and participants were asked to help choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
-
 :::
 
 ![Example of a test item in @fricke2024semantic´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
@@ -185,7 +179,7 @@ Barplots from @fricke2024semantic
 The plots in figure @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
 
 1.) calculating the absolute frequencies of the genders in the data\
-2.) calculating the relative frequencies of the different levels of emoji understanding for each gender\
+2.) calculating the frequencies of the different levels of emoji understanding for each gender\
 3.) visualising the frequencies in a barplot similar to the plots above
 
 <!-- descriptive statistics? -->
@@ -260,17 +254,19 @@ The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary peop
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-1\)  Which of these problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
+[**Q1.**]{style="color:green;"} Which of these problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("It may appear as if men have a greater emoji understanding simply because of their group size.", "It may appear as if non-binary people have a lower emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger than they actually are."), options = c("It may appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger than they actually are.", "The differences in emoji understanding within gender groups may look smaller than they actually are.", "It may appear as if non-binary people have a lower emoji understanding simply because of their group size.", "There will be no problems if we use ggplot."), type = "checkbox",
+check_question(c("It may appear as if men have a greater emoji understanding simply because of their group size.", "It may appear as if non-binary people have a lower emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger than they actually are.", "With a very small sample size of 3 non-binary participants, the results may be unreliable."), options = c("It may appear as if men have a greater emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger than they actually are.", "The differences in emoji understanding within gender groups may look smaller than they actually are.", "It may appear as if non-binary people have a lower emoji understanding simply because of their group size.", "There will be no problems if we use ggplot.", "With a very small sample size of 3 non-binary participants, the results may be unreliable."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! Unequal group sizes can exaggerate the differences by showing larger totals for larger groups and smaller totals for smaller groups. <br><br>Can you think of ways to address these issues?",
-wrong = "Not quite. Here’s a hint: ")
+right = "That´s right! Unequal group sizes can exaggerate the differences by showing larger totals for larger groups and smaller totals for smaller groups. With a small sample size, the results may also not be statistically significant and therefore unreliable.<br><br>Can you think of ways to address these issues?",
+wrong = "Not quite. Try again.")
+check_hint("Four of these problems are likely to occur.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
+<br>
 :::
 
 To solve this problem, we will, like @fricke2024semantic, use relative rather than absolute frequencies and exclude the very small group of three non-binary participants for our visualisation.
@@ -481,8 +477,7 @@ table(data$context)
 
 ```
 
-
-:::callout-tip
+::: callout-tip
 #### Quiz time! {.unnumbered}
 
 2\) Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
@@ -496,9 +491,7 @@ right = "That´s right! Something must have gone wrong. As you can see, it is al
 wrong = "Not quite, try again.")
 
 ```
-
 :::
-
 
 The contexts "mild disappointment" and "moderate disappointment" have created some issues: Both are described by "ist enttäuscht" *is disappointed*. Their data appears to be identical except for their coding in the column `name`. The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
 
@@ -594,8 +587,7 @@ We need not only one plot, but six: One for each emoji pair. We could write it a
 ::: {.callout-note title="What are functions and how to define them?"}
 So far, we have only used built-in R functions, but have not defined any functions ourselves. Functions are reusable blocks of code that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, it makes sense to define a function for highly specific queries that are applied multiple times.
 
-Functions in R are defined using the keyword `function`. After this keyword, we write a list of **parameters** in parantheses. **Parameters** act as placeholders for the function's actual arguments. 
-We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon. 
+Functions in R are defined using the keyword `function`. After this keyword, we write a list of **parameters** in parantheses. **Parameters** act as placeholders for the function's actual arguments. We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon.
 
 We also need to think of a name for our function under which we will be able to call it. The function is assigned to the name by `<-`.
 
@@ -670,7 +662,6 @@ p1 <- x / y / z
 p2 <- a / b / c
 
 p_combined <- p1 | p2
-
 ```
 
 In each of the patchworks `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the \[AU+\] condition and the \[AU-\] condition. We will then put these patchworks next to each other for comparison (`p_combined`). The final graph will have two columns and three rows.
@@ -741,7 +732,6 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
 ::: {#fig-AU-plot-options layout-ncol="2"}
-
 ![The plot with all six legends kept.](images/AU-plot_legend_option1.png){#fig-alllegends fig-align="center" width="550"}
 
 ![The plot with only one legend kept.](images/AU-plot_legend_option2.png){#fig-onelegend fig-align="center" width="550"}
@@ -753,14 +743,15 @@ Here, we have opted to create one legend for each condition, but feel free to tr
 
 ::: callout-caution
 #### Task 1 {.unnumbered}
+
 Create a graph with one legend for each subplot, as in @fig-alllegends. You will need to have the `patchwork` package installed and its library loaded.
 
 Look up which function and argument we used to collect the legends. Recreate the plot by adjusting the argument value accordingly. Remember, you can get information on functions by writing `?function` in the console.
-
 :::
 
 ::: {.callout-note collapse="true"}
 #### Click here for the solution to Task 1
+
 The argument that will maintain all legends is `guides = "keep"` of the `plot_layout` function.
 
 ```{r}
@@ -774,7 +765,6 @@ AU_minus_patch <- AU_minus_patch +
 ```
 
 If we rerun the code with this argument value, our final plot will contain six legends.
-
 :::
 
 As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
@@ -783,7 +773,7 @@ As you have now experienced, building plots and assembling them can be quite fid
 
 By looking and interpreting @fig-AUpatch, we can now finally answer the research question: Do AU-differences lead to differences in meaning between the two emojis of a pair?
 
-The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic] both in the AU+ and in the AU- condition. 
+The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic] both in the AU+ and in the AU- condition.
 
 However, we also see that minor visual differences between emojis do affect the understanding and choice of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Interestingly, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : they had less than a 2% difference between matching rates.
 
@@ -792,7 +782,7 @@ Through the following quiz questions, we will further interpret the graph (@fig-
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-2\) In which context did participants choose the matching emoji most often?
+[**Q2.**]{style="color:green;"} In which context did participants choose the matching emoji most often?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -804,7 +794,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> 3\) How can a small difference (such as < 2%) between matching rates within pairs be interpreted?
+<br><br> [**Q3.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
 check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, the same amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji in these pairs.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
@@ -813,8 +803,8 @@ button_label = "Check answer",
 right = "That´s right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
 wrong = "Not quite, try again.")
 ```
- 
-<br><br> 3\) Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
+
+<br><br> [**Q4.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -826,7 +816,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> 4) Which interpretations of this finding are correct? Select all that apply.
+<br><br> [**Q5.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 check_question("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair is the matching rate for one emoji above chance and the matching rate for the other emoji below chance.", "Since the matching rates differ so much in the lower left plot, AU+ does seem to affect participants' preference."), type = "checkbox", 
@@ -836,7 +826,7 @@ right = "That´s right! Apparently, two thirds (66.67 %) of participants favoure
 wrong = "Not quite, try again.")
 ```
 
-<br><br> 5)  Which of the following reasons are likely to have caused this variance? Select all that apply.
+<br><br> [**Q6.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 
@@ -847,10 +837,10 @@ right = "That´s right! These are two possible explanations. However, as we have
 wrong = "Not quite.", alignment = "vertical")
 
 ```
-
+<br>
 :::
 
-Overall, the plot shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other. 
+Overall, the plot shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
 
 <!-- ggf. besser in die conclusion? -->
 

@@ -456,7 +456,7 @@ data <- data |>
 
 ```
 
-We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. However, we need to be careful: Both "mild disappointment" and "moderate disappointment" are described by "ist enttäuscht" *is disappointed*. We will deal with this in a second, but we will exclude these contexts for now.
+We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for a context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
 
 ```{r}
 
@@ -470,8 +470,8 @@ data <- data |>
                              str_detect(question, "ärgert sich") ~ "annoyance",
                              str_detect(question, "amüsiert sich") ~ "amusement",
                              str_detect(question, "ist überglücklich") ~ "(intense) happiness",
-                             #str_detect(question, "ist enttäuscht") ~ "mild disappointment",
-                             #str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
+                             str_detect(question, "ist enttäuscht") ~ "mild disappointment",
+                             str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
                              str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
@@ -481,11 +481,26 @@ table(data$context)
 
 ```
 
-Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for a context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
 
-(A problem becomes apparent when checking the output: All contexts have 159 occurences, except for "mild disappointment" which appears to exist 318 times. Something must have gone wrong.)
+:::callout-tip
+#### Quiz time! {.unnumbered}
 
-Now for the problematic "mild disappointment" / "moderate disappointment" with their matching emojis 🙁 / ☹️ : Their data appears to be identical except for their coding in the column `name`. The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
+2\) Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
+
+```{r echo=FALSE, results="asis"}
+
+check_question("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", options = c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in.", "The context descriptions were not correctly assigned in case of matching strings.", "There are too many occurences of matches per context than can be reasonably assumed."), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That´s right! Something must have gone wrong. As you can see, it is always a good idea to check the output for inconsistencies.",
+wrong = "Not quite, try again.")
+
+```
+
+:::
+
+
+The contexts "mild disappointment" and "moderate disappointment" have created some issues: Both are described by "ist enttäuscht" *is disappointed*. Their data appears to be identical except for their coding in the column `name`. The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
 
 ```{r}
 
@@ -721,32 +736,6 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
-::: callout-tip
-#### Quiz time! {.unnumbered}
-
-2\) Looking at the final patchwork, which "sub-plot" stands out from the rest?
-
-```{r echo=FALSE, results="asis"}
-
-check_question("lower left", options = c("upper left", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer",
-right = "That´s right! There is a notable difference between the matching rates.",
-wrong = "Not quite, try again.")
-
-```
-
-<br><br> 3) Which interpretation of this finding is most accurate?
-
-```{r echo=FALSE, results="asis"}
-check_question("😐 was chosen significantly less for its matching context than all the other emojis.", options = c("😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts happiness2 and bashfulness.","Noch was drittes"), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer",
-right = "That´s right!",
-wrong = "Not quite, try again.")
-```
-:::
-
 @fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the graph contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
 
 There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
@@ -792,44 +781,77 @@ As you have now experienced, building plots and assembling them can be quite fid
 
 ### Interpreting the plot
 
-By looking and interpreting the above plot, we can now finally answer the research question: Do AU-differences lead to differences in meaning between the two emojis of a pair?
+By looking and interpreting @fig-AUpatch, we can now finally answer the research question: Do AU-differences lead to differences in meaning between the two emojis of a pair?
 
-The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. In the plot, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic] in the AU+ and the AU- condition. 
+The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic] both in the AU+ and in the AU- condition. 
 
 However, we also see that minor visual differences between emojis do affect the understanding and choice of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Interestingly, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : they had less than a 2% difference between matching rates.
 
-The emoji pair *mild irritation* 😐 - *annoyance* 😑 sets itself apart from the rest: There is a considerable difference between the matching rates. Perhaps counterintuitively, this means that participants opted for the same emoji in both contexts.
-
-Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: they chose 😑 in the context "is slightly irritated". One of the single-sentence-narratives in this context was "a malfunctioning wifi router". Which emoji would you choose in this context, 😐 or 😑? 
+Through the following quiz questions, we will further interpret the graph (@fig-AUpatch). The correct answers will reveal how the information displayed can be made sense of.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-4\)  Which of the following explanations reasons could have caused this variance? Select all options that apply.
+2\) In which context did participants choose the matching emoji most often?
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("Participants perceived the stories of the context `slightly irritated´ as more annoying than was expected.", "The stories created for being slightly irritated and being annoyed were too similar to each other."), options = c("Participants perceived the stories of the context `slightly irritated´ as more annoying than was expected.", "The stories created for being slightly irritated and being annoyed were too similar to each other.", "option c", "option d", "option e"), type = "checkbox",
+check_question("happiness and (cheeky) laughter", options = c("happiness and (cheeky) laughter", "concern and surprise", "amusement and (intense) happiness", "mild irritation and annoyance", "mild disappointment and moderate disappointment", "happiness2 and bashfulness "), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! These are two possible explanations. However, as we have no way of tracking the participants reasoning, we can only make some educated guesses.",
-wrong = "Not quite. Here’s a hint: ")
+right = "That´s right! The great majority of particpants (86.79% and 88.68%) decided for the matching emoji in the contexts happiness (😃) and (cheeky) laughter (😆).",
+wrong = "Not quite, try again.")
 
 ```
 
-<br><br> 5) How can a small difference (such as < 2%) between matching rates within pairs be interpreted?
+<br><br> 3\) How can a small difference (such as < 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, the same amount of participants choose the matching emoji.", options = c("Within these pairs, the same amount of participants choose the matching emoji.", "option a", "option b", "option c"), type = "radio", 
+check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, the same amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji in these pairs.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That´s right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
 wrong = "Not quite, try again.")
 ```
  
+<br><br> 3\) Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
+
+```{r echo=FALSE, results="asis"}
+
+check_question("lower left", options = c("upper left", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "Correct! The emoji pair *mild irritation* 😐 - *annoyance* 😑 sets itself apart from the rest: There is a considerable difference between the matching rates. Perhaps counterintuitively, this means that most participants opted for the same emoji in both contexts.",
+wrong = "Not quite, try again.")
+
+```
+
+<br><br> 4) Which interpretations of this finding are correct? Select all that apply.
+
+```{r echo=FALSE, results="asis"}
+check_question("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair is the matching rate for one emoji above chance and the matching rate for the other emoji below chance.", "Since the matching rates differ so much in the lower left plot, AU+ does seem to affect participants' preference."), type = "checkbox", 
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That´s right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the single-sentence-narratives in this context was *a malfunctioning wifi router*. Which emoji would you choose in this context, 😐 or 😑?" ,
+wrong = "Not quite, try again.")
+```
+
+<br><br> 5)  Which of the following reasons are likely to have caused this variance? Select all that apply.
+
+```{r echo=FALSE, results="asis"}
+
+check_question("Participants perceived the stories of the context slightly irritated as more annoying than was expected by the authors.", "The stories created for being slightly irritated and being annoyed were too similar to each other.", options = c("Participants perceived the stories of the context slightly irritated as more annoying than was expected by the authors.", "The stories created for being slightly irritated and being annoyed triggered a similar reaction.", "Unlike what was anticipated, most participants use the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That´s right! These are two possible explanations. However, as we have no way of tracking the participants reasoning, we can only make some educated guesses.",
+wrong = "Not quite.", alignment = "vertical")
+
+```
+
 :::
 
-Overall, the plot shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants´ decision for one emoji or the other. 
+Overall, the plot shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other. 
+
 <!-- ggf. besser in die conclusion? -->
 
 ## Conclusion {#sec-conclusion}

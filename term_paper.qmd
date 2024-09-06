@@ -480,7 +480,7 @@ table(data$context)
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-2\) Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
+[**Q2.**]{style="color:green;"} Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
 
 ```{r echo=FALSE, results="asis"}
 
@@ -782,29 +782,30 @@ Through the following quiz questions, we will further interpret the graph (@fig-
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q2.**]{style="color:green;"} In which context did participants choose the matching emoji most often?
+[**Q3.**]{style="color:green;"} In which context did participants choose the matching emoji most often?
 
 ```{r echo=FALSE, results="asis"}
 
 check_question("happiness and (cheeky) laughter", options = c("happiness and (cheeky) laughter", "concern and surprise", "amusement and (intense) happiness", "mild irritation and annoyance", "mild disappointment and moderate disappointment", "happiness2 and bashfulness "), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! The great majority of particpants (86.79% and 88.68%) decided for the matching emoji in the contexts happiness (😃) and (cheeky) laughter (😆).",
+right = "That's right! The great majority of particpants (86.79% and 88.68%) decided for the matching emoji in the contexts happiness (😃) and (cheeky) laughter (😆).",
 wrong = "Not quite, try again.")
 
 ```
 
-<br><br> [**Q3.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
+<br><br> [**Q4.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, the same amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji in these pairs.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
+check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
-wrong = "Not quite, try again.")
+right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
+wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) laughter* 😆 and think about its meaning.")
+check_hint("A small difference implies that match/no match ratios are very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q4.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
+<br><br> [**Q5.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -812,29 +813,31 @@ check_question("lower left", options = c("upper left", "upper right", "middle le
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "Correct! The emoji pair *mild irritation* 😐 - *annoyance* 😑 sets itself apart from the rest: There is a considerable difference between the matching rates. Perhaps counterintuitively, this means that most participants opted for the same emoji in both contexts.",
-wrong = "Not quite, try again.")
+wrong = "Not quite. Which graph looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q5.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
+<br><br> [**Q6.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
-check_question("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair is the matching rate for one emoji above chance and the matching rate for the other emoji below chance.", "Since the matching rates differ so much in the lower left plot, AU+ does seem to affect participants' preference."), type = "checkbox", 
+check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance.", "Since the matching rates differ so much in the lower left plot, we can conclude that AU-difference affect participants' preference."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the single-sentence-narratives in this context was *a malfunctioning wifi router*. Which emoji would you choose in this context, 😐 or 😑?" ,
-wrong = "Not quite, try again.")
+right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the single-sentence-narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,
+wrong = "Not quite. Consider the implications of a low matching rate versus a high matching rate.", alignment = "vertical")
+check_hint("Two statements are correct. Consider the implications of a low matching rate versus a high matching rate.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q6.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
+<br><br> [**Q7.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 
-check_question("Participants perceived the stories of the context slightly irritated as more annoying than was expected by the authors.", "The stories created for being slightly irritated and being annoyed were too similar to each other.", options = c("Participants perceived the stories of the context slightly irritated as more annoying than was expected by the authors.", "The stories created for being slightly irritated and being annoyed triggered a similar reaction.", "Unlike what was anticipated, most participants use the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
+check_question(c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants use the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! These are two possible explanations. However, as we have no way of tracking the participants reasoning, we can only make some educated guesses.",
-wrong = "Not quite.", alignment = "vertical")
+right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants reasoning, we can only make some educated guesses.",
+wrong = "Not quite. Consider what could have caused the differing matching rates.", alignment = "vertical")
+check_hint("Two of these are plausible reasons for the observed result. The graph suggests that participants preferred the same emoji for the stories associated with mild irritation and annoyance.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 <br>

@@ -37,20 +37,8 @@ knitr::opts_chunk$set(dev = "ragg_png", warning = FALSE, message = FALSE)
 library(checkdown)
 
 ```
-
-#### **Chapter overview** {#sec-chapter-overview .unnumbered}
-
-This chapter will walk you through: <!-- Vorschläge -->
-
--   how to overview/explore the data of a study
--   access the specific data you are interested in
--   frequency analysis
--   visualisations
--   building a complex plot and interpreting it
-
-We will work with data of the study by @fricke2024semantic. @fricke2024semantic have made their data and their analysis code available to the public. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
-
-## Session set up {#sec-session-set-up}
+:::callout-warning
+### Session set up {#sec-session-set-up}
 
 To run the code of this chapter, you will need to install and load the following packages:
 
@@ -85,6 +73,19 @@ brewer.pal(2, "Set2")
 # however, a palette may be too much as we only need two colours at the same time, but which ones? two for men/women and two different ones for match/no match?
 
 ```
+:::
+
+#### **Chapter overview** {#sec-chapter-overview .unnumbered}
+
+In this chapter, you will learn how to: <!-- Vorschläge -->
+
+-   overview and explore the data of a study
+-   access specific data you are interested in
+-   analyse and interpret frequency
+-   visualise data via barplots
+-   build and interpret a complex plot
+
+In this chapter, we will work with data of the study by @fricke2024semantic. @fricke2024semantic have made their data and their analysis code available to the public. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
 
 ## Introducing the study {#sec-introducing-the-study}
 

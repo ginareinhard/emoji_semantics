@@ -93,7 +93,7 @@ In this chapter, we will work with data of the study by @fricke2024semantic. @fr
 
 <!--Everyday, millions of people use emojis in their text messages as a means to communicate their emotions. -->
 
-Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. Several studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into this study by @fricke2024semantic:
+Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. A few studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into this study by @fricke2024semantic:
 
 <!-- Ich finde die Einleitung für eine Hausarbeit sehr gut, mein erster Eindruck war nur ggf. für unseren Zweck zu weit ausgeholt? -->
 
@@ -103,9 +103,9 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 
 @fricke2024semantic compare visually similar emojis using a face emoji annotation system developed by @fugate2021implications. This annotation system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assign numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
 
-![Emoji pairs and their contexts, @fricke2024semantic](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
+![Emoji pairs and their contexts [@fricke2024semantic, p.5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
-@fricke2024semantic distinguish two different types of emoji pairs: In the \[AU+\] condition, the visual difference between emojis corresponds to a difference between AUs. In the \[AU-\] condition, the visual difference does not correspond to an AU difference.
+@fricke2024semantic distinguish two different types of emoji pairs: In the AU+ condition, the visual difference between emojis corresponds to a difference between AUs. In the AU- condition, the visual difference does not correspond to an AU-difference.
 
 Their central research question is: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
 
@@ -113,14 +113,14 @@ Their central research question is: **Do AU-differences lead to differences in m
 <!-- @fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words.
 Following the pictorial approach, -->
 ```
-@fricke2024semantic predict in line with the pictorial approach by @maier2023emojis that visual differences between emojis that do not correspond to human facial features (AU-) are less semantically relevant than differences corresponding to human facial features (AU+).
+@fricke2024semantic predict, in line with the pictorial approach by @maier2023emojis, that visual differences between emojis which do not correspond to human facial features (AU-) are less semantically relevant compared to those that do correspond to such features (AU+).
 
 ### The experiment {#sec-design}
 
 ::: {.callout-note title="How did the experiment work?"}
-Three \[AU+\] and three \[AU-\] emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors.
+Three AU+ and three AU- emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors.
 
-Four single-sentence-narratives were created for each of the contexts. See @fig-testitems, and its following translation [taken from @fricke2024semantic, p.6], for an example:
+Four single-sentence-narratives were created for each of the contexts. For an example, see @fig-testitems, translated in the following [taken from @fricke2024semantic, p.6]:
 
 > 1.  Alex writes to his best friend Stefan:
 >
@@ -137,12 +137,12 @@ Four single-sentence-narratives were created for each of the contexts. See @fig-
 
 These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
 
-The context illustrating situations were presented to participants, and participants were asked to help choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
+The context-illustrating narratives were presented to the participants, and the participants were asked to help choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
 :::
 
-![Example of a test item in @fricke2024semantic´s experiment](images/test_items.png){#fig-testitems fig-align="center" width="500"}
+![Example of a test item in @fricke2024semantic´s experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-The lexicalist approach predicts that it does not matter whether visual (AU) differences correspond to facial characteristics or not: For both types of pairs, the context-matching emoji should be chosen more often than the non-matching one. <!-- erstmal hierhin verschoben, weil von den Kontexten vor der blauen Box noch nicht die Rede war -->
+The lexicalist approach predicts that it does not matter whether visual (AU) differences correspond to facial characteristics or not: For both types of pairs, the context-matching emoji should be preferred over the non-matching one. <!-- erstmal hierhin verschoben, weil von den Kontexten vor der blauen Box noch nicht die Rede war -->
 
 In contrast, @fricke2024semantic expect that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the pattern is predicted to be more random. <!-- erstmal hierhin verschoben, weil von den Kontexten vorher noch nicht die Rede war -->
 
@@ -400,13 +400,13 @@ We will now turn to exploring the central research question of @fricke2024semant
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
-Ideally, we would plot matching rates based on a column that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic´s data does not include such a column. We will tackle this by ourselves in this section.
+Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's data does not include such a variable. We will tackle this by ourselves in this section.
 
 ### Preparing the data {#sec-au-data-preparation}
 
-First, we need a column that includes the experimental conditions of each trial. The experimental conditions include whether the visual difference between the presented emojis correponded to an AU-difference (AU+) or not (AU-), or whether a filler was presented.
+First, we need a variable that includes the experimental conditions of each trial. The experimental conditions tell us whether the visual difference between the presented emojis corresponded to an AU-difference (AU+) or not (AU-), or whether a filler was presented.
 
-We add a column `AU_difference` that will include all the necessary information by using a combination of `mutate` (which adds the column), `case_when` and `str_detect`.
+We add a variable `AU_difference` that will include all the necessary information. We do this by using a combination of `mutate` (which adds the column representing our variable), `case_when` and `str_detect`.
 
 ```{r}
 
@@ -418,9 +418,9 @@ data <- data |>
 
 ```
 
-The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is "AU".
+The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is *AU*.
 
-The above code command means: look for the string "AU" in the column `name`, and in all cases where you find it (`case_when`), add the string "AU+" to the column `AU_difference`. We do this for the other conditions as well.
+The above code command means: look for the string *AU* in the column `name`, and in all cases where you find it (`case_when`), add the string *AU+* to the column `AU_difference`. We do this for the other conditions as well.
 
 ```{r}
 
@@ -453,7 +453,7 @@ data <- data |>
 
 ```
 
-We will create another column called `context` to which we will add the context descriptions used in @fig-emojipairs. Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for a context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
+We will now create another variable called `context`. The column of this variable will contain the context descriptions used in @fig-emojipairs. Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
 
 ```{r}
 
@@ -494,7 +494,7 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-The contexts "mild disappointment" and "moderate disappointment" have created some issues: Both are described by "ist enttäuscht" *is disappointed*. Their data appears to be identical except for their coding in the column `name`. The emoji 🙁 ("mild disappointment") is named `N-36-L1` and ☹️ ("moderate disappointment") is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
+The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by "ist enttäuscht" *is disappointed*. Except for their coding in the column `name`, their data appears to be identical. The emoji 🙁 (*mild disappointment*) is named `N-36-L1` and ☹️ (*moderate disappointment*) is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
 
 ```{r}
 
@@ -508,7 +508,7 @@ table(data$context)
 
 ```
 
-Finally, we add the critical column that includes whether the chosen emojis and contexts match: If the response-emoji and the context agree, the column will have the value "match". Otherwise, the value will be "no match".
+Finally, we add the critical variable that describes whether there is a match between chosen emojis and contexts: If the emoji and the context agree, the variable will have the value *match*. Otherwise, the value will be *no match*.
 
 ```{r}
 
@@ -544,9 +544,9 @@ data_AU <- data |>
 
 ```
 
-The data is grouped by contexts. Matches and non-matches are counted for each context and stored in a column `n`. We add a column `percent` which stores the percentage of matches and non-matches for each context-pair.
+First, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the percentage of matches and non-matches for each context-pair.
 
-Let´s plot the first emoji pair of the \[AU+\] condition 😯 😲, with their respective contexts "concern" and "surprise."
+Let's plot the first emoji pair of the AU+ condition 😯 😲, with their respective contexts *concern* and *surprise.*
 
 ```{r}
 
@@ -565,17 +565,17 @@ theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank()) #9.
 
 The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps:
 
-1.  Filter out the contexts, such that only rows of the contexts "concern" or (`|`) "surprise" are taken into account.
-2.  Create a ggplot with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
-3.  Display the plot as a barplot. By default, `geom_bar` counts how many times matches/ no matches occurred. However, as we have already calculated the values of metric we want to use (column `percent`), we use `geom_col` to use the data as is.
-4.  The "context" values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-5.  Adjust colours: The hexadecimal color values chosen here are the first two colours of the colour-blind friendly palette `"Set2"` from the package `RColorBrewer`. Since we only need two colours, we can easily insert them manually without having to install an additional package.
+1.  Filter out the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are taken into account.
+2.  Create a `ggplot` with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
+3.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values of metric we want to use in the column `percent`, we use `geom_col` to use the data as is.
+4.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
+5.  Adjust colours: The hexadecimal color values chosen here are the first two colours of the colour-blind friendly palette `Set2` from the package `RColorBrewer`. Since we only need two colours, we can easily insert them manually without having to install an additional package.
 6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
-7.  Add labels: "context" on the x-axis, "percent" on the y-axis, and the corresponding emojis as the title.
-8.  Add a theme.
-9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend since the "match/no match" values are self-explanatory.
+7.  Add labels: `context` on the x-axis, `percent` on the y-axis, and the corresponding emojis as the title.
+8.  Add a theme, in this case `theme_bw()`.
+9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
 
-Let´s take a look at our plot.
+Let's take a look at our plot.
 
 ```{r}
 
@@ -586,7 +586,7 @@ plot_concern_surprise
 We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
 
 ::: {.callout-note title="What are functions and how to define them?"}
-So far, we have only used built-in R functions, but have not defined any functions ourselves. Functions are reusable blocks of code that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, it makes sense to define a function for highly specific queries that are applied multiple times.
+So far, we have only used built-in R functions, but have not defined any functions ourselves. Functions are reusable code snippets that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, it makes sense to define a function for highly specific queries that are applied multiple times.
 
 Functions in R are defined using the keyword `function`. After this keyword, we write a list of **parameters** in parantheses. **Parameters** act as placeholders for the function's actual arguments. We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon.
 
@@ -632,8 +632,6 @@ As we want to display emojis within plots, we need to pay even more attention to
 
 If displaying emojis as part of plots in RStudio does not work for you, you will need to use AGG or Cairo as a backend in RStudio. To do this, head to the "Tools" drop-down menu and click on "Global Options". Then go to the "Graphics" tab and select the "AGG" or "Cairo" option (see @fig-agg). AGG stands for Anti-Grain Geometry \[explain AGG/Cairo\]
 
-Tools for inserting and displaying emojis in RStudio
-
 ::: {#fig-emoji-tools layout-ncol="2"}
 ![The emoji keyboard](images/emoji_keyboard.png){#fig-emoji-keyboard fig-align="center" width="270"}
 
@@ -649,11 +647,11 @@ To correctly render the output from a Quarto document to HTML, you can use the "
 
 ### Assembling with `patchwork` {#sec-au-patchwork}
 
-By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package [@pedersen2024patchwork] to assemble the plots in an overview. As the name suggests, the `patchwork` package enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
+By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package [@pedersen2024patchwork] to assemble the plots, thereby creating an overview. As the name suggests, `patchwork` enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
 
 ![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 
-In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the \[AU+\] condition with the matching rates in the \[AU-\] condition. In the `patchwork` package, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
+In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. In `patchwork`, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
 First, let us plan the layout of our final graph with some placeholder names:
 
@@ -665,17 +663,17 @@ p2 <- a / b / c
 p_combined <- p1 | p2
 ```
 
-In each of the patchworks `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the \[AU+\] condition and the \[AU-\] condition. We will then put these patchworks next to each other for comparison (`p_combined`). The final graph will have two columns and three rows.
+In each `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ condition and the AU- condition, respectively. We then put these patchworks next to each other for comparison (`p_combined`). The final graph will have two columns and three rows.
 
 Now, we simply need to fill in the names of the plots and choose some meaningful names:
 
 ```{r}
 
-#[AU+] condition:
+#AU+ condition:
 AU_plus_patch <-
   plot_concern_surprise / plot_happiness_cheeky / plot_mild_irr_annoyance
 
-#[AU-] condition:
+#AU- condition:
 AU_minus_patch <-
   plot_mild_disapp_mod_dissap / plot_amusement_int_happiness / plot_happiness2_bashfulness
 
@@ -695,7 +693,7 @@ AU_minus_patch <- AU_minus_patch +
 
 ```
 
-Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one graph, we need to add titles to them to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
+Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one graph, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
 
 ```{r}
 
@@ -774,11 +772,11 @@ As you have now experienced, building plots and assembling them can be quite fid
 
 By looking and interpreting @fig-AUpatch, we can now finally answer the research question: Do AU-differences lead to differences in meaning between the two emojis of a pair?
 
-The answer is no, seemingly not. AU-difference does not seem to be critical to the choice of an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic] both in the AU+ and in the AU- condition.
+The answer is no, seemingly not. AU-difference does not seem to be critical to the decision for an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic, p. 11], both in the AU+ and AU- condition.
 
 However, we also see that minor visual differences between emojis do affect the understanding and choice of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Interestingly, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : they had less than a 2% difference between matching rates.
 
-Through the following quiz questions, we will further interpret the graph (@fig-AUpatch). The correct answers will reveal how the information displayed can be made sense of.
+Through the following quiz questions, we will further interpret the the @fig-AUpatch. The correct answers will reveal how the information displayed can be made sense of.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
@@ -790,7 +788,7 @@ Through the following quiz questions, we will further interpret the graph (@fig-
 check_question("happiness and (cheeky) laughter", options = c("happiness and (cheeky) laughter", "concern and surprise", "amusement and (intense) happiness", "mild irritation and annoyance", "mild disappointment and moderate disappointment", "happiness2 and bashfulness "), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That's right! The great majority of particpants (86.79% and 88.68%) decided for the matching emoji in the contexts happiness (😃) and (cheeky) laughter (😆).",
+right = "That's right! The great majority of participants (86.79% and 88.68%) decided for the matching emoji in the contexts happiness (😃) and (cheeky) laughter (😆).",
 wrong = "Not quite, try again.")
 
 ```
@@ -803,10 +801,10 @@ random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
 wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) laughter* 😆 and think about its meaning.")
-check_hint("A small difference implies that match/no match ratios are very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q5.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out from the rest?
+<br><br> [**Q5.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out most from the rest?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -824,7 +822,7 @@ wrong = "Not quite. Which graph looks significantly different than the others?")
 check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance.", "Since the matching rates differ so much in the lower left plot, we can conclude that AU-difference affect participants' preference."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the single-sentence-narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,
+right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,
 wrong = "Not quite. Consider the implications of a low matching rate versus a high matching rate.", alignment = "vertical")
 check_hint("Two statements are correct. Consider the implications of a low matching rate versus a high matching rate.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
@@ -836,15 +834,15 @@ check_hint("Two statements are correct. Consider the implications of a low match
 check_question(c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants use the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants reasoning, we can only make some educated guesses.",
+right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants' reasoning, we can only make some educated guesses.",
 wrong = "Not quite. Consider what could have caused the differing matching rates.", alignment = "vertical")
-check_hint("Two of these are plausible reasons for the observed result. The graph suggests that participants preferred the same emoji for the stories associated with mild irritation and annoyance.", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("Two of these are plausible reasons for the observed result. The graph suggests that participants preferred the same emoji for the stories associated with *mild irritation* and *annoyance*.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 <br>
 :::
 
-Overall, the plot shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
+Overall, @fig-AUpatch shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
 
 <!-- ggf. besser in die conclusion? -->
 

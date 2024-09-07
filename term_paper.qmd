@@ -78,50 +78,38 @@ brewer.pal(2, "Set2")
 
 #### **Chapter overview** {#sec-chapter-overview .unnumbered}
 
-In this chapter, you will learn how to: <!-- Vorschläge -->
+In this chapter, you will learn how to:
 
 -   overview and explore the data of a study
 -   access specific data you are interested in
--   analyse and interpret frequency
--   visualise data via barplots
--   build and interpret a complex plot
+-   analyse and interpret frequencies
+-   visualise data using barplots
+-   create and interpret a complex plot
 
-In this chapter, we will work with data of the study by @fricke2024semantic. @fricke2024semantic have made their data and their analysis code available to the public. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
-
-## Introducing the study {#sec-introducing-the-study}
-
-<!-- Kapitel überarbeitet -->
-
-<!--Everyday, millions of people use emojis in their text messages as a means to communicate their emotions. -->
-
-Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. A few studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into this study by @fricke2024semantic:
-
-<!-- Ich finde die Einleitung für eine Hausarbeit sehr gut, mein erster Eindruck war nur ggf. für unseren Zweck zu weit ausgeholt? -->
+We will work with data from this study by @fricke2024semantic:
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
+@fricke2024semantic have made their data and their analysis code publicly available. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
+
+## Introducing the study {#sec-introducing-the-study}
+
+Face emojis stand in for facial expressions and thereby fundamentally contribute to the subtext of a text message. A few studies have investigated the relationship between emojis and the emotions they depict. However, as emojis are a relatively recently occuring phenomenon, there is still a lot to be discovered. In this chapter, we will look into the study by @fricke2024semantic.
+
 ### Deconstructing emojis into Action Units {#sec-deconstructing}
 
-@fricke2024semantic compare visually similar emojis using a face emoji annotation system developed by @fugate2021implications. This annotation system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assign numbers to features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
+@fricke2024semantic compared visually similar emojis using a face emoji annotation system developed by @fugate2021implications. This annotation system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assigned numbers to human-like facial features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
 
 ![Emoji pairs and their contexts [@fricke2024semantic, p.5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
-@fricke2024semantic distinguish two different types of emoji pairs: In the AU+ condition, the visual difference between emojis corresponds to a difference between AUs. In the AU- condition, the visual difference does not correspond to an AU-difference.
-
-Their central research question is: **Do AU-differences lead to differences in meaning between the two emojis of a pair?**
-
-```{=html}
-<!-- @fricke2024semantic compare two approaches that answer this question differently: The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words.
-Following the pictorial approach, -->
-```
-@fricke2024semantic predict, in line with the pictorial approach by @maier2023emojis, that visual differences between emojis which do not correspond to human facial features (AU-) are less semantically relevant compared to those that do correspond to such features (AU+).
+@fricke2024semantic defined two different types of emoji pairs: In the AU+ condition, the visual difference between emojis corresponded to a difference between AUs. In the AU- condition, the visual difference did not correspond to an AU difference.
 
 ### The experiment {#sec-design}
 
 ::: {.callout-note title="How did the experiment work?"}
-Three AU+ and three AU- emoji pairs were created, as depicted in @fig-emojipairs. Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), where each context corresponded to a prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and on a previous norming study by the authors.
+Three AU+ and three AU- emoji pairs were created (see @fig-emojipairs). Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), with each context corresponding to the prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and a previous norming study.
 
-Four single-sentence-narratives were created for each of the contexts. For an example, see @fig-testitems, translated in the following [taken from @fricke2024semantic, p.6]:
+Four single-sentence narratives were created for each of the contexts. For an example, see @fig-testitems, translated below [taken from @fricke2024semantic, p.6]:
 
 > 1.  Alex writes to his best friend Stefan:
 >
@@ -129,23 +117,43 @@ Four single-sentence-narratives were created for each of the contexts. For an ex
 >
 >     Alex is amused. Which of the emojis matches the message better? 😄😁
 >
+>     <br>
+>
 > 2.  Alex writes to his best friend Stefan:
 >
 >     *I just learned that I won 500 Euro in the\
 >     lottery.*
 >
->     Alex is overjoyed. Which of the emojis matches the messsage better? 😄😁
+>     Alex is overjoyed. Which of the emojis matches the message better? 😄😁
 
-These stories were then divided up into into four lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items.
-
-The context-illustrating narratives were presented to the participants, and the participants were asked to help choosing the fitting emoji. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
+These stories were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants they were asked to help choose the emoji that matched the context. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
 :::
 
-![Example of a test item in @fricke2024semantic´s experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
+![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-The lexicalist approach predicts that it does not matter whether visual (AU) differences correspond to facial characteristics or not: For both types of pairs, the context-matching emoji should be preferred over the non-matching one. <!-- erstmal hierhin verschoben, weil von den Kontexten vor der blauen Box noch nicht die Rede war -->
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** They predicted that small visual differences between emojis which do not correspond to human facial features (AU-) would be less semantically relevant compared to those that do (AU+), in line with the pictorial approach by @maier2023emojis.
 
-In contrast, @fricke2024semantic expect that participants will choose the context-matching emoji more often in the \[AU+\] condition than in the \[AU-\] condition. For the \[AU-\] pairs, the pattern is predicted to be more random. <!-- erstmal hierhin verschoben, weil von den Kontexten vorher noch nicht die Rede war -->
+```{=html}
+<!-- The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words. -->
+```
+::: callout-tip
+#### Quiz time! {.unnumbered}
+
+[**Q1.**]{style="color:green;"} According to @fricke2024semantic's hypothesis, which of these results would you expect from the experiment?
+
+```{r echo=FALSE, results="asis"}
+
+check_question(c("Participants will choose the context-matching emoji more often in the [AU+] condition.", "For the [AU-] pairs, the pattern will be more random."), options = c("Participants will choose the context-matching emoji more often in the [AU+] condition.", "For the [AU-] pairs, the pattern will be more random.", "Participants will choose the context-matching emoji more often in the [AU-] condition.", "For the [AU+] pairs, the pattern will be more random.", "For both types of pairs, the context-matching emoji will be preferred over the non-matching one."), type = "checkbox",
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That´s right! Visual differences between emojis would be semantically more relevant if they correspond to differences in human facial features (AU+). This would lead to participants choosing a context-matching emoji more often in the AU+ condition and making more random choices in the AU- condition.",
+wrong = "Not quite. Try again.")
+check_hint("Based on the hypothesis, differences corresponding to facial features (AU+) would be more semantically relevant. In contrast, differences  that do not correspond to facial features (AU-) would be less semantically relevant, making them less noticeable and leading to more inconsistent choices. How might this affect the frequency with which participants choose the context-matching emoji in each condition?", hint_title = "🐭 Click on the mouse for a hint.")
+
+```
+
+<br>
+:::
 
 ## Importing the data {#sec-importing-the-data}
 
@@ -256,7 +264,7 @@ The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary peop
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q1.**]{style="color:green;"} Which of these problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
+[**Q2.**]{style="color:green;"} Which of these problems are likely to occur if you plot emoji understanding by gender in a barplot with unequal group sizes?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -483,7 +491,7 @@ table(data$context)
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q2.**]{style="color:green;"} Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
+[**Q3.**]{style="color:green;"} Which problem becomes apparent when checking the output via the table? Select the one that describes the issue most accurately.
 
 ```{r echo=FALSE, results="asis"}
 
@@ -787,7 +795,7 @@ Through the following quiz questions, we will further interpret the the @fig-AUp
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q3.**]{style="color:green;"} In which context did participants choose the matching emoji most often?
+[**Q4.**]{style="color:green;"} In which context did participants choose the matching emoji most often?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -799,7 +807,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> [**Q4.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
+<br><br> [**Q5.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
 check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
@@ -810,7 +818,7 @@ wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) l
 check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q5.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out most from the rest?
+<br><br> [**Q6.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which "sub-plot" stands out most from the rest?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -822,7 +830,7 @@ wrong = "Not quite. Which graph looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q6.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
+<br><br> [**Q7.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance.", "Since the matching rates differ so much in the lower left plot, we can conclude that AU-difference affect participants' preference."), type = "checkbox", 
@@ -833,7 +841,7 @@ wrong = "Not quite. Consider the implications of a low matching rate versus a hi
 check_hint("Two statements are correct. Consider the implications of a low matching rate versus a high matching rate.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q7.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 

@@ -37,7 +37,8 @@ knitr::opts_chunk$set(dev = "ragg_png", warning = FALSE, message = FALSE)
 library(checkdown)
 
 ```
-:::callout-warning
+
+::: callout-warning
 ### Session set up {#sec-session-set-up}
 
 To run the code of this chapter, you will need to install and load the following packages:
@@ -267,6 +268,7 @@ wrong = "Not quite. Try again.")
 check_hint("Four of these problems are likely to occur.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
+
 <br>
 :::
 
@@ -630,7 +632,7 @@ There are various ways to insert emojis in R. The easiest is to use the emoji ke
 
 As we want to display emojis within plots, we need to pay even more attention to graphics. Emojis as part of plots created by ggplot cannot be displayed just like that. Additional problems can occur when rendering a Quarto or R Markdown document to HTML.
 
-If displaying emojis as part of plots in RStudio does not work for you, you will need to use AGG or Cairo as a backend in RStudio. To do this, head to the "Tools" drop-down menu and click on "Global Options". Then go to the "Graphics" tab and select the "AGG" or "Cairo" option (see @fig-agg). AGG stands for Anti-Grain Geometry \[explain AGG/Cairo\]
+If displaying emojis as part of plots in RStudio does not work for you, you will need to use the high-quality graphics library "AGG" ("Anti-Grain Geometry") or "Cairo" as a backend in RStudio. To do this, head to the "Tools" drop-down menu and click on "Global Options". Then, go to the "Graphics" tab and select the "AGG" or "Cairo" option (see @fig-agg).
 
 ::: {#fig-emoji-tools layout-ncol="2"}
 ![The emoji keyboard](images/emoji_keyboard.png){#fig-emoji-keyboard fig-align="center" width="270"}
@@ -640,9 +642,13 @@ If displaying emojis as part of plots in RStudio does not work for you, you will
 Tools for inserting and displaying emojis in RStudio
 :::
 
-To correctly render the output from a Quarto document to HTML, you can use the "ragg" library developed by @pedersen2024ragg. This library provides graphic devices based on AGG and includes advanced text rendering, with support for emojis.
+To correctly render your Quarto document to HTML, you can use the "ragg" library developed by @pedersen2024ragg. This library provides graphic devices based on AGG and includes advanced text rendering, with support for emojis. ragg can be used with knitr by using the following setup at the beginning of your document:
 
-"Use ragg with knitr: knitr supports png output from ragg by setting `dev = "ragg_png"` in the chunk settings or globally with `knitr::opts_chunk$set(dev = "ragg_png")`." (<https://ragg.r-lib.org/index.html>)
+```{r setup-example}
+
+knitr::opts_chunk$set(dev = "ragg_png")
+
+```
 :::
 
 ### Assembling with `patchwork` {#sec-au-patchwork}
@@ -839,6 +845,7 @@ wrong = "Not quite. Consider what could have caused the differing matching rates
 check_hint("Two of these are plausible reasons for the observed result. The graph suggests that participants preferred the same emoji for the stories associated with *mild irritation* and *annoyance*.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
+
 <br>
 :::
 

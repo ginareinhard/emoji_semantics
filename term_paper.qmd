@@ -109,7 +109,7 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 ::: {.callout-note title="How did the experiment work?"}
 Three AU+ and three AU- emoji pairs were created (see @fig-emojipairs). Each pair was assigned two contexts (for example *happiness* and *(cheeky) laughter*), with each context corresponding to the prominent usage or meaning of one emoji but not the other. The contexts were assigned based on <https://emojipedia.org> and a previous norming study.
 
-Four single-sentence narratives were created for each of the contexts. For an example, see @fig-testitems, translated below [taken from @fricke2024semantic, p.6]:
+Four single-sentence narratives were created for each of the contexts. For an example, see @fig-testitems, translated from German below [taken from @fricke2024semantic, p.6]:
 
 > 1.  Alex writes to his best friend Stefan:
 >
@@ -133,9 +133,8 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 @fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** They predicted that small visual differences between emojis which do not correspond to human facial features (AU-) would be less semantically relevant compared to those that do (AU+), in line with the pictorial approach by @maier2023emojis.
 
-```{=html}
 <!-- The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words. -->
-```
+
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
@@ -154,25 +153,6 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 
 <br>
 :::
-
-## Importing the data {#sec-importing-the-data}
-
-We import the data using the `here` function, as explained in <https://elenlefoll.github.io/RstatsTextbook/6_ImpoRtingData.html> **6.5 Importing data from a .csv file**.
-
-```{r import-data, message=FALSE}
-
-raw_data <- read.csv(file = here("data", "raw_data.csv"))
-
-```
-
-As specified by @fricke2024semantic (p. 8), we filter out participants who exceed the maximum age of 35 years. (refer to <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.5.2 Piped Functions**).
-
-```{r filter-age}
-
-data <- raw_data |> 
-  filter(age <= 35)
-
-```
 
 ## Exploring the relationship between gender and emoji understanding {#sec-gender-understanding}
 
@@ -194,9 +174,28 @@ The plots in figure @fig-barplots show that women use emojis more often and have
 
 <!-- descriptive statistics? -->
 
+### Importing the data {#sec-importing-the-data}
+
+Before we start our analysis, we import the data using the `here` function (see <https://elenlefoll.github.io/RstatsTextbook/6_ImpoRtingData.html>):
+
+```{r import-data, message=FALSE}
+
+raw_data <- read.csv(file = here("data", "raw_data.csv"))
+
+```
+
+As specified by @fricke2024semantic, we filter out participants who exceed the maximum age of 35 years for all following analyses. We do this by using the function `filter()` and store the result in a new data frame called `data`:
+
+```{r filter-age}
+
+data <- raw_data |> 
+  filter(age <= 35)
+
+```
+
 ### Gender frequency analysis {#sec-gender-freq}
 
-Let's first get a general overview: How many men, women, and non-binary people participated in the study?
+Now, let's first get a general overview: How many men, women, and non-binary people participated in the study?
 
 The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. Before we start analysing, we should translate them into English. To figure out what the the labels of the different genders are, we use the `levels()` function. `levels()` applies to factors, so we first need to convert `gender` with the function `as.factor()`:
 
@@ -284,7 +283,9 @@ To solve these problems, we will use the same strategies as @fricke2024semantic.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 
-Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender. Just like with `gender`, we have to do some data wrangling first. Again, we convert the variable `emoji_understanding` as a factor to get its levels:
+Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender.
+
+The variable we work with is called `emoji_understanding`. Just like with `gender`, we first have to do some data wrangling. Again, we convert `emoji_understanding` as a factor to get its levels:
 
 ```{r convert-understanding}
 
@@ -352,18 +353,18 @@ gender_understanding_count <- data |>
 
 ```
 
-Finally, we print our frequency table:
+Finally, we print our frequency table, selecting the columns `gender`, `emoji_understanding`, `n`, and `percentage` by applying `select()`:
 
 ```{r print-gender-understanding}
 
-#gender_understanding_count <- gender_understanding_count |> 
-#  select(gender, emoji_understanding, n, percentage)
+gender_understanding_count <- gender_understanding_count |> 
+  select(gender, emoji_understanding, n, percentage)
 
 print(gender_understanding_count)
 
 ```
 
-<!-- interpret frequencies? -->
+From the frequency table, we can already see that non-binary participants reported either a *rather good* or *good* understanding of emojis. A higher percentage of women (44.7%) reported a *very good* emoji understanding compared to men (38.5%). But let's create our barplot to see the distribution more clearly.
 
 ### Data visualisation {#sec-gender-understanding-vis}
 
@@ -376,7 +377,7 @@ gender_understanding_count <- gender_understanding_count |>
 
 ```
 
-We use `ggplot()` to create a barplot in which emoji understanding is arranged in ascending order on the x-axis and the relative frequencies on the y-axis. The bars are coloured according to gender:
+We use `ggplot()` to create a barplot with emoji understanding on the x-axis and the relative frequencies on the y-axis. The bars are coloured according to gender:
 
 ```{r gender-understanding-plot}
 
@@ -402,7 +403,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. There are also more women than men in the *moderate* category. The bars for both genders are highest in the *good* to *very good* range.
+As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the *good* to *very good* range. There are also more women than men in the *moderate* and *rather good* category. Generally, men are more evenly distributed across the levels of emoji understanding.
 
 ## Comparing matching rates between AU-conditions {#sec-au-plot}
 

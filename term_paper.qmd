@@ -285,7 +285,7 @@ To solve these problems, we will use the same strategies as @fricke2024semantic.
 
 Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender.
 
-The variable we work with is called `emoji_understanding`. Just like with `gender`, we first have to do some data wrangling. Again, we convert `emoji_understanding` as a factor to get its levels:
+The variable we are interested in is called `emoji_understanding`. Just like with `gender`, we first have to do some data wrangling. We convert `emoji_understanding` as a factor to get its levels:
 
 ```{r convert-understanding}
 
@@ -325,12 +325,22 @@ levels(data$emoji_understanding)
 
 ```
 
-The levels now look correct, so we can count the frequencies for the different gender groups within `emoji_understanding`. We create a new data frame `gender_understanding_count` and again keep only each participant's unique `submission_id` as above. We group the data by gender and count the frequencies for the different genders within the `emoji_understanding` factor:
+The levels now look correct, so we can count the absolute frequencies for the different gender groups within `emoji_understanding`. We can do this by simply cross-tabulating gender with emoji understanding:
+
+```{r}
+
+table(gender_count$gender, gender_count$emoji_understanding)
+
+```
+
+Since the sizes of the gender groups are very unequal, we want to calculate the relative frequencies to make the numbers comparable. There is an easy way to calculate relative frequencies using the `proportions()` function (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html>). However, our aim is to calculate proportions within groups and not across the whole data. We also want to create a comprehensive visualisation that contains both groups of men and women in a single barplot. This is why we have to group our data first, using a powerful combination of `group_by()` and `count()`.
+
+We create a new data frame `gender_understanding_count` and again keep only each participant's unique `submission_id` as above. We group the data by gender and count the frequencies for the different genders within the `emoji_understanding` factor:
 
 ```{r gender-understanding-freq}
 
 gender_understanding_count <- data |>
-  distinct(submission_id, .keep_all = TRUE) |> 
+  distinct(submission_id, .keep_all = TRUE) |>
   group_by(gender) |> 
   count(gender, emoji_understanding)
 
@@ -340,25 +350,21 @@ If we check our data frame `gender_understanding_count` with `View()`, it looks 
 
 ![The gender_understanding_count object as visualised using the View() function in RStudio](images/gender_understanding_count.png){#fig-gender_understanding_count fig-align="center" width="400"}
 
-Since the sizes of the gender groups are very unequal, we add a column with the relative frequencies to make the numbers comparable. We calculate the relative frequencies using the formula `percentage = (n/total) * 100`, where we define `total` as `sum(n)` (in other words: the sum of all absolute numbers within each gender group):
+`n` is calculated by the `count()` function and represents the number of occurrences for each combination of `gender` and `emoji understanding`. Next, we add a column with the relative frequencies, which we calculate with the formula `proportions(n) * 100`:
 
 ```{r gender-understanding-percent}
 
 gender_understanding_count <- data |>
-  distinct(submission_id, .keep_all = TRUE) |> 
+  distinct(submission_id, .keep_all = TRUE) |>
   group_by(gender) |> 
   count(gender, emoji_understanding) |> 
-  mutate(total = sum(n), 
-         percentage = (n/total) * 100)
+  mutate(percentage = proportions(n) * 100)
 
 ```
 
-Finally, we print our frequency table, selecting the columns `gender`, `emoji_understanding`, `n`, and `percentage` by applying `select()`:
+Finally, we print our frequency table:
 
 ```{r print-gender-understanding}
-
-gender_understanding_count <- gender_understanding_count |> 
-  select(gender, emoji_understanding, n, percentage)
 
 print(gender_understanding_count)
 

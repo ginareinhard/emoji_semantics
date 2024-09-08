@@ -122,8 +122,7 @@ Four single-sentence narratives were created for each of the contexts. For an ex
 >
 > 2.  Alex writes to his best friend Stefan:
 >
->     *I just learned that I won 500 Euro in the\
->     lottery.*
+>     *I just learned that I won 500 Euro in the lottery.*
 >
 >     Alex is overjoyed. Which of the emojis matches the message better? 😄😁
 
@@ -169,7 +168,7 @@ Barplots from @fricke2024semantic
 
 The plots in figure @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
 
-1.) calculating the absolute frequencies of the genders in the data\
+1.) calculating the frequencies of the genders in the data\
 2.) calculating the frequencies of the different levels of emoji understanding for each gender\
 3.) visualising the frequencies in a barplot similar to the plots above
 
@@ -387,7 +386,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-To make our plot more meaningful, we add a title and labels. We also change the colours manually to make it look nicer:
+To make our plot more meaningful, we add a title and labels. We also change the colours manually to make it look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package "RColorBrewer". Since we only need two colours, we can easily insert them manually without having to install an additional package.
 
 ```{r gender-understanding-labs}
 
@@ -410,13 +409,13 @@ We will now turn to exploring the central research question of @fricke2024semant
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
-Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's data does not include such a variable. We will tackle this by ourselves in this section.
+Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's data do not include such a variable. We will tackle this by ourselves in this section.
 
 ### Preprocessing the data {#sec-au-data-preparation}
 
 First, we need a variable that includes the experimental conditions of each trial. The experimental conditions tell us whether the visual difference between the presented emojis corresponded to an AU-difference (AU+) or not (AU-), or whether a filler was presented.
 
-We add a variable `AU_difference` that will include all the necessary information. We do this by using a combination of `mutate` (which adds the column representing our variable), `case_when` and `str_detect`.
+We add a variable `AU_difference` that will include all the necessary information. We do this by using a combination of `mutate`, `case_when` and `str_detect`:
 
 ```{r}
 
@@ -426,9 +425,9 @@ data <- data |>
 
 ```
 
-The function `str_detect` looks for a specifc string in the column we specify. In our case, the column is called name, and the first string we need is *AU*.
+The function `mutate` adds the column representing our variable. `str_detect` looks for a specifc string in the column we specify. In our case, the column is called `name`, and the first string we need is *AU*.
 
-The above code command means: look for the string *AU* in the column `name`, and in all cases where you find it (`case_when`), add the string *AU+* to the column `AU_difference`. We do this for the other conditions as well.
+The above code command means: look for the string *AU* in the column `name`, and in all cases where you find it (`case_when`), add the string *AU+* to a new column `AU_difference`. We do this for the other conditions as well:
 
 ```{r}
 
@@ -498,7 +497,7 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by "ist enttäuscht" *is disappointed*. Except for their coding in the column `name`, their data appears to be identical. The emoji 🙁 (*mild disappointment*) is named `N-36-L1` and ☹️ (*moderate disappointment*) is coded as `N-37-L1`. Using this, we define these contexts as well. <!--(citing original analysis script, meaning of N-36 = "mild disappointment", meaning of N-37 = "moderate disappointment")-->
+The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by *ist enttäuscht* 'is disappointed'. Except for their coding in the column `name`, their data appears to be identical. The emoji 🙁 (*mild disappointment*) is named `N-36-L1` and ☹️ (*moderate disappointment*) is coded as `N-37-L1`. Using this information, we redefine these contexts:
 
 ```{r}
 
@@ -512,7 +511,7 @@ table(data$context)
 
 ```
 
-Finally, we add the critical variable that describes whether there is a match between chosen emojis and contexts: If the emoji and the context agree, the variable will have the value *match*. Otherwise, the value will be *no match*.
+Finally, we add the critical variable that describes whether there is a match between the chosen emojis and the contexts: if the emoji and the context agree, the variable will have the value *match*. Otherwise, the value will be *no match*.
 
 ```{r}
 
@@ -537,20 +536,18 @@ data <- data |>
 
 ### Building the plot(s) {#sec-au-plot-building}
 
-In a new data frame `AU_plot`, we store all and only the columns needed to build our plot:
+In a new data frame `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
 
 ```{r AU difference , matching rates, context}
 
 data_AU <- data |> 
   group_by(context) |> 
   count(match) |>
-  mutate(percent = round(n/sum(n)*100, 2))
+  mutate(percent = round(proportions(n)*100, 2))
 
 ```
 
-First, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the percentage of matches and non-matches for each context-pair.
-
-Let's plot the first emoji pair of the AU+ condition 😯 😲, with their respective contexts *concern* and *surprise.*
+We plot the first emoji pair of the AU+ condition 😯 😲 with their respective contexts *concern* and *surprise*:
 
 ```{r}
 
@@ -573,13 +570,13 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 2.  Create a `ggplot` with context values on the x-axis and percent scaled on the y-axis. Fill the area inside geoms with colour according to match values.
 3.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values of metric we want to use in the column `percent`, we use `geom_col` to use the data as is.
 4.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-5.  Adjust colours: The hexadecimal color values chosen here are the first two colours of the colour-blind friendly palette `Set2` from the package `RColorBrewer`. Since we only need two colours, we can easily insert them manually without having to install an additional package.
+5.  Adjust colours with values from "Set2" from the RColorBrewer package (see @sec-gender-understanding-vis).
 6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
-7.  Add labels: `context` on the x-axis, `percent` on the y-axis, and the corresponding emojis as the title.
+7.  Add labels: "context" on the x-axis, "percent" on the y-axis, and the corresponding emojis as the title.
 8.  Add a theme, in this case `theme_bw()`.
-9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their matching context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
+9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
 
-Let's take a look at our plot.
+Let's take a look at our plot:
 
 ```{r}
 
@@ -587,17 +584,25 @@ plot_concern_surprise
 
 ```
 
-We need not only one plot, but six: One for each emoji pair. We could write it all out, but since the code is identical except for the contexts and the emojis, it is way more efficient to define a function.
+We need not only one plot, but six: one for each emoji pair. We could write it all out for each emoji pair, but since the code is identical (except for the contexts and the emojis), it is way more efficient to define a function.
 
 ::: {.callout-note title="What are functions and how to define them?"}
-So far, we have only used built-in R functions, but have not defined any functions ourselves. Functions are reusable code snippets that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, it makes sense to define a function for highly specific queries that are applied multiple times.
+So far, we have only used built-in R functions, but have not defined our own functions. Functions are reusable code snippets that perform specific tasks. You have already learned about built-in R functions in <https://elenlefoll.github.io/RstatsTextbook/7_VariablesFunctions.html> **7.4 Using built-in R functions**. However, for highly specific queries that are applied several times it makes sense to define a function yourself. As a rule of thumb, whenever code seems redundant (you may find yourself copying and pasting a lot), it is best to define a function for that task.
 
-Functions in R are defined using the keyword `function`. After this keyword, we write a list of **parameters** in parantheses. **Parameters** act as placeholders for the function's actual arguments. We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon.
+The basic structure of a function is `function(argument)`. Looks familiar? Accordingly, we define a function the following way: `function(parameters){function body}`
 
-We also need to think of a name for our function under which we will be able to call it. The function is assigned to the name by `<-`.
+These are the steps:
+
+1.  We define a function using the keyword `function`. After this keyword, we write a list of **parameters** in parentheses. **Parameters** act as placeholders for the function's arguments.
+2.  We then construct the **function body** and enclose it in curly braces. The **function body** tells the function what it is meant to do when called upon.
+3.  We also need to think of a name for our function under which we will be able to call it. The function is assigned to the name by `<-`.
 :::
 
-In our case, the process of defining a function is straightforward: We state that the function should take `contexts` as its first argument and `emojis` as its second argument. We then simply repeat the code we just wrote for our plot, only replacing the specific contexts and emojis with parameters.
+In our case, the process of defining a function is straightforward:
+
+1.  We start with the keyword `function` and state that our function should take `contexts` as its first argument and `emojis` as its second argument, as only these change with each plot.
+2.  We then simply paste the code we just wrote for our plot inside the curly braces, replacing the specific contexts and emojis with parameters.
+3.  Our function is called `plot_AU_matches` because what it does is plotting AU matches.
 
 ```{r}
 
@@ -615,7 +620,7 @@ plot_AU_matches <- function(contexts, emojis) {
 }
 ```
 
-We apply this function to all emoji pairs and contexts by filling in the argument names:
+We apply this function to all contexts and emoji pairs by filling them in as the arguments:
 
 ```{r}
 

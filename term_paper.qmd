@@ -658,13 +658,13 @@ knitr::opts_chunk$set(dev = "ragg_png")
 
 ### Assembling with `patchwork` {#sec-au-patchwork}
 
-By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package [@pedersen2024patchwork] to assemble the plots, thereby creating an overview. As the name suggests, `patchwork` enables us to patch several plots together and arrange them nicely, so that the finished graph will be cohesive and informative.
+By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the `patchwork` package [@pedersen2024patchwork] to assemble the plots, thereby creating an overview. As the name suggests, `patchwork` enables us to patch several plots together and arrange them nicely, so that the finished plot will be cohesive and informative.
 
 ![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. In `patchwork`, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
-First, let us plan the layout of our final graph with some placeholder names:
+First, let us plan the layout of our final plot with the placeholder names for the patchworks ("p1", "p2", and "p_combined"):
 
 ```         
 p1 <- x / y / z
@@ -674,9 +674,9 @@ p2 <- a / b / c
 p_combined <- p1 | p2
 ```
 
-In each `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ condition and the AU- condition, respectively. We then put these patchworks next to each other for comparison (`p_combined`). The final graph will have two columns and three rows.
+The final plot will have two columns and three rows: In both "p1" and "p2", three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison ("p_combined").
 
-Now, we simply need to fill in the names of the plots and choose some meaningful names:
+Now, we simply fill in the names of the plots and choose some meaningful names:
 
 ```{r}
 
@@ -690,7 +690,7 @@ AU_minus_patch <-
 
 ```
 
-The `plot_layout` function takes the argument `guides`. By setting this argument to `"collect"`, identical legends of all plots within the patchwork are merged.
+To specify the layout, we use the `plot_layout` function. It takes the argument `guides`. By setting this argument to `"collect"`, legends that are identical across the plots within the patchwork are merged when combined.
 
 ```{r}
 
@@ -704,7 +704,7 @@ AU_minus_patch <- AU_minus_patch +
 
 ```
 
-Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one graph, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
+Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one plot, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
 
 ```{r}
 
@@ -716,7 +716,7 @@ AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
 
 ```
 
-Finally, we put both elements together to get our final graph.
+Finally, we put both elements together to get our final plot.
 
 ```{r}
 
@@ -726,7 +726,7 @@ AU_combined_patch <- AU_plus_patch | AU_minus_patch
 
 ```{r combined patch}
 #| label: fig-AUpatch
-#| fig-cap: "Graph that combines all subplots into one picture"
+#| fig-cap: "Plot that combines all subplots into one picture"
 
 AU_combined_patch
 ```
@@ -737,7 +737,7 @@ ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px
 
 ```
 
-@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the graph contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
+@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the plot contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
 
 There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
@@ -754,7 +754,7 @@ Here, we have opted to create one legend for each condition, but feel free to tr
 ::: callout-caution
 #### Task 1 {.unnumbered}
 
-Create a graph with one legend for each subplot, as in @fig-alllegends. You will need to have the `patchwork` package installed and its library loaded.
+Create a plot with one legend for each subplot, as in @fig-alllegends. You will need to have the `patchwork` package installed and its library loaded.
 
 Look up which function and argument we used to collect the legends. Recreate the plot by adjusting the argument value accordingly. Remember, you can get information on functions by writing `?function` in the console.
 :::
@@ -777,7 +777,7 @@ AU_minus_patch <- AU_minus_patch +
 If we rerun the code with this argument value, our final plot will contain six legends.
 :::
 
-As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful graph you create in the process will make up for the trouble.
+As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful plot you create in the process will make up for the trouble.
 
 ### Interpreting the plot
 
@@ -823,7 +823,7 @@ check_question("lower left", options = c("upper left", "upper right", "middle le
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "Correct! The emoji pair *mild irritation* 😐 - *annoyance* 😑 sets itself apart from the rest: There is a considerable difference between the matching rates. Perhaps counterintuitively, this means that most participants opted for the same emoji in both contexts.",
-wrong = "Not quite. Which graph looks significantly different than the others?")
+wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
@@ -847,7 +847,7 @@ random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants' reasoning, we can only make some educated guesses.",
 wrong = "Not quite. Consider what could have caused the differing matching rates.", alignment = "vertical")
-check_hint("Two of these are plausible reasons for the observed result. The graph suggests that participants preferred the same emoji for the stories associated with *mild irritation* and *annoyance*.", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("Two of these are plausible reasons for the observed result. The plot suggests that participants preferred the same emoji for the stories associated with *mild irritation* and *annoyance*.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 

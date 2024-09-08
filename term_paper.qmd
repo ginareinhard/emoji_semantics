@@ -78,15 +78,16 @@ brewer.pal(2, "Set2")
 
 #### **Chapter overview** {#sec-chapter-overview .unnumbered}
 
-In this chapter, you will learn how to:
+The chapter will walk you through:
 
--   overview and explore the data of a study
--   access specific data you are interested in
--   analyse and interpret frequencies
--   visualise data using barplots
--   create and interpret a complex plot
+-   overviewing and exploring the data of a study
+-   preprocessing data for analysis (including translation, ordering and categorisation of levels)
+-   analysing and interpreting frequencies of two categorical variables (gender and emoji understanding)
+-   visualising frequencies using a barplot
+-   inserting and displaying emojis in R and inside of plots
+-   creating and interpreting a complex plot
 
-We will work with data from this study by @fricke2024semantic:
+We will work with the data from this study by @fricke2024semantic:
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
@@ -411,15 +412,13 @@ Step by step, we will build an informative plot which will include all the infor
 
 Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's data does not include such a variable. We will tackle this by ourselves in this section.
 
-### Preparing the data {#sec-au-data-preparation}
+### Preprocessing the data {#sec-au-data-preparation}
 
 First, we need a variable that includes the experimental conditions of each trial. The experimental conditions tell us whether the visual difference between the presented emojis corresponded to an AU-difference (AU+) or not (AU-), or whether a filler was presented.
 
 We add a variable `AU_difference` that will include all the necessary information. We do this by using a combination of `mutate` (which adds the column representing our variable), `case_when` and `str_detect`.
 
 ```{r}
-
-#delete this code chunk?
 
 data <- data |>
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+", 
@@ -456,10 +455,6 @@ This looks promising. Since we are only interested in the experimental items, we
 data <- data |>
   filter(AU_difference != "filler")
 
-# alternative (if code chunk above is deleted): 
-#data <- data |> 
-#  filter(!str_detect(name, "filler"))
-
 ```
 
 We will now create another variable called `context`. The column of this variable will contain the context descriptions used in @fig-emojipairs. Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
@@ -478,7 +473,7 @@ data <- data |>
                              str_detect(question, "ist überglücklich") ~ "(intense) happiness",
                              str_detect(question, "ist enttäuscht") ~ "mild disappointment",
                              str_detect(question, "ist enttäuscht") ~ "moderate disappointment",
-                             str_detect(question, "ist gut gelaunt") ~ "happiness2", #called this "happiness2" for now
+                             str_detect(question, "ist gut gelaunt") ~ "happiness2",
                              str_detect(question, "ist verlegen") ~ "bashfulness",
                                    .default = NULL))
 
@@ -542,7 +537,7 @@ data <- data |>
 
 ### Building the plot(s) {#sec-au-plot-building}
 
-In a new dataframe `AU_plot`, we store all and only the columns needed to build our plot:
+In a new data frame `AU_plot`, we store all and only the columns needed to build our plot:
 
 ```{r AU difference , matching rates, context}
 

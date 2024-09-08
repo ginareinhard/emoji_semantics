@@ -131,7 +131,7 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 ![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** They predicted that small visual differences between emojis which do not correspond to human facial features (AU-) would be less semantically relevant compared to those that do (AU+), in line with the pictorial approach by @maier2023emojis.
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis, they predicted that small visual differences between emojis which do not correspond to human facial features (AU-) would be less semantically relevant compared to those that do (AU+).
 
 <!-- The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words. -->
 
@@ -193,7 +193,7 @@ data <- raw_data |>
 
 ### Gender frequency analysis {#sec-gender-freq}
 
-Now, let's first get a general overview: How many men, women, and non-binary people participated in the study?
+Let's first get a general overview: How many men, women, and non-binary people participated in the study?
 
 The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. Before we start analysing, we should translate them into English. To figure out what the the labels of the different gender **levels** are, we use the `levels()` function. `levels()` applies to **factors**, so we first need to convert `gender` with the function `as.factor()`:
 
@@ -323,9 +323,9 @@ levels(data$emoji_understanding)
 
 ```
 
-The levels now look correct, so we can count the absolute frequencies for the different gender groups within `emoji_understanding`. We could do this by simply cross-tabulating gender with emoji understanding (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.1.3 Mode**). But since we know that the sizes of the gender subsets are very unequal, we also want to calculate the relative frequencies to make the numbers comparable.
+The levels now look correct, so we can determine the frequencies for the different gender groups within `emoji_understanding`. We could do this by simply cross-tabulating gender with emoji understanding (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.1.3 Mode**). But since we know that the sizes of the gender subsets are very unequal, we also want to calculate the relative frequencies to make the numbers comparable.
 
-There is an easy way to calculate relative frequencies using the `proportions()` function (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.2.1 Distributions of categorical variables**). However, our aim is to calculate proportions within groups and not across the whole data. We also want to create a comprehensive visualisation that contains both subsets of men and women in a single barplot. To achieve both, we have to first group our data, using the powerful combination of `group_by()` and `count()`.
+There is an easy way to calculate relative frequencies using the `proportions()` function (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.2.1 Distributions of categorical variables**). However, our aim is to calculate proportions within groups and not across the whole data. We also want to create a comprehensive visualisation that contains both groups of men and women in a single barplot. To achieve both, we have to first group our data, using the powerful combination of `group_by()` and `count()`.
 
 We create a new data frame `gender_understanding_count` and again keep only each participant's unique `submission_id` as above. We group the data by gender and count the frequencies for the different genders within the `emoji_understanding` factor:
 
@@ -401,7 +401,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-As you can tell from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the *good* to *very good* range. There are also more women than men in the *moderate* and *rather good* category. Generally, men are more evenly distributed across the levels of emoji understanding.
+As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the *good* to *very good* range. There are also more women than men in the *moderate* and *rather good* category. Generally, men are more evenly distributed across the levels of emoji understanding.
 
 ## Comparing matching rates between AU-conditions {#sec-au-plot}
 

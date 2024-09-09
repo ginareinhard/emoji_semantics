@@ -662,9 +662,11 @@ By applying our self-defined function `plot_AU_matches` to all emoji pairs and c
 
 ![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 
-In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. In `patchwork`, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
+In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to the one by @fricke2024semantic:
 
-First, let us plan the layout of our final plot with the placeholder names for the patchworks ("p1", "p2", and "p_combined"):
+![Plot of individual emoji pairs that compares AU conditions [by @fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="800"}
+
+First, let us plan the layout of our final plot with the placeholder names for the patchworks (`p1`, `p2`, and `p_combined`). In `patchwork`, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
 ```         
 p1 <- x / y / z
@@ -674,7 +676,7 @@ p2 <- a / b / c
 p_combined <- p1 | p2
 ```
 
-The final plot will have two columns and three rows: In both "p1" and "p2", three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison ("p_combined").
+The final plot will have two columns and three rows: In both `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison (`p_combined`).
 
 Now, we simply fill in the names of the plots and choose some meaningful names:
 
@@ -690,21 +692,7 @@ AU_minus_patch <-
 
 ```
 
-To specify the layout, we use the `plot_layout` function. It takes the argument `guides`. By setting this argument to `"collect"`, legends that are identical across the plots within the patchwork are merged when combined.
-
-```{r}
-
-#AU+ condition:
-AU_plus_patch <- AU_plus_patch +
-  plot_layout(guides = "collect")
-
-#AU- condition:
-AU_minus_patch <- AU_minus_patch +
-  plot_layout(guides = "collect")
-
-```
-
-Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one plot, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions. Unfortunately, there is one small downside to this approach, as we will see in a second.
+Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one plot, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the `patchwork` package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions.
 
 ```{r}
 
@@ -731,53 +719,9 @@ AU_combined_patch <- AU_plus_patch | AU_minus_patch
 AU_combined_patch
 ```
 
-```{r image AU plot, include=FALSE}
+It does not look exactly the same as the plot by @fricke2024semantic, but it contains the same information. Which look do you prefer?
 
-ggsave(filename = "images/AU_plot.png", width = 3400, height = 2000, units = "px")
-
-```
-
-@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the plot contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
-
-There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
-
-::: {#fig-AU-plot-options layout-ncol="2"}
-![The plot with all six legends kept.](images/AU-plot_legend_option1.png){#fig-alllegends fig-align="center" width="550"}
-
-![The plot with only one legend kept.](images/AU-plot_legend_option2.png){#fig-onelegend fig-align="center" width="550"}
-
-Alternative options to deal with the legend.
-:::
-
-Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself. Which look do you prefer?
-
-::: callout-caution
-#### Task {.unnumbered}
-
-Create a plot with one legend for each subplot, as in @fig-alllegends. You will need to have the `patchwork` package installed and its library loaded.
-
-Look up which function and argument we used to collect the legends. Recreate the plot by adjusting the argument value accordingly. Remember, you can get information on functions by writing `?function` in the console.
-:::
-
-::: {.callout-note collapse="true"}
-#### Click here for the solution to the Task
-
-The argument that will maintain all legends is `guides = "keep"` of the `plot_layout` function.
-
-```{r}
-#AU+ condition:
-AU_plus_patch <- AU_plus_patch +
-  plot_layout(guides = "keep")
-
-#AU- condition:
-AU_minus_patch <- AU_minus_patch +
-  plot_layout(guides = "keep")
-```
-
-If we rerun the code with this argument value, our final plot will contain six legends.
-:::
-
-As you have now experienced, building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and a lot of trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful plot you create in the process will make up for the trouble.
+Building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful plot you create in the process will make up for the trouble.
 
 ### Interpreting the plot
 

@@ -662,9 +662,9 @@ By applying our self-defined function `plot_AU_matches` to all emoji pairs and c
 
 ![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 
-In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to the one by @fricke2024semantic:
+In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to this one by @fricke2024semantic:
 
-![Plot of individual emoji pairs that compares AU conditions [by @fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="800"}
+![Plot of individual emoji pairs that compares AU-conditions [@fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
 
 First, let us plan the layout of our final plot with the placeholder names for the patchworks (`p1`, `p2`, and `p_combined`). In `patchwork`, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 

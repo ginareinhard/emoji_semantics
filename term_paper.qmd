@@ -752,7 +752,7 @@ Alternative options to deal with the legend.
 Here, we have opted to create one legend for each condition, but feel free to try the other options for yourself. Which look do you prefer?
 
 ::: callout-caution
-#### Task 1 {.unnumbered}
+#### Task {.unnumbered}
 
 Create a plot with one legend for each subplot, as in @fig-alllegends. You will need to have the `patchwork` package installed and its library loaded.
 
@@ -760,7 +760,7 @@ Look up which function and argument we used to collect the legends. Recreate the
 :::
 
 ::: {.callout-note collapse="true"}
-#### Click here for the solution to Task 1
+#### Click here for the solution to the Task
 
 The argument that will maintain all legends is `guides = "keep"` of the `plot_layout` function.
 
@@ -807,7 +807,7 @@ wrong = "Not quite, try again.")
 <br><br> [**Q5.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, the distribution of matching rates is almost 50/50: half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
+check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
@@ -830,7 +830,7 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 <br><br> [**Q7.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
-check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and the matching rate for the other emoji is below chance.", "Since the matching rates differ so much in the lower left plot, we can conclude that AU-difference affect participants' preference."), type = "checkbox", 
+check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance.", "Since matching rates differ a lot in the 😐😑 plot, AU-difference seems to affect participants' preference."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,
@@ -842,7 +842,7 @@ check_hint("Two statements are correct. Consider the implications of a low match
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("Participants perceived the stories of the context mild irritation as more annoying than the authors anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants use the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
+check_question(c("The stories of the mild irritation-context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("The stories of the mild irritation-context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants used the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants' reasoning, we can only make some educated guesses.",

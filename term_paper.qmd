@@ -813,7 +813,7 @@ some keypoints/ ideas/ takeways:
 - barplots are powerful and useful for visualising categorical data (but they do have their limits)
 - even simple barplots can become quite complex and contain lots of information, especially when combined/ assembled next to each other
 - main research question was answered with no -> a null-finding? Kind of, but several other findings
-- coming back to the pictorial/lexcial approach?
+- coming back to the pictorial/lexical approach?
 - there is a science behind emojis 🤓. Emojis contain a lot of information; how and why we choose certain ones is difficult to measure
 
 ## References {#sec-references .unnumbered}

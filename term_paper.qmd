@@ -81,7 +81,7 @@ The chapter will walk you through:
 -   analysing and interpreting frequencies of categorical variables
 -   visualising frequencies using a barplot
 -   inserting and displaying emojis in R and inside of plots
--   creating and interpreting a complex plot
+-   assembling multiple plots into one patchwork and interpreting it
 
 We will work with the data from this study by @fricke2024semantic:
 
@@ -128,8 +128,6 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 ![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
 @fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis, they predicted that small visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
-
-<!-- The pictorial approach by @maier2023emojis considers emojis to be depictions of the writer´s face in the moment of typing. In contrast, the lexicalist approach (@grosz2023semantics) emphasises the meanings of emojis as described by words. -->
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
@@ -830,4 +828,7 @@ By combining multiple plots, we have created an informative picture that answers
 
 Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, our analysis has provided insights into this fascinating area of study.
 
+## Declaration of collaboration {#sec-collaboration .unnumbered}
+
 ## References {#sec-references .unnumbered}
+

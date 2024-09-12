@@ -401,7 +401,7 @@ As you can see from the barplot, the gender distribution for emoji understanding
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q3.**]{style="color:green;"} How to interpret this plot?
+[**Q3.**]{style="color:green;"} How do you interpret this plot?
 
 ```{r echo=FALSE, results="asis"}
 

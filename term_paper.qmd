@@ -1,8 +1,8 @@
 ---
-title: "Term paper"
+title: "Exploring the semantics of emojis: Analysis and visualisation of categorical data"
 subtitle: ""
 author: "Rose Hörsting & Gina Reinhard"
-date: "2024-09-15"
+date: "2024-09-13"
 engine: knitr
 bibliography: references.bib
 format: 

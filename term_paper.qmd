@@ -166,9 +166,9 @@ Barplots from @fricke2024semantic
 
 The plots in figure @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
 
-1.) calculating the frequencies of the genders in the data\
-2.) calculating the frequencies of the different levels of emoji understanding for each gender\
-3.) visualising the frequencies in a barplot similar to the plots above
+1\. calculating the frequencies of the genders in the data\
+2. calculating the frequencies of the different levels of emoji understanding for each gender\
+3. visualising the frequencies in a barplot similar to the plots above
 
 ### Importing the data {#sec-importing-the-data}
 
@@ -408,7 +408,7 @@ We will now turn to exploring the central research question of @fricke2024semant
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
-Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's data do not include such a variable. We will tackle this by ourselves in this section.
+Ideally, we would plot matching rates based on a variable that tells us exactly when the participants responded with the matching emoji. Unfortunately, @fricke2024semantic's raw data do not include such a variable. We will tackle this by ourselves in this section.
 
 ### Preprocessing the data {#sec-au-data-preparation}
 
@@ -496,7 +496,7 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by *ist enttäuscht* 'is disappointed'. Except for their coding in the column `name`, their data appears to be identical. The emoji 🙁 (*mild disappointment*) is named `N-36-L1` and ☹️ (*moderate disappointment*) is coded as `N-37-L1`. Using this information, we redefine these contexts:
+The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by *ist enttäuscht* 'is disappointed'. Except for their coding in the column `name`, their data appears to be identical. At this point, we have no choice but to look for additional disambiguating information in @fricke2024semantic's analysis script: The emoji 🙁 (*mild disappointment*) is named `N-36-L1` and ☹️ (*moderate disappointment*) is coded as `N-37-L1`. Using this information, we redefine the two contexts:
 
 ```{r}
 

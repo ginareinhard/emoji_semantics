@@ -834,6 +834,8 @@ We have written this term paper in close collaboration. To roughly summarise who
 
 Rose:
 
+-   title
+
 -   Parts of "Chapter overview"
 
 -   In "Introducing the study":
@@ -845,8 +847,6 @@ Rose:
 -   In chapter "Exploring the relationship between gender and emoji understanding":
 
     -   text on ggplot colours
-    
-    -   minor editing
 
 -   Chapter "Comparing matching rates between AU conditions"
 

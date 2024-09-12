@@ -431,9 +431,9 @@ Ideally, we would plot matching rates based on a variable that tells us exactly 
 
 First, we need a variable that includes the experimental conditions of each trial. The experimental conditions tell us whether the visual difference between the presented emojis corresponded to an AU difference (AU+) or not (AU-), or whether a filler was presented.
 
-We add a variable `AU_difference` that will include all the necessary information. We do this by using a combination of `mutate`, `case_when` and `str_detect`:
+We add a variable `AU_difference` that will include the necessary information. We do this by using a combination of `mutate`, `case_when` and `str_detect`:
 
-```{r}
+```{r AU-variable}
 
 data <- data |>
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+", 
@@ -441,11 +441,11 @@ data <- data |>
 
 ```
 
-The function `mutate` adds the column representing our variable. `str_detect` looks for a specifc string in the column we specify. In our case, the column is called `name`, and the first string we need is `"AU"`.
+The function `mutate` adds the column representing our variable. `str_detect` looks for a specific string in the column we specify. In our case, the column is called `name`, and the first string we need is `"AU"`.
 
 The above code command means: look for the string `"AU"` in the column `name`, and in all cases where you find it (`case_when`), add the string `"AU+"` to a new column called `AU_difference`. We do this for the other conditions as well:
 
-```{r}
+```{r AU-variable-complete}
 
 data <- data |> 
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
@@ -457,7 +457,7 @@ data <- data |>
 
 A table checks that everything worked:
 
-```{r}
+```{r table-AU}
 
 table(data$AU_difference)
 
@@ -465,7 +465,7 @@ table(data$AU_difference)
 
 This looks promising. Since we are only interested in the experimental items, we now filter out filler trials:
 
-```{r}
+```{r filter-filler}
 
 data <- data |>
   filter(AU_difference != "filler")
@@ -474,7 +474,7 @@ data <- data |>
 
 We will now create another variable called `context`. The column of this variable will contain the contexts used in @fig-emojipairs. Again, we combine `mutate`, `case_when` and `str_detect`: In the column `question`, we look for context-characteristic strings, and add the context descriptions in case of a match. We check the output with `table()`.
 
-```{r}
+```{r context-variable}
 
 data <- data |> 
   mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
@@ -504,7 +504,7 @@ table(data$context)
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in."), options = c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in.", "The context descriptions were not correctly assigned in case of matching strings.", "There are too many occurences of matches per context than can be reasonably assumed."), type = "checkbox", 
+check_question(c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in."), options = c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in.", "The context descriptions were not correctly assigned in case of matching strings.", "There are too many occurences of matches per context than can be reasonably assumed.", "There are more contexts in the output than we have put in."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That´s right! Something must have gone wrong. As you can see, it is always a good idea to check the output for inconsistencies.",
@@ -513,9 +513,9 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by *ist enttäuscht* 'is disappointed'. Except for their coding in the column `name`, their data appears to be identical. At this point, we have no choice but to look for additional disambiguating information in @fricke2024semantic's analysis script: The emoji 🙁 (*mild disappointment*) is coded `N-36-L1` and ☹️ (*moderate disappointment*) as `N-37-L1`. Using this information, we redefine the two contexts:
+The contexts *mild disappointment* and *moderate disappointment* have created some issues: Both are described by *ist enttäuscht* 'is disappointed'. Except for their coding in the column `name`, their data appears to be identical. At this point, we have no choice but to look for additional disambiguating information in @fricke2024semantic's analysis script: The emoji 🙁 (*mild disappointment*) is coded as `N-36-L1` and ☹️ (*moderate disappointment*) as `N-37-L1`. Using this information, we redefine the two contexts:
 
-```{r}
+```{r recode-disappointment}
 
 data <- data |> 
   mutate(context = case_when(
@@ -529,7 +529,7 @@ table(data$context)
 
 Finally, we add the critical variable that describes whether there is a match between the chosen emojis and the contexts: if the emoji and the context agree, the variable will have the value *match*. Otherwise, the value will be *no match*.
 
-```{r}
+```{r match-variable}
 
 data <- data |> 
   mutate(
@@ -552,9 +552,9 @@ data <- data |>
 
 ### Building the plot(s) {#sec-au-plot-building}
 
-We will now build our plots to visualise the matching rates per emoji pair. In a new data frame called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
+We will now build our plots to visualise the matching rates per emoji pair. In a new dataframe called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
 
-```{r AU difference , matching rates, context}
+```{r data-AU-context-match}
 
 data_AU <- data |> 
   group_by(context) |> 
@@ -569,7 +569,7 @@ Using the `View()` function, we take a look at our data:
 
 We plot the first emoji pair of the AU+ condition 😯 😲 with their respective contexts *concern* and *surprise*:
 
-```{r}
+```{r create-plot-concern-surprise}
 
 plot_concern_surprise <- data_AU |> 
 filter(context == "concern" | context == "surprise") |> #1.
@@ -588,7 +588,7 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 
 1.  Filter the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are taken into account.
 2.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
-3.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values of the metric we want to use in the column `percent`, we use `geom_col` to use the data as is.
+3.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
 4.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
 5.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
 6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
@@ -598,7 +598,7 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 
 Let's take a look at our plot:
 
-```{r}
+```{r show-plot-concern-surprise}
 
 plot_concern_surprise
 
@@ -624,7 +624,7 @@ In our case, the process of defining a function is straightforward:
 2.  We then simply paste the code we just wrote for our plot inside the curly braces, replacing the specific contexts and emojis with parameters.
 3.  Our function is called `plot_AU_matches` because that is what it does: plotting AU matches.
 
-```{r}
+```{r define-function}
 
 plot_AU_matches <- function(contexts, emojis) {
   data_AU |> 
@@ -642,7 +642,7 @@ plot_AU_matches <- function(contexts, emojis) {
 
 We apply this function to all contexts and emoji pairs by filling them in as the arguments:
 
-```{r}
+```{r apply-function}
 
 plot_concern_surprise <- plot_AU_matches(c("concern", "surprise"), "😯 😲")
 plot_happiness_cheeky <- plot_AU_matches(c("happiness", "(cheeky) laughter"), "😃 😆")
@@ -684,7 +684,7 @@ By applying our self-defined function `plot_AU_matches` to all emoji pairs and c
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to this one by @fricke2024semantic:
 
-![Plot of individual emoji pairs that compares AU-conditions [@fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
+![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
 
 First, let us plan the layout of our final plot with some placeholder names for the patchworks (`p1`, `p2`, and `p_combined`). In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -698,9 +698,9 @@ p_combined <- p1 | p2
 
 The final plot will have two columns and three rows: In both `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison (`p_combined`).
 
-Now, we simply fill in the names of the plots and choose some meaningful names:
+Now, we fill in the names of the plots and choose some meaningful names:
 
-```{r}
+```{r AU-patch-condition}
 
 #AU+ condition:
 AU_plus_patch <-
@@ -714,7 +714,7 @@ AU_minus_patch <-
 
 Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one plot, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the {patchwork} package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions.
 
-```{r}
+```{r patch-titles}
 
 AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +
   ggtitle("[AU+] condition")
@@ -726,20 +726,20 @@ AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
 
 Finally, we put both elements together to get our final plot.
 
-```{r}
+```{r AU-combined-patch}
 
 AU_combined_patch <- AU_plus_patch | AU_minus_patch
 
 ```
 
-```{r combined patch}
+```{r show-AU-combined-patch}
 #| label: fig-AUpatch
 #| fig-cap: "Plot that combines all subplots into one picture"
 
 AU_combined_patch
 ```
 
-It does not look exactly the same as the plot by @fricke2024semantic (@fig-AUFricke) but it contains the same information. Which look do you prefer?
+It does not look exactly the same as the plot by @fricke2024semantic (see @fig-AUFricke) but it contains the same information. Which look do you prefer?
 
 ### Interpreting the plot
 
@@ -789,10 +789,10 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q8.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left subplot are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
-check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance.", "Since matching rates differ a lot in the 😐😑 plot, AU difference seems to affect participants' preference."), type = "checkbox", 
+check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between the matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance.", "Since matching rates differ a lot in the 😐😑 plot, AU difference seems to affect participants' preference."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,

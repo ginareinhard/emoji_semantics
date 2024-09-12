@@ -71,8 +71,6 @@ display.brewer.all(colorblindFriendly = TRUE)
 brewer.pal(2, "Set2")
 # second list of colours is best suited for nominal/categorical data: "Set2", "Paired", "Dark2"
 
-# however, a palette may be too much as we only need two colours at the same time, but which ones? two for men/women and two different ones for match/no match?
-
 ```
 :::
 
@@ -142,7 +140,7 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("Participants will choose the context-matching emoji more often in the [AU+] condition.", "For the [AU-] pairs, the pattern will be more random."), options = c("Participants will choose the context-matching emoji more often in the [AU+] condition.", "For the [AU-] pairs, the pattern will be more random.", "Participants will choose the context-matching emoji more often in the [AU-] condition.", "For the [AU+] pairs, the pattern will be more random.", "For both types of pairs, the context-matching emoji will be preferred over the non-matching one."), type = "checkbox",
+check_question(c("Participants will choose the context-matching emoji more often in the AU+ condition.", "For the AU- pairs, the pattern will be more random."), options = c("Participants will choose the context-matching emoji more often in the AU+ condition.", "For the AU- pairs, the pattern will be more random.", "Participants will choose the context-matching emoji more often in the AU- condition.", "For the AU+ pairs, the pattern will be more random.", "For both types of pairs, the context-matching emoji will be preferred over the non-matching one."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That´s right! Visual differences between emojis would be semantically more relevant if they correspond to differences in human facial features (AU+). This would lead to participants choosing a context-matching emoji more often in the AU+ condition and making more random choices in the AU- condition.",
@@ -256,7 +254,7 @@ table(gender_count$gender)
 
 ```
 
-The **mode** (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.1.3 Mode**) of the `gender` variable in the dataset is *men*, as you can see from the output. The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. This is likely to skew our visualisation.
+The **mode** (see <https://elenlefoll.github.io/RstatsTextbook/8_DescriptiveStats.html> **8.1.3 Mode**) of the `gender` variable in the dataset is *men*, as you can see from the output. The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. This is likely to skew our visualisation.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

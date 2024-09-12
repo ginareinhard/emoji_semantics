@@ -2,7 +2,7 @@
 title: "Exploring the semantics of emojis: analysis and visualisation of categorical data"
 subtitle: ""
 author: "Rose Hörsting & Gina Reinhard"
-date: "2024-09-13"
+date: "2024-09-12"
 engine: knitr
 bibliography: references.bib
 format: 

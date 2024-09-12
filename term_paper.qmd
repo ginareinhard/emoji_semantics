@@ -166,9 +166,9 @@ Barplots from @fricke2024semantic (p. 9 and p. 10)
 
 The plots in figure @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
 
-1.    calculating the frequencies of the genders in the data\
-2.    calculating the frequencies of the different levels of emoji understanding for each gender\
-3.    visualising the frequencies in a barplot similar to the plots above
+1.  calculating the frequencies of the genders in the data\
+2.  calculating the frequencies of the different levels of emoji understanding for each gender\
+3.  visualising the frequencies in a barplot similar to the plots above
 
 ### Importing the data {#sec-importing-the-data}
 
@@ -535,8 +535,7 @@ data <- data |>
 
 ### Building the plot(s) {#sec-au-plot-building}
 
-We will now build our plots to visualise the matching rates per emoji pair. 
-In a new data frame called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
+We will now build our plots to visualise the matching rates per emoji pair. In a new data frame called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
 
 ```{r AU difference , matching rates, context}
 
@@ -725,8 +724,6 @@ AU_combined_patch
 
 It does not look exactly the same as the plot by @fricke2024semantic (@fig-AUFricke) but it contains the same information. Which look do you prefer?
 
-Building plots and assembling them can be quite fiddly. You may get lost in details and may need to accept some trade-offs. It can take some time and trial-and-error to make the final plot look like what you have imagined. However, there is a solution for (almost) anything and hopefully, the beautiful plot you create in the process will make up for the trouble.
-
 ### Interpreting the plot
 
 By looking and interpreting @fig-AUpatch, we can now finally answer the research question: Do AU differences lead to differences in meaning between the two emojis of a pair?
@@ -790,7 +787,7 @@ check_hint("Two statements are correct. Consider the implications of a low match
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("The stories of the mild irritation-context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("The stories of the mild irritation-context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants used the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
+check_question(c("The stories of the mild irritation context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction."), options = c("The stories of the mild irritation context were perceived as more annoying than the authors had anticipated.", "The stories created for mild irritation and annoyance triggered a similar reaction.", "Unlike what was anticipated, most participants used the emojis 😐 and 😑 in very different contexts.", "The participants did not realize there was a difference between 😐 and 😑."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! These are two possible explanations. However, as we have no way of tracking the participants' reasoning, we can only make some educated guesses.",
@@ -804,14 +801,13 @@ check_hint("Two of these are plausible reasons for the observed result. The plot
 
 Overall, @fig-AUpatch shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
 
-<!-- ggf. besser in die conclusion? -->
-
 ## Conclusion {#sec-conclusion}
-You are now a pro in handling barplots! You can build, customize, arrange and interpret them. 
 
-Barplots are quite useful and powerful for visualisung categorical data. They offer a straightforward way to compare values across different categories, making patterns immediately apparent. However, like any data visualization method, they do have their limitations. For instance, they are not ideal for displaying continuous data.
+You are now a pro in handling barplots! You can build, customise, arrange, and interpret them. Barplots are powerful for visualising categorical data, offering a straightforward way to compare frequencies and make patterns apparent. However, like any data visualisation method, they do have their limitations. For instance, they are not ideal for displaying continuous data. Building plots and assembling them can be quite fiddly. It can take some trial-and-error to make the final plot look like what you have imagined. But there is a solution for (almost) anything and hopefully, the beautiful plot you create in the process will be worth the effort.
 
-We have made interesting gender-related findings regarding emoji usage and understanding. By combining multiple plots, we have created an informative picture that answers the experiment’s research question. This question, whether Action Unit (AU) differences are critical for emoji preference, was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
+Our analysis revealed interesting gender-specific insights into emoji understanding. Women were more likely to report understanding emojis *very well* compared to men. Men, on the other hand, showed a more even distribution across all levels of understanding, suggesting a wider range of self-assessments. However, both genders stated that they understood emoji well overall. Our visualisations have been adjusted for gender imbalance, demonstrating the importance of taking sample size differences into account. The small sample size of non-binary participants limited further analysis and emphasises the need for more inclusive data in further studies.
+
+By combining multiple plots, we have created an informative picture that answers the experiment’s research question. The question whether Action Unit (AU) differences are critical for emoji preference, was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
 
 Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, our analysis has provided insights into this fascinating area of study.
 

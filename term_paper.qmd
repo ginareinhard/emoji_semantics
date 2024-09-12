@@ -830,5 +830,46 @@ Emojis, it turns out, contain lots of information, and there is a science behind
 
 ## Declaration of collaboration {#sec-collaboration .unnumbered}
 
-## References {#sec-references .unnumbered}
+We have written this term paper in close collaboration. To roughly summarise who did what:
 
+Rose:
+
+-   
+
+-   In chapter "Exploring the relationship between gender and emoji understanding":
+
+    -   text on ggplot colours
+
+-   
+
+Gina:
+
+-   Parts of "Chapter overview"
+
+-   "Introducing the study":
+
+    -   editing
+
+    -   quiz question
+
+-   Chapter "Exploring the relationship between gender and emoji understanding"
+
+-   In chapter "Comparing matching rates between AU-conditions":
+
+    -   data preprocessing code (code in chapter 3.1 up to half of defining the matches)
+
+    -   function "plot_AU_matches"
+
+    -   part "Inserting emojis in R" (including ragg library)
+
+    -   editing until chapter 3.3
+
+-   Conclusion:
+
+    -   part on gender-specific insights
+
+    -   editing
+
+Details be found in our Git repository: <https://github.com/ginareinhard/term_paper>
+
+## References {#sec-references .unnumbered}

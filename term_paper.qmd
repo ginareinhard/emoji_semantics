@@ -847,6 +847,8 @@ Rose:
 -   In chapter "Exploring the relationship between gender and emoji understanding":
 
     -   text on ggplot colours
+    
+    -   minor editing
 
 -   Chapter "Comparing matching rates between AU conditions"
 
@@ -874,7 +876,7 @@ Gina:
 
     -   function "plot_AU_matches"
 
-    -   part "Inserting emojis in R" (including ragg library)
+    -   part "Inserting emojis in R"
 
     -   editing until chapter 3.3
 

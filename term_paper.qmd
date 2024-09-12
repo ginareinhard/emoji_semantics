@@ -47,8 +47,6 @@ To run the code of this chapter, you will need to install and load the following
 
 library(here)
 library(tidyverse)
-#install.packages("scales")
-library(scales)
 #install.packages("patchwork")
 library(patchwork)
 #install.packages("ragg")

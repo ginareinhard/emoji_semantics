@@ -808,12 +808,12 @@ Overall, @fig-AUpatch shows that there was indeed a preference for context-match
 <!-- ggf. besser in die conclusion? -->
 
 ## Conclusion {#sec-conclusion}
-some keypoints/ ideas/ takeways:
-- genders differ in their use, attitude and understanding of emojis but to differing extents
-- barplots are powerful and useful for visualising categorical data (but they do have their limits)
-- even simple barplots can become quite complex and contain lots of information, especially when combined/ assembled next to each other
-- main research question was answered with no -> a null-finding? Kind of, but several other findings
-- coming back to the pictorial/lexical approach?
-- there is a science behind emojis 🤓. Emojis contain a lot of information; how and why we choose certain ones is difficult to measure
+You are now a pro in handling barplots! You can build, customize, arrange and interpret them. 
+
+Barplots are quite useful and powerful for visualisung categorical data. They offer a straightforward way to compare values across different categories, making patterns immediately apparent. However, like any data visualization method, they do have their limitations. For instance, they are not ideal for displaying continuous data.
+
+We have made interesting gender-related findings regarding emoji usage and understanding. By combining multiple plots, we have created an informative picture that answers the experiment’s research question. This question, whether Action Unit (AU) differences are critical for emoji preference, was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
+
+Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, our analysis has provided insights into this fascinating area of study.
 
 ## References {#sec-references .unnumbered}

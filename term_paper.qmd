@@ -846,7 +846,7 @@ Gina:
 
 -   Parts of "Chapter overview"
 
--   "Introducing the study":
+-   In "Introducing the study":
 
     -   editing
 
@@ -864,7 +864,7 @@ Gina:
 
     -   editing until chapter 3.3
 
--   Conclusion:
+-   In conclusion:
 
     -   part on gender-specific insights
 

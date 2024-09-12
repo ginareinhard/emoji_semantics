@@ -400,7 +400,26 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude: while proportionally more women than men reported a *very good* emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the *good* to *very good* range. There are also more women than men in the *moderate* and *rather good* category. Generally, men are more evenly distributed across the levels of emoji understanding.
+As you can see from the barplot, the gender distribution for emoji understanding is not as clear as for emoji use and emoji attitude.
+
+::: callout-tip
+#### Quiz time! {.unnumbered}
+
+[**Q3.**]{style="color:green;"} How to interpret this plot?
+
+```{r echo=FALSE, results="asis"}
+
+check_question(c("Proportionally more women than men reported a very good emoji understanding.", "Men are more evenly distributed across the levels of emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "The bars for both genders are highest in the good to very good range."), options = c("Proportionally more women than men reported a very good emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "Men are more evenly distributed across the levels of emoji understanding.", "Women are more evenly distributed across the levels of emoji understanding.", "Women reported lower level of emoji understanding than men.", "The bars for both genders are highest in the good to very good range."), type = "checkbox",
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That's right! While proportionally more women than men reported a very good emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the good to very good range. There are also more women than men in the moderate and rather good category. Generally, men are more evenly distributed across the levels of emoji understanding.",
+wrong = "Not quite. Try again.")
+check_hint("Four of the above options are correct interpretations of the plot.", hint_title = "🐭 Click on the mouse for a hint.")
+
+```
+
+<br>
+:::
 
 Interestingly, women were more confident in reporting that they used emojis frequently and had a positive attitude towards emojis than they were in reporting that they understood emojis well. It is possible that they were more modest in rating their emoji understanding, which could suggest a gender confidence gap. Reporting a good understanding likely requires more confidence compared to frequent use or positive attitudes.
 
@@ -485,7 +504,7 @@ table(data$context)
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q3.**]{style="color:green;"} Which problems become apparent when checking the output via the table?
+[**Q4.**]{style="color:green;"} Which problems become apparent when checking the output via the table?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -739,7 +758,7 @@ Through the following quiz questions, you can further interpret @fig-AUpatch. Th
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q4.**]{style="color:green;"} In which context-pair did participants choose the matching emojis most often?
+[**Q5.**]{style="color:green;"} In which context-pair did participants choose the matching emojis most often?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -751,7 +770,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> [**Q5.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
+<br><br> [**Q6.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
 check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
@@ -762,7 +781,7 @@ wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) l
 check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q6.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out most from the rest?
+<br><br> [**Q7.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out most from the rest?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -774,7 +793,7 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q7.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} Which interpretations of this finding are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance.", "Since matching rates differ a lot in the 😐😑 plot, AU difference seems to affect participants' preference."), type = "checkbox", 
@@ -785,7 +804,7 @@ wrong = "Not quite. Consider the implications of a low matching rate versus a hi
 check_hint("Two statements are correct. Consider the implications of a low matching rate versus a high matching rate.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q8.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
+<br><br> [**Q9.**]{style="color:green;"} Which of the following reasons are likely to have caused this variance? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 

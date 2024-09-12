@@ -81,7 +81,7 @@ The chapter will walk you through:
 -   analysing and interpreting frequencies of categorical variables
 -   visualising frequencies using a barplot
 -   inserting and displaying emojis in R and inside of plots
--   assembling multiple plots into one patchwork and interpreting it
+-   assembling multiple plots into a patchwork and interpreting it
 
 We will work with the data from this study by @fricke2024semantic:
 
@@ -834,13 +834,27 @@ We have written this term paper in close collaboration. To roughly summarise who
 
 Rose:
 
--   
+-   Parts of "Chapter overview"
+
+-   In "Introducing the study":
+
+    -   text of "Deconstructing emojis into Action Units" and "The experiment"
+    
+    -   editing
 
 -   In chapter "Exploring the relationship between gender and emoji understanding":
 
     -   text on ggplot colours
+    
+    -   minor editing
 
--   
+-   Chapter "Comparing matching rates between AU conditions"
+
+-   In "Conclusion"
+
+    -   part on barplots
+    
+    -   part on research question & end
 
 Gina:
 

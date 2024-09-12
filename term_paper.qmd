@@ -419,7 +419,7 @@ check_hint("Four of the above options are correct interpretations of the plot.",
 
 Interestingly, compared to @fig-barplots, women were more confident in reporting that they used emojis frequently and had a positive attitude towards emojis than they were in reporting that they understood emojis well. It is possible that some women were more modest in rating their understanding of emojis, which could indicate a gender confidence gap. Reporting a good understanding likely requires more confidence compared to frequent use or positive attitudes.
 
-## Comparing matching rates between AU-conditions {#sec-au-plot}
+## Comparing matching rates between AU conditions {#sec-au-plot}
 
 We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU differences lead to differences in meaning between the two emojis of a pair?**
 
@@ -854,7 +854,7 @@ Gina:
 
 -   Chapter "Exploring the relationship between gender and emoji understanding"
 
--   In chapter "Comparing matching rates between AU-conditions":
+-   In chapter "Comparing matching rates between AU conditions":
 
     -   data preprocessing code (code in chapter 3.1 up to half of defining the matches)
 

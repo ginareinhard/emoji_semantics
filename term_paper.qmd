@@ -1,5 +1,5 @@
 ---
-title: "Exploring the semantics of emojis: Analysis and visualisation of categorical data"
+title: "Exploring the semantics of emojis: analysis and visualisation of categorical data"
 subtitle: ""
 author: "Rose Hörsting & Gina Reinhard"
 date: "2024-09-13"

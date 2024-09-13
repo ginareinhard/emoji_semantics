@@ -160,7 +160,7 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 Barplots from @fricke2024semantic (p. 9 and p. 10)
 :::
 
-The plots in figure @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
+The plots in @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
 
 1.  calculating the frequencies of the genders in the data\
 2.  calculating the frequencies of the different levels of emoji understanding for each gender\
@@ -769,7 +769,7 @@ wrong = "Not quite, try again.")
 <br><br> [**Q6.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, half of the partcipants preferred the one emoji and half of them preferred the other."), type = "radio", 
+check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, half of the participants preferred the one emoji and half of them preferred the other."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
@@ -824,7 +824,7 @@ You are now a pro in handling barplots! You can build, customise, arrange, and i
 
 Our analysis revealed gender-specific differences in emoji understanding, potentially indicating a gender confidence gap between men and women. Both genders, however, reported understanding emojis well overall. Our visualisations have been adjusted for the gender imbalance in the data, demonstrating the importance of accounting for differences in sample sizes.
 
-By combining multiple plots, we have created an informative picture that answers the experiment’s research question. The question whether Action Unit (AU) differences are critical for emoji preference, was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
+By combining multiple plots, we have created an informative picture that answers the experiment’s research question. The question whether Action Unit (AU) differences are critical for emoji preference was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
 
 Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, our analysis has provided insights into this fascinating area of study.
 
@@ -840,7 +840,7 @@ Rose:
 
 -   In "Introducing the study":
 
-    -   text of "Deconstructing emojis into Action Units" and "The experiment"
+    -   texts "Deconstructing emojis into Action Units" and "The experiment"
     
     -   editing
 

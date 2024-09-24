@@ -421,7 +421,7 @@ Interestingly, compared to @fig-barplots, women were more confident in reporting
 
 ## Comparing matching rates between AU conditions {#sec-au-plot}
 
-We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU differences lead to differences in meaning between the two emojis of a pair?**
+We will now turn to exploring the central research question of @fricke2024semantic. Remember, it was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** As mentioned in @sec-deconstructing, AUs are numbers which correspond to human-like facial features. In emoji pairs of the AU+ condition, the visual difference between the emojis is reflected in a number difference, e.g. *grinning face with big eyes* 😃 (AU: **5** + 12 + 25 + 26) and *grinning squinting face* 😆 (AU: 12 + 25 + 26 + **43**). In the AU- condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes* 😁 (AU for both: 12 + 25 + 26 + 63).
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
@@ -700,7 +700,7 @@ columns_combined <- column1 | column2
 
 The final plot will have two columns and three rows: In both `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison (`p_combined`).
 
-Now, we fill in the names of the plots and choose some meaningful names:
+Now, we fill in the names of the plots and choose some meaningful names. If you have not already installed the patchwork package and/or have not loaded the library, please do so now by `install.packages(patchwork)` and `library(patchwork)`.
 
 ```{r AU-patch-condition}
 

@@ -570,31 +570,33 @@ Using the `View()` function, we take a look at our data:
 We plot the first emoji pair of the AU+ condition 😯 😲 with their respective contexts *concern* and *surprise*:
 
 ```{r create-plot-concern-surprise}
+#| code-line-numbers: true
 
 plot_concern_surprise <- data_AU |> 
-filter(context == "concern" | context == "surprise") |> #1.
-ggplot(aes(x = context, y = percent, fill = match)) + #2.
-geom_col() + #3.
-scale_x_discrete(limits = c("concern", "surprise")) + #4.
-scale_fill_manual(values = c("#66C2A5", "#FC8D62")) + #5.
-geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) + #6.
-labs (x= "context", y = "percent", title = "😯 😲") + #7.
-theme_bw() + #8.
-theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank()) #9.
+filter(context == "concern" | context == "surprise") |>
+ggplot(aes(x = context, y = percent, fill = match)) +
+geom_col() +
+scale_x_discrete(limits = c("concern", "surprise")) +
+scale_fill_manual(values = c("#66C2A5", "#FC8D62")) +
+geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
+labs (x= "context", y = "percent", title = "😯 😲") +
+theme_bw() +
+theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 
 ```
 
 The above command creates a barplot and stores it in `plot_concern_surprise`. These are the steps:
 
-1.  Filter the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are taken into account.
-2.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
-3.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
-4.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-5.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
-6.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
-7.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
-8.  Add a theme, in this case `theme_bw()`.
-9.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
+1.  Begin by assigning a clear name for the plot and call the data.
+2.  Filter the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are taken into account.
+3.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
+4.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
+5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
+6.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
+7.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
+8.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
+9.  Add a theme, in this case `theme_bw()`.
+10.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
 
 Let's take a look at our plot:
 
@@ -652,7 +654,7 @@ plot_amusement_int_happiness <- plot_AU_matches(c("amusement", "(intense) happin
 plot_happiness2_bashfulness <- plot_AU_matches(c("happiness2", "bashfulness"), "😊 ☺️")
 ```
 
-::: {.callout-note title="Inserting emojis in R"}
+::: {.callout-note title="Inserting emojis in R" collapse="true"}
 There are various ways to insert emojis in R. The easiest is to use the emoji keyboard (see @fig-emoji-keyboard). To open it on MacOS, use the keyboard shortcut `Crtl + Cmd + Space` or `fn + e` and on Windows `Windows logo key + . (period)`. The emoji keyboard is also available in RStudio, if you go to the "Edit" drop-down menu and click on "Emojis & Symbols". Alternatively, there are emoji libraries for R, for example {emo(ji)} developed by @wickham2024emoji.
 
 As we want to display emojis within plots, we need to pay even more attention to graphics. Emojis as part of plots created by `ggplot` cannot be displayed just like that. Additional problems can occur when rendering a Quarto or R Markdown document to HTML.

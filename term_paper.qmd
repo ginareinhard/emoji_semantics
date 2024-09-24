@@ -381,7 +381,7 @@ ggplot(gender_understanding_count, aes(x = emoji_understanding,
 
 ```
 
-To make our plot more meaningful, we add a title and labels. We also change the colours manually to make it look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package {RColorBrewer}. Since we only need two colours, we can easily insert them manually without having to install an additional package.
+To make our plot more meaningful, we add a title and labels. We also change the colours manually to make it look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html) [@neuwirth2022package]. Since we only need two colours, we can easily insert them manually without having to install an additional package.
 
 ```{r gender-understanding-labs}
 
@@ -669,7 +669,7 @@ If displaying emojis as part of plots in RStudio does not work for you, you will
 Tools for inserting and displaying emojis in RStudio
 :::
 
-To correctly render your Quarto document to HTML, you can use the {ragg} library developed by @pedersen2024ragg. This library provides graphic devices based on AGG and includes advanced text rendering, with support for emojis. {ragg} can be used with knitr by using the following setup at the beginning of your document:
+To correctly render your Quarto document to HTML, you can use the [{ragg}](https://ragg.r-lib.org) package developed by @pedersen2024ragg. This package provides graphic devices based on AGG and includes advanced text rendering, with support for emojis. {ragg} can be used with knitr by using the following setup at the beginning of your document:
 
 ```{r setup-example}
 
@@ -680,7 +680,7 @@ knitr::opts_chunk$set(dev = "ragg_png")
 
 ### Assembling with {patchwork} {#sec-au-patchwork}
 
-By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the {patchwork} package [@pedersen2024patchwork] to assemble the plots, thereby creating an overview. As the name suggests, {patchwork} enables us to patch several plots together and arrange them nicely, so that the finished plot will be cohesive and informative.
+By applying our self-defined function `plot_AU_matches` to all emoji pairs and contexts, we have created one barplot for each emoji pair. We will use the [{patchwork}](https://patchwork.data-imaginist.com) package [@pedersen2024patchwork] to assemble the plots, thereby creating an overview. As the name suggests, {patchwork} enables us to patch several plots together and arrange them nicely, so that the finished plot will be cohesive and informative.
 
 ![Patchwork artwork by Allison Horst, <https://allisonhorst.com/r-packages-functions>](images/patchwork.png){#fig-patchwork width="600"}
 

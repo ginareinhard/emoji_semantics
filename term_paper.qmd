@@ -689,11 +689,11 @@ In line with the research question of @fricke2024semantic, we want to compare th
 First, let us plan the layout of our final plot with some placeholder names for the patchworks (`p1`, `p2`, and `p_combined`). In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
 ```         
-p1 <- x / y / z
+column1 <- p1 / p2 / p3
 
-p2 <- a / b / c
+column2 <- p4 / p5 / p6
 
-p_combined <- p1 | p2
+columns_combined <- column1 | column2
 ```
 
 The final plot will have two columns and three rows: In both `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison (`p_combined`).

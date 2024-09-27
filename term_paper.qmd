@@ -550,7 +550,7 @@ data <- data |>
 
 ```
 
-### Building the plot(s) {#sec-au-plot-building}
+### Building the plots {#sec-au-plot-building}
 
 We will now build our plots to visualise the matching rates per emoji pair. In a new dataframe called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
 
@@ -577,10 +577,11 @@ filter(context == "concern" | context == "surprise") |>
 ggplot(aes(x = context, y = percent, fill = match)) +
 geom_col() +
 scale_x_discrete(limits = c("concern", "surprise")) +
+scale_y_continuous(expand = c(0,0)) +
 scale_fill_manual(values = c("#66C2A5", "#FC8D62")) +
 geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
 labs (x= "context", y = "percent", title = "😯 😲") +
-theme_bw() +
+theme_classic() +
 theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 
 ```
@@ -592,11 +593,12 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 3.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
 4.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
 5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-6.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
-7.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
-8.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
-9.  Add a theme, in this case `theme_bw()`.
-10.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
+6.  The `expand()` function makes the bars expand vertically., thereby removing white space between the bars and the x-axis. 
+7.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
+8.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
+9.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
+10.  Add a theme, in this case `theme_classic()`.
+11.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
 
 Let's take a look at our plot:
 
@@ -634,10 +636,11 @@ plot_AU_matches <- function(contexts, emojis) {
     ggplot(aes(x = context, y = percent, fill = match)) +
     geom_col() +
     scale_x_discrete(limits = contexts) +
+    scale_y_continuous(expand = c(0,0)) +
     scale_fill_manual(values = c("#66C2A5", "#FC8D62")) +
     geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
     labs (x= "context", y = "percent", title = emojis) +
-    theme_bw() +
+    theme_classic() +
     theme(plot.title = element_text(hjust = 0.5), legend.title=element_blank())
 }
 ```
@@ -688,7 +691,7 @@ In line with the research question of @fricke2024semantic, we want to compare th
 
 ![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
 
-First, let us plan the layout of our final plot with some placeholder names for the patchworks (`p1`, `p2`, and `p_combined`). In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
+First, let us plan the layout of our final plot with some placeholder names. In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
 ```         
 column1 <- p1 / p2 / p3
@@ -698,7 +701,7 @@ column2 <- p4 / p5 / p6
 columns_combined <- column1 | column2
 ```
 
-The final plot will have two columns and three rows: In both `p1` and `p2`, three plots are stacked on top of each other. These will be the plots of the AU+ and the AU- condition. We then put these patchworks next to each other for comparison (`p_combined`).
+The final plot will have two columns and three rows: In both `column1` and `column2`, three plots are stacked on top of each other. These are the plots of the AU+ and the AU- condition, respectively. We then put these patchworks next to each other for comparison (`columns_combined`).
 
 Now, we fill in the names of the plots and choose some meaningful names. To run the code, you will need to have the patchwork package installed `install.packages(patchwork)` and the library loaded `library(patchwork)`.
 

@@ -717,6 +717,19 @@ AU_minus_patch <-
 
 ```
 
+To specify the layout, we use the `plot_layout` function. It takes the argument `guides`. By setting this argument to `"collect"`, legends that are identical across the plots within the patchwork are merged when combined. We place the legends at the bottom.
+
+```{r legends}
+
+#AU+ condition:
+AU_plus_patch <- AU_plus_patch +
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+
+#AU- condition:
+AU_minus_patch <- AU_minus_patch +
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+
 Since `AU_plus_patch` and `AU_minus_patch` are to be combined in one plot, we need to add titles to keep them apart. Technically, it is possible (and recommended!) to use the `plot_annotation` function of the {patchwork} package for this. However, annotations of this function are only shown at the highest nesting level. As we will be building a double-nested plot, any annotations we do on the "blocks-of-three"-level will not be displayed. We can work around this by using the function `wrap_elements`. This fixates the blocks in their current state and allows us to add titles in the form of `ggtitles` which relate the blocks to the conditions.
 
 ```{r patch-titles}
@@ -726,7 +739,6 @@ AU_plus_patch <- wrap_elements(plot = AU_plus_patch) +
 
 AU_minus_patch <- wrap_elements(plot = AU_minus_patch) +
   ggtitle("[AU-] condition")
-
 ```
 
 Finally, we put both elements together to get our final plot.
@@ -740,11 +752,28 @@ AU_combined_patch <- AU_plus_patch | AU_minus_patch
 ```{r show-AU-combined-patch}
 #| label: fig-AUpatch
 #| fig-cap: "Plot that combines all subplots into one picture"
+#| fig-height: 12
 
 AU_combined_patch
 ```
 
+@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the plot contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
+
 It does not look exactly the same as the plot by @fricke2024semantic (see @fig-AUFricke) but it contains the same information. Which look do you prefer?
+
+::: {.callout-note title="Alternative ways of dealing with the legend" collapse="true"}
+
+There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
+
+::: {#fig-AU-plot-options layout-ncol="2"}
+![The plot with all six legends kept.](images/AU-plot_legend_option1.png){#fig-alllegends fig-align="center" width="550"}
+
+![The plot with only one legend kept.](images/AU-plot_legend_option2.png){#fig-onelegend fig-align="center" width="550"}
+
+Options for the legend placement
+
+:::
+:::
 
 ### Interpreting the plot
 

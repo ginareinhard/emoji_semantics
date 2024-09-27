@@ -504,10 +504,10 @@ table(data$context)
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in."), options = c("All contexts have 159 occurences, except for mild disappointment which appears to exist 318 times.", "There are less contexts in the output than we have put in.", "The context descriptions were not correctly assigned in case of matching strings.", "There are too many occurences of matches per context than can be reasonably assumed.", "There are more contexts in the output than we have put in."), type = "checkbox", 
+check_question(c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we entered."), options = c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we entered.", "The context descriptions were not correctly assigned in the case of matching strings.", "There are too many occurrences of matches per context than can be reasonably assumed.", "There are more contexts in the output than we entered."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That´s right! Something must have gone wrong. As you can see, it is always a good idea to check the output for inconsistencies.",
+right = "That's right! Something must have gone wrong. As you can see, it is always a good idea to check the output for inconsistencies.",
 wrong = "Not quite, try again.")
 
 ```
@@ -752,14 +752,14 @@ By looking and interpreting @fig-AUpatch, we can now finally answer the research
 
 The answer is no, seemingly not. AU difference does not seem to be critical to the decision for an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic, p. 11], both in the AU+ and in the AU- condition. Now, was all our work for nothing?
 
-No, not at all! We can still draw some interesting inferences from the plot we created. For example, we see that minor visual differences between emojis do affect the understanding and selection of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Notably, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : they had less than a 2% difference between matching rates.
+No, not at all! We can still draw some interesting inferences from the plot we created. For example, we see that minor visual differences between emojis do affect the understanding and selection of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Notably, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : there was less than a 2% difference between the matching rates.
 
 Through the following quiz questions, you can further interpret @fig-AUpatch. The correct answers will reveal how the information displayed can be made sense of.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q5.**]{style="color:green;"} In which context-pair did participants choose the matching emojis most often?
+[**Q5.**]{style="color:green;"} In which context pair did participants choose the matching emojis most often?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -774,7 +774,7 @@ wrong = "Not quite, try again.")
 <br><br> [**Q6.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, a very similar amount of participants chose the matching emoji.", options = c("Within these pairs, a very similar amount of participants chose the matching emoji.", "Within these pairs, participants struggled the most to decide for one emoji over the other.", "Within these pairs, the least amount of participants chose the matching emoji.", "Within these pairs, half of the participants preferred the one emoji and half of them preferred the other."), type = "radio", 
+check_question("Within these pairs, a very similar number of participants chose the matching emoji.", options = c("Within these pairs, a very similar number of participants chose the matching emoji.", "Within these pairs, participants had the most difficulty choosing one emoji over the other.", "Within these pairs, the least number of participants chose the matching emoji.", "Within these pairs, half of the participants preferred the one emoji and half of them preferred the other."), type = "radio", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both members of the pair.",
@@ -782,7 +782,7 @@ wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) l
 check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q7.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out most from the rest?
+<br><br> [**Q7.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out the most?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -794,10 +794,10 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left subplot are correct? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
-check_question(c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance."), options = c("The emoji 😐 was chosen significantly less for its matching context than all the other emojis.", "There is a major difference between the matching rates of the contexts annoyance and happiness.","Only in the 😐😑 pair, the matching rate for one emoji is above chance and for the other below chance.", "Since matching rates differ a lot in the 😐😑 plot, AU difference seems to affect participants' preference."), type = "checkbox", 
+check_question(c("The emoji 😐 was selected for its matching context significantly less often than all the other emojis.", "Only in the 😐😑 pair is the matching rate for one emoji above chance and for the other below chance."), options = c("The emoji 😐 was selected for its matching context significantly less often than all the other emojis.", "There is a major difference between the matching rates of the annoyance and happiness contexts.","Only in the 😐😑 pair is the matching rate for one emoji above chance and for the other below chance.", "Since matching rates in the 😐😑 plot differ a lot, AU difference seems to affect participants' preference."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,
@@ -831,7 +831,7 @@ Our analysis revealed gender-specific differences in emoji understanding, potent
 
 By combining multiple plots, we have created an informative picture that answers the experiment’s research question. The question whether Action Unit (AU) differences are critical for emoji preference was answered in the negative. However, we have made several other discoveries along the way, and have found that small changes of emojis’ facial features do affect choice patterns.
 
-Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, our analysis has provided insights into this fascinating area of study.
+Emojis, it turns out, contain lots of information, and there is a science behind them 🤓. While measuring why we prefer certain emojis over other ones can be challenging, @fricke2024semantic's study and their analysis, as well as our reanalysis, have provided insights into this fascinating area of study.
 
 ## Declaration of collaboration {#sec-collaboration .unnumbered}
 

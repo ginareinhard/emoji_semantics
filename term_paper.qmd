@@ -603,9 +603,7 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 Let's take a look at our plot:
 
 ```{r show-plot-concern-surprise}
-
 plot_concern_surprise
-
 ```
 
 We need not only one plot, but six: one for each emoji pair. We could write it all out for each emoji pair, but since the code is identical (except for the contexts and the emojis), it is way more efficient to define a function.
@@ -752,23 +750,21 @@ AU_combined_patch <- AU_plus_patch | AU_minus_patch
 ```{r show-AU-combined-patch}
 #| label: fig-AUpatch
 #| fig-cap: "Plot that combines all subplots into one picture"
-#| fig-height: 12
+#| fig-height: 11
 
 AU_combined_patch
 ```
 
-@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. However, you probably will have noticed that the plot contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later.
-
-It does not look exactly the same as the plot by @fricke2024semantic (see @fig-AUFricke) but it contains the same information. Which look do you prefer?
+@fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. It does not look exactly the same as the plot by @fricke2024semantic (see @fig-AUFricke) but it contains the same information. Which look do you prefer?
 
 ::: {.callout-note title="Alternative ways of dealing with the legend" collapse="true"}
 
-There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
+You probably will have noticed that @fig-AUpatch contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later. There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
 ::: {#fig-AU-plot-options layout-ncol="2"}
-![The plot with all six legends kept.](images/AU-plot_legend_option1.png){#fig-alllegends fig-align="center" width="550"}
+![The plot with six legend.](images/AU_plot_six_legends.png){#fig-alllegends fig-align="center" width="550"}
 
-![The plot with only one legend kept.](images/AU-plot_legend_option2.png){#fig-onelegend fig-align="center" width="550"}
+![The plot with one legends.](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
 
 Options for the legend placement
 

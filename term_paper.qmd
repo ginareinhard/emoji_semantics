@@ -87,7 +87,7 @@ We will work with the data from this study by @fricke2024semantic:
 
 > Fricke, L., Grosz, P. G., & Scheffler, T. (2024). Semantic differences in visually similar face emojis. Language and Cognition, 1–15. <https://doi.org/10.1017/langcog.2024.12>
 
-@fricke2024semantic have made their data and their analysis code publicly available. You can access it at <https://osf.io/k2t9p/>. The data is contained in the file `raw_data.csv`.
+@fricke2024semantic have made their data and their analysis code publicly available. You can access it at <https://osf.io/k2t9p/>. There, the data is contained in the file `raw_data.csv`.
 
 ## Introducing the study {#sec-introducing-the-study}
 
@@ -95,7 +95,7 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 
 ### Deconstructing emojis into Action Units {#sec-deconstructing}
 
-@fricke2024semantic compared visually similar emojis using a face emoji annotation system developed by @fugate2021implications. This annotation system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assigned numbers to human-like facial features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
+@fricke2024semantic compared visually face similar emojis using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assigned numbers to human-like facial features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
 
 ![Emoji pairs and their contexts [@fricke2024semantic, p.5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
@@ -127,7 +127,7 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 ![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis, they predicted that small visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** That is, do ... In line with the pictorial approach by @maier2023emojis, they predicted that small visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

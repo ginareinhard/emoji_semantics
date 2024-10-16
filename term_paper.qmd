@@ -99,9 +99,9 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 
 ![Emoji pairs and their contexts [@fricke2024semantic, p.5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
-@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the visual difference between emojis corresponded to a difference between AUs. In the **AU- condition**, the visual difference did not correspond to an AU difference. As AUs are facial expressions captured by numbers, they help in accurately describing emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures that the former emoji has open eyes while the latter has closed eyes. Therefore, this is an AU+ pair. If the subtle difference between emojis is not manipulable by humans, the emojis are described by identical numbers (AU-). For instance, one cannot control whether the lower teeth show in a smile, as in 😄 and 😁 [@fricke2024semantic, p. 4]. 
+@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the visual difference between emojis corresponded to a difference between AUs. In the **AU- condition**, the visual difference did not correspond to an AU difference. As AUs are facial expressions captured by numbers, they help in accurately describing emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures that the former emoji has open eyes while the latter has closed eyes. Therefore, this is an AU+ pair. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (AU-). 
 
-@fricke2024semantic's research question asks whether these two types of emojis are treated any differently when being assigned to a context. 
+@fricke2024semantic's ask whether these two types of emojis are treated any differently when being assigned to a context. 
 
 ### The experiment {#sec-design}
 
@@ -129,7 +129,7 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 ![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-To target their research question **Do AU differences lead to differences in meaning between the two emojis of a pair?**, @fricke2024semantic made predictions in line with the pictorial approach by @maier2023emojis: They expected that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis they predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}

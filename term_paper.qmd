@@ -596,7 +596,7 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 3.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
 4.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
 5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-6.  The `expand()` function makes the bars expand vertically., thereby removing white space between the bars and the x-axis. 
+6.  The `expand()` function makes the bars expand vertically, thereby removing white space between the bars and the x-axis. 
 7.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
 8.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
 9.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
@@ -690,7 +690,7 @@ By applying our self-defined function `plot_AU_matches` to all emoji pairs and c
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to this one by @fricke2024semantic:
 
-![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic, p.11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
+![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic, p. 11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
 
 First, let us plan the layout of our final plot with some placeholder names. In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -704,7 +704,7 @@ columns_combined <- column1 | column2
 
 The final plot will have two columns and three rows: In both `column1` and `column2`, three plots are stacked on top of each other. These are the plots of the AU+ and the AU- condition, respectively. We then put these patchworks next to each other for comparison (`columns_combined`).
 
-Now, we fill in the names of the plots and choose some meaningful names. To run the code, you will need to have the patchwork package installed `install.packages(patchwork)` and the library loaded `library(patchwork)`.
+Now, we fill in the names of the plots and choose some meaningful names. To run the code, you will need to have the patchwork package installed (`install.packages(patchwork)`) and the library loaded (`library(patchwork)`).
 
 ```{r AU-patch-condition}
 

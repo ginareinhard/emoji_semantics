@@ -178,7 +178,7 @@ raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
 
-As specified by @fricke2024semantic, we filter out participants who exceed the maximum age of 35 years for all following analyses. We do this by using the function `filter()` and store the result in a new data frame called `data`:
+As specified by @fricke2024semantic, we filter out participants who exceed the maximum age of 35 years for all following analyses. We do this by using the function `filter()` and store the result in a new data frame called `df`:
 
 ```{r filter-age}
 
@@ -725,7 +725,7 @@ You probably will have noticed that @fig-AUpatch contains two identical legends.
 ::: {#fig-AU-plot-options layout-ncol="2"}
 ![The plot with six legend.](images/AU_plot_six_legends.png){#fig-alllegends fig-align="center" width="550"}
 
-![The plot with one legends.](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
+![The plot with one legend.](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
 
 Options for the legend placement
 :::

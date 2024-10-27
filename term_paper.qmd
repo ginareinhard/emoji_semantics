@@ -213,27 +213,9 @@ table(df$gender)
 
 ```
 
-Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. We have used the `table()` function, which determines the number of occurences of the different genders in the data. But in this case counting the occurences is not straightforward. The data frame contains 24 rows for each subject, as each participant saw 24 items (see @sec-design). So, if we were to simply count the occurrences of *men*, *women*, and *non-binary* in the data with `table()`, we would end up with 24 times the values of the frequencies.
+Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. We have used the `table()` function, which determines the number of occurrences of the different genders in the data. But in this case counting the occurrences is not straightforward. The data frame contains 24 rows for each subject, as each participant saw 24 items (see @sec-design). So, if we were to simply count the occurrences of *men*, *women*, and *non-binary* in the data with `table()`, we would end up with 24 times the values of the frequencies.
 
-To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
-
-```{r gender-freq}
-
-gender_count <- df |> 
-  group_by(submission_id) |> 
-  count(gender)
-
-```
-
-The result is stored in a new data frame called `gender_count`. Now we can look at the distribution using the `table()` function:
-
-```{r gender-table}
-
-table(gender_count$gender)
-
-```
-
-Alternatively, we can use the `distinct()` function to keep only unique occurrences (exactly: the first unique occurrence) of each `submission_id`. The argument `.keep_all` is set to `TRUE`, which means that all other variables in the data frame are kept and not deleted:
+To determine the actual gender distribution, we need to count the occurrences according to the subjects' unique IDs. To do this, we apply the `distinct()` function to keep only unique occurrences (exactly: the first unique occurrence) of each `submission_id`. The argument `.keep_all` is set to `TRUE`, which means that all other variables in the data frame are kept and not deleted:
 
 ```{r gender-distinct}
 
@@ -341,15 +323,11 @@ gender_understanding_count <- df |>
 
 ```
 
-Finally, we print our frequency table:
+Finally, our frequency table includes the percentages:
 
-```{r print-gender-understanding}
+![The gender_understanding_count object (including percentages) as visualised using the View() function in RStudio](images/gender_understanding_count2.png){#fig-gender_understanding_count2 fig-align="center" width="509"}
 
-print(gender_understanding_count)
-
-```
-
-From the frequency table, we can already see that non-binary participants reported either a *rather good* or *good* understanding of emojis. A higher percentage of women (44.7%) reported a *very good* emoji understanding compared to men (38.5%). But let's create our barplot to see the distribution more clearly.
+From the percentages, we can already see that non-binary participants reported either a *rather good* or *good* understanding of emojis. A higher percentage of women (44.7%) reported a *very good* emoji understanding compared to men (38.5%). But let's create our barplot to see the distribution more clearly.
 
 ### Data visualisation {#sec-gender-understanding-vis}
 

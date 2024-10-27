@@ -97,7 +97,7 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 
 @fricke2024semantic compared visually face similar emojis using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces invented by @ekman1978facial. @fricke2024semantic assigned numbers to human-like facial features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs:
 
-![Emoji pairs and their contexts [@fricke2024semantic, p.5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
+![Emoji pairs and their contexts [@fricke2024semantic: 5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
 @fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the visual difference between emojis corresponded to a difference between AUs. In the **AU- condition**, the visual difference did not correspond to an AU difference. As AUs are facial expressions captured by numbers, they help in accurately describing emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures that the former emoji has open eyes while the latter has closed eyes. Therefore, this is an AU+ pair. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (AU-). 
 
@@ -108,7 +108,7 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 ::: {.callout-note title="How did the experiment work?"}
 Three AU+ and three AU- emoji pairs were created (see @fig-emojipairs). Each pair was assigned two contexts, with each context corresponding to the prominent usage or meaning of one emoji but not the other. For example, the contexts of the first pair are *happiness* and *(cheeky) laughter*. The contexts were assigned based on <https://emojipedia.org> and a previous norming study.
 
-Four single-sentence narratives were created for each of the contexts. For an example, see @fig-testitems, translated from German below [taken from @fricke2024semantic, p.6]:
+Four single-sentence narratives were created for each of the contexts. For an example, see @fig-testitems, translated from German below [taken from @fricke2024semantic: 6]:
 
 > 1.  Alex writes to his best friend Stefan:
 >
@@ -127,7 +127,7 @@ Four single-sentence narratives were created for each of the contexts. For an ex
 These stories were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants were then asked to help choose the emoji that matched the context. Each participant saw each emoji pair twice. The rate with which the context-matching emoji was chosen was measured.
 :::
 
-![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic, p.6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
+![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic: 6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
 @fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis they predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
 
@@ -159,7 +159,7 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 
 ![Barplot "Attitude towards emojis by gender"](images/emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
 
-Barplots from @fricke2024semantic (p. 9 and p. 10)
+Barplots from @fricke2024semantic
 :::
 
 The plots in @fig-barplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve 3 steps:
@@ -690,7 +690,7 @@ By applying our self-defined function `plot_AU_matches` to all emoji pairs and c
 
 In line with the research question of @fricke2024semantic, we want to compare the matching rates of emojis and contexts in the AU+ condition with the matching rates in the AU- condition. Our goal is to create a plot that looks similar to this one by @fricke2024semantic:
 
-![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic, p. 11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
+![Plot of individual emoji pairs that compares AU conditions [@fricke2024semantic: 11]](images/Fricke_AUplot.png){#fig-AUFricke width="700"}
 
 First, let us plan the layout of our final plot with some placeholder names. In {patchwork}, plots are combined by `|` (horizontally), `/` (vertically), or `+` (generally).
 
@@ -778,7 +778,7 @@ Options for the legend placement
 
 By looking and interpreting @fig-AUpatch, we can now finally answer the research question: Do AU differences lead to differences in meaning between the two emojis of a pair?
 
-The answer is no, seemingly not. AU difference does not seem to be critical to the decision for an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic, p. 11], both in the AU+ and in the AU- condition. Now, was all our work for nothing?
+The answer is no, seemingly not. AU difference does not seem to be critical to the decision for an emoji in a context. As @fig-AUpatch shows, the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic: 11], both in the AU+ and in the AU- condition. Now, was all our work for nothing?
 
 No, not at all! We can still draw some interesting inferences from the plot we created. For example, we see that minor visual differences between emojis do affect the understanding and selection of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Notably, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : there was less than a 2% difference between the matching rates.
 

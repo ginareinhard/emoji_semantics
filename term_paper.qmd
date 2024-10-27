@@ -193,7 +193,7 @@ Let's first get a general overview: How many men, women, and non-binary people p
 
 The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. To figure out what the the labels of the different gender groups are, we use the `table()` function:
 
-```{r}
+```{r table-gender}
 
 table(df$gender)
 
@@ -271,13 +271,11 @@ To solve these problems, we will use the same strategies as @fricke2024semantic.
 
 Next, we calculate the relative frequencies of the different levels of emoji understanding for each gender.
 
-The variable we are interested in is called `emoji_understanding`. Just like with `gender`, we first have to do some data wrangling. We convert `emoji_understanding` as a factor to get its levels:
+The variable we are interested in is called `emoji_understanding`. Just like with `gender`, we first have to do some data wrangling. We use the `table()` function to get the labels:
 
-```{r convert-understanding}
+```{r table-understanding}
 
-df$emoji_understanding <- as.factor(df$emoji_understanding)
-
-levels(df$emoji_understanding)
+table(df$emoji_understanding)
 
 ```
 
@@ -292,7 +290,7 @@ df <- df |>
                                         "gut" = "good",
                                         "sehr gut" = "very good"))
 
-levels(df$emoji_understanding)
+table(df$emoji_understanding)
 
 ```
 
@@ -307,7 +305,7 @@ df <- df |>
                                                    "good",
                                                    "very good")))
 
-levels(df$emoji_understanding)
+table(df$emoji_understanding)
 
 ```
 

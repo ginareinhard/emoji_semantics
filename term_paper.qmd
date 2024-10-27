@@ -917,6 +917,4 @@ Gina:
 
     -   editing
 
-Details be found in our Git repository: <https://github.com/ginareinhard/term_paper>
-
 ## References {#sec-references .unnumbered}

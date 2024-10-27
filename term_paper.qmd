@@ -199,7 +199,9 @@ table(df$gender)
 
 ```
 
-Before we start analysing, we should translate them into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary*:
+Before we start analysing, we should translate them into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary*[^1]:
+
+[^1]: We decided to translate 'diverse' as 'non-binary' as this is the term @fricke2024semantic used in their paper as the translation for 'diverse'.
 
 ```{r recode-gender}
 
@@ -247,7 +249,7 @@ check_hint("Four of these problems are likely to occur.", hint_title = "🐭 Cli
 <br>
 :::
 
-To solve these problems, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable.
+To solve this problem, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 
@@ -331,7 +333,7 @@ From the percentages, we can already see that non-binary participants reported e
 
 ### Data visualisation {#sec-gender-understanding-vis}
 
-As mentioned above, we will use relative rather than absolute frequencies for our visualisation to make sure that the numbers for the different genders are comparable. We also have to exclude the very small group of three non-binary participants by filtering them out:
+As mentioned above, we will visualise the relative rather than the absolute frequencies to make sure that the numbers for the different genders are comparable. In line with @fricke2024semantic, we also have to exclude the very small group of three non-binary participants by filtering them out:
 
 ```{r filter-gender}
 
@@ -340,20 +342,9 @@ gender_understanding_count <- gender_understanding_count |>
 
 ```
 
-We use `ggplot()` to create a barplot with `emoji_understanding` on the x-axis and the relative frequencies on the y-axis. The bars are coloured according to `gender`:
+We use `ggplot()` to create a barplot with `emoji_understanding` on the x-axis and the relative frequencies on the y-axis. The bars are coloured according to `gender`. To make our plot more meaningful, we add a title and labels. We also remove the white space between the bottom of the bars and the x-axis and change the colours manually to make it look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html) [@neuwirth2022package]. Since we only need two colours, we can easily insert them manually without having to install an additional package.
 
 ```{r gender-understanding-plot}
-
-ggplot(gender_understanding_count, aes(x = emoji_understanding, 
-                                       y = percentage, 
-                                       fill = gender)) +
-  geom_bar(stat = "identity", position = "dodge")
-
-```
-
-To make our plot more meaningful, we add a title and labels. We also remove the white space between the bottom of the bars and the x-axis and change the colours manually to make it look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html) [@neuwirth2022package]. Since we only need two colours, we can easily insert them manually without having to install an additional package.
-
-```{r gender-understanding-labs}
 
 ggplot(gender_understanding_count, aes(x = emoji_understanding, 
                                        y = percentage, 
@@ -376,12 +367,12 @@ As you can see from the barplot, the gender distribution for emoji understanding
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("Proportionally more women than men reported a very good emoji understanding.", "Men are more evenly distributed across the levels of emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "The bars for both genders are highest in the good to very good range."), options = c("Proportionally more women than men reported a very good emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "Men are more evenly distributed across the levels of emoji understanding.", "Women are more evenly distributed across the levels of emoji understanding.", "Women reported a lower level of emoji understanding than men.", "The bars for both genders are highest in the good to very good range."), type = "checkbox",
+check_question(c("Proportionally more women than men reported a very good emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "The bars for both genders are highest in the good to very good range."), options = c("Proportionally more women than men reported a very good emoji understanding.", "Proportionally more women than men reported a moderate emoji understanding.", "Women reported a lower level of emoji understanding than men.", "The bars for both genders are highest in the good to very good range."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That's right! While proportionally more women than men reported a very good emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the good to very good range. There are also more women than men in the moderate and rather good category. Generally, men are more evenly distributed across the levels of emoji understanding.",
+right = "That's right! While proportionally more women than men reported a very good emoji understanding, a relatively large number of men also stated that they understood emojis very well. The bars for both genders are highest in the good to very good range. There are also more women than men in the moderate and rather good category.",
 wrong = "Not quite. Try again.")
-check_hint("Four of the above options are correct interpretations of the plot.", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("Three of the above options are correct interpretations of the plot.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 

@@ -191,23 +191,15 @@ df <- raw_data |>
 
 Let's first get a general overview: How many men, women, and non-binary people participated in the study?
 
-The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. Before we start analysing, we should translate them into English. To figure out what the the labels of the different gender **levels** are, we use the `levels()` function. `levels()` applies to **factors**, so we first need to convert `gender` with the function `as.factor()`:
+The relevant variable in the data set is called `gender`. However, you will see that the names of the different gender groups are in German. To figure out what the the labels of the different gender groups are, we use the `table()` function:
 
-```{r convert-gender}
+```{r}
 
-df$gender <- as.factor(df$gender)
-
-```
-
-Now, we can look at the levels of our factor `gender`:
-
-```{r gender-levels}
-
-levels(df$gender)
+table(df$gender)
 
 ```
 
-Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary*:
+Before we start analysing, we should translate them into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary*:
 
 ```{r recode-gender}
 
@@ -217,11 +209,11 @@ df <- df |>
                          "weiblich" = "women", 
                          "divers" = "non-binary"))
 
-levels(df$gender)
+table(df$gender)
 
 ```
 
-Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. This is not straightforward, because the data frame contains 24 rows for each subject, as each participant saw 24 items (see @sec-design). If we were to simply count the occurrences of *men*, *women*, and *non-binary* in the data, we would end up with 24 times the values of the frequencies.
+Now that the genders have English names, we want to determine how many men, women, and non-binary subjects participated. We have used the `table()` function, which determines the number of occurences of the different genders in the data. But in this case counting the occurences is not straightforward. The data frame contains 24 rows for each subject, as each participant saw 24 items (see @sec-design). So, if we were to simply count the occurrences of *men*, *women*, and *non-binary* in the data with `table()`, we would end up with 24 times the values of the frequencies.
 
 To determine the actual gender distribution, we need to group the data according to the subjects' unique IDs. To do this, we apply the `group_by` function to the `submission_id` variable. We then pipe `count(gender)` to this to count the genders by `submission_id`:
 
@@ -555,7 +547,7 @@ df <- df |>
 
 ### Building the plots {#sec-au-plot-building}
 
-We will now build our plots to visualise the matching rates per emoji pair. In a new dataframe called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
+We will now build our plots to visualise the matching rates per emoji pair. In a new data frame called `data_AU`, we group the data by contexts. The command `count(match)` counts matches and non-matches for each context and stores them in the column `n`. We add the column `percent` which stores the rounded percentage of matches and non-matches for each context-pair:
 
 ```{r data-AU-context-match}
 
@@ -568,7 +560,7 @@ data_AU <- df |>
 
 Using the `View()` function, we take a look at our data:
 
-![The first 14 columns of the dataframe data_AU as visualised using the View() function in RStudio](images/context_percentages.png){#fig-data-percentages fig-align="center" width="400"}
+![The first 14 columns of the data frame data_AU as visualised using the View() function in RStudio](images/context_percentages.png){#fig-data-percentages fig-align="center" width="400"}
 
 We plot the first emoji pair of the AU+ condition 😯 😲 with their respective contexts *concern* and *surprise*:
 

@@ -182,7 +182,7 @@ As specified by @fricke2024semantic, we filter out participants who exceed the m
 
 ```{r filter-age}
 
-data <- raw_data |> 
+df <- raw_data |> 
   filter(age <= 35)
 
 ```
@@ -195,7 +195,7 @@ The relevant variable in the data set is called `gender`. However, you will see 
 
 ```{r convert-gender}
 
-data$gender <- as.factor(data$gender)
+df$gender <- as.factor(df$gender)
 
 ```
 
@@ -203,7 +203,7 @@ Now, we can look at the levels of our factor `gender`:
 
 ```{r gender-levels}
 
-levels(data$gender)
+levels(df$gender)
 
 ```
 
@@ -211,13 +211,13 @@ Using a combination of `mutate()` and `recode()`, we translate *männlich* to *m
 
 ```{r recode-gender}
 
-data <- data |> 
+df <- df |> 
   mutate(gender = recode(gender, 
                          "männlich" = "men", 
                          "weiblich" = "women", 
                          "divers" = "non-binary"))
 
-levels(data$gender)
+levels(df$gender)
 
 ```
 
@@ -227,7 +227,7 @@ To determine the actual gender distribution, we need to group the data according
 
 ```{r gender-freq}
 
-gender_count <- data |> 
+gender_count <- df |> 
   group_by(submission_id) |> 
   count(gender)
 
@@ -245,7 +245,7 @@ Alternatively, we can use the `distinct()` function to keep only unique occurren
 
 ```{r gender-distinct}
 
-gender_count <- data |> 
+gender_count <- df |> 
   distinct(submission_id, .keep_all = TRUE)
 
 table(gender_count$gender)
@@ -283,9 +283,9 @@ The variable we are interested in is called `emoji_understanding`. Just like wit
 
 ```{r convert-understanding}
 
-data$emoji_understanding <- as.factor(data$emoji_understanding)
+df$emoji_understanding <- as.factor(df$emoji_understanding)
 
-levels(data$emoji_understanding)
+levels(df$emoji_understanding)
 
 ```
 
@@ -293,14 +293,14 @@ We translate *mittelmäßig* to *moderate*, *eher gut* to *rather good*, *gut* t
 
 ```{r recode-understanding}
 
-data <- data |> 
+df <- df |> 
     mutate(emoji_understanding = recode(emoji_understanding,
                                         "mittelmäßig" = "moderate",
                                         "eher gut" = "rather good",
                                         "gut" = "good",
                                         "sehr gut" = "very good"))
 
-levels(data$emoji_understanding)
+levels(df$emoji_understanding)
 
 ```
 
@@ -308,14 +308,14 @@ The levels are still in the wrong order. We need to rearrange them in an ascendi
 
 ```{r reorder-understanding}
 
-data <- data |> 
+df <- df |> 
     mutate(emoji_understanding = factor(emoji_understanding,
                                         levels = c("moderate",
                                                    "rather good",
                                                    "good",
                                                    "very good")))
 
-levels(data$emoji_understanding)
+levels(df$emoji_understanding)
 
 ```
 
@@ -328,7 +328,7 @@ To achieve both, we have to first group our data, using the powerful combination
 
 ```{r gender-understanding-freq}
 
-gender_understanding_count <- data |>
+gender_understanding_count <- df |>
   distinct(submission_id, .keep_all = TRUE) |>
   group_by(gender) |> 
   count(gender, emoji_understanding)
@@ -343,7 +343,7 @@ If we check our data frame `gender_understanding_count` with `View()`, it looks 
 
 ```{r gender-understanding-percent}
 
-gender_understanding_count <- data |>
+gender_understanding_count <- df |>
   distinct(submission_id, .keep_all = TRUE) |>
   group_by(gender) |> 
   count(gender, emoji_understanding) |> 
@@ -438,7 +438,7 @@ We add a variable `AU_difference` that will include the necessary information. W
 
 ```{r AU-variable}
 
-data <- data |>
+df <- df |>
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+", 
                                    .default = NULL))
 
@@ -450,7 +450,7 @@ The above code command means: look for the string `"AU"` in the column `name`, a
 
 ```{r AU-variable-complete}
 
-data <- data |> 
+df <- df |> 
   mutate(AU_difference = case_when(str_detect(name, "AU") ~ "AU+",
                                    str_detect(name, "N") ~ "AU-",
                                    str_detect(name, "filler") ~ "filler",
@@ -462,7 +462,7 @@ A table checks that everything worked:
 
 ```{r table-AU}
 
-table(data$AU_difference)
+table(df$AU_difference)
 
 ```
 
@@ -470,7 +470,7 @@ This looks promising. Since we are only interested in the experimental items, we
 
 ```{r filter-filler}
 
-data <- data |>
+df <- df |>
   filter(AU_difference != "filler")
 
 ```
@@ -479,7 +479,7 @@ We will now create another variable called `context`. The column of this variabl
 
 ```{r context-variable}
 
-data <- data |> 
+df <- df |> 
   mutate(context = case_when(str_detect(question, "freut sich") ~ "happiness",
                              str_detect(question, "lacht") ~ "(cheeky) laughter",
 
@@ -496,7 +496,7 @@ data <- data |>
                                    .default = NULL))
 
 
-table(data$context)
+table(df$context)
 
 ```
 
@@ -520,13 +520,13 @@ The contexts *mild disappointment* and *moderate disappointment* have created so
 
 ```{r recode-disappointment}
 
-data <- data |> 
+df <- df |> 
   mutate(context = case_when(
                              str_detect(name, "N-36") ~ "mild disappointment",
                              str_detect(name, "N-37") ~ "moderate disappointment",
                                    .default = context))
 
-table(data$context)
+table(df$context)
 
 ```
 
@@ -534,7 +534,7 @@ Finally, we add the critical variable that describes whether there is a match be
 
 ```{r match-variable}
 
-data <- data |> 
+df <- df |> 
   mutate(
   match = case_when(
     context == "happiness" & response == "grinning_face_with_big_eyes" ~ "match",
@@ -559,7 +559,7 @@ We will now build our plots to visualise the matching rates per emoji pair. In a
 
 ```{r data-AU-context-match}
 
-data_AU <- data |> 
+data_AU <- df |> 
   group_by(context) |> 
   count(match) |>
   mutate(percent = round(proportions(n)*100, 2))

@@ -99,9 +99,9 @@ Face emojis stand in for facial expressions and thereby fundamentally contribute
 
 ![Emoji pairs and their contexts [@fricke2024semantic: 5]](images/emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
-@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the visual difference between emojis corresponded to a difference between AUs. In the **AU- condition**, the visual difference did not correspond to an AU difference. As AUs are facial expressions captured by numbers, they help in accurately describing emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures that the former emoji has open eyes while the latter has closed eyes. Therefore, this is an AU+ pair. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (AU-). 
+@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the visual difference between emojis corresponded to a difference between AUs. In the **AU- condition**, the visual difference did not correspond to an AU difference. As AUs are facial expressions captured by numbers, they help in accurately describing emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures that the former emoji has open eyes while the latter has closed eyes. Therefore, this is an AU+ pair. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (AU-).
 
-@fricke2024semantic's ask whether these two types of emojis are treated any differently when being assigned to a context. 
+@fricke2024semantic's ask whether these two types of emojis are treated any differently when being assigned to a context.
 
 ### The experiment {#sec-design}
 
@@ -129,7 +129,7 @@ These stories were divided up into into four experimental lists of 12 items. Eac
 
 ![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic: 6]](images/test_items.png){#fig-testitems fig-align="center" width="500"}
 
-@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis they predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis the authors predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant compared to those that do not (AU-).
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
@@ -152,7 +152,7 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 
 ## Exploring the relationship between gender and emoji understanding {#sec-gender-understanding}
 
-@fricke2024semantic asked participants about their gender, their attitude towards emojis, how often they use emojis on WhatsApp and how well they think they understand emojis. They visualised the distribution of male and female gender for emoji use and emoji attitude as barplots:
+@fricke2024semantic asked participants about their gender, their attitude towards emojis, how often they use emojis on WhatsApp and how well they think they understand emojis. @fricke2024semantic visualised the distribution of male and female gender for emoji use and emoji attitude as barplots:
 
 ::: {#fig-barplots layout-ncol="2"}
 ![Barplot "Emoji use by gender"](images/emoji_use.png){#fig-emojiuse fig-align="center" width="550"}
@@ -596,12 +596,12 @@ The above command creates a barplot and stores it in `plot_concern_surprise`. Th
 3.  Create a `ggplot` with context values on the x-axis and percentages scaled on the y-axis. Fill the area inside geoms with colour according to match values.
 4.  Display the plot as a barplot. By default, `geom_bar` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col` to use the data as is.
 5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts.
-6.  The `expand()` function makes the bars expand vertically, thereby removing white space between the bars and the x-axis. 
+6.  The `expand()` function makes the bars expand vertically, thereby removing white space between the bars and the x-axis.
 7.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
 8.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the according bar.
 9.  Add labels: *context* on the x-axis, *percent* on the y-axis, and the corresponding emojis as the title.
-10.  Add a theme, in this case `theme_classic()`.
-11.  Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
+10. Add a theme, in this case `theme_classic()`.
+11. Plots are left-aligned by default. Since we want the emojis to be displayed on top of their corresponding context bars, we move the title to the center of the plot. We also remove the title of the legend because the *match* and *no match* values are self-explanatory.
 
 Let's take a look at our plot:
 
@@ -761,7 +761,6 @@ AU_combined_patch
 @fig-AUpatch contains information on the matching rates of all emoji pairs with their contexts. It does not look exactly the same as the plot by @fricke2024semantic (see @fig-AUFricke) but it contains the same information. Which look do you prefer?
 
 ::: {.callout-note title="Alternative ways of dealing with the legend" collapse="true"}
-
 You probably will have noticed that @fig-AUpatch contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later. There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
 ::: {#fig-AU-plot-options layout-ncol="2"}
@@ -770,7 +769,6 @@ You probably will have noticed that @fig-AUpatch contains two identical legends.
 ![The plot with one legends.](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
 
 Options for the legend placement
-
 :::
 :::
 
@@ -874,13 +872,13 @@ Rose:
 -   In "Introducing the study":
 
     -   texts "Deconstructing emojis into Action Units" and "The experiment"
-    
+
     -   editing
 
 -   In chapter "Exploring the relationship between gender and emoji understanding":
 
     -   text on ggplot colours
-    
+
     -   minor editing
 
 -   Chapter "Comparing matching rates between AU conditions"
@@ -888,7 +886,7 @@ Rose:
 -   In "Conclusion"
 
     -   part on barplots
-    
+
     -   part on research question & end
 
 Gina:

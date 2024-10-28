@@ -720,9 +720,9 @@ AU_combined_patch
 You probably will have noticed that @fig-AUpatch contains two identical legends. This is the trade-off we take by using the `wrap_elements` function: We have fixated the patchworks in their state with their legends, therefore the legends cannot be merged later. There are a couple of other options that will produce different outcomes, however, none is going to be perfect: Since we do not want to delete the legend completely, we could keep the legends of all six plots, as in @fig-alllegends. Another option would be to keep the legend of one block and delete the other. However, as you can see in @fig-onelegend, this makes the bars take up the space of the legend, and the bars in one block become wider than in the other one.
 
 ::: {#fig-AU-plot-options layout-ncol="2"}
-![The plot with six legend.](images/AU_plot_six_legends.png){#fig-alllegends fig-align="center" width="550"}
+![The plot with six legends](images/AU_plot_six_legends.png){#fig-alllegends fig-align="center" width="550"}
 
-![The plot with one legend.](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
+![The plot with one legend](images/AU_plot_one_legend.png){#fig-onelegend fig-align="center" width="550"}
 
 Options for the legend placement
 :::

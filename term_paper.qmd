@@ -322,11 +322,11 @@ gender_understanding_count <- df |>
 
 ```
 
-Finally, our frequency table includes the percentages:
+Finally, our data frame includes the percentages:
 
 ![The gender_understanding_count object (including percentages) as visualised using the View() function in RStudio](images/gender_understanding_count2.png){#fig-gender_understanding_count2 fig-align="center" width="509"}
 
-From the percentages, we can already see that non-binary participants reported either a *rather good* or *good* understanding of emojis. A higher percentage of women (44.7%) reported a *very good* emoji understanding compared to men (38.5%). But let's create our barplot to see the distribution more clearly.
+From the data frame, we can already see that non-binary participants reported either a *rather good* or *good* understanding of emojis. A higher percentage of women (44.7%) reported a *very good* emoji understanding compared to men (38.5%). But let's create our barplot to see the distribution more clearly.
 
 ### Data visualisation {#sec-gender-understanding-vis}
 

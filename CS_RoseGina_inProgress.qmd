@@ -64,6 +64,7 @@ brewer.pal(8, "Set2")
 #### **About the authors of this chapter** {.unnumbered}
 
 @RoseGina**, please write a short biography paragraph each here (in the third person).**
+Rose Hörsting is a second-year master’s student in Linguistics at the University of Cologne. She completed her bachelor’s degree in Linguistics at the Heinrich-Heine-University Düsseldorf, where she developed a strong interest in the scientific systems behind language. Rose is particularly drawn to understanding language processing in both human and machine contexts. She was first introduced to `R` during her bachelor’s thesis, finding it intimidating at first, but has since developed an enthusiasm for statistics and programming. Now, Rose is enjoying the process of mastering `R` as she deepens her skills in data analysis.
 :::
 
 ### Chapter overview {.unnumbered}

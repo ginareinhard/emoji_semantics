@@ -447,7 +447,7 @@ df <- df |>
 
 ```
 
-We will now create another variable called `context`. The column of this variable will contain the contexts used in @fig-emojipairs. Again, we combine `mutate()`, `case_when()` and `str_detect()`: In the `question` column, we look for context-characteristic strings, and add the **context descriptions** whenever we have a match **(@RoseGina, are these yours? Or did you take them from the paper? Please clarify)**. Again, we check the output with `table()`.
+We will now create another variable called `context`. The column of this variable will contain the context descriptions used by @fricke2024semantic:5 in @fig-emojipairs. Again, we combine `mutate()`, `case_when()` and `str_detect()`: In the `question` column, we look for context-characteristic strings, and add the context descriptions whenever we have a match. Again, we check the output with `table()`.
 
 ```{r context-variable}
 
@@ -488,7 +488,11 @@ wrong = "Not quite, try again.")
 ```
 :::
 
-The contexts *mild disappointment* and *moderate disappointment* have created some issues: In the `question` variable, both are described as *ist enttäuscht* ('is disappointed'). Except for their encoding in the `name` variable, these contexts appear to be identical. At this point, we have no choice but to look for additional disambiguating information in @fricke2024semantic's **analysis script (@RoseGina, please add a link or citation for the code. Also, might it be an idea to display the relevant extract of the code? Or to at least mention in which line, the information can be found?)**. The emoji 🙁 (*mild disappointment*) is coded as `N-36-L1` and ☹️ (*moderate disappointment*) as `N-37-L1`. We use this information to assign these two contexts to our `context` variable.
+The contexts *mild disappointment* and *moderate disappointment* have created some issues: In the `question` variable, both are described as *ist enttäuscht* ('is disappointed'). Except for their encoding in the `name` variable, these contexts appear to be identical. At this point, we have no choice but to look for additional disambiguating information in @fricke2024semantic's analysis script, which you can access under <https://osf.io/k8dtp>. The relevant information is in lines 522 and 523, as follows:
+
+![Screenshot of @fricke2024semantic's analysis script <https://osf.io/k8dtp>](images/disappointment_script_fricke.png){#fig-script fig-align="center" width="600"}
+
+The emoji 🙁 (*mild disappointment*) is coded as `N-36` and ☹️ (*moderate disappointment*) as `N-37`. We use this information to assign these two contexts to our `context` variable.
 
 ```{r recode-disappointment}
 

@@ -245,7 +245,7 @@ df |>
 
 ```
 
-The **mode** (see \@sec-Mode) of the `gender` variable in the dataset is *men*, as you can see from the output. The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. If we are not careful, this inbalance can lead to misleading data visualisations.
+The **mode** (see \@sec-Mode) of the `gender` variable in the dataset is *men*, as you can see from the output. The gender distribution is very uneven: 109 men, 47 women, and 3 non-binary people participated in the study. If we are not careful, this imbalance can lead to misleading data visualisations.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
@@ -267,7 +267,7 @@ check_hint("Three of these problems could occur.", hint_title = "🐭 Click on t
 <br>
 :::
 
-To solve this problem, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable. **(@RoseGina, somewhere in your chapter, you need to make clear what the Percent axis on all gender barplots actually represents. I am not convinced that all readers will understand why your bars (and the ones from the original publication!) add up to more than 100 %. Personally, I would also make that clear on the y-axis label of your own barplot.)**
+To solve this problem, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable. This means that we will calculate the percentages of emoji understanding within each gender group by counting the total number of male, female and non-binary participants each as 100%, rather than counting all subjects together as 100%. In this way, we can compare what percentage of men, women and non-binary participants reported a very good emoji understanding, for example.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 
@@ -393,7 +393,7 @@ check_hint("Two of the above options are correct interpretations of the plot.", 
 <br>
 :::
 
-When comparing our barplot to @fig-barplots, it is interesting to note that, whilst women reported more frequent use of emojis and a more positive attitude towards emojis, they did not report a higher understanding of emojis. It is possible that some women were more modest in rating their understanding of emojis than men, which could indicate a gender confidence gap. Reporting a good understanding likely requires more confidence compared to emoji use or attitude towards emoji.
+When comparing our barplot to @fig-FrickeGenderBarplots, it is interesting to note that, whilst women reported more frequent use of emojis and a more positive attitude towards emojis, they did not report a higher understanding of emojis. It is possible that some women were more modest in rating their understanding of emojis than men, which could indicate a gender confidence gap. Reporting a good understanding likely requires more confidence compared to emoji use or attitude towards emoji.
 
 ## Comparing matching rates between AU conditions {#sec-au-plot}
 

@@ -138,7 +138,7 @@ Four single-sentence narratives were created for each of the contexts (see @fig-
 >
 >     Alex is overjoyed. Which of the emojis matches the message better? 😄😁
 
-![Example of a test item in \@fricke2024semantic's experiment \[\@fricke2024semantic: 6\]](images/RoseGina_Fricke_test_items.png){#fig-testitems fig-align="center" width="500"}
+![Example of a test item in \@fricke2024semantic's experiment [@fricke2024semantic: 6]](images/RoseGina_Fricke_test_items.png){#fig-testitems fig-align="center" width="500"}
 
 These short narratives were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants were then asked to help choose the emoji that best matched the context. Each participant saw each emoji pair twice. **The rate with which the context-matching emoji was chosen was measured. (\@RoseGina, this last sentence needs rephrasing).**
 :::
@@ -171,9 +171,9 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 ::: {#fig-FrickeGenderBarplots layout-ncol="2"}
 ![Emoji use by gender](images/RoseGina_Fricke_emoji_use.png){#fig-emojiuse fig-align="center" width="550"}
 
-![Attitude towards emojis by gender](images/RoseGina_Fricke_emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
+![Attitude towards emojis by gender ](images/RoseGina_Fricke_emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
 
-Barplots from @fricke2024semantic @RoseGina**, please make clear that these plots is taken from the paper directly and add reference(s) to page number(s)**
+Barplots from \@fricke2024semantic's study [@fricke2024semantic: 9-10]
 :::
 
 The plots in @fig-FrickeGenderBarplots show that women use emojis more often and have a more positive attitude towards emojis than men. We want to find out whether women also reported a higher level of emoji understanding than men. Our analysis will involve three steps:
@@ -194,7 +194,7 @@ raw_data <- read.csv(file = here("data", "raw_data.csv"))
 
 ```
 
-As specified by @fricke2024semantic **(\@RoseGina, add page)**, we filter out participants who exceed the maximum age of 35 years for all following analyses. We do this by using the `filter()` function and store the result in a new data frame called `df`.
+As specified by @fricke2024semantic:8, we filter out participants who exceed the maximum age of 35 years for all following analyses. We do this by using the `filter()` function and store the result in a new data frame called `df`.
 
 ```{r filter-age}
 

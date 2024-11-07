@@ -267,7 +267,7 @@ check_hint("Three of these problems could occur.", hint_title = "🐭 Click on t
 <br>
 :::
 
-To solve this problem, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable. This means that we will calculate the percentages of emoji understanding within each gender group by counting the total number of male, female and non-binary participants each as 100%, rather than counting all subjects together as 100%. In this way, we can compare what percentage of men, women and non-binary participants reported a very good emoji understanding, for example.
+To solve this problem, we will use the same strategy as @fricke2024semantic. We will use relative rather than absolute frequencies to make sure that the numbers for the different genders are comparable. This means that we will calculate the percentages of emoji understanding within each gender group by counting the total number of male, female and non-binary participants each as 100%, rather than counting all subjects together as 100%. In this way, we can compare what percentage of men, women, and non-binary participants reported a very good emoji understanding, for example.
 
 ### How well do the different genders understand emojis? {#sec-gender-understanding-freq}
 

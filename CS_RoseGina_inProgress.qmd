@@ -812,16 +812,10 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply. @RoseGina**, I am struggling to get my head around two of the options for this question:**
-
-1.  **"Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance." (marked as correct) --\>**
-
-2.  **"The disparate matching rates of the 😐😑 pair indicate that, in general, AU differences affect participants' preferences." (marked as incorrect) --\> Am I right to think that this depends whether the statement refers to AU difference in general, across all emoji pairs, or in this specific pair? If so, you need to specify which you mean.**
-
-**Also, please make the hint a litte bit more informative. It currently largely repeats information that the reader already gets if they got the answer wrong and I think most people will only click on the hint once they have given a wrong answer.**
+<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
-check_question(c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance."), options = c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "There is a major difference between the matching rates of the annoyance and happiness contexts.","Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance.", "The disparate matching rates of the 😐😑 pair indicate that, in general, AU differences affect participants' preferences."), type = "checkbox", 
+check_question(c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance."), options = c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "There is a major difference between the matching rates of the annoyance and happiness contexts.","Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance.", "The disparate matching rates of the 😐😑 pair prove that, in general, AU differences affect participants' preferences."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Apparently, two thirds (66.67 %) of participants favoured the non matching emoji in the *mild irritation*-context: Instead of 😐, they chose 😑. One of the narratives in this context was 'a malfunctioning wifi router'. Which emoji would you choose in this context, 😐 or 😑?" ,

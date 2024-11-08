@@ -343,7 +343,7 @@ This tabular presentation of the data already shows us that non-binary participa
 
 ### Data visualisation {#sec-gender-understanding-vis}
 
-As mentioned above, we will visualise the relative rather than the absolute frequencies to make sure that the numbers for the different genders are comparable. In line with @fricke2024semantic (@RoseGina, please add page number), we also exclude the three non-binary participants. To this end, we use the `filter()` function combined with the `!=` operator (see @sec-RelationalOperators).
+As mentioned above, we will visualise the relative rather than the absolute frequencies to make sure that the numbers for the different genders are comparable. In line with @fricke2024semantic:9 (@RoseGina, please add page number), we also exclude the three non-binary participants. To this end, we use the `filter()` function combined with the `!=` operator (see @sec-RelationalOperators).
 
 ```{r filter-gender}
 

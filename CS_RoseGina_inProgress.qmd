@@ -105,7 +105,7 @@ library(ragg)
 
 ## Introducing the study 🙂 {#sec-introducing-the-study}
 
-Face emojis are frequently used in text messages. They represent facial expressions and often make fundamental contributions to the subtext of a text message. A few studies have investigated the relationship between emojis and the emotions that they depict **(@RoseGina, such statements typically require one or more reference in academic writing. Could you please add a couple of references and send me an updated .bib file)**. However, as emojis are a relatively recent phenomenon, there is still a lot to be discovered. In this chapter, we will look into a study by @fricke2024semantic.
+Face emojis are frequently used in text messages. They represent facial expressions and often make fundamental contributions to the subtext of a text message. A few studies have investigated the relationship between emojis and the emotions that they depict [@fugate2021implications, @maier2023emojis, @pfeifer2022all]. However, as emojis are a relatively recent phenomenon, there is still a lot to be discovered. In this chapter, we will look into a study by @fricke2024semantic.
 
 ### Deconstructing emojis into Action Units {#sec-deconstructing}
 

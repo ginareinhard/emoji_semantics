@@ -138,9 +138,9 @@ Four single-sentence narratives were created for each of the contexts (see @fig-
 >
 >     Alex is overjoyed. Which of the emojis matches the message better? 😄😁
 
-![Example of a test item in \@fricke2024semantic's experiment [@fricke2024semantic: 6]](images/RoseGina_Fricke_test_items.png){#fig-testitems fig-align="center" width="500"}
+![Example of a test item in @fricke2024semantic's experiment [@fricke2024semantic: 6]](images/RoseGina_Fricke_test_items.png){#fig-testitems fig-align="center" width="500"}
 
-These short narratives were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants were then asked to help choose the emoji that best matched the context. Each participant saw each emoji pair twice. **The rate with which the context-matching emoji was chosen was measured. (\@RoseGina, this last sentence needs rephrasing).**
+These short narratives were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants were then asked to help choose the emoji that best matched the context. Each participant saw each emoji pair twice. It was measured how often participants chose the context-matching emoji versus the non-matching emoji.
 :::
 
 @fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis the authors predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant than those that do not (AU-).
@@ -354,7 +354,7 @@ gender_understanding_count <- gender_understanding_count |>
 
 ```
 
-We use `ggplot()` to create a barplot with the `emoji_understanding` categories on the *x*-axis and the relative frequencies that we calculated on the *y*-axis. The bars are coloured according to `gender`. We also add a title and axis labels. Finally, we remove the white space between the bottom of the bars with an additional `scale_y_continuous(expand = c(0,0))` layer and change the colours to make our plot look nicer. **The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html)[@neuwirth2022package]. Since we only need two colours, we chose to insert them manually to avoid having to install an additional package. (\@RoseGina, I think that this package comes with either base R or the tidyverse so this statement is probably not true. Can you please check?)** <!-- I checked and it does not seem to be part of base R or tidyverse-->
+We use `ggplot()` to create a barplot with the `emoji_understanding` categories on the *x*-axis and the relative frequencies that we calculated on the *y*-axis. The bars are coloured according to `gender`. We also add a title and axis labels. Finally, we remove the white space between the bottom of the bars with an additional `scale_y_continuous(expand = c(0,0))` layer and change the colours to make our plot look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html)[@neuwirth2022package]. Since we only need two colours, we chose to insert them manually to avoid having to install an additional package. <!--**(\@RoseGina, I think that this package comes with either base R or the tidyverse so this statement is probably not true. Can you please check?)** #I checked and it is not part of base R or tidyverse-->
 
 ```{r gender-understanding-plot}
 
@@ -571,11 +571,11 @@ The code above creates a barplot and stores it in `plot_concern_surprise`. Here'
 
 1.  Begin by assigning a clear name for the plot and call the data to be plotted.
 2.  Filter the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are plotted.
-3.  Create a `ggplot` object with the context values on the *x*-axis, **percentages scaled** **(\@RoseGina, I'm not sure what you mean by this)** on the *y*-axis, and fill colours corresponding to the match values.
+3.  Create a `ggplot` object with the context values on the *x*-axis and percentages on the *y*-axis. Colours are filled corresponding to the match values.
 4.  Display the data as a barplot. By default, `geom_bar()` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col()` to be able to use the data as is.
-5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts. **(\@RoseGina, I reckon that this line is redundant as it only repeats the default ggplot settings. I was going to delete it, but can you check that I am correct in this assumption? Especially in the function afterwards!)**
+5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts. **(\@RoseGina, I reckon that this line is redundant as it only repeats the default ggplot settings. I was going to delete it, but can you check that I am correct in this assumption? Especially in the function afterwards!)** <!--yes, it is redundant and could be deleted but that would mess up the line numbers (Rose)-->
 6.  Use the "expand" argument of the `scale_y_continuous()` function to remove the white space between the bars and the *x*-axis.
-7.  Adjust colours with values from **"Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis) (\@RoseGina, see my earlier comment).**
+7.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
 8.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the corresponding bars.
 9.  Add the corresponding emojis at the top of the plot.
 10. Add a theme, in this case `theme_classic()`.

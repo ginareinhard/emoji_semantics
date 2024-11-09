@@ -152,15 +152,15 @@ a\) According to the abstract, what were the results of the experiment?
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("For both types of pairs, the context-matching emoji was preferred over the non-matching one."), options = c("Participants chose the context-matching emoji more often in the AU+ condition.", "For the AU- pairs, the pattern was more random.", "Participants chose the context-matching emoji more often in the AU- condition.", "For the AU+ pairs, the pattern was more random.", "For both types of pairs, the context-matching emoji was preferred over the non-matching one."), type = "checkbox",
+check_question(c("For both types of pairs, the context-matching emoji was preferred over the non-matching one.", "There were no significant differences between the two conditions."), options = c("Participants chose the context-matching emoji more often in the AU+ condition.", "There were no significant differences between the two conditions.", "Participants chose the context-matching emoji more often in the AU- condition.", "For both types of pairs, the context-matching emoji was preferred over the non-matching one."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
-right = "That's right! In both AU conditions, the context-matching emoji was preferred over the non-matching one. There were no significant differences between the two conditions.",
+right = "That's right!",
 wrong = "Not quite. Read the abstract again.")
 
 ```
 
-b\) The actual results of the experiment were different from what the authors had expected. According to @fricke2024semantic's research hypothesis "Visual differences between emojis which correspond to human facial features (AU+) are more semantically relevant than those that do not (AU-)", which of these results would you have expected from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).** <!--Since the hypothesis and design are complex and quite difficult to understand, the question was intended to make the readers infer from the hypothesis what the outcome of the experiment would be if the hypothesis was true. The actual results of the experiment were different from what the authors expected, i.e. the abstract of the study describes different results from those asked in the quiz question. I was thinking the readers might need to understand what results the authors had expected before they conducted the experiment. The question could be confusing for the readers though. So now, as a suggestion, two questions are included as a task, let us know what you prefer / what to include. (Gina)-->
+b\) The actual results of the experiment were different from what the authors had expected. According to @fricke2024semantic's research hypothesis (visual differences between emojis which correspond to human facial features are more semantically relevant than those that do not), which of these results would you have expected from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).** <!--Since the hypothesis and design are complex and quite difficult to understand, the question was intended to make the readers infer from the hypothesis what the outcome of the experiment would be if the hypothesis was true. The actual results of the experiment were different from what the authors expected, i.e. the abstract of the study describes different results from those asked in the quiz question. I was thinking the readers might need to understand what results the authors had expected before they conducted the experiment. The question could be confusing for the readers though. So now, as a suggestion, two questions are included as a task, let us know what you prefer / what to include. (Gina)-->
 
 ```{r echo=FALSE, results="asis"}
 
@@ -169,7 +169,7 @@ random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Visual differences between emojis would be semantically more relevant if they corresponded to differences in human facial features (AU+). This would lead to participants choosing a context-matching emoji more often in the AU+ condition and making more random choices in the AU- condition.",
 wrong = "Not quite. Try again.")
-check_hint("Based on the hypothesis, differences corresponding to facial features (AU+) would be more semantically relevant. In contrast, differences  that do not correspond to facial features (AU-) would be less semantically relevant, making them less noticeable and leading to more inconsistent choices. How might this affect the frequency with which participants choose the context-matching emoji in each condition?", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("Based on the hypothesis, differences corresponding to facial features (AU+) would be more semantically relevant. In contrast, differences that do not correspond to facial features (AU-) would be less semantically relevant, making them less noticeable and leading to more inconsistent choices. How might this affect the frequency with which participants choose the context-matching emoji in each condition?", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 

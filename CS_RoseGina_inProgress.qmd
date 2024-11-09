@@ -46,20 +46,6 @@ knitr::opts_chunk$set(dev.args = list(png = list(type = "cairo")))
 library(checkdown)
 ```
 
-```{r colour-palettes, include=FALSE}
-# https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/#r-base-color-palettes
-
-# an option with an additional package:
-#install.packages("RColorBrewer")
-library(RColorBrewer)
-#colourblind-friendly
-display.brewer.all(colorblindFriendly = TRUE)
-# second list of colours is best suited for nominal/categorical data: "Set2", "Paired", "Dark2"
-brewer.pal(8, "Set2")
-#Set2 hex codes: "#66C2A5" "#FC8D62" "#8DA0CB" "#E78AC3""#A6D854" "#FFD92F" "#E5C494" "#B3B3B3"
-
-```
-
 ::: callout-note
 #### **About the authors of this chapter** {.unnumbered}
 
@@ -160,7 +146,7 @@ wrong = "Not quite. Read the abstract again.")
 
 ```
 
-b\) The actual results of the experiment were different from what the authors had expected. According to @fricke2024semantic's research hypothesis (visual differences between emojis which correspond to human facial features are more semantically relevant than those that do not), which of these results would you have expected from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).** <!--Since the hypothesis and design are complex and quite difficult to understand, the question was intended to make the readers infer from the hypothesis what the outcome of the experiment would be if the hypothesis was true. The actual results of the experiment were different from what the authors expected, i.e. the abstract of the study describes different results from those asked in the quiz question. I was thinking the readers might need to understand what results the authors had expected before they conducted the experiment. The question could be confusing for the readers though. So now, as a suggestion, two questions are included as a task, let us know what you prefer / what to include. (Gina)-->
+b\) The actual results of the experiment were different from what the authors had expected. According to @fricke2024semantic's research hypothesis (visual differences between emojis which correspond to human facial features are more semantically relevant than those that do not), which of these results would you have expected from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).** <!--@Elen: Since the hypothesis and design are complex and quite difficult to understand, the question was intended to make the readers infer from the hypothesis what the outcome of the experiment would be if the hypothesis was true. The actual results of the experiment were different from what the authors expected, i.e. the abstract of the study describes different results from those asked in the quiz question. I was thinking the readers might need to understand what results the authors had expected before they conducted the experiment. The question could be confusing for the readers though. So now, as a suggestion, two questions are included as a task, let us know what you prefer / what to include. (Gina)-->
 
 ```{r echo=FALSE, results="asis"}
 
@@ -366,7 +352,7 @@ gender_understanding_count <- gender_understanding_count |>
 
 ```
 
-We use `ggplot()` to create a barplot with the `emoji_understanding` categories on the *x*-axis and the relative frequencies that we calculated on the *y*-axis. The bars are coloured according to `gender`. We also add a title and axis labels. Finally, we remove the white space between the bottom of the bars with an additional `scale_y_continuous(expand = c(0,0))` layer and change the colours to make our plot look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html)[@neuwirth2022package]. Since we only need two colours, we chose to insert them manually to avoid having to install an additional package. <!--**(\@RoseGina, I think that this package comes with either base R or the tidyverse so this statement is probably not true. Can you please check?)** #I checked and it is not part of base R or tidyverse-->
+We use `ggplot()` to create a barplot with the `emoji_understanding` categories on the *x*-axis and the relative frequencies that we calculated on the *y*-axis. The bars are coloured according to `gender`. We also add a title and axis labels. Finally, we remove the white space between the bottom of the bars with an additional `scale_y_continuous(expand = c(0,0))` layer and change the colours to make our plot look nicer. The hexadecimal color values chosen here are from the colour-blind friendly palette "Set2" from the package [{RColorBrewer}](https://cran.r-project.org/web/packages/RColorBrewer/index.html)[@neuwirth2022package]. Since we only need two colours, we chose to insert them manually to avoid having to install an additional package. **(\@RoseGina, I think that this package comes with either base R or the tidyverse so this statement is probably not true. Can you please check?)** <!--#@Elen:I checked, and RColorBrewer seems to be a standalone package, it’s not part of base R or the tidyverse. But ggplot2 includes functions that are compatible with RColorBrewer, so as long as RColorBrewer is installed (even if not loaded), these functions can be used. But our statement is correct because we'd need to install RColorBrewer if we wanted to use it. (Rose)-->
 
 ```{r gender-understanding-plot}
 
@@ -568,7 +554,7 @@ plot_concern_surprise <- data_AU |>
   filter(context == "concern" | context == "surprise") |>
   ggplot(aes(x = context, y = percent, fill = match)) +
   geom_col() +
-  scale_x_discrete(limits = c("concern", "surprise")) +
+  #scale_x_discrete(limits = c("concern", "surprise")) +
   scale_y_continuous(expand = c(0,0)) +
   scale_fill_manual(values = c("#66C2A5", "#E78AC3")) +
   geom_text(aes(label = percent), position = position_stack(vjust = 0.5)) +
@@ -585,7 +571,7 @@ The code above creates a barplot and stores it in `plot_concern_surprise`. Here'
 2.  Filter the contexts, such that only rows of the contexts *concern* or (`|`) *surprise* are plotted.
 3.  Create a `ggplot` object with the context values on the *x*-axis and percentages on the *y*-axis. Colours are filled corresponding to the match values.
 4.  Display the data as a barplot. By default, `geom_bar()` counts how many times *match* and *no match* occur. However, as we have already calculated and stored the values in the column `percent`, we use `geom_col()` to be able to use the data as is.
-5.  The context values, which are displayed on the x-axis, are discrete. With this command, we set and order the contexts. **(\@RoseGina, I reckon that this line is redundant as it only repeats the default ggplot settings. I was going to delete it, but can you check that I am correct in this assumption? Especially in the function afterwards!)** <!--yes, it is redundant and could be deleted but that would mess up the line numbers (Rose)-->
+5.  The context values, which are displayed on the *x*-axis, are discrete. With this command, we set and order the contexts. **(\@RoseGina, I reckon that this line is redundant as it only repeats the default ggplot settings. I was going to delete it, but can you check that I am correct in this assumption? Especially in the function afterwards!)** <!--@Elen: Yes, in this case, the code is indeed redundant and could be removed. But since we’ll be reusing this code later in our "plot_AU_matches" function, I’d like to keep it. Without this line, the contexts default to alphabetical order, which would cause a mismatch with the emojis positioned above the bars. (Rose)-->
 6.  Use the "expand" argument of the `scale_y_continuous()` function to remove the white space between the bars and the *x*-axis.
 7.  Adjust colours with values from "Set2" from the {RColorBrewer} package (see @sec-gender-understanding-vis).
 8.  Annotate the percentages of matching rates by adding them as text and placing them inside the plot, in the middle of the corresponding bars.

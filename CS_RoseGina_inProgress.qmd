@@ -143,10 +143,24 @@ These short narratives were divided up into into four experimental lists of 12 i
 
 @fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis the authors predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant than those that do not (AU-).
 
-::: callout-tip
-#### Quiz time! {.unnumbered}
+::: callout-caution
+#### Task
 
-[**Q1.**]{style="color:green;"} According to @fricke2024semantic's hypothesis, which of these results would you expect from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).**
+Read the abstract of @fricke2024semantic's study.
+
+a\) According to the abstract, what were the results of the experiment?
+```{r echo=FALSE, results="asis"}
+
+check_question(c("For both types of pairs, the context-matching emoji was preferred over the non-matching one."), options = c("Participants chose the context-matching emoji more often in the AU+ condition.", "For the AU- pairs, the pattern was more random.", "Participants chose the context-matching emoji more often in the AU- condition.", "For the AU+ pairs, the pattern was more random.", "For both types of pairs, the context-matching emoji was preferred over the non-matching one."), type = "checkbox",
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That's right! In both AU conditions, the context-matching emoji was preferred over the non-matching one. There were no significant differences between the two conditions.",
+wrong = "Not quite. Read the abstract again.")
+
+```
+
+
+b\) The actual results of the experiment were different from what the authors had expected. According to @fricke2024semantic's research hypothesis "Visual differences between emojis which correspond to human facial features (AU+) are more semantically relevant than those that do not (AU-)", which of these results would you have expected from the experiment? **(\@RoseGina, how are readers supposed to know this? Would you like them to read the abstract before attempting this question? I think that'd be a good idea but in that case you need to tell them to do so first).** <!--Since the hypothesis and design are complex and quite difficult to understand, the question was intended to make the readers infer from the hypothesis what the outcome of the experiment would be if the hypothesis was true. The actual results of the experiment were different from what the authors expected, i.e. the abstract of the study describes different results from those asked in the quiz question. I was thinking the readers might need to understand what results the authors had expected before they conducted the experiment. The question could be confusing for the readers though. So now, as a suggestion, two questions are included as a task, let us know what you prefer / what to include. (Gina)-->
 
 ```{r echo=FALSE, results="asis"}
 
@@ -169,7 +183,7 @@ check_hint("Based on the hypothesis, differences corresponding to facial feature
 ::: {#fig-FrickeGenderBarplots layout-ncol="2"}
 ![Emoji use by gender](images/RoseGina_Fricke_emoji_use.png){#fig-emojiuse fig-align="center" width="550"}
 
-![Attitude towards emojis by gender ](images/RoseGina_Fricke_emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
+![Attitude towards emojis by gender](images/RoseGina_Fricke_emoji_attitude.png){#fig-emojiattitude fig-align="center" width="550"}
 
 Barplots from \@fricke2024semantic's study [@fricke2024semantic: 9-10]
 :::
@@ -248,7 +262,7 @@ The **mode** (see \@sec-Mode) of the `gender` variable in the dataset is *men*, 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q2.**]{style="color:green;"} Which of these problems are likely to occur if we plot emoji understanding by gender in a barplot with unequal gender groups?
+[**Q1.**]{style="color:green;"} Which of these problems are likely to occur if we plot emoji understanding by gender in a barplot with unequal gender groups?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -375,7 +389,7 @@ As you can see from the barplot, the gender distribution for emoji understanding
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q3.**]{style="color:green;"} How do you interpret this plot?
+[**Q2.**]{style="color:green;"} How do you interpret this plot?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -474,7 +488,7 @@ table(df$context)
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q4.**]{style="color:green;"} Which problems become apparent when checking the content of our new `context` variable using the `table()` function?
+[**Q3.**]{style="color:green;"} Which problems become apparent when checking the content of our new `context` variable using the `table()` function?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -775,7 +789,7 @@ The following quiz questions are about the interpretation of @fig-AUpatch. The q
 ::: callout-tip
 #### Quiz time! {.unnumbered}
 
-[**Q5.**]{style="color:green;"} In which context pair did participants choose the matching emojis most often?
+[**Q4.**]{style="color:green;"} In which context pair did participants choose the matching emojis most often?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -787,7 +801,7 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> [**Q6.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
+<br><br> [**Q5.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
 
 ```{r echo=FALSE, results="asis"}
 check_question("Within these pairs, a very similar number of participants chose the matching emoji.", options = c("Within these pairs, a very similar number of participants chose the matching emoji.", "Within these pairs, participants had the most difficulty choosing one emoji over the other.", "Within these pairs, the least number of participants chose the matching emoji.", "Within these pairs, half the participants preferred one emoji and half preferred the other."), type = "radio", 
@@ -798,7 +812,7 @@ wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) l
 check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q7.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out the most?
+<br><br> [**Q6.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out the most?
 
 ```{r echo=FALSE, results="asis"}
 
@@ -810,7 +824,7 @@ wrong = "Not quite. Which plot looks significantly different than the others?")
 
 ```
 
-<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
+<br><br> [**Q7.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 check_question(c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance."), options = c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "There is a major difference between the matching rates of the annoyance and happiness contexts.","Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance.", "The disparate matching rates of the 😐😑 pair prove that, in general, AU differences affect participants' preferences."), type = "checkbox", 
@@ -821,7 +835,7 @@ wrong = "Not quite. Consider the implications of a low matching rate versus a hi
 check_hint("Two statements are correct. A low matching rate indicates that participants rarely chose the emoji that was intended for the context, that is, the emoji that the authors identified as the most fitting.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q9.**]{style="color:green;"} What are plausible reasons for the striking results presented in the lower left barplot? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} What are plausible reasons for the striking results presented in the lower left barplot? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 

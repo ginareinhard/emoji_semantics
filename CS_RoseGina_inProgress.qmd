@@ -214,7 +214,7 @@ df |>
 
 ```
 
-Before we start analysing, we should translate the categories labels (levels) into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary.*[^1]
+Before we start analysing, we should translate the labels (levels) of the categories into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary.*[^1]
 
 [^1]: We decided to translate '*divers*' as 'non-binary', as this is the English term that @fricke2024semantic used in their paper.
 

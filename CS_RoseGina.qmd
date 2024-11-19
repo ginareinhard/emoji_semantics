@@ -380,7 +380,7 @@ When comparing our barplot to @fig-FrickeGenderBarplots, it is interesting to no
 
 ## Comparing matching rates between AU conditions {#sec-au-plot}
 
-We will now turn to exploring the central research question of @fricke2024semantic: **Do AU differences lead to differences in meaning between the two emojis of a pair?** As explained in @sec-deconstructing, AUs are numbers which correspond to human-like facial features. In emoji pairs of the AU+ condition, the visual difference between the emojis is reflected in a number difference, e.g. *grinning face with big eyes* 😃 (AU: **5** + 12 + 25 + 26) and *grinning squinting face* 😆 (AU: 12 + 25 + 26 + **43**). In the AU- condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes* 😁 both have the same AU (12 + 25 + 26 + 63).
+We will now turn to exploring the central research question of @fricke2024semantic: **Do AU differences lead to differences in meaning between the two emojis of a pair?** As explained in @sec-deconstructing, AUs are numbers which correspond to human-like facial features. In emoji pairs of the AU+ condition, the visual difference between the emojis is reflected in a number difference, e.g. *grinning face with big eyes* 😃 (AU: **5** + 12 + 25 + 26) and *grinning squinting face* 😆 (AU: 12 + 25 + 26 + **43**). In the AU- condition, the visual difference does not correspond to an AU difference, e.g. *grinning face with smiling eyes* 😄 and *beaming face with smiling eyes* 😁 both have the same AUs (12 + 25 + 26 + 63).
 
 Step by step, we will build an informative plot which will include all the information needed to answer this question. This plot will display how many times each emoji was chosen in its presumed corresponding context.
 
@@ -463,7 +463,7 @@ table(df$context)
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we coded for."), options = c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we coded for", "The context descriptions were not correctly assigned in the case of matching strings.", "There are too many occurrences of matches per context than can reasonably be assumed.", "There are more contexts in the output than we coded for."), type = "checkbox", 
+check_question(c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we coded for."), options = c("All contexts have 159 occurrences, except for mild disappointment which occurs 318 times.", "There are fewer contexts in the output than we coded for.", "The context descriptions were not correctly assigned in the case of matching strings.", "There are too many occurrences of matches per context than can reasonably be assumed.", "There are more contexts in the output than we coded for."), type = "checkbox", 
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Something must have gone wrong. As you can see, it is always a good idea to check the output of every step of your code for inconsistencies!",
@@ -852,7 +852,7 @@ You have successfully completed [`r checkdown::insert_score()` out of 10 quiz qu
 
 You are now a pro in handling (stacked) barplots! You can build, customise, arrange, and interpret them. Barplots are powerful for visualising categorical data, offering a straightforward way to compare frequencies and make patterns apparent. However, they do have their limitations. For instance, they are not ideal for displaying continuous data. Building and assembling plots can be quite fiddly and it can take some trial-and-error to make the plot look like what you had imagined. But there is a solution for (almost) everything and hopefully, the beautiful plot you create in the process will be worth the effort.
 
-This chapter's analysis revealed gender-specific differences in emoji understanding, potentially indicating a gender confidence gap between men and women. On average, however, both genders, reported at least a good understanding of emojis. The visualisations have been adjusted for the gender imbalance in the data, demonstrating the importance of accounting for differences in group sizes.
+This chapter's analysis revealed gender-specific differences in emoji understanding, potentially indicating a gender confidence gap between men and women. On average, however, both genders reported at least a good understanding of emojis. The visualisations have been adjusted for the gender imbalance in the data, demonstrating the importance of accounting for differences in group sizes.
 
 In this chapter, we have created an informative figure that answers the experiment’s research question by combining multiple plots. The question whether Action Unit (AU) differences are critical for emoji preference was answered in the negative. However, we have made several other discoveries along the way: As noted by @fricke2024semantic, we have found that small changes of emojis’ facial features do affect choice patterns.
 

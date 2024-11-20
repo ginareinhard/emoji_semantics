@@ -59,7 +59,7 @@ Face emojis are frequently used in text messages. They represent facial expressi
 
 ### Deconstructing emojis into Action Units {#sec-deconstructing}
 
-@fricke2024semantic compared "visually similar face emojis" using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces [@ekman1978facial]. @fricke2024semantic assigned numbers to human-like facial features such as *eyebrows arched* and *eyes wide*. These numbers are called Action Units, short AUs. As you can see in @fig-emojipairs, each emoji consists of several AUs.
+@fricke2024semantic compared "visually similar face emojis" using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces [@ekman1978facial] and was adopted for human faces by @fugate2021implications. Human-like facial features/ facial action movements such as *eyebrows arched* and *eyes wide* are called Action Units, short AUs. For convenience, AUs are assigned numbers, allowing them to be easily referenced. As you can see in @fig-emojipairs, each emoji consists of several AUs.
 
 ![Emoji pairs and their AU codes [from @fricke2024semantic: 5, CC-BY]](images/CS_RoseGina_emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 

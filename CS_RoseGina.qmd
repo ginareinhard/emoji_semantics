@@ -59,11 +59,13 @@ Face emojis are frequently used in text messages. They represent facial expressi
 
 ### Deconstructing emojis into Action Units {#sec-deconstructing}
 
-@fricke2024semantic compared "visually similar face emojis" using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces [@ekman1978facial] and was adopted for human faces by @fugate2021implications. Human-like facial features/ facial action movements such as *eyebrows arched* and *eyes wide* are called Action Units, short AUs. For convenience, AUs are assigned numbers, allowing them to be easily referenced. As you can see in @fig-emojipairs, each emoji consists of several AUs.
+@fricke2024semantic compared "visually similar face emojis" using an annotation system developed by @fugate2021implications. This system is based on the Facial Action Coding System (FACS) for human faces [@ekman1978facial] and was adopted for human faces by @fugate2021implications. Human-like facial features such as *eyebrows arched* and *eyes wide* are called Action Units, short AUs. For convenience, AUs are assigned numbers, allowing them to be easily referenced. As you can see in @fig-emojipairs, each emoji consists of several AUs.
 
 ![Emoji pairs and their AU codes [from @fricke2024semantic: 5, CC-BY]](images/CS_RoseGina_emoji_pairs.png){#fig-emojipairs fig-align="center" width="700"}
 
-@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the pairs of emojis are similar, but are assigned a different set of AUs. The emoji pairs in the **AU- condition** are also similar, but their AUs are identical. AUs capture facial expressions by numbers and, as such, can assist linguists to accurately describe emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures the fact that the former emoji has open eyes while the latter has closed eyes. Since humans can choose whether to open or close their eyes, this is an **AU+ pair**. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (**AU-**).
+@fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the pairs of emojis are similar, but are assigned a different set of AUs. The emoji pairs in the **AU- condition** are also similar, but their AUs are identical. @fricke2024semantic deliberately selected the emojis of a pair to be as visually similar as possible, while ensuring that they either differed by exactly one Action Unit (AU+) or had no differences in Action Units (AU-).
+
+AUs capture facial expressions by numbers and, as such, can assist linguists to accurately describe emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures the fact that the former emoji has open eyes while the latter has closed eyes. Since humans can choose whether to open or close their eyes, this is an **AU+ pair**. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (**AU-**).
 
 ### The experiment {#sec-design}
 
@@ -91,7 +93,7 @@ Four single-sentence narratives were created for each of the contexts (see @fig-
 These short narratives were divided up into into four experimental lists of 12 items. Each list also contained 12 filler items, so that each participant saw 24 items. The participants were then asked to help choose the emoji that best matched the context. Each participant saw each emoji pair twice. It was measured how often participants chose the context-matching emoji versus the non-matching emoji.
 :::
 
-@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis the authors predicted that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant than those that do not (AU-).
+@fricke2024semantic's central research question was: **Do AU differences lead to differences in meaning between the two emojis of a pair?** In line with the pictorial approach by @maier2023emojis the authors hypothesized that visual differences between emojis which correspond to human facial features (AU+) would be more semantically relevant than those that do not (AU-). However, they noted that if no evidence were found to support this hypothesis, it would align with @grosz2023semantics's lexicalist approach. This approach suggests that visual differences between emojis and their correspondence to human facial features are less significant, placing emphasis instead on the intrinsic meaning of the emoji and its constituent parts.
 
 ::: callout-tip
 #### Quiz time! {.unnumbered}
@@ -199,9 +201,9 @@ df |>
 
 ```
 
-Before we start analysing, we should translate the labels (levels) of the categories into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary.*[^cs_rosegina-1]
+Before we start analysing, we should translate the labels (levels) of the categories into English. Using a combination of `mutate()` and `recode()`, we translate *männlich* to *men*, *weiblich* to *women*, and *divers* to *non-binary.*[^1]
 
-[^cs_rosegina-1]: We decided to translate '*divers*' as 'non-binary', as this is the English term that @fricke2024semantic used in their paper.
+[^1]: We decided to translate '*divers*' as 'non-binary', as this is the English term that @fricke2024semantic used in their paper.
 
 ```{r recode-gender}
 
@@ -844,7 +846,9 @@ check_hint("Two of these are plausible reasons for the observed result. The plot
 <br>
 :::
 
-Overall, @fig-AUpatch shows that there was indeed a preference for context-matching emojis. However, the findings do not support the pictorial approach adopted by @fricke2024semantic: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
+Overall, @fig-AUpatch shows that there was indeed a preference for context-matching emojis. Importantly, participants preferred the context-matching emoji in both the AU+ condition and the AU- condition: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
+
+The findings thus do not provide evidence for @fricke2024semantic's hypothesis, which was based on the pictorial approach. Instead, the results suggest that visually similar emojis can convey different meanings, even when they correspond to the same human facial expressions. However, Fricke, Grosz & Scheffler [-@fricke2024semantic: 12] note that while this strongly aligns with the predictions of the lexicalist approach, it does not automatically provide clear evidence for it.
 
 ## Conclusion {#sec-conclusion}
 

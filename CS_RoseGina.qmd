@@ -777,7 +777,8 @@ By looking and interpreting @fig-AUpatch, we can now finally answer the research
 
 Based on the descriptive statistics visualised in @fig-AUpatch, the answer is no, seemingly not. The AU difference does not seem to be critical when deciding which emoji to use in a specific context. The original study also concluded that the matching emoji was "generally preferred with matching rates above chance level" [@fricke2024semantic: 11], both in the AU+ and in the AU- condition. Now, was all this work for nothing?
 
-No, not at all! We can still draw some interesting inferences from the plot we created. For example, we see that minor visual differences between emojis do appear to affect the understanding and selection of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Notably, matching rates were quite similar within emoji pairs. In particular, this was the case for the contexts *happiness* 😃 - *(cheeky) laughter* 😆 and *happiness2* 😊 - *bashfulness* ☺️ : there was less than a 2% difference between the matching rates. Hence, there is much more to explore in future linguistics studies on the semantics of emoji in text messages!
+No, not at all! We can still draw some interesting inferences from the plot we created. For example, we see that minor visual differences between emojis do appear to affect the understanding and selection of emojis in different contexts: By slightly varying the contexts, participants were made to choose emojis with different facial features. Matching rates were quite similar within emoji pairs and, notably, also largely consistent across emoji pairs, regardless of their AU status.
+Hence, there is much more to explore in future linguistics studies on the semantics of emoji in text messages!
 
 The following quiz questions are about the interpretation of @fig-AUpatch. The questions should help you make sense of the information displayed.
 
@@ -848,7 +849,7 @@ check_hint("Two of these are plausible reasons for the observed result. The plot
 
 Overall, @fig-AUpatch shows that there was indeed a preference for context-matching emojis. Importantly, participants preferred the context-matching emoji in both the AU+ condition and the AU- condition: Whether or not emoji features coincided with human facial features, did not (significantly) affect the participants' decision for one emoji or the other.
 
-The findings thus do not provide evidence for @fricke2024semantic's hypothesis, which was based on the pictorial approach. Instead, the results suggest that visually similar emojis can convey different meanings, even when they correspond to the same human facial expressions. However, Fricke, Grosz & Scheffler [-@fricke2024semantic: 12] note that while this strongly aligns with the predictions of the lexicalist approach, it does not automatically provide clear evidence for it.
+The findings do not provide evidence for @fricke2024semantic's experimental hypothesis, which was based on the pictorial approach. Instead, as the authors note, the results suggest that visually similar emojis can convey different meanings, even when they correspond to the same human facial expressions. However, Fricke, Grosz & Scheffler [-@fricke2024semantic: 12] point out that while this strongly aligns with the predictions of the lexicalist approach, it does not automatically provide clear evidence for it.
 
 ## Conclusion {#sec-conclusion}
 

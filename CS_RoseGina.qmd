@@ -808,6 +808,17 @@ wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) l
 check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
+<br><br> [**Q7.**]{style="color:green;"} How can similar matching rates across emoji pairs (that is, across sub-plots) be interpreted?
+
+```{r echo=FALSE, results="asis"}
+check_question("For these pairs, a very similar number of participants chose the matching emoji.", options = c("For these pairs, a very similar number of participants chose the matching emoji.", "For these pairs, participants had the most difficulty choosing one emoji over the other.", "For these pairs, the least number of participants chose the matching emoji.", "For these pairs, half the participants preferred one emoji and half preferred the other."), type = "radio", 
+random_answer_order = TRUE,
+button_label = "Check answer",
+right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for these pairs.",
+wrong = "This is not correct. Look at the subplots *happiness* 😃 - *(cheeky) laughter* 😆 and *amusement* 😄 - *(intense) happiness* ️😁 and think about their meaning.")
+check_hint("Similar matching rates imply that the *match* / *no match* ratio is somewhat constant across contexts. For example, compare the subplots *happiness* 😃 - *(cheeky) laughter* 😆 and *amusement* 😄 - *(intense) happiness*: the matching rates are consistenly high for all emojis and contexts. What might this indicate?", hint_title = "🐭 Click on the mouse for a hint.")
+```
+
 <br> [**Q8.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out the most?
 
 ```{r echo=FALSE, results="asis"}

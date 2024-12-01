@@ -239,13 +239,13 @@ The **mode** (see @sec-Mode) of the `gender` variable in the dataset is *men*, a
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("It may appear as if men have better emoji understanding simply because of their group size.", "It may appear as if non-binary people have lower emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger or smaller than they actually are."), 
-               options = c("It may appear as if men have better emoji understanding simply because of their group size.", "It may appear as if non-binary people have lower emoji understanding simply because of their group size.", "The differences in emoji understanding between gender groups may look bigger or smaller than they actually are.", "We will not be able to use ggplot to visualise the data."), type = "checkbox",
+check_question(c("The differences in emoji understanding between gender groups may look bigger or smaller than they actually are."), 
+               options = c("The bars for the gender groups may overlap in the plot.", "The y-axis of the plot may become distorted and therefore inaccurate.", "The differences in emoji understanding between gender groups may look bigger or smaller than they actually are.", "We will not be able to use ggplot to visualise the data."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right! Unequal group sizes can distort the differences by showing larger totals for larger groups and smaller totals for smaller groups. <br><br>Can you think of ways to address this issue?",
 wrong = "Not quite. Try again.")
-check_hint("Three of these problems could occur.", hint_title = "🐭 Click on the mouse for a hint.")
+check_hint("Only one of these problems could occur.", hint_title = "🐭 Click on the mouse for a hint.")
 
 ```
 

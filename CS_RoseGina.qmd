@@ -65,7 +65,7 @@ Face emojis are frequently used in text messages. They represent facial expressi
 
 @fricke2024semantic defined two different types of emoji pairs: In the **AU+ condition**, the pairs of emojis are similar, but are assigned a different set of AUs. The emoji pairs in the **AU- condition** are also similar, but their AUs are identical. @fricke2024semantic deliberately selected the emojis of a pair to be as visually similar as possible, while ensuring that they either differed by exactly one Action Unit (AU+) or had no differences in Action Units (AU-).
 
-AUs capture facial expressions by numbers and, as such, can assist linguists to accurately describe emojis. However, only expressions that can be consciously changed by humans receive number-labels: For example, the AU difference between 😃 and 😆 captures the fact that the former emoji has open eyes while the latter has closed eyes. Since humans can choose whether to open or close their eyes, this is an **AU+ pair**. If the subtle difference between emojis is not manipulable, as in 😄 and 😁, the emojis are described by identical numbers (**AU-**).
+AUs capture the facial expressions of emojis and, as such, can assist linguists to accurately describe them. However, only expressions that can be consciously changed by humans receive labels: For example, the AU difference between 😃 and 😆 captures the fact that the former emoji has open eyes while the latter has closed eyes. Since humans can choose whether to open or close their eyes, this is an **AU+ pair**. If the subtle difference between emojis is not manipulable by humans, as in 😄 and 😁, the emojis are described by identical AUs (**AU-**).
 
 ### The experiment {#sec-design}
 

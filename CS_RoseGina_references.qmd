@@ -1,0 +1,29 @@
+---
+title: "RoseGina_references"
+format: html
+editor: visual
+---
+
+## References
+
+-   Ekman, Paul & Wallace V Friesen. 1978. Facial Action Coding System. *Environmental Psychology & Nonverbal Behavior.*
+
+-   Fricke, Lea, Patrick G Grosz, & Tatjana Scheffler. 2024. Semantic Differences in Visually Similar Face Emojis. *Language and Cognition*. Cambridge University Press 1–15. <https://doi.org/10.1017/langcog.2024.12>.
+
+-   Fugate, Jennifer MB & Courtny L Franco. 2021. Implications for Emotion: Using Anatomically Based Facial Coding to Compare Emoji Faces Across Platforms. *Frontiers in Psychology*. Frontiers Media SA 12. 605928. <https://doi.org/10.3389/fpsyg.2021.605928>.
+
+-   Grosz, Patrick Georg, Gabriel Greenberg, Christian De Leon & Elsi Kaiser. 2023. A semantics of face emoji in discourse. *Linguistics and Philosophy.* Springer 46(4). 905-957. <https://doi.org/10.1007/s10988-022-09369-8>
+
+-   Maier, Emar. 2023. Emojis as Pictures. *Ergo* 10. <https://doi.org/10.3998/ergo.4641>.
+
+-   Neuwirth, Erich. 2022. Package "RColorBrewer". *ColorBrewer Palettes* 991. <https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf>.
+
+-   Pedersen, Thomas Lin. 2024. *Patchwork: The Composer of Plots*. <https://patchwork.data-imaginist.com>.
+
+-   Pedersen, Thomas Lin & Maxim Shemanarev. 2024. *Ragg: Graphic Devices Based on AGG*. <https://ragg.r-lib.org>.
+
+-   Pfeifer, Valeria A, Emma L Armstrong & Vicky Tzuyin Lai. 2022. Do all facial emojis communicate emotion? The impact of facial emojis on perceived sender emotion and text processing. *Computers in Human Behavior*. Elsevier 126. 107016. <https://doi.org/10.1016/j.chb.2021.107016>.
+
+-   Scheffler, Tatjana & Ivan Nenchev. 2024. Affective, semantic, frequency, and descriptive norms for 107 face emojis. *Behavior Research Methods*. Springer 1–22. <https://doi.org/10.3758/s13428-024-02444-x>.
+
+-   Wickham, Hadley, Romain François & Lucy D’Agostino McGowan. 2024. *Emo: Easily Insert ’emoji’*. <https://github.com/hadley/emo>.

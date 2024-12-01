@@ -106,7 +106,7 @@ Read the abstract of the study:
 
 ```{r echo=FALSE, results="asis"}
 
-check_question(c("For both types of pairs, the context-matching emoji was preferred over the non-matching one.", "There were no significant differences between the two conditions."), options = c("Participants chose the context-matching emoji more often in the AU+ condition.", "There were no significant differences between the two conditions.", "Participants chose the context-matching emoji more often in the AU- condition.", "For both types of pairs, the context-matching emoji was preferred over the non-matching one."), type = "checkbox",
+check_question(c("For both types of pairs, the context-matching emoji was preferred over the non-matching one.", "There were no significant differences between the two conditions."), options = c("Participants chose the context-matching emoji more often in the AU+ condition than in the AU- condition.", "There were no significant differences between the two conditions.", "Participants chose the context-matching emoji more often in the AU- condition than in the AU+ condition.", "For both types of pairs, the context-matching emoji was preferred over the non-matching one."), type = "checkbox",
 random_answer_order = TRUE,
 button_label = "Check answer",
 right = "That's right!",

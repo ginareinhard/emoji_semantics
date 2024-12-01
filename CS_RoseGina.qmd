@@ -797,17 +797,6 @@ wrong = "Not quite, try again.")
 
 ```
 
-<br><br> [**Q7.**]{style="color:green;"} How can a small difference (such as \< 2%) between matching rates within pairs be interpreted?
-
-```{r echo=FALSE, results="asis"}
-check_question("Within these pairs, a very similar number of participants chose the matching emoji.", options = c("Within these pairs, a very similar number of participants chose the matching emoji.", "Within these pairs, participants had the most difficulty choosing one emoji over the other.", "Within these pairs, the least number of participants chose the matching emoji.", "Within these pairs, half the participants preferred one emoji and half preferred the other."), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer",
-right = "That's right! Of course, this does not mean that the same participants preferred the matching emojis for both emojis of a pair.",
-wrong = "This is not correct. Look at the subplot *happiness* 😃 - *(cheeky) laughter* 😆 and think about its meaning.")
-check_hint("A small difference implies that the *match* / *no match* ratio is very similar across contexts. For example, this is the case in the subplot *happiness* 😃 - *(cheeky) laughter* 😆.", hint_title = "🐭 Click on the mouse for a hint.")
-```
-
 <br><br> [**Q7.**]{style="color:green;"} How can similar matching rates across emoji pairs (that is, across sub-plots) be interpreted?
 
 ```{r echo=FALSE, results="asis"}
@@ -819,19 +808,7 @@ wrong = "This is not correct. Look at the subplots *happiness* 😃 - *(cheeky) 
 check_hint("Similar matching rates imply that the *match* / *no match* ratio is somewhat constant across contexts. For example, compare the subplots *happiness* 😃 - *(cheeky) laughter* 😆 and *amusement* 😄 - *(intense) happiness*: the matching rates are consistenly high for all emojis and contexts. What might this indicate?", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br> [**Q8.**]{style="color:green;"} Looking at the final patchwork (@fig-AUpatch), which subplot stands out the most?
-
-```{r echo=FALSE, results="asis"}
-
-check_question("lower left", options = c("upper left", "upper right", "middle left", "middle right", "lower left", "lower right"), type = "radio", 
-random_answer_order = TRUE,
-button_label = "Check answer",
-right = "Correct! The emoji pair *mild irritation* 😐 - *annoyance* 😑 sets itself apart from the rest: There is a considerable difference between the matching rates. Perhaps counterintuitively, this means that most participants opted for the same emoji in both contexts.",
-wrong = "Not quite. Which plot looks significantly different than the others?")
-
-```
-
-<br><br> [**Q9.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
+<br><br> [**Q8.**]{style="color:green;"} Which interpretations of the lower left plot are correct? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 check_question(c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance."), options = c("The emoji 😐 was selected for its matching context considerably less often than all the other emojis.", "There is a major difference between the matching rates of the annoyance and happiness contexts.","Only in the 😐😑 pair does the matching rate for one emoji exceed chance level, while the matching rate for the other falls below chance.", "The disparate matching rates of the 😐😑 pair prove that, in general, AU differences affect participants' preferences."), type = "checkbox", 
@@ -842,7 +819,7 @@ wrong = "Not quite. Consider the implications of a low matching rate versus a hi
 check_hint("Two statements are correct. A low matching rate indicates that participants rarely chose the emoji that was intended for the context, that is, the emoji that the authors identified as the most fitting.", hint_title = "🐭 Click on the mouse for a hint.")
 ```
 
-<br><br> [**Q10.**]{style="color:green;"} What are plausible reasons for the striking results presented in the lower left barplot? Select all that apply.
+<br><br> [**Q9.**]{style="color:green;"} What are plausible reasons for the striking results presented in the lower left barplot? Select all that apply.
 
 ```{r echo=FALSE, results="asis"}
 
@@ -866,7 +843,7 @@ This observation closely aligns with the predictions of the lexicalist approach 
 
 ## Conclusion {#sec-conclusion}
 
-You have successfully completed [`r checkdown::insert_score()` out of 10 quiz questions]{style="color:green;"} in this chapter.
+You have successfully completed [`r checkdown::insert_score()` out of 9 quiz questions]{style="color:green;"} in this chapter.
 
 You are now a pro in handling (stacked) barplots! You can build, customise, arrange, and interpret them. Barplots are powerful for visualising categorical data, offering a straightforward way to compare frequencies and make patterns apparent. However, they do have their limitations. For instance, they are not ideal for displaying continuous data. Building and assembling plots can be quite fiddly and it can take some trial-and-error to make the plot look like what you had imagined. But there is a solution for (almost) everything and hopefully, the beautiful plot you create in the process will be worth the effort.
 
